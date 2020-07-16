@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SignUpForm from '../../forms/SignUpForm'
-import styles from './Authentication.less'
+import styles from '../Authentication.less'
 class SignUp extends Component {
     constructor(props) {
         super(props)

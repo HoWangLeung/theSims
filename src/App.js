@@ -1,27 +1,118 @@
-import React from 'react';
+import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import styles from './App.less';
+import classes from './App.less';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Components/Home'
-import Nav from './Components/Nav';
+import Nav from './Common/NavigationBar';
 import SignUp from './Components/Authentication/SignUp/SignUp';
+import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
+import { Typography } from 'antd';
+import { Avatar } from 'antd';
+import { UserOutlined, DownOutlined } from '@ant-design/icons';
+import Employee from './Components/Employee/Employee';
+import Login from './Components/Authentication/Login/Login';
+import HomePage from './Components/HomePage/HomePage';
+import { emit } from './emit.js'
+import intl from 'react-intl-universal';
+import { ConfigProvider } from 'antd';
+import zh_TW from 'antd/es/locale/zh_TW';
+import zh_CN from 'antd/es/locale/zh_CN';
+import en_US from 'antd/es/locale/en_US';
+import Dashboard from './Components/Dashboard';
+import AuthenticatedRoute from './Components/Authentication/Authentication'
+import WebFooter from './Components/WebFooter/WebFooter'
 
-console.log(styles)
-function App() {
-  console.log(styles)
-  return (
-    <div className={styles.App}>
-      <Router>
-        <Nav className={styles.navLayout} />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/signup' component={SignUp} />
+const { Title } = Typography;
+const { Header, Content, Footer, Sider } = Layout;
 
-        </Switch>
+const locales = {
+  'en-US': require('./Common/locales/en_US/translations.json'),
+  'zh-CN': require('./Common/locales/zh_CN/translations.json'),
+};
 
-      </Router>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      antdLang: en_US,  // 修改antd  組件的國際化
+    }
+  }
+
+  componentDidMount() {
+    emit.on('change_language', lang => this.loadLocales(lang)); // 監聽語言改變事件
+    this.loadLocales(); // 初始化語言
+  }
+
+  loadLocales = (lang = 'en-US') => {
+    intl.init({
+      currentLocale: lang,  // 設置初始語音
+      locales,
+    }).then(() => {
+      this.setState({
+        antdLang: lang === 'en-US' ? en_US : zh_TW
+      });
+    });
+  }
+
+  handleChangeLocale = (e) => {
+    e.preventDefault()
+    console.log(e.currentTarget.getAttribute('value'));
+    let val = e.currentTarget.getAttribute('value')
+    emit.emit('change_language', val);
+
+  }
+
+
+  render() {
+    return (
+      <ConfigProvider locale={this.state.antdLang}>
+        <Router>
+          <Layout hasSider={false} className={classes.layout}>
+            <Nav
+              handleChangeLocale={this.handleChangeLocale}
+              currentLocale={this.state.antdLang}
+            />
+            <Content className={classes.content}>
+              <Switch>
+                <Route exact path='/' component={HomePage} />
+                <AuthenticatedRoute path='/dashboard' component={Dashboard} />
+                <Route path='/login' component={Login} />
+                <Route path='/signup' component={SignUp} />
+                <AuthenticatedRoute path='/employee' component={Employee} />
+                <Route path='/jotto' component={Home} />
+              </Switch>
+            </Content>
+            <Footer>
+               <WebFooter/>
+            </Footer>
+          </Layout>
+        </Router >
+      </ConfigProvider>
+    );
+  }
 }
 
 export default App;
+
+
+// import React, { Component } from 'react'
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props)
+
+//     this.state = {
+
+//     }
+//   }
+
+//   render() {
+//     return (
+//       <div>
+
+//       </div>
+//     )
+//   }
+// }
+
+// export default App

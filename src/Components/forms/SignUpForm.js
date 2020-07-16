@@ -31,24 +31,10 @@ class SignUpForm extends React.Component {
             pwValidateLength,
             pwValidateSpecialChar
         } = this.state
-        const layout = {
-            labelCol: {
-                span: 8,
-            },
-            wrapperCol: {
-                span: 8,
-            },
-        };
-        const tailLayout = {
-            wrapperCol: {
-                offset: 8,
-                span: 2,
-            },
-        };
+
         return (
             <Form
-            data-test="component-SignUpForm"
-                {...layout}
+                data-test="component-SignUpForm"
                 name="basic"
                 initialValues={{
                     remember: true,
@@ -60,7 +46,7 @@ class SignUpForm extends React.Component {
                 <Form.Item
                     label="Email"
                     name="email"
-                    validateTrigger={['onChange','onBlur']}
+                    validateTrigger={['onChange', 'onBlur']}
                     rules={[
                         {
                             required: true,
@@ -135,28 +121,28 @@ class SignUpForm extends React.Component {
 
 
 
-                                this.setState({pwValidateChar, pwValidateLength, pwValidateSpecialChar })
+                                this.setState({ pwValidateChar, pwValidateLength, pwValidateSpecialChar })
                                 return Promise.resolve()
                             },
                         }),
                     ]}
-                  
+
                     // className={styles.passwordField}
                     onFocus={() => { this.setState({ showPwValidator: true }) }}
                     onBlur={() => { this.setState({ showPwValidator: false }) }}
-                   
+
                 >
                     <div>
                         <Input.Password />
-                        {showPwValidator&&
-                        <ValidationHint
-                            pwValidateChar={this.state.pwValidateChar}
-                            pwValidateLength={pwValidateLength}
-                            pwValidateSpecialChar={pwValidateSpecialChar}
+                        {showPwValidator &&
+                            <ValidationHint
+                                pwValidateChar={this.state.pwValidateChar}
+                                pwValidateLength={pwValidateLength}
+                                pwValidateSpecialChar={pwValidateSpecialChar}
 
-                        />}
+                            />}
 
-                            
+
                     </div>
 
 
@@ -186,11 +172,11 @@ class SignUpForm extends React.Component {
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                <Form.Item name="remember" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
-                <Form.Item {...tailLayout}>
+                <Form.Item >
                     <Button type="primary" htmlType="submit">
                         Submit
         </Button>

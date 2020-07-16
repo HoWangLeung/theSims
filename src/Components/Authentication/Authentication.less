@@ -1,0 +1,166 @@
+
+
+.container{
+ 
+height: auto;
+
+display: flex;
+align-items: center;
+justify-content: center;
+width: auto;
+}
+
+.loginCollapse{
+    color: #ffffff !important;
+    * {
+        color: #ffffff;
+      
+    }
+    
+   
+
+    box-sizing: border-box;
+    position: relative;
+    background-color: #26707a !important;
+    :global{
+        .ant-collapse-header {
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        :nth-of-type(1) .ant-collapse-header {
+            background: #008D84 !important;
+            
+        }
+        .ant-collapse-item {
+            background: rgb(55, 85, 115) !important;
+        }
+        .ant-input{
+            color: black !important;
+        }
+        .ant-form-item-label > label{
+            color: white !important;
+        }
+    }
+    width:400px ;
+   
+
+}
+// @media screen and (max-width:800px){
+//     .loginCard {
+//         left: 0px;
+//         width:100% ;
+//         background-color: rgb(119, 196, 157) !important;
+//     }
+// }
+
+
+
+
+.loginBox{
+    box-sizing: border-box;
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: red;
+}
+
+
+.panel{
+    :global{
+        .ant-collapse-header[aria-expanded = 'true'] {
+            padding-left: 12px;
+            display: none !important;
+        }
+
+       
+    }
+    img{
+        height: 100px;
+        width: auto;
+        background-color: #ffffff;
+    }
+
+    &:nth-of-type(1n+0){
+        background: #26707a !important;
+        // display: block;
+        :global{
+        .ant-collapse-content {
+            background: #008D84 !important;
+        }
+    }
+    }
+    &:nth-of-type(2n+0){
+        :global{
+            .ant-collapse-content {
+                background: #26707a !important;
+            }
+        }
+    }
+  
+     
+    // &:nth-of-type(3){
+    //     background: #26707a !important;
+    // }
+    // &:nth-of-type(3n + 0) .ant-collapse-header[aria-expanded = 'true']{
+    //     display: block;
+    // }
+    // background: #008D84;
+}
+
+
+
+.QrCodeInnerImageContainer{
+    position: relative;
+    height: 128px;
+    :global{
+    .ant-collapse-content {
+        background: #26707a !important;
+    }
+    
+}
+}
+  
+.loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // padding: 30px 0;
+    // margin: 0 40px;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.icon{
+
+}
+
+:global{
+    .ant-popover-arrow {
+        display: none !important;
+
+  
+    
+    }
+
+    .ant-popover-inner-content {
+        padding: 0 !important;
+    }
+}
+
+.loginCardContainer{
+    
+}
+
+:global{
+    .ant-btn-primary{
+        background-color:     rgb(55, 85, 115);
+        border: none;
+        &:hover{
+            background: rgb(41, 66, 90);
+        }
+    }
+
+}

@@ -1,63 +1,64 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Table, Tag, Space } from 'antd';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Table } from 'antd'
 
-const GuessedWord = (props) => {
-    const { guessedWords } = props
-    console.log(guessedWords);
 
-    const columns = [
-        {
-            title: 'Guess',
-            dataIndex: 'guessedWord',
-            key: 'guessedWord',
-            render: text => {
-                console.log(text);
-                return text
+class GuessedWord extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+
+        }
+        console.log(this.props);
+
+
+    }
+
+
+
+    render() {
+
+        const dataSource = this.props.guessedWords.map(word => {
+            console.log(word);
+            return {
+                id: word.id,
+                value: word.value,
+                commonWordLength: word.commonWordLength
             }
-        },
-        {
-            title: 'Matching Letters',
-            dataIndex: 'letterMatchCount',
-            key: 'letterMatchCount',
-            render: (text,record,index) => {     
-                console.log(record);
-                       
-            return <div data-test="guessed-word">{record.letterMatchCount}</div>
-            }
-        },
-    ]
 
-const data = guessedWords
+        })
+
+        const columns = [
+            {
+                title: "GuessedWord",
+                dataIndex: 'value',
+                key: 'id'
+            },
+            {
+                title: "LetterMatched",
+                dataIndex: 'commonWordLength',
+                key: 'id'
+            },
 
 
-    let contents
-    console.log(guessedWords.length);
-
-    if (guessedWords.length === 0) {
-        contents = (<span data-test="guess-instructions">Try to guess the secret word!</span>)
-    } else {
-        contents = (
-            <div data-test="guessed-words">
-             <Table columns={columns} dataSource={data}  />
-            </div>
+        ]
+        return (
+            <div>
+                <Table columns={columns}
+                    dataSource={dataSource} />
+            </div >
         )
     }
-    return (
-        <div data-test="component-guessed-words">
-            {contents}
-        </div>
-    )
 }
 
-GuessedWord.propTypes = {
-    guessedWords: PropTypes.arrayOf(
-        PropTypes.shape({
-            guessedWord: PropTypes.string.isRequired,
-            letterMatchCount: PropTypes.number.isRequired
-        })
-    ).isRequired,
-
+const mapStateToProps = (state) => {
+    return {
+        guessedWords: state.JottoReducer.guessedWords,
+        secretWord: state.JottoReducer.secretWord
+    }
 }
 
-export default GuessedWord;
+
+
+export default connect(mapStateToProps)(GuessedWord);
