@@ -115,7 +115,7 @@ class Employee extends Component {
 
     getSelectDropdown = () => {
         let departmentOptions =
-            ['Marketing', "Information Technology", "Human Resource", "Operation", "Finance"]
+            ['marketing', "informationTechnology", "humanResource", "operation", "finance"]
         return (<SelectDropdown
             placeHolder={intl.get('selectDepartment')}
             icon={faBuilding}

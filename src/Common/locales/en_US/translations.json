@@ -36,7 +36,12 @@
     "lastModifiedDate":"Last Modified Date",
     "profile":"Profile",
     "access":"Access",
-    "selectDepartment":"Select a Department"
+    "selectDepartment":"Select a Department",
+    "marketing":"Marketing",
+    "informationTechnology":"Information Technology",
+    "humanResource":"Human Resource",
+    "operation":"General Affairs",
+    "finance":"Finance"
     
    
 }

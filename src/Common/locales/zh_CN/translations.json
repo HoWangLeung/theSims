@@ -36,5 +36,10 @@
     "lastModifiedDate":"最後修改日期",
     "profile":"個人資料",
     "access":"進入",
-    "selectDepartment":"選擇部門"
+    "selectDepartment":"選擇部門",
+    "marketing":"市場部",
+    "informationTechnology":"資訊科技部",
+    "humanResource":"人力資源部",
+    "operation":"總務部",
+    "finance":"財務部"
 }

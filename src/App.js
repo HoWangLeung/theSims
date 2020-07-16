@@ -34,18 +34,18 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      antdLang: en_US,  // 修改antd  組件的國際化
+      antdLang: en_US,  
     }
   }
 
   componentDidMount() {
-    emit.on('change_language', lang => this.loadLocales(lang)); // 監聽語言改變事件
-    this.loadLocales(); // 初始化語言
+    emit.on('change_language', lang => this.loadLocales(lang)); 
+    this.loadLocales(); 
   }
 
   loadLocales = (lang = 'en-US') => {
     intl.init({
-      currentLocale: lang,  // 設置初始語音
+      currentLocale: lang, 
       locales,
     }).then(() => {
       this.setState({
