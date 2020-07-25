@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { Switch } from 'antd';
+import { Switch, Button } from 'antd';
 
 
 
@@ -13,6 +13,7 @@ const headerId = () => (
         title: () => (intl.get('id')),
         dataIndex: 'id',
         key: 'id',
+        
     }
 )
 const headerName = () => (
@@ -20,10 +21,10 @@ const headerName = () => (
         title: () => (intl.get('employeeName')),
         dataIndex: 'name',
         key: 'name',
+        width:200,
+        sorter:(a, b) => a.firstName.localeCompare(b.firstName),
         render: (text, row, index) => {
-            console.log(text);
-            console.log(row);
-            console.log(index);
+   
             return (
                 <div>
                     {row.firstName} {row.lastName}
@@ -36,8 +37,11 @@ const headerName = () => (
 const headerRole = () => (
     {
         title: () => (intl.get('jobTitle')),
+        sorter:true,
         dataIndex: 'role',
         key: 'role',
+        width:200,
+        sorter:(a, b) => a.role.localeCompare(b.role)
     }
 )
 
@@ -99,18 +103,43 @@ const headerProfile = () => (
         render: () => <Link>{intl.get('access')}</Link>
     }
 )
-export const commonHeader = () => {
 
+const headerDelete = (config) => {
+
+    const {handleDelete} = config
     return (
-        [
-            headerId(),
-            headerName(),
-            headerRole(),
-            headerPermission(),
-            headerAdmin(),
-            headerDefaultPermission(),
-            lastModifiedBy(),
-            lastModifiedDate(),
-            headerProfile()
-        ])
+        {
+            title: () => (intl.get('terminate')),
+            dataIndex: 'terminate',
+            key: 'terminate',
+            render: (text, record, index) => {
+                     
+                return (<Button
+                    key={index}
+                    id={record.id}
+                    onClick={handleDelete}
+                    >{intl.get('terminate')}</Button>)
+            }
+        }
+
+    )
+}
+export const commonHeader = (config) => {
+   
+    
+        return (
+            [
+                headerId(),
+                headerName(),
+                headerRole(),
+                headerPermission(),
+                headerAdmin(),
+                headerDefaultPermission(),
+                lastModifiedBy(),
+                lastModifiedDate(),
+                headerProfile(),
+                headerDelete(config)
+            ])
+    
+
 }

@@ -1,7 +1,7 @@
 {
     "key1": "國際化",
     "signInWithUserName":"以帳號及密碼登入",
-    "signInWithQrCode":"以 Qr Code 登入",
+    "signInWithQrCode":"以二維碼登入",
     "userProfile":"個人資料",
     "dashboard":"主控版",
     "signin":"登入",
@@ -36,10 +36,18 @@
     "lastModifiedDate":"最後修改日期",
     "profile":"個人資料",
     "access":"進入",
+    "terminate":"終止合約",
     "selectDepartment":"選擇部門",
     "marketing":"市場部",
     "informationTechnology":"資訊科技部",
     "humanResource":"人力資源部",
     "operation":"總務部",
-    "finance":"財務部"
+    "finance":"財務部",
+    "search":"搜尋",
+    "reSet":"重置",
+    "confirm":"確認",
+    "cancel":"取消",
+    "processing":"正在處理你的請求",
+    "askConfirmDelete":"確認刪除 ?"
+    
 }

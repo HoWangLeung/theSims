@@ -6,8 +6,8 @@ const initState = {
 }
 
 const JottoReducer = (state = initState, action) => {
-    console.log(state);
-    console.log(action);
+    
+    
     switch (action.type) {
         case ("ADD_GUESSED_WORD"):
             let index = state.guessedWords.length
@@ -18,7 +18,7 @@ const JottoReducer = (state = initState, action) => {
                 guessedWords: guessedWordsArr.concat(guessedWord)
             }
             case ("RETRIEVE_SECRET_WORD"):
-                console.log('receiving secret', action.secretWord);
+                
                 
                 return{
                     ...state,

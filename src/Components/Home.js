@@ -35,7 +35,7 @@ class Home extends Component {
         const { retrieveSecetWord } = this.props
         await RandomWordService.retrieveRandomWord()
             .then(res => {
-                console.log(res);
+                
                 let secretWord = res.data.word;
                 retrieveSecetWord(secretWord)
                 this.setState({
@@ -46,8 +46,8 @@ class Home extends Component {
     }
 
     render() {
-        console.log(styles);
-        console.log(this.props.guessedWords);
+        
+        
 
         return (
             <Spin tip="Loading..." spinning={this.state.isLoading} size="large" >
@@ -76,7 +76,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    
 
     return {
         guessedWords: state.guessedWords,

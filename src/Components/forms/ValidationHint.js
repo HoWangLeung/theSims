@@ -24,7 +24,7 @@ class ValidationHint extends Component {
             invalid,
             validationHint
         } = styles
-        console.log(pwValidateSpecialChar);
+        
 
         return (
             <div className={validationHint}>

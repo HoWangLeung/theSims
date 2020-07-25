@@ -10,7 +10,7 @@ class GuessedWord extends Component {
         this.state = {
 
         }
-        console.log(this.props);
+        
 
 
     }
@@ -20,7 +20,7 @@ class GuessedWord extends Component {
     render() {
 
         const dataSource = this.props.guessedWords.map(word => {
-            console.log(word);
+            
             return {
                 id: word.id,
                 value: word.value,

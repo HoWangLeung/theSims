@@ -18,11 +18,11 @@ class SignUpForm extends React.Component {
         }
     }
     onFinish = values => {
-        console.log('Success:', values);
+        
     };
 
     onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
+        
     };
     render() {
         const {
@@ -54,11 +54,11 @@ class SignUpForm extends React.Component {
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                console.log(getFieldValue('email'));
+                                
 
                                 if (value) {
                                     if (value.indexOf('@') == -1 || value.indexOf('.com') == -1) {
-                                        console.log('not found');
+                                        
 
                                         return Promise.reject('invalid email format')
                                     }
@@ -91,7 +91,7 @@ class SignUpForm extends React.Component {
                                     pwValidateSpecialChar
                                 } = this.state
 
-                                console.log(getFieldValue('password'));
+                                
                                 let pwCharRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*/;
                                 let pwLengthRegex = /^[a-zA-Z0-9#?!@$%^&]{8,128}$/;
                                 let pwSpecialCharRegex = /(?=.*?[#?!@$%^&])/;
@@ -109,11 +109,11 @@ class SignUpForm extends React.Component {
                                     }
 
                                     if (pwSpecialCharRegex.test(value)) {
-                                        console.log('really true');
+                                        
 
                                         pwValidateSpecialChar = true
                                     } else {
-                                        console.log('really false true');
+                                        
                                         pwValidateSpecialChar = false;
                                     }
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const defaultProps={success:false, hello:false, hi:false}
 const Congrats = (props={}) => {
     const testProps = {...defaultProps, ...props}
-    console.log(testProps);
+    
 
 
     if(props.success){

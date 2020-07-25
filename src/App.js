@@ -21,6 +21,7 @@ import en_US from 'antd/es/locale/en_US';
 import Dashboard from './Components/Dashboard';
 import AuthenticatedRoute from './Components/Authentication/Authentication'
 import WebFooter from './Components/WebFooter/WebFooter'
+import CreateTemplate from './Components/DigitalQrCodeMenu/GettingStrated/GettingStarted';
 
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
@@ -43,7 +44,8 @@ class App extends Component {
     this.loadLocales(); 
   }
 
-  loadLocales = (lang = 'en-US') => {
+  loadLocales =  (lang = 'en-US') => {
+    
     intl.init({
       currentLocale: lang, 
       locales,
@@ -54,9 +56,9 @@ class App extends Component {
     });
   }
 
-  handleChangeLocale = (e) => {
+  handleChangeLocale =  (e) => {
     e.preventDefault()
-    console.log(e.currentTarget.getAttribute('value'));
+    
     let val = e.currentTarget.getAttribute('value')
     emit.emit('change_language', val);
 
@@ -80,6 +82,7 @@ class App extends Component {
                 <Route path='/signup' component={SignUp} />
                 <AuthenticatedRoute path='/employee' component={Employee} />
                 <Route path='/jotto' component={Home} />
+                <Route path='/createMenu' component={CreateTemplate} />
               </Switch>
             </Content>
             <Footer>

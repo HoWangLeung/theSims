@@ -9,15 +9,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey, faQrcode, faMarker } from '@fortawesome/free-solid-svg-icons'
 import intl from 'react-intl-universal';
 import qrCodeImg from '../../assests/Image/qrCode.png'
+import { Route, Redirect } from 'react-router-dom'
 const { Panel } = Collapse;
 class LoginCard extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-
+            closePanel: false
         }
-        console.log(classes);
+        
+    }
+
+    handlePanelChange = activeKey => {
+        
+        
+        if (activeKey === '3') {
+
+            // this.setState({
+            //     closePanel: true
+            // })
+            this.props.hanldeSignupClick()
+            this.props.history.push("/signup")
+        }
     }
 
     generateLoginCard = () => {
@@ -25,10 +39,13 @@ class LoginCard extends Component {
         A QR code is a type of matrix barcode (or two-dimensional barcode) first designed in 1994 for the 
         automotive industry in Japan.
       `
+        const { closePanel } = this.state
         return (<Collapse
             accordion
             defaultActiveKey="1"
-            className={classes.loginCollapse}
+            className={[classes.loginCollapse, closePanel ? classes.closePanel : null]}
+            onChange={this.handlePanelChange}
+
         >
             <Panel
                 showArrow={false}
@@ -56,18 +73,19 @@ class LoginCard extends Component {
                 <p>{text}qr code here</p>
 
             </Panel>
-          
+
             <Panel
+
                 showArrow={false}
                 header={
-                    <Link to="/signup"> <LoginCollapsePanelHeader
+                    <LoginCollapsePanelHeader
                         title={intl.get('signup')}
                         icon={faMarker}
-                    />    </Link>} key="3">
+                    />} key="3">
 
 
             </Panel>
-         
+
         </Collapse>)
     }
 

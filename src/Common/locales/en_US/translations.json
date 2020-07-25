@@ -1,4 +1,5 @@
 {
+    "webTitle":"THE SIMS",
     "key1": "Internationalization",
     "signInWithUserName":"Sign In With Username",
     "signInWithQrCode":"Sign In With QR Code",
@@ -7,7 +8,6 @@
     "password":"Password",
     "signup":"Sign Up",
     "login":"Login",
-    "webTitle":"THE SIMS",
     "news":"News",
     "forms":"Forms",
     "entertainment":"Entertainment",
@@ -36,12 +36,20 @@
     "lastModifiedDate":"Last Modified Date",
     "profile":"Profile",
     "access":"Access",
+    "terminate":"Terminate",
     "selectDepartment":"Select a Department",
     "marketing":"Marketing",
     "informationTechnology":"Information Technology",
     "humanResource":"Human Resource",
     "operation":"General Affairs",
-    "finance":"Finance"
+    "finance":"Finance",
+    "search":"Search",
+    "reSet":"Reset",
+    "confirm":"Confirm",
+    "cancel":"Cancel",
+    "processing":"Processing Your Request",
+    "askConfirmDelete":"Are You Sure You Want to Delete ?"
+    
     
    
 }

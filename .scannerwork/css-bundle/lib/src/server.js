@@ -20,7 +20,7 @@ function start(port = 0) {
         app.post("/analyze", analyzeWithStylelint);
         app.get("/status", (_, resp) => resp.send("OK!"));
         app.post("/close", (_req, resp) => {
-            console.log("DEBUG stylelint-bridge server will shutdown");
+            
             resp.end(() => {
                 server.close();
             });

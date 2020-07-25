@@ -22,8 +22,13 @@ class ManagementTabTable extends Component {
     }
 
     componentDidMount() {
-        console.log(intl.get('internalUsers'));
+        
     }
+
+    handleDelete = () => {
+        
+    }
+
 
     generateManagementTabs = () => {
         return (
@@ -48,16 +53,30 @@ class ManagementTabTable extends Component {
 
 
     generateInternalLowerTable = () => {
-        console.log(this.props);
+        
         const { managementList } = this.props
-        const columns = commonHeader()
-        return (
-            <Table
-                className={classes.employeeTable}
-                columns={columns} dataSource={managementList || []}
-                pagination={{ pageSize: 3, showSizeChanger: false, pageSizeOptions: [3, 5, 10] }}
-            />)
 
+        let config = {
+            handleDelete: this.handleDelete
+        }
+        
+        const columns =  commonHeader(config)
+        
+        if(columns!==undefined){
+            
+            
+            
+            return (
+                <Table
+                    className={classes.employeeTable}
+                    columns={columns} dataSource={managementList || []}
+                    pagination={{ pageSize: 3, showSizeChanger: false, pageSizeOptions: [3, 5, 10] }}
+                    scroll={{ x: true }}
+                />)
+        }else{
+            return <h1>dsdf</h1>
+        }
+        
     }
 
     render() {

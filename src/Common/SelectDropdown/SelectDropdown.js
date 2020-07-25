@@ -16,24 +16,24 @@ class SelectDropdown extends Component {
     }
 
     onChange = (value) => {
-        console.log(`selected ${value}`);
+        
     }
 
     onBlur = () => {
-        console.log('blur');
+        
     }
 
     onFocus = () => {
-        console.log('focus');
+        
     }
 
     onSearch = (val) => {
-        console.log('search:', val);
+        
     }
     generateSelectDropdown = () => {
 
         const { placeHolder, departmentOptions } = this.props
-        console.log(departmentOptions);
+        
         return (<Select
             className={classes.SelectDropdown}
             showSearch

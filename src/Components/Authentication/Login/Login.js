@@ -12,12 +12,12 @@ class Login extends Component {
         super(props)
 
         this.state = {
-
+            isLoggedIn:false
         }
     }
 
     onFinish = async (values) => {
-        console.log('Success:', values);
+        
         const { username, password, remember } = values
         // if (username === 'derek' && password === '123') {
         //     await AuthenticationService.registerSuccessfulLogin(username)
@@ -29,13 +29,17 @@ class Login extends Component {
         AuthenticationService
         .executeJwtAuthenticationService(username,password)
         .then((res)=>{
-            console.log(res);
+            
             AuthenticationService.registerSuccessfulLoginForJwt(username,res.data.token)
             let isLoggedIn = AuthenticationService.isUserLoggedIn()
-            this.props.loginAction(isLoggedIn)
+            // localStorage.setItem('jwtToken', res.data.token);
+
+            this.setState({isLoggedIn:true})
+
+            this.props.loginAction(this.state.isLoggedIn)
             this.props.history.push('/dashboard')
         }).catch((error)=>{
-            console.log(error);
+            
         })
 
 
@@ -43,7 +47,7 @@ class Login extends Component {
     };
 
     onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
+        
     };
 
     generateLoginForm = () => {
@@ -123,7 +127,7 @@ class Login extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    
 
     return {
 

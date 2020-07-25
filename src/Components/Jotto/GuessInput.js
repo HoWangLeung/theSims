@@ -27,14 +27,14 @@ class GuessInput extends Component {
                 commonWordLength++;
             }
         }
-        console.log(commonWordLength, "length");
+        
         this.props.addGuessedWord(guessedWord, commonWordLength)
-        console.log(this.props, 'sdfsdf');
+        
 
     };
 
     onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
+        
     };
 
 
@@ -48,7 +48,7 @@ class GuessInput extends Component {
         const { retrieveSecetWord } = this.props
         await RandomWordService.retrieveRandomWord()
             .then(res => {
-                console.log(res);
+                
                 let secretWord = res.data.word;
                 retrieveSecetWord(secretWord)
                 this.setState({

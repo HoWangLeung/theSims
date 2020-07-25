@@ -3,8 +3,9 @@ import axios from "axios";
 class AuthenticationService {
 
 
+
     executeJwtAuthenticationService(username, password){
-        console.log('returning jwt service');
+        
         return axios.post('http://localhost:8080/authenticate',
         {
            username,
@@ -19,16 +20,17 @@ class AuthenticationService {
 
 
     registerSuccessfulLogin(username, password) {
-        console.log(username, password);
+        
         sessionStorage.setItem('authenticatedUser', username)
     }
 
     logout() {
-        console.log('clearing');
+        
         sessionStorage.clear();
     }
 
     createJWTToken(token){
+        sessionStorage.setItem("USER_TOKEN", "Bearer " + token)
         return 'Bearer ' + token
     }
 
@@ -42,6 +44,7 @@ class AuthenticationService {
     }
 
     setupAxiosInterceptors(token){
+        
         axios.interceptors.request.use(
             (config)=>{
                 if(this.isUserLoggedIn()){
@@ -51,6 +54,12 @@ class AuthenticationService {
             }
         )
     }
+
+    componentWillMount(){
+      
+        this.setupAxiosInterceptors()
+    }
+
 
 
 }

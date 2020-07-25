@@ -15,14 +15,14 @@ class RetrieveHint extends Component {
     }
 
     handleGetHint = e => {
-        console.log('getting hint');
+        
 
         const { secretWord } = this.props
         GetHintService.getHint(secretWord)
             .then(res => {
-                console.log(res);
+                
                 let wordDefinition = res.data.definitions
-                console.log(wordDefinition);
+                
 
                 this.setState({
                     wordDefinition,
@@ -36,7 +36,7 @@ class RetrieveHint extends Component {
     render() {
         const definitions = this.state.wordDefinition.map((item, index) => {
             if (this.state.wordDefinition !== []) {
-                console.log('sdf');
+                
 
                 return (<Alert key={index} message={item.definition} type="info" />)
             } else {

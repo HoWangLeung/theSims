@@ -25,9 +25,10 @@ class Nav extends React.Component {
         this.state = {
             current: 'mail',
             hideNav: false,
+            visible:false
         };
 
-        console.log(this.props);
+        
     }
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
@@ -39,26 +40,26 @@ class Nav extends React.Component {
     }
 
     handleClick = e => {
-        console.log('click ', e);
+        
         this.setState({
             current: e.key,
         });
     };
 
     logout = async () => {
-        console.log('logginout');
+        
         await AuthenticationService.logout()
-        console.log(this.props);
+        
         let isLoggedIn = AuthenticationService.isUserLoggedIn()
         this.props.logoutAction(isLoggedIn)
         this.props.history.push('/')
     }
 
     handleUserMenuClick = ({ item, key, keyPath, domEvent }) => {
-        console.log('clicked logout', item);
-        console.log(key);
-        console.log(keyPath);
-        console.log(domEvent);
+        
+        
+        
+        
         item.onClick = this.testing()
 
         switch (key) {
@@ -71,11 +72,17 @@ class Nav extends React.Component {
         }
     }
     testing = () => {
-        console.log('testing');
+        
 
     }
 
+    handleSignupClick=()=>{
+        this.setState({visible:false})
+    }
 
+    handleVisibleChange=(visible)=>{
+        this.setState({ visible });
+    }
     render() {
 
         const { hideNav } = this.state
@@ -86,10 +93,10 @@ class Nav extends React.Component {
         const menu = (
             <Menu>
                 <Menu.Item key="0">
-                Dashboard
+              <Link to="/createMenu">QR Code Generator</Link>
                 </Menu.Item>
                 <Menu.Item key="1">
-                User Profile
+                Placeholder
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="3">3rd menu item</Menu.Item>
@@ -124,7 +131,14 @@ class Nav extends React.Component {
                 {userMenuIcon}
             </Dropdown>
         } else {
-            loginOrUserIcon = <Popover content={<LoginCard />} placement="bottomLeft" trigger="click">
+            loginOrUserIcon = <Popover  
+             visible={this.state.visible} 
+             content={<LoginCard hanldeSignupClick={this.handleSignupClick} 
+             />} 
+             placement="bottomLeft" 
+             trigger="click"
+             onVisibleChange={this.handleVisibleChange}
+             >
                 {loginIcon}
             </Popover>
         }
@@ -135,20 +149,20 @@ class Nav extends React.Component {
         const topNavigationMenu = (<div className={classes.appHeaderContainer}>
             <Title style={{ padding: 10 }} level={3}><Link to="/" >{intl.get('webTitle')}</Link></Title>
 
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={['hover']}>
                 <h4>{intl.get('news')}</h4>
             </Dropdown>
 
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={['hover']}>
                 <h4>{intl.get('forms')}</h4>
             </Dropdown>
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={['hover']}>
                 <h4>{intl.get('entertainment')}<DownOutlined /></h4>
             </Dropdown>
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={['hover']}>
                 <h4>{intl.get('contact')}</h4>
             </Dropdown>
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown overlay={menu} trigger={['hover']}>
                 <h4>{intl.get('others')}<DownOutlined /></h4>
             </Dropdown>
 
@@ -163,7 +177,7 @@ class Nav extends React.Component {
         return (
             <>
                 {hideNav === false && topNavigationMenu}
-                {isLoggedIn && <Banner />}
+                {this.props.isLoggedIn && <Banner />}
                 {isLoggedIn && < NavigationMenu />}
                 {hideNav === true && <AppNav />}
             </>
@@ -176,7 +190,7 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    
     return {
         isLoggedIn: state.AuthenticationReducer.isLoggedIn
     }
