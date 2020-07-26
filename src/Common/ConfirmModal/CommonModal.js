@@ -7,7 +7,7 @@ class CommonModal {
    success=(props)=>{
 
         return Modal.success({
-            title: 'Success',
+            title: intl.get('success'),
             ...props
         });
 

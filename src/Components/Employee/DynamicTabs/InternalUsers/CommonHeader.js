@@ -50,8 +50,9 @@ const headerPermission = () => (
         title: () => (intl.get('permission')),
         dataIndex: '',
         key: 'permission',
+        align:'center',
         render: () => {
-            return (<FontAwesomeIcon icon={faLock} />)
+            return (<Button type="text" icon={<FontAwesomeIcon icon={faLock}/>}></Button>)
         }
     })
 const headerAdmin = () => (
@@ -59,6 +60,7 @@ const headerAdmin = () => (
         title: () => (intl.get('hasAdmin')),
         dataIndex: 'hasAdmin',
         key: 'hasAdmin',
+        align:'center',
         render: (text, row, index) => {
 
             if (text === true) return (<p>Yes</p>)
@@ -72,6 +74,7 @@ const headerDefaultPermission = () => (
         title: () => (intl.get('defaultPermission')),
         dataIndex: 'defaultPermission',
         key: 'defaultPermission',
+        align:'center',
         render: (text, row, index) => {
             return (<Switch defaultChecked />)
         }

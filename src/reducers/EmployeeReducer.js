@@ -2,12 +2,13 @@ import { returnMessage } from "../Common/utilities/helpers";
 import intl from 'react-intl-universal';
 const initState = {
     employeeList: [],
+    managementList:[],
     loading: false,
-   
+
 }
 
 const EmployeeReducer = (state = initState, action) => {
-    
+
 
     switch (action.type) {
         case ("FETCH_EMPLOYEE"):
@@ -18,11 +19,13 @@ const EmployeeReducer = (state = initState, action) => {
 
 
         case ('FETCH_EMPLOYEE_SUCCESS'):
-            
 
+            console.log(action.payload.detail);
+            const managementList = action.payload.detail.filter(employee=> employee.management===true)
             return {
                 ...state,
                 employeeList: action.payload.detail,
+                managementList,
                 loading: false
             }
 
@@ -39,13 +42,13 @@ const EmployeeReducer = (state = initState, action) => {
 
         case ("DELETE_EMPLOYEE"):
 
-            
-           action.payload.modal.update({
-               title: intl.get('processing'),
-               content: '',
-               okButtonProps: { loading: true },
-               cancelButtonProps:{disabled:true}
-           });
+
+            action.payload.modal.update({
+                title: intl.get('processing'),
+                content: '',
+                okButtonProps: { loading: true },
+                cancelButtonProps: { disabled: true }
+            });
 
             return {
                 ...state,
@@ -66,12 +69,28 @@ const EmployeeReducer = (state = initState, action) => {
             return {
                 ...state
             };
+        //==================================================================================================================================================================
 
-
+        //==================================================================================================================================================================
+        case ("SEARCH_EMPLOYEE"):
+            return {
+                ...state,
+                loading: true
+            }
+        case ("SEARCH_EMPLOYEE_SUCCESS"):
+            return {
+                ...state,
+                employeeList:action.payload,
+                loading: false
+            }
 
         default:
             return state;
     }
+
+
+
+
 
 }
 

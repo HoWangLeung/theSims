@@ -1,5 +1,7 @@
 {
     "webTitle":"THE SIMS",
+    "yes":"Yes",
+    "no":"No",
     "key1": "Internationalization",
     "signInWithUserName":"Sign In With Username",
     "signInWithQrCode":"Sign In With QR Code",
@@ -48,6 +50,8 @@
     "confirm":"Confirm",
     "cancel":"Cancel",
     "processing":"Processing Your Request",
+    "deleted":"Successfully Deleted",
+    "success":"Success",
     "askConfirmDelete":"Are You Sure You Want to Delete ?"
     
     

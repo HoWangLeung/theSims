@@ -36,18 +36,18 @@ class Employee extends Component {
     }
 
     componentDidUpdate() {
-        
+
 
     }
     handleTabChange = (activeKey) => {
-        
+
         this.setState({
             currentTab: activeKey
         })
     }
 
     generateTabs = () => {
-        
+
         return (
             <>
                 <Tabs
@@ -67,6 +67,7 @@ class Employee extends Component {
                     >
                         <SearchCollapse />
                         <Spin spinning={this.props.isLoading} >
+
                             <PermanentUserList />
                         </Spin>
                     </TabPane>
@@ -134,27 +135,30 @@ class Employee extends Component {
 
     render() {
         const { currentTab } = this.state
-        const { employeeList } = this.props
+        const { employeeList, managementList, isLoading } = this.props
         const dynamicTabs = this.generateTabs()
-        
+
         let SelectDropdown = this.getSelectDropdown()
         return (
             <div className={classes.employeeContainer}>
                 {SelectDropdown}
                 {dynamicTabs}
-                {currentTab === 'permanentUsers' && <ManagementTabTable
-                    managementList={employeeList}
-                />}
+                {currentTab === 'permanentUsers' &&
+                    <ManagementTabTable
+                        managementList={managementList}
+                        isLoading={isLoading}
+                    />}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    
+
 
     return {
         employeeList: state.EmployeeReducer.employeeList,
+        managementList: state.EmployeeReducer.managementList,
         isLoading: state.EmployeeReducer.loading
     }
 }

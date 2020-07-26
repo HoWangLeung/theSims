@@ -41,7 +41,7 @@ class PermanentUserList extends Component {
 
                 }).then(() => {
 
-                    returnMessage('deleted')
+                    returnMessage(intl.get('deleted'))
 
                 })
 

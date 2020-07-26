@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import intl from 'react-intl-universal';
-import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { Switch, Tabs, Table } from 'antd';
+import { Switch, Tabs, Table ,Spin} from 'antd';
 import classes from '../../Employee.less'
 
 import { UserOutlined } from '@ant-design/icons';
@@ -54,7 +53,7 @@ class ManagementTabTable extends Component {
 
     generateInternalLowerTable = () => {
         
-        const { managementList } = this.props
+        const { managementList,isLoading } = this.props
 
         let config = {
             handleDelete: this.handleDelete
@@ -67,12 +66,15 @@ class ManagementTabTable extends Component {
             
             
             return (
+              <Spin spinning={isLoading}>
                 <Table
                     className={classes.employeeTable}
                     columns={columns} dataSource={managementList || []}
                     pagination={{ pageSize: 3, showSizeChanger: false, pageSizeOptions: [3, 5, 10] }}
                     scroll={{ x: true }}
-                />)
+                />
+                </Spin>
+                )
         }else{
             return <h1>dsdf</h1>
         }

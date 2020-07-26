@@ -1,5 +1,7 @@
 {
     "key1": "國際化",
+    "yes":"是",
+    "no":"否",
     "signInWithUserName":"以帳號及密碼登入",
     "signInWithQrCode":"以二維碼登入",
     "userProfile":"個人資料",
@@ -48,6 +50,9 @@
     "confirm":"確認",
     "cancel":"取消",
     "processing":"正在處理你的請求",
+    "success":"成功",
+    "deleted":"刪除成功",
     "askConfirmDelete":"確認刪除 ?"
+   
     
 }
