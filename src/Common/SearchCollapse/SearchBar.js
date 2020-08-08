@@ -41,12 +41,14 @@ const SearchBar = (props) => {
             : null;
 
     const onFinish = values => {
-
+        const {currentDept} = props
+        console.log(currentDept);
         const startDate = moment(values.lastModifiedDate??[0]._d).format('L')
         const endDate = moment(values.lastModifiedDate??[1]._d).format('L')
        console.log(values);
         values.lastModifiedDate = { startDate, endDate }
-        props.searchEmployee(values)
+        props.searchEmployee(values, currentDept)
+        
 
     };
 
@@ -110,13 +112,14 @@ const mapStateToProps = (state) => {
 
 
     return {
-        employeeList: state.EmployeeReducer.employeeList
+        employeeList: state.EmployeeReducer.employeeList,
+        currentDept:state.EmployeeReducer.currentDept
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        searchEmployee: (values) => dispatch(searchEmployee(values))
+        searchEmployee: (values,currentDept) => dispatch(searchEmployee(values,currentDept))
     }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar))

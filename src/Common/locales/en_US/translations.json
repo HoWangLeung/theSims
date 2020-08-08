@@ -39,12 +39,14 @@
     "profile":"Profile",
     "access":"Access",
     "terminate":"Terminate",
+    "department":"Department",
+    "All":"All",
     "selectDepartment":"Select a Department",
-    "marketing":"Marketing",
-    "informationTechnology":"Information Technology",
-    "humanResource":"Human Resource",
+    "Marketing":"Marketing",
+    "Information Technology":"Information Technology",
+    "Human Resource":"Human Resource",
     "operation":"General Affairs",
-    "finance":"Finance",
+    "Finance":"Finance",
     "search":"Search",
     "reSet":"Reset",
     "confirm":"Confirm",
@@ -53,6 +55,7 @@
     "deleted":"Successfully Deleted",
     "success":"Success",
     "askConfirmDelete":"Are You Sure You Want to Delete ?"
+ 
     
     
    

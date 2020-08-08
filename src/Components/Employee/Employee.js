@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { GET_ALL_EMPLOYEE } from './constant'
 import { connect } from 'react-redux'
-import { fetchEmployee } from './actions/EmployeeAction';
+import { fetchEmployee, searchByDepartment } from './actions/EmployeeAction';
 import classes from './Employee.less'
-import { Tabs, Table, Spin } from 'antd';
-import { UserOutlined, UsergroupDeleteOutlined, SendOutlined, SettingOutlined, FieldTimeOutlined } from '@ant-design/icons';
+import { Tabs, Table, Spin, Button, Row } from 'antd';
+import { UserOutlined, UsergroupDeleteOutlined, SendOutlined, SettingOutlined, FieldTimeOutlined,DownloadOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
@@ -15,6 +15,7 @@ import PermanentUserList from './DynamicTabs/InternalUsers/PermanentUserList'
 import ManagementTabTable from './DynamicTabs/InternalUsers/ManagementTabTable'
 import SelectDropdown from '../../Common/SelectDropdown';
 import SearchCollapse from '../../Common/SearchCollapse/SearchCollapse';
+
 
 const { TabPane } = Tabs;
 
@@ -44,6 +45,12 @@ class Employee extends Component {
         this.setState({
             currentTab: activeKey
         })
+    }
+
+    handleSelect = (value) => {
+        const { searchByDepartment } = this.props
+        searchByDepartment(value)
+
     }
 
     generateTabs = () => {
@@ -124,13 +131,32 @@ class Employee extends Component {
 
     getSelectDropdown = () => {
         let departmentOptions =
-            ['marketing', "informationTechnology", "humanResource", "operation", "finance"]
+            ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
         return (<SelectDropdown
             placeHolder={intl.get('selectDepartment')}
             icon={faBuilding}
             options={departmentOptions}
             departmentOptions={departmentOptions}
+            handleSelect={this.handleSelect}
         />)
+    }
+
+    getExportButton = () => (<Button icon={<DownloadOutlined />} onClick={this.hanldleExport} >Export</Button>)
+    hanldleExport=()=>{
+        console.log('sdf');
+      return axios({
+        url: "http://localhost:8080/employee/export", //your url
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then(res=>{
+          console.log(res);
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'Employee.xlsx'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+      })
     }
 
     render() {
@@ -139,9 +165,13 @@ class Employee extends Component {
         const dynamicTabs = this.generateTabs()
 
         let SelectDropdown = this.getSelectDropdown()
+        let exportButton = this.getExportButton()
         return (
             <div className={classes.employeeContainer}>
-                {SelectDropdown}
+                <Row>
+                    {currentTab === 'permanentUsers' && SelectDropdown}
+                    {currentTab === 'permanentUsers' && exportButton}
+                </Row>
                 {dynamicTabs}
                 {currentTab === 'permanentUsers' &&
                     <ManagementTabTable
@@ -165,7 +195,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchEmployee: () => { dispatch(fetchEmployee()) }
+        fetchEmployee: () => { dispatch(fetchEmployee()) },
+        searchByDepartment: (payload) => { dispatch(searchByDepartment(payload)) }
 
     }
 }

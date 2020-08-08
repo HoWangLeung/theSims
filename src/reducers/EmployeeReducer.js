@@ -1,9 +1,11 @@
 import { returnMessage } from "../Common/utilities/helpers";
 import intl from 'react-intl-universal';
+import { isArray } from "lodash";
 const initState = {
     employeeList: [],
-    managementList:[],
+    managementList: [],
     loading: false,
+    currentDept:"All"
 
 }
 
@@ -21,7 +23,7 @@ const EmployeeReducer = (state = initState, action) => {
         case ('FETCH_EMPLOYEE_SUCCESS'):
 
             console.log(action.payload.detail);
-            const managementList = action.payload.detail.filter(employee=> employee.management===true)
+            const managementList = action.payload.detail.filter(employee => employee.management === true)
             return {
                 ...state,
                 employeeList: action.payload.detail,
@@ -78,20 +80,42 @@ const EmployeeReducer = (state = initState, action) => {
                 loading: true
             }
         case ("SEARCH_EMPLOYEE_SUCCESS"):
+
+            console.log(isArray(action.payload));
+            console.log(action.payload);
             return {
                 ...state,
-                employeeList:action.payload,
+                employeeList: action.payload,
                 loading: false
             }
+
+        //==================================================================================================================================================================
+
+        //==================================================================================================================================================================
+        case ("SEARCH_DEPARTMENT"):
+            console.log(action.payload);
+        
+            return {
+                ...state,
+                loading: true,
+                currentDept:action.payload.department
+            }
+
+            case ("SEARCH_DEPARTMENT_SUCCESS"):
+        
+            console.log(action.payload);
+                return {
+                    ...state,
+                    employeeList:action.payload,
+                    loading: false,
+                    // currentDept:action.payload[0]?action.payload[0].department.name:"All"
+                }
 
         default:
             return state;
     }
 
-
-
-
-
 }
+
 
 export default EmployeeReducer

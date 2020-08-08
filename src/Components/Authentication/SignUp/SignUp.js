@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import SignUpForm from '../../forms/SignUpForm'
 import styles from '../Authentication.less'
+import { connect } from 'react-redux'
+import {signUpRequest} from './actions/AuthenticationActions'
+import { withRouter } from 'react-router-dom';
 class SignUp extends Component {
     constructor(props) {
         super(props)
@@ -15,15 +18,49 @@ class SignUp extends Component {
         return this.state.showUsernameValidation
     }
 
+    handleSubmit=(values)=>{
+        console.log(values);
+        const {signUpRequest} = this.props
+        const payload =
+        {
+            "username":values.email,
+            "password":values.password
+        }
+
+        signUpRequest(payload)
+    }
+
     render() {
         return (
 
             <div className={styles.container}>
-                <SignUpForm handleFocus={this.handleFocus} />
+                <SignUpForm 
+                handleFocus={this.handleFocus}
+                handleSubmit={this.handleSubmit}
+                
+                />
             </div>
 
         )
     }
 }
 
-export default SignUp
+const mapStateToProps = (state) => {
+    
+
+    return {
+        
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    
+    return {
+        signUpRequest: (values) => {
+            dispatch(signUpRequest(values,ownProps))
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp))

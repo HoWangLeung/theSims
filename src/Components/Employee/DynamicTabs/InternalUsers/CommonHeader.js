@@ -45,6 +45,24 @@ const headerRole = () => (
     }
 )
 
+const headerDepartment = () => (
+    {
+        title: () => (intl.get('department')),
+        sorter:true,
+        dataIndex: 'department',
+        key: 'department',
+        width:200,
+        sorter:(a, b) => a.department.name.localeCompare(b.department.name),
+        render: (text, row, index) => {
+            console.log(row);
+            return (
+               <span>{row.department.name}</span>
+            )
+        }
+    
+    }
+)
+
 const headerPermission = () => (
     {
         title: () => (intl.get('permission')),
@@ -135,6 +153,7 @@ export const commonHeader = (config) => {
                 headerId(),
                 headerName(),
                 headerRole(),
+                headerDepartment(),
                 headerPermission(),
                 headerAdmin(),
                 headerDefaultPermission(),

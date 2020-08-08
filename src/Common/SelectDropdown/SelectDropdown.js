@@ -30,6 +30,11 @@ class SelectDropdown extends Component {
     onSearch = (val) => {
         
     }
+    onSelect=(value)=>{
+        const{handleSelect} = this.props
+        console.log(value, "34");
+        handleSelect(value);
+    }
     generateSelectDropdown = () => {
 
         const { placeHolder, departmentOptions } = this.props
@@ -44,6 +49,7 @@ class SelectDropdown extends Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             onSearch={this.onSearch}
+            onSelect={this.onSelect}
             filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
