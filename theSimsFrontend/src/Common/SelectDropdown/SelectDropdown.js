@@ -3,6 +3,8 @@ import { Select } from 'antd';
 import classes from './SelectDropdown.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import intl from 'react-intl-universal';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 const { Option } = Select;
 
 
@@ -11,37 +13,39 @@ class SelectDropdown extends Component {
         super(props)
 
         this.state = {
-
+        
         }
     }
 
     onChange = (value) => {
-        
+
     }
 
     onBlur = () => {
-        
+
     }
 
     onFocus = () => {
-        
+
     }
 
     onSearch = (val) => {
-        
+
     }
-    onSelect=(value)=>{
-        const{handleSelect} = this.props
+    onSelect = (value) => {
+        const { handleSelect } = this.props
         console.log(value, "34");
         handleSelect(value);
     }
     generateSelectDropdown = () => {
 
-        const { placeHolder, departmentOptions } = this.props
-        
+        const { placeHolder, departmentOptions,currentDept } = this.props
+
         return (<Select
             className={classes.SelectDropdown}
             showSearch
+            allowClear
+            value={currentDept}
             style={{ width: 200 }}
             placeholder={placeHolder}
             optionFilterProp="children"
@@ -55,9 +59,10 @@ class SelectDropdown extends Component {
             }
         >
 
-            {departmentOptions.map((option, index) => (
-                    <Option value={option}>{intl.get(option)}</Option>
-                 ))}
+            {departmentOptions.map((option, index) => {
+                console.log(option);
+                return <Option value={option}>{intl.get(option)}</Option>
+            })}
         </Select>)
     }
 
@@ -73,4 +78,12 @@ class SelectDropdown extends Component {
     }
 }
 
-export default SelectDropdown
+const mapStateToProps = (state) => {
+
+
+    return {
+        currentDept:state.EmployeeReducer.currentDept
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(SelectDropdown))

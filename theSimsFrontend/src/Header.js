@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
 import {emit} from './emit.js'
-// import '../../assets/css/index.less'
+
 const { Option } = Select;
 class Header extends Component {
     handleChange(val) {
-        // 發送消息
+ 
         console.log(typeof val);
         emit.emit('change_language', val);
     }

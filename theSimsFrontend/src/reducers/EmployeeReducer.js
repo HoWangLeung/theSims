@@ -75,6 +75,7 @@ const EmployeeReducer = (state = initState, action) => {
 
         //==================================================================================================================================================================
         case ("SEARCH_EMPLOYEE"):
+            console.log(action.payload);
             return {
                 ...state,
                 loading: true

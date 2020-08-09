@@ -4,7 +4,6 @@ import classes from './SearchCollapse.less'
 import { Form, Input, Button, Radio } from 'antd';
 import CustomDatePicker from './CustomDatePicker';
 import { UndoOutlined } from '@ant-design/icons';
-import SelectDropdown from '../SelectDropdown';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { DatePicker } from 'antd';

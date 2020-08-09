@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { GET_ALL_EMPLOYEE } from './constant'
 import { connect } from 'react-redux'
 import { fetchEmployee, searchByDepartment } from './actions/EmployeeAction';
 import classes from './Employee.less'
@@ -141,7 +140,7 @@ class Employee extends Component {
         />)
     }
 
-    getExportButton = () => (<Button icon={<DownloadOutlined />} onClick={this.hanldleExport} >Export</Button>)
+getExportButton = () => (<Button icon={<DownloadOutlined />} onClick={this.hanldleExport} >{intl.get("export")}</Button>)
     hanldleExport=()=>{
         console.log('sdf');
       return axios({
@@ -168,7 +167,7 @@ class Employee extends Component {
         let exportButton = this.getExportButton()
         return (
             <div className={classes.employeeContainer}>
-                <Row>
+                <Row  className={classes.barAboveTabs} >
                     {currentTab === 'permanentUsers' && SelectDropdown}
                     {currentTab === 'permanentUsers' && exportButton}
                 </Row>

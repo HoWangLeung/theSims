@@ -35,9 +35,9 @@ class NavigationMenu extends Component {
                 </Menu.ItemGroup>
             </SubMenu>
             <Menu.Item key="alipay" icon={<BarcodeOutlined />}>
-                <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+                <Link to="/inventory">
                     {intl.get('inventory')}
-                </a>
+                </Link>
             </Menu.Item>
             <Menu.Item key="mail" icon={<MailOutlined />}>
                 <a href="https://ant.design" target="_blank" rel="noopener noreferrer">

@@ -22,6 +22,7 @@ import Dashboard from './Components/Dashboard';
 import AuthenticatedRoute from './Components/Authentication/Authentication'
 import WebFooter from './Components/WebFooter/WebFooter'
 import CreateTemplate from './Components/DigitalQrCodeMenu/GettingStrated/GettingStarted';
+import Inventory from './Components/Inventory/';
 
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
@@ -81,6 +82,7 @@ class App extends Component {
                 <Route path='/login' component={Login} />
                 <Route path='/signup' component={SignUp} />
                 <AuthenticatedRoute path='/employee' component={Employee} />
+                <AuthenticatedRoute path='/inventory' component={Inventory} />
                 <Route path='/jotto' component={Home} />
                 <Route path='/createMenu' component={CreateTemplate} />
               </Switch>

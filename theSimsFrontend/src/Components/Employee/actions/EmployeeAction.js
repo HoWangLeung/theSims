@@ -1,16 +1,15 @@
 
 import axios from 'axios'
 import AuthenticationService from '../../Authentication/SignUp/AuthenticationService'
+import { url } from '../../../apiConstant'
 
 export const fetchEmployee = () => {
 
-    //return a function if use thunk
     return (dispatch, getState) => {
-        // dispatch({ type: 'FETCH_EMPLOYEE',})
-
+        
         dispatch({ type: 'FETCH_EMPLOYEE' })
         setTimeout(() => {
-            axios.get('http://localhost:8080/employee/')
+            axios.get(`${url}/employee/`)
                 .then(res => {
                     console.log(res.data);
                     dispatch({ type: 'FETCH_EMPLOYEE_SUCCESS', payload: res.data })
@@ -29,7 +28,7 @@ export const deleteEmployee = (id, res, modal) => {
 
         dispatch({ type: 'DELETE_EMPLOYEE', payload: { modal } })
         setTimeout(() => {
-            axios.delete(`http://localhost:8080/employee/delete/${id}`)
+            axios.delete(`${url}/employee/delete/${id}`)
                 .then(response => {
                     dispatch({
                         type: 'DELETE_EMPLOYEE_SUCCESS',
@@ -54,7 +53,8 @@ export const searchEmployee = (values, currentDept) => {
     const params = {}
     if (values.id) { params.id = parseInt(values.id) }
     if (values.employeeName) { params.name = values.employeeName }
-    if ((params.name || values.id) && currentDept !== "All") { params.department = currentDept }
+    if ((params.name || values.id) && currentDept !== "All") { params.department = currentDept }  
+
     else if (!params.name && !values.id) {
         params.department = currentDept
     } else { params.department = "All" }
@@ -63,13 +63,13 @@ export const searchEmployee = (values, currentDept) => {
     return (dispatch, getState) => {
         dispatch({ type: 'SEARCH_EMPLOYEE', payload: { values } })
         setTimeout(() => {
-            axios.get(`http://localhost:8080/employee/search`, { params })
+            axios.get(`${url}/employee/search`, { params })
                 .then(res => {
                     console.log(res);
               
                     if (res.data == null) {
                         dispatch({ type: 'FETCH_EMPLOYEE' })
-                        axios.get('http://localhost:8080/employee/')
+                        axios.get(`${url}/employee/`)
                             .then(res => {
                                 dispatch({ type: 'FETCH_EMPLOYEE_SUCCESS', payload: res.data })
                             })
@@ -96,7 +96,7 @@ export const searchByDepartment = (value) => {
         console.log('reaching return');
         dispatch({ type: 'SEARCH_DEPARTMENT', payload:params })
         setTimeout(() => {
-            axios.get(`http://localhost:8080/employee/search`, { params })
+            axios.get(`${url}/employee/search`, { params })
                 .then(res => {
                     console.log(res.data);
                     dispatch({ type: 'SEARCH_DEPARTMENT_SUCCESS', payload: res.data })
