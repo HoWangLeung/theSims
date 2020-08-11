@@ -41,8 +41,6 @@ public class Employee {
 	private String address;
 	
 	@ManyToOne(  fetch = FetchType.LAZY)
-
-	
 	private Department department;
 
 	public Employee() {

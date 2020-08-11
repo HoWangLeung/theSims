@@ -55,7 +55,13 @@
     "processing":"Processing Your Request",
     "deleted":"Successfully Deleted",
     "success":"Success",
-    "askConfirmDelete":"Are You Sure You Want to Delete ?"
+    "askConfirmDelete":"Are You Sure You Want to Delete ?",
+    "productCategory":"Product Category",
+    "productName":"Product Name",
+    "productCost":"Product Cost",
+    "productRemaining":"Remaining Quantity",
+    "productStatus":"Product Status"
+    
  
     
     

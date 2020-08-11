@@ -55,7 +55,12 @@
     "processing":"正在處理你的請求",
     "success":"成功",
     "deleted":"刪除成功",
-    "askConfirmDelete":"確認刪除 ?"
+    "askConfirmDelete":"確認刪除 ?",
+    "productCategory":"產品類別",
+    "productName":"產品名稱",
+    "productCost":"成本",
+    "productRemaing":"剩餘",
+    "ProductStatus":"狀態"
    
     
 }
