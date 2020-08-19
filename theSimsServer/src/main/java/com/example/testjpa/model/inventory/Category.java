@@ -1,38 +1,50 @@
 package com.example.testjpa.model.inventory;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.example.testjpa.model.Employee;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 
 @Entity
 @Table(name="category")
+@NamedEntityGraph(
+		  name = "category-product",
+		  attributeNodes = {
+		    @NamedAttributeNode(value="product")
+		  }
+		)
 public class Category {
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private String category;
-	@OneToMany(mappedBy = "category")
-
-	private List<Product> product;
-	
+	@Column(name="name")
+	private String name;
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+	@JsonBackReference
+	 private List<Product> product;
 	public Category() {
 		super();
+		
 		// TODO Auto-generated constructor stub
 	}
-	public Category(long id, String category) {
+	public Category(long id, String name, List<Product> product) {
 		super();
 		this.id = id;
-		this.category = category;
+		this.name = name;
+		this.product = product;
 	}
 	public long getId() {
 		return id;
@@ -40,21 +52,24 @@ public class Category {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCategory() {
-		return category;
+	public String getName() {
+		return name;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public List<Product> getProducts() {
+	public List<Product> getProduct() {
 		return product;
 	}
-	public void setProducts(List<Product> product) {
+	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+
+
 	
 	
 	
-	
+
+
 
 }

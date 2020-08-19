@@ -31,7 +31,7 @@ public class EmployeeService {
 	EmployeeRepository employeeRepository;
 	
 	public List<Employee> getAll(){
-		
+		System.out.println("GETALLLLINE34___________________________");
 		 Specification<Employee> spec = new Specification<Employee>() {
 			private static final long serialVersionUID = 1L;
 

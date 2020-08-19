@@ -19,10 +19,15 @@ class Inventory extends Component {
     }
 
     render() {
+        console.log(this.props);
+       const{isLoading, inventoryList} = this.props
         return (
             <div className={classes.inventoryContainer} >
                 <DataBoxes/>
-                <InventoryList/>
+                <InventoryList
+                    isLoading={isLoading}
+                    inventoryList={inventoryList}
+                />
             </div>
         )
     }
@@ -30,9 +35,10 @@ class Inventory extends Component {
 
 const mapStateToProps = (state) => {
 
-
+ 
     return {
-    
+        isLoading:state.InventoryReducer.loading,
+        inventoryList:state.InventoryReducer.inventoryList,
     }
 }
 

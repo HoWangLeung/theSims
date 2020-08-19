@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'antd';
+import { Table, Button, Spin } from 'antd';
 import { GetHeader } from './GetHeader';
+import CommonModal from '../../../Common/CommonModal/CommonModal';
 
 
 const data = [];
@@ -8,7 +9,7 @@ for (let i = 0; i < 46; i++) {
     data.push({
         key: i,
         id: i,
-        productName:`London, Park Lane no. ${i}`
+        productName: `London, Park Lane no. ${i}`
 
     });
 }
@@ -19,45 +20,63 @@ class InventoryList extends Component {
         this.state = {
             selectedRowKeys: [], // Check here to configure the default column
             loading: false,
+            showModal:false
         }
     }
 
-    start = () => {
-        this.setState({ loading: true });
-        // ajax request after empty completing
-        setTimeout(() => {
-            this.setState({
-                selectedRowKeys: [],
-                loading: false,
-            });
-        }, 1000);
+    showModal = e => {
+        console.log('show modal');
+     this.setState({showModal:true})
     };
 
-    onSelectChange = selectedRowKeys => {
+    hideModal =()=>{
+        this.setState({showModal:false})
+    }
+
+    onSelectChange = (selectedRowKeys,selectedRows) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
+        console.log(selectedRows);
         this.setState({ selectedRowKeys });
     };
 
+    onSelect=(record, selected, selectedRows, nativeEvent)=>{
+        console.log(record,selected, selectedRows);
+    }
+
     render() {
-        const { loading, selectedRowKeys } = this.state;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
+        const { loading, selectedRowKeys,showModal } = this.state;
+        const{isLoading,inventoryList} = this.props
+      
         const hasSelected = selectedRowKeys.length > 0;
-        
-const columns = GetHeader();
+
+        const columns = GetHeader();
+        console.log(inventoryList);
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
-                    <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
-                        Reload
+                    <Button type="primary" onClick={this.showModal} disabled={!hasSelected} loading={loading}>
+                        Edit Multiple
           </Button>
+
+          <CommonModal 
+          visible={this.state.showModal}
+          hideModal={this.hideModal}
+          />
                     <span style={{ marginLeft: 8 }}>
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                     </span>
                 </div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                <Spin spinning={isLoading} >
+                    <Table
+                    rowKey={record => record.id}
+                     rowSelection={{
+                         type:"checkbox",
+                         onChange:this.onSelectChange
+                     }} 
+                     
+                     
+                     columns={columns} dataSource={inventoryList} />
+                </Spin>
             </div>
         )
     }
