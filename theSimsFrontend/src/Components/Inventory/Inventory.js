@@ -5,29 +5,35 @@ import InventoryList from './InventoryList/InventoryList'
 import intl from 'react-intl-universal';
 import { fetchInventory } from './action/InventoryAction';
 import { connect } from 'react-redux';
+import QueueAnim from 'rc-queue-anim';
 class Inventory extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-                 
+
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchInventory()
     }
 
     render() {
         console.log(this.props);
-       const{isLoading, inventoryList} = this.props
+        const { isLoading, inventoryList } = this.props
         return (
             <div className={classes.inventoryContainer} >
-                <DataBoxes/>
-                <InventoryList
-                    isLoading={isLoading}
-                    inventoryList={inventoryList}
-                />
+                <QueueAnim type="top" duration={1500}  >
+                    <DataBoxes key="demo1"  />
+                </QueueAnim>
+                <QueueAnim type="bottom" duration={1500}>
+                    <InventoryList
+                        key="demo2"
+                        isLoading={isLoading}
+                        inventoryList={inventoryList}
+                    />
+                </QueueAnim>
             </div>
         )
     }
@@ -35,10 +41,10 @@ class Inventory extends Component {
 
 const mapStateToProps = (state) => {
 
- 
+
     return {
-        isLoading:state.InventoryReducer.loading,
-        inventoryList:state.InventoryReducer.inventoryList,
+        isLoading: state.InventoryReducer.loading,
+        inventoryList: state.InventoryReducer.inventoryList,
     }
 }
 

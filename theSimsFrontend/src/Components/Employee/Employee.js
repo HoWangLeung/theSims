@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { fetchEmployee, searchByDepartment } from './actions/EmployeeAction';
 import classes from './Employee.less'
 import { Tabs, Table, Spin, Button, Row } from 'antd';
-import { UserOutlined, UsergroupDeleteOutlined, SendOutlined, SettingOutlined, FieldTimeOutlined,DownloadOutlined } from '@ant-design/icons';
+import { UserOutlined, UsergroupDeleteOutlined, SendOutlined, SettingOutlined, FieldTimeOutlined, DownloadOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ import PermanentUserList from './DynamicTabs/InternalUsers/PermanentUserList'
 import ManagementTabTable from './DynamicTabs/InternalUsers/ManagementTabTable'
 import SelectDropdown from '../../Common/SelectDropdown';
 import SearchCollapse from '../../Common/SearchCollapse/SearchCollapse';
-
+import QueueAnim from 'rc-queue-anim';
 
 const { TabPane } = Tabs;
 
@@ -131,53 +131,59 @@ class Employee extends Component {
     getSelectDropdown = () => {
         let departmentOptions =
             ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
-        return (<SelectDropdown
-            placeHolder={intl.get('selectDepartment')}
-            icon={faBuilding}
-            options={departmentOptions}
-            departmentOptions={departmentOptions}
-            handleSelect={this.handleSelect}
-        />)
+        return (
+            <QueueAnim  duration={800} ease="easeInOutExpo">
+                <SelectDropdown
+                    key="selectDropdown"
+                    placeHolder={intl.get('selectDepartment')}
+                    icon={faBuilding}
+                    options={departmentOptions}
+                    departmentOptions={departmentOptions}
+                    handleSelect={this.handleSelect}
+                />
+            </QueueAnim>
+        )
     }
 
-getExportButton = () => (<Button icon={<DownloadOutlined />} onClick={this.hanldleExport} >{intl.get("export")}</Button>)
-    hanldleExport=()=>{
-        console.log('sdf');
-      return axios({
-        url: "http://localhost:8080/employee/export", //your url
-        method: 'GET',
-        responseType: 'blob', // important
-      }).then(res=>{
-          console.log(res);
-        const url = window.URL.createObjectURL(new Blob([res.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'Employee.xlsx'); //or any other extension
-        document.body.appendChild(link);
-        link.click();
-      })
+    getExportButton = () => (
+        <Button key="exportButton" icon={<DownloadOutlined />} onClick={this.hanldleExport} >{intl.get("export")}</Button>)
+    hanldleExport = () => {
+                    console.log('sdf');
+        return axios({
+                    url: "http://localhost:8080/employee/export", //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then(res => {
+                    console.log(res);
+            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Employee.xlsx'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+        })
     }
 
     render() {
-        const { currentTab } = this.state
-        const { employeeList, managementList, isLoading } = this.props
+        const {currentTab} = this.state
+        const {employeeList, managementList, isLoading} = this.props
         const dynamicTabs = this.generateTabs()
 
         let SelectDropdown = this.getSelectDropdown()
         let exportButton = this.getExportButton()
         return (
             <div className={classes.employeeContainer}>
-                <Row  className={classes.barAboveTabs} >
-                    {currentTab === 'permanentUsers' && SelectDropdown}
-                    {currentTab === 'permanentUsers' && exportButton}
-                </Row>
-                {dynamicTabs}
-                {currentTab === 'permanentUsers' &&
-                    <ManagementTabTable
-                        managementList={managementList}
-                        isLoading={isLoading}
-                    />}
-            </div>
+                    <Row className={classes.barAboveTabs} >
+                        {currentTab === 'permanentUsers' && SelectDropdown}
+                        {currentTab === 'permanentUsers' && exportButton}
+                    </Row>
+                    {dynamicTabs}
+                    {currentTab === 'permanentUsers' &&
+                        <ManagementTabTable
+                            managementList={managementList}
+                            isLoading={isLoading}
+                        />}
+                </div>
         )
     }
 }
@@ -186,7 +192,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-        employeeList: state.EmployeeReducer.employeeList,
+                    employeeList: state.EmployeeReducer.employeeList,
         managementList: state.EmployeeReducer.managementList,
         isLoading: state.EmployeeReducer.loading
     }
@@ -194,8 +200,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchEmployee: () => { dispatch(fetchEmployee()) },
-        searchByDepartment: (payload) => { dispatch(searchByDepartment(payload)) }
+                    fetchEmployee: () => {dispatch(fetchEmployee())},
+        searchByDepartment: (payload) => {dispatch(searchByDepartment(payload))}
 
     }
 }

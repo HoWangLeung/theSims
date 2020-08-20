@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List, Card, Col, Row } from 'antd';
 
+
 class DataBoxes extends Component {
     constructor(props) {
         super(props)
@@ -20,22 +21,24 @@ class DataBoxes extends Component {
 
         return (
             <div>
-                <Card >
-                    <Row>
-                        <Col xs={24} sm={24} xl={6} >
-                            <Card.Grid style={gridStyle}><h1>3</h1> <p>Category</p></Card.Grid>
-                        </Col>
-                        <Col  xs={24}  sm={24}  xl={6}   >
-                            <Card.Grid style={gridStyle}><h1>15</h1> <p>Products</p></Card.Grid>
-                        </Col>
-                        <Col  xs={24}  sm={24}   xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>159</h1> <p>Sold</p></Card.Grid>
-                        </Col>
-                        <Col  xs={24}  sm={24}  xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>130</h1> <p>Remain</p></Card.Grid>
-                        </Col>
-                    </Row>
-                </Card>
+            
+                    <Card   >
+                        <Row>
+                            <Col xs={24} sm={24} xl={6} >
+                                <Card.Grid  style={gridStyle}><h1>3</h1> <p>Category</p></Card.Grid>
+                            </Col>
+                            <Col xs={24} sm={24} xl={6}   >
+                                <Card.Grid style={gridStyle}><h1>15</h1> <p>Products</p></Card.Grid>
+                            </Col>
+                            <Col xs={24} sm={24} xl={6}  >
+                                <Card.Grid style={gridStyle}><h1>159</h1> <p>Sold</p></Card.Grid>
+                            </Col>
+                            <Col xs={24} sm={24} xl={6}  >
+                                <Card.Grid style={gridStyle}><h1>130</h1> <p>Remain</p></Card.Grid>
+                            </Col>
+                        </Row>
+                    </Card>
+             
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
+import CommonTexty from './CommonTexty'
 class CommonModal {
 
    success=(props)=>{
@@ -48,7 +49,7 @@ class CommonModal {
     confirm = (props) => {
 
         return Modal.confirm({
-            title:intl.get('confirm'),
+            title:<CommonTexty text={'confirm'}/> ,
             cancelText: intl.get('cancel'),
             okButtonProps:props.okButtonProps,
             ...props

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Table, Button, Spin } from 'antd';
 import { GetHeader } from './GetHeader';
 import CommonModal from '../../../Common/CommonModal/CommonModal';
+import EditMultiple from './EditMultiple';
+import EditMultipleSteps from './EditMultipleSteps';
 
 
 const data = [];
@@ -19,6 +21,7 @@ class InventoryList extends Component {
 
         this.state = {
             selectedRowKeys: [], // Check here to configure the default column
+            selectedRows:[],
             loading: false,
             showModal:false
         }
@@ -36,7 +39,7 @@ class InventoryList extends Component {
     onSelectChange = (selectedRowKeys,selectedRows) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         console.log(selectedRows);
-        this.setState({ selectedRowKeys });
+        this.setState({ selectedRowKeys,selectedRows });
     };
 
     onSelect=(record, selected, selectedRows, nativeEvent)=>{
@@ -44,7 +47,7 @@ class InventoryList extends Component {
     }
 
     render() {
-        const { loading, selectedRowKeys,showModal } = this.state;
+        const { loading, selectedRowKeys,showModal,selectedRows } = this.state;
         const{isLoading,inventoryList} = this.props
       
         const hasSelected = selectedRowKeys.length > 0;
@@ -61,6 +64,7 @@ class InventoryList extends Component {
           <CommonModal 
           visible={this.state.showModal}
           hideModal={this.hideModal}
+          content={<EditMultipleSteps content={selectedRows} />}
           />
                     <span style={{ marginLeft: 8 }}>
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}

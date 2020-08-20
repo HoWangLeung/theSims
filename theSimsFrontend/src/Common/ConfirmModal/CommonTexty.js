@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'antd';
 import Texty from 'rc-texty';
 import 'rc-texty/assets/index.css';
 import intl from 'react-intl-universal';
-
-class CommonModal extends Component {
+class CommonTexty extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-
+                 
         }
     }
     getEnter = (e) => {
@@ -89,21 +87,11 @@ class CommonModal extends Component {
                 };
         }
     }
-
     render() {
         return (
-            <div>
-                <Modal
-                    title={<Texty enter={this.getEnter} >{intl.get('Marketing')}</Texty>}
-                    visible={this.props.visible}
-                    onOk={this.props.hideModal}
-                    onCancel={this.props.hideModal}
-                >
-                    {this.props.content}
-                </Modal>
-            </div>
+        <Texty enter={this.getEnter} >{intl.get(`${this.props.text}`)}</Texty>
         )
     }
 }
 
-export default CommonModal
+export default CommonTexty
