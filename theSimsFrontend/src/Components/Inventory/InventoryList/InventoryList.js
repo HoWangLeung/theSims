@@ -64,7 +64,7 @@ class InventoryList extends Component {
           <CommonModal 
           visible={this.state.showModal}
           hideModal={this.hideModal}
-          content={<EditMultipleSteps content={selectedRows} />}
+          content={<EditMultipleSteps inventoryList={inventoryList} content={selectedRows} />}
           />
                     <span style={{ marginLeft: 8 }}>
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}

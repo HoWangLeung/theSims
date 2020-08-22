@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import QueueAnim from 'rc-queue-anim';
+import { List, Typography, Divider } from 'antd';
+
 class EditMultiple extends Component {
     constructor(props) {
         super(props)
@@ -11,14 +13,23 @@ class EditMultiple extends Component {
 
     getSelecteditems = () => {
         const { content } = this.props
-        return content.map((item, index) => {
+        return content.map((e, i) => {
             return (
-           
-                    <div key={index}>
-                        {index+1} . {item.productName}
-                    </div>
-         
+
+                <div key={i}>
+                    <List
+                    bordered={true}
+                    size="small"
+                    
+                    >
+                        <List.Item  >
+                            {e.productName}
+                        </List.Item>
+                    </List>
+                </div >
+
             )
+
         })
     }
 
@@ -28,8 +39,9 @@ class EditMultiple extends Component {
         return (
             <div>
                 <h3>You have Selected:</h3>
-                <QueueAnim  leaveReverse={true} delay={500} interval={200} >
-                {this.getSelecteditems()}
+                <QueueAnim forcedReplay={true} leaveReverse={true} delay={200} interval={200} >
+
+                    {this.getSelecteditems()}
                 </QueueAnim>
             </div>
         )

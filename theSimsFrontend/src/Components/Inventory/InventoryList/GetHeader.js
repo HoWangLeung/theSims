@@ -101,8 +101,7 @@ const lastModifiedDate=()=>(
 
 
 export const GetHeader = (config) => {
-   
-    
+     
     return (
         [
             headerId(),
@@ -115,5 +114,17 @@ export const GetHeader = (config) => {
             lastModifiedDate(),
         ])
 
+}
+
+export const GetPreviewTableHeader = (config) => {
+     
+    return (
+        [
+            headerId(),
+            headerProductCategory(),
+            headerProductName(),
+            headerProductRemaining(),
+            headerProductStatus(),
+        ])
 
 }
