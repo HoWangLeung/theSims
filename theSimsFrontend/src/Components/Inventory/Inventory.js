@@ -6,6 +6,7 @@ import intl from 'react-intl-universal';
 import { fetchInventory } from './action/InventoryAction';
 import { connect } from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
+import CommonButton from '../../Common/CommonButton/CommonButton';
 class Inventory extends Component {
     constructor(props) {
         super(props)
@@ -20,7 +21,6 @@ class Inventory extends Component {
     }
 
     render() {
-        console.log(this.props);
         const { isLoading, inventoryList } = this.props
         return (
             <div className={classes.inventoryContainer} >

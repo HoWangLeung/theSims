@@ -10,6 +10,7 @@ import { faKey, faQrcode, faMarker } from '@fortawesome/free-solid-svg-icons'
 import intl from 'react-intl-universal';
 import qrCodeImg from '../../assests/Image/qrCode.png'
 import { Route, Redirect } from 'react-router-dom'
+
 const { Panel } = Collapse;
 class LoginCard extends Component {
     constructor(props) {

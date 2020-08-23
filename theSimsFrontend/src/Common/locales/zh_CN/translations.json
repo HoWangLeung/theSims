@@ -60,7 +60,9 @@
     "productName":"產品名稱",
     "productCost":"成本",
     "productRemaing":"剩餘",
-    "ProductStatus":"狀態"
+    "ProductStatus":"狀態",
+    "selection":"你的選擇",
+    "next":"下一步"
    
     
 }

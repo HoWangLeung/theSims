@@ -60,7 +60,9 @@
     "productName":"Product Name",
     "productCost":"Product Cost",
     "productRemaining":"Remaining Quantity",
-    "productStatus":"Product Status"
+    "productStatus":"Product Status",
+    "selection":"Selection",
+    "next":"Next"
     
  
     

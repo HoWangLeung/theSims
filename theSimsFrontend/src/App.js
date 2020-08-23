@@ -67,11 +67,13 @@ class App extends Component {
 
 
   render() {
+    console.log(classes);
     return (
       <ConfigProvider locale={this.state.antdLang}>
         <Router>
           <Layout hasSider={false} className={classes.layout}>
             <Nav
+             className={classes.nav}
               handleChangeLocale={this.handleChangeLocale}
               currentLocale={this.state.antdLang}
             />

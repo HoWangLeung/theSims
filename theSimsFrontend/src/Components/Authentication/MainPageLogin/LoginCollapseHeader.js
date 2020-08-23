@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from '../Authentication.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const LoginCollapsePanelHeader = (props) => {
 
     const { title, icon } = props;

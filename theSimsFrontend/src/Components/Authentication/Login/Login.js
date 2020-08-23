@@ -6,7 +6,7 @@ import { loginAction } from '../SignUp/actions/AuthenticationActions'
 import { withRouter } from 'react-router-dom';
 import classes from '../Authentication.less'
 import intl from 'react-intl-universal';
-
+import 'antd/dist/antd.less';
 class Login extends Component {
     constructor(props) {
         super(props)

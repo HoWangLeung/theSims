@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import intl from 'react-intl-universal';
 import classes from '../Inventory.less'
+import { Input } from 'antd';
+import TweenOne from 'rc-tween-one';
 
 const headerId=()=>(
     {
@@ -50,15 +52,36 @@ const headerProductCost=()=>(
     }
 )
 
-const headerProductRemaining=()=>(
-    {
+const headerProductRemaining=()=>{
+    return ({
         title: () => (intl.get('productRemaining')),
         dataIndex: 'remaining',
         align:'center',
         key: 'remaining',
         
-    }
-)
+    })
+}
+
+const headerProductRemainingWithInput=(addToAllValue)=>{
+    return ({
+        title: () => (intl.get('productRemaining')),
+        dataIndex: 'remaining',
+        align:'center',
+        key: 'remaining',
+        render: (text, row, index) => {     
+            console.log(addToAllValue);
+            const finalValue = row.remaining + addToAllValue;
+
+
+           
+            return (
+                
+               <Input  key={index} defaultValue={finalValue} value={finalValue} />
+            )
+        }
+        
+    })
+}
 
 const headerProductStatus=()=>(
     {
@@ -116,14 +139,14 @@ export const GetHeader = (config) => {
 
 }
 
-export const GetPreviewTableHeader = (config) => {
-     
+export const GetPreviewTableHeader = (value) => {
+    
     return (
         [
             headerId(),
             headerProductCategory(),
             headerProductName(),
-            headerProductRemaining(),
+            headerProductRemainingWithInput(value),
             headerProductStatus(),
         ])
 

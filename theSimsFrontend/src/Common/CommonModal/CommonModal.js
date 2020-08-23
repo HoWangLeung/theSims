@@ -95,7 +95,7 @@ class CommonModal extends Component {
             <div>
                 <Modal
                     
-                    title={<Texty enter={this.getEnter} >{intl.get('Marketing')}</Texty>}
+                    title={<Texty enter={this.getEnter} >{intl.get('selection')}</Texty>}
                     visible={this.props.visible}
                     onOk={this.props.hideModal}
                     onCancel={this.props.hideModal}

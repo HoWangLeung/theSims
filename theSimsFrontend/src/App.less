@@ -1,5 +1,41 @@
 
 
+ 
+ :global{
+
+    *[class*='-primary']
+    {
+      background-color:     rgb(55, 85, 115);
+      border: none;
+      &:hover,
+      &:visited,
+      &:link,
+      &:focus{ background-color:     rgb(55, 85, 115);}
+    }
+  
+    
+ 
+    .ant-steps-item-process .ant-steps-item-icon  {
+      background-color: rgb(55, 85, 115);
+      border: rgb(55, 85, 115);
+    }
+    .ant-steps-item-finish .ant-steps-item-icon {
+      background-color: #fff;
+      border-color: rgb(55, 85, 115);
+      &>.ant-steps-icon{
+        color: rgb(55, 85, 115);
+        &::after{
+          color: rgb(55, 85, 115);
+        }
+      }
+  
+  }
+  .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after{
+    background-color: rgb(55, 85, 115);
+}
+  
+    
+} 
 .header{
 
 
@@ -20,4 +56,5 @@ height: 100%;
  align-items: center;
  justify-content: center;
  overflow-y: auto;
+
 }

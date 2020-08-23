@@ -14,7 +14,7 @@ class EditMultipleSteps extends Component {
         };
     }
 
-    next() {
+    next=()=> {
         const current = this.state.current + 1;
         this.setState({ current });
     }
@@ -56,7 +56,7 @@ class EditMultipleSteps extends Component {
                         </Button>
                     )}
                      {current < steps.length - 1 && (
-                        <Button type="primary" onClick={() => this.next()}>
+                        <Button type="primary" onClick={this.next}>
                             Next
                         </Button>
                     )}

@@ -46,8 +46,8 @@ class PreviewTable extends Component {
     }
 
     render() {
-        const { inventoryList } = this.props
-        const columns = GetPreviewTableHeader()
+        const { inventoryList,addToAllValue } = this.props
+        const columns = GetPreviewTableHeader(addToAllValue)
         console.log(inventoryList);
         return (
             <div>

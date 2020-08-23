@@ -5,16 +5,6 @@ import CommonModal from '../../../Common/CommonModal/CommonModal';
 import EditMultiple from './EditMultiple';
 import EditMultipleSteps from './EditMultipleSteps';
 
-
-const data = [];
-for (let i = 0; i < 46; i++) {
-    data.push({
-        key: i,
-        id: i,
-        productName: `London, Park Lane no. ${i}`
-
-    });
-}
 class InventoryList extends Component {
     constructor(props) {
         super(props)
