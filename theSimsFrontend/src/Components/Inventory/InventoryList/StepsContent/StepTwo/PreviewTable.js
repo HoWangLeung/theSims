@@ -2,40 +2,6 @@ import React, { Component } from 'react'
 import { Table } from 'antd';
 import { GetPreviewTableHeader } from '../../GetHeader';
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-    },
-];
 class PreviewTable extends Component {
     constructor(props) {
         super(props)
@@ -45,18 +11,42 @@ class PreviewTable extends Component {
         }
     }
 
+    componentDidUpdate() {
+
+    }
+
+    getColumns = () => {
+        const { previewList, addToAllValue } = this.props
+
+
+        return GetPreviewTableHeader()
+    }
+
+    handleChange = () => {
+
+    }
+
+    handleSubmission = (currentData) => {
+        const { inventoryList, addToAllValue } = this.props
+
+
+
+
+    }
+
     render() {
-        const { inventoryList,addToAllValue } = this.props
-        const columns = GetPreviewTableHeader(addToAllValue)
-        console.log(inventoryList);
+        const { previewList } = this.props
+        const columns = this.getColumns()
+
         return (
             <div>
-                <Table 
-                columns={columns} 
-                dataSource={inventoryList} 
-                size="small"
-                scroll={{y:150}}
-                
+                <Table
+                    columns={columns}
+                    dataSource={previewList}
+                    size="small"
+                    scroll={{ y: 150 }}
+                    onChange={this.handleChange}
+                    summary={this.handleSubmission}
                 />
             </div>
         )

@@ -20,7 +20,7 @@ const headerProductCategory=()=>(
         key: 'category',
         align:'center',
         render: (text, row, index) => {
-            console.log(text);
+            
             return (
                 <p>
                    {text.name}
@@ -69,14 +69,13 @@ const headerProductRemainingWithInput=(addToAllValue)=>{
         align:'center',
         key: 'remaining',
         render: (text, row, index) => {     
-            console.log(addToAllValue);
-            const finalValue = row.remaining + addToAllValue;
+   
 
-
+            
            
             return (
                 
-               <Input  key={index} defaultValue={finalValue} value={finalValue} />
+               <Input   key={index} defaultValue={row.remaining} value={row.remaining} />
             )
         }
         
@@ -139,14 +138,14 @@ export const GetHeader = (config) => {
 
 }
 
-export const GetPreviewTableHeader = (value) => {
+export const GetPreviewTableHeader = () => {
     
     return (
         [
             headerId(),
             headerProductCategory(),
             headerProductName(),
-            headerProductRemainingWithInput(value),
+            headerProductRemainingWithInput(),
             headerProductStatus(),
         ])
 

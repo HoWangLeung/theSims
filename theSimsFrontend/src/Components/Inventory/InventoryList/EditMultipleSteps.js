@@ -24,6 +24,12 @@ class EditMultipleSteps extends Component {
         this.setState({ current });
     }
 
+
+    handleQuantityUpdate=()=>{
+        
+        console.log('line 30');
+    }
+
     render() {
         const { current } = this.state
         const {inventoryList} = this.props
@@ -34,7 +40,10 @@ class EditMultipleSteps extends Component {
             },
             {
                 title: 'Edit & Preview',
-                content: <EditStepTwo inventoryList={inventoryList} />,
+                content: <EditStepTwo
+                 inventoryList={inventoryList}
+                 handleQuantityUpdate={this.handleQuantityUpdate}
+                 />,
             },
         
         ];
@@ -61,8 +70,8 @@ class EditMultipleSteps extends Component {
                         </Button>
                     )}
                       {current === steps.length - 1 && (
-                        <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                            Done
+                        <Button type="primary" onClick={this.handleQuantityUpdate}>
+                            Confirm
                         </Button>
                     )}
                 </div>

@@ -18,7 +18,7 @@ class InventoryList extends Component {
     }
 
     showModal = e => {
-        console.log('show modal');
+        
      this.setState({showModal:true})
     };
 
@@ -27,13 +27,13 @@ class InventoryList extends Component {
     }
 
     onSelectChange = (selectedRowKeys,selectedRows) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        console.log(selectedRows);
+        
+        
         this.setState({ selectedRowKeys,selectedRows });
     };
 
     onSelect=(record, selected, selectedRows, nativeEvent)=>{
-        console.log(record,selected, selectedRows);
+        
     }
 
     render() {
@@ -43,7 +43,7 @@ class InventoryList extends Component {
         const hasSelected = selectedRowKeys.length > 0;
 
         const columns = GetHeader();
-        console.log(inventoryList);
+        
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>

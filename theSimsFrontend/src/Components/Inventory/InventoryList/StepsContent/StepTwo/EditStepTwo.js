@@ -5,6 +5,9 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import PreviewTable from './PreviewTable';
 import Animate from 'rc-animate';
 import styles from './Animation.less'
+import cloneDeep from 'lodash/cloneDeep';
+import _ from 'lodash'
+
 
 const layout = {
     labelCol: {
@@ -26,16 +29,41 @@ class EditStepTwo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAnimation: false,
-            addToAllValue:0
+            showAnimation: true,
+            addToAllValue: 0,
+            previewList: []
         }
     }
 
+    componentDidMount() {
+        const { inventoryList } = this.props
+        const previewList = cloneDeep(inventoryList);
+        previewList.forEach((item) => {
+            item.remaining += this.state.addToAllValue
+        })
+
+        this.setState(({
+            previewList
+        }))
+    }
+
     onFinish = values => {
+ 
+        if (!_.isUndefined(values.addToAll)) {
 
-        let parsedValue = parseInt(values.addToAll)
+            const { inventoryList } = this.props
+            const valueToAdd = parseInt(values.addToAll)
+            const updatedPreviewList = cloneDeep(previewList);
+            updatedPreviewList.forEach((item) => {
+                item.remaining += valueToAdd
+            })
+            this.setState({ previewList: updatedPreviewList })
+            const { previewList } = this.state
 
-        this.setState({addToAllValue:this.state.addToAllValue + parsedValue})
+            
+          
+        }
+
 
     };
     onPreview = () => {
@@ -45,7 +73,7 @@ class EditStepTwo extends Component {
     }
 
     onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
+
     };
 
     getForm = () => {
@@ -59,8 +87,11 @@ class EditStepTwo extends Component {
             <Form.Item
                 label="Add to All"
                 name="addToAll"
+
             >
-                <Input />
+                <Input
+                    placeholder="number"
+                    type="number" />
             </Form.Item>
             <Form.Item >
                 <Button type="primary" htmlType="submit">
@@ -68,11 +99,11 @@ class EditStepTwo extends Component {
                  </Button>
             </Form.Item>
             <Form.Item >
-              
+
                 <Button type="primary" onClick={this.onPreview}>
                     {showAnimation ? ' Hide ' : 'Preview'}
                 </Button>
-              
+
 
             </Form.Item>
         </Form>
@@ -81,10 +112,10 @@ class EditStepTwo extends Component {
 
     render() {
         const { inventoryList } = this.props
-        const { showAnimation , addToAllValue} = this.state
+        const { showAnimation, addToAllValue, previewList } = this.state
         const addToAllInput = this.getForm()
 
-        console.log(addToAllValue);
+
         return (
             <div className={classes.stepTwoContainer} >
                 {addToAllInput}
@@ -99,11 +130,11 @@ class EditStepTwo extends Component {
                     }}
                     transitionAppear
                 >
-                    {showAnimation && <PreviewTable 
-                     key="previewTable"
-                     inventoryList={inventoryList}
-                     addToAllValue={addToAllValue}                    
-                     />}
+                    {showAnimation && <PreviewTable
+                        key="previewTable"
+                        previewList={previewList}
+                        addToAllValue={addToAllValue}
+                    />}
                 </Animate>
             </div>
         );
