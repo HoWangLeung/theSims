@@ -15,15 +15,22 @@ class PreviewTable extends Component {
 
     }
 
+    handleInputChange=e=>{
+        const {handleInputChange} = this.props
+        handleInputChange(e)
+    }
+
     getColumns = () => {
         const { previewList, addToAllValue } = this.props
+        const callbacks =  {
+            handleInputChange:this.handleInputChange
+        }
 
-
-        return GetPreviewTableHeader()
+        return GetPreviewTableHeader(callbacks)
     }
 
     handleChange = () => {
-
+        console.log('changing');
     }
 
     handleSubmission = (currentData) => {

@@ -4,126 +4,132 @@ import classes from '../Inventory.less'
 import { Input } from 'antd';
 import TweenOne from 'rc-tween-one';
 
-const headerId=()=>(
+const headerId = () => (
     {
         title: intl.get('id'),
         dataIndex: 'id',
         key: 'id',
-        align:'center',
+        align: 'center',
     }
 )
 
-const headerProductCategory=()=>(
+const headerProductCategory = () => (
     {
         title: intl.get('productCategory'),
         dataIndex: 'category',
         key: 'category',
-        align:'center',
+        align: 'center',
         render: (text, row, index) => {
-            
+
             return (
                 <p>
-                   {text.name}
+                    {text.name}
                 </p>
             )
         }
-        
+
     }
 )
 
-const headerProductName=()=>(
+const headerProductName = () => (
     {
         title: () => (intl.get('productName')),
         dataIndex: 'productName',
-        align:'center',
+        align: 'center',
         key: 'productName',
-        
+
     }
 )
 
 
-const headerProductCost=()=>(
+const headerProductCost = () => (
     {
         title: () => (intl.get('productCost')),
         dataIndex: 'cost',
-        align:'center',
+        align: 'center',
         key: 'cost',
-        
+
     }
 )
 
-const headerProductRemaining=()=>{
+const headerProductRemaining = () => {
     return ({
         title: () => (intl.get('productRemaining')),
         dataIndex: 'remaining',
-        align:'center',
+        align: 'center',
         key: 'remaining',
-        
+
     })
 }
 
-const headerProductRemainingWithInput=(addToAllValue)=>{
+const headerProductRemainingWithInput = (handleInputChange) => {
+    // const{handleInputChange} = callbacks
     return ({
         title: () => (intl.get('productRemaining')),
         dataIndex: 'remaining',
-        align:'center',
+        align: 'center',
         key: 'remaining',
-        render: (text, row, index) => {     
-   
-
-            
-           
+        render: (text, row, index) => {
+            console.log(text);
+            console.log(row);
             return (
-                
-               <Input   key={index} defaultValue={row.remaining} value={row.remaining} />
+
+                <Input
+
+                    id={index}
+                    onChange={handleInputChange}
+                    key={index} defaultValue={row.remaining}
+                    type="number"
+                    value={row.remaining}
+                />
             )
         }
-        
+
     })
 }
 
-const headerProductStatus=()=>(
+const headerProductStatus = () => (
     {
         title: () => (intl.get('productStatus')),
         dataIndex: 'productStatus',
         key: 'productStatus',
-        align:'center',
+        align: 'center',
         render: (text, row, index) => {
-             
+
             return (
                 <div className={classes.circleContainer} >
                     <div className={classes.circle} />
                 </div>
             )
         }
-        
+
     }
 )
 
-const lastModifiedBy=()=>(
+const lastModifiedBy = () => (
     {
         title: () => (intl.get('lastModifiedBy')),
         dataIndex: 'lastModifiedBy',
-        align:'center',
+        align: 'center',
         key: 'lastModifiedBy',
-        
+
     }
 )
 
-const lastModifiedDate=()=>(
+const lastModifiedDate = () => (
     {
         title: () => (intl.get('lastModifiedDate')),
         dataIndex: 'lastModifiedDate',
-        align:'center',
+        align: 'center',
         key: 'lastModifiedDate',
-        
+
     }
 )
 
 
 
 export const GetHeader = (config) => {
-     
+
     return (
         [
             headerId(),
@@ -138,14 +144,14 @@ export const GetHeader = (config) => {
 
 }
 
-export const GetPreviewTableHeader = () => {
-    
+export const GetPreviewTableHeader = ({ handleInputChange }) => {
+
     return (
         [
             headerId(),
             headerProductCategory(),
             headerProductName(),
-            headerProductRemainingWithInput(),
+            headerProductRemainingWithInput(handleInputChange),
             headerProductStatus(),
         ])
 

@@ -1,6 +1,7 @@
 const initState = {
     loading: false,
-    inventoryList:[]
+    inventoryList:[],
+    previewList:[]
     
 }
 
@@ -23,6 +24,12 @@ const InventoryReducer = (state = initState, action) => {
                 loading:false,
                 inventoryList:action.payload.detail
             }
+
+        case("SAVE_INVENTORY"):
+        return{
+            ...state,
+            previewList:action.payload
+        }
            
         default:
             return state;

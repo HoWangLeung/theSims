@@ -18,7 +18,6 @@
     "userProfile":"User Profile",
     "dashboard":"Dashboard",
     "payment":"Payment",
-    "inventory":"Inventory",
     "email":"Email",
     "management":"Management",
     "outstandingPayment":"Outstanding Payment",
@@ -62,7 +61,13 @@
     "productRemaining":"Remaining Quantity",
     "productStatus":"Product Status",
     "selection":"Selection",
-    "next":"Next"
+    "next":"Next",
+    "inventory":{
+                    "inventory":"Inventory",
+                    "add":"Add",
+                    "undo":"Undo"
+                    
+                }
     
  
     

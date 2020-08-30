@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Steps, Button, message } from 'antd';
 import EditMultiple from './EditMultiple';
 import classes from '../Inventory.less'
 import EditStepTwo from './StepsContent/StepTwo/EditStepTwo';
+
 const { Step } = Steps;
 
 
@@ -26,8 +28,9 @@ class EditMultipleSteps extends Component {
 
 
     handleQuantityUpdate=()=>{
-        
-        console.log('line 30');
+        const{previewList} = this.props
+        console.log('line 30',previewList );
+
     }
 
     render() {
@@ -80,4 +83,17 @@ class EditMultipleSteps extends Component {
     }
 }
 
-export default EditMultipleSteps
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+         previewList:state.InventoryReducer.previewList
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+     
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditMultipleSteps)

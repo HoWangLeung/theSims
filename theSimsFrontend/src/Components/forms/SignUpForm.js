@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
-import styles from './form.less'
+import classes from './form.less'
 import ValidationHint from './ValidationHint';
+import Animate from 'rc-animate';
 
 
 
@@ -18,15 +19,15 @@ class SignUpForm extends React.Component {
         }
     }
     onFinish = values => {
-        const {handleSubmit} = this.props
+        const { handleSubmit } = this.props
         console.log(values);
         handleSubmit(values)
 
     };
 
     onFinishFailed = errorInfo => {
-       
-        
+
+
     };
     render() {
         const {
@@ -36,8 +37,17 @@ class SignUpForm extends React.Component {
             pwValidateSpecialChar
         } = this.state
 
+        const layout = {
+            labelCol: { span: 8},
+            wrapperCol: { span: 6 },
+        };
+        const tailLayout = {
+            wrapperCol: { offset: 8, span: 16 },
+        };
+
         return (
             <Form
+               {...layout}
                 data-test="component-SignUpForm"
                 name="basic"
                 initialValues={{
@@ -45,7 +55,7 @@ class SignUpForm extends React.Component {
                 }}
                 onFinish={this.onFinish}
                 onFinishFailed={this.onFinishFailed}
-                className={styles.signUpForm}
+                className={classes.signUpForm}
             >
                 <Form.Item
                     label="Email"
@@ -58,11 +68,11 @@ class SignUpForm extends React.Component {
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                
+
 
                                 if (value) {
                                     if (value.indexOf('@') == -1 || value.indexOf('.com') == -1) {
-                                        
+
 
                                         return Promise.reject('invalid email format')
                                     }
@@ -95,7 +105,7 @@ class SignUpForm extends React.Component {
                                     pwValidateSpecialChar
                                 } = this.state
 
-                                
+
                                 let pwCharRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*/;
                                 let pwLengthRegex = /^[a-zA-Z0-9#?!@$%^&]{8,128}$/;
                                 let pwSpecialCharRegex = /(?=.*?[#?!@$%^&])/;
@@ -113,11 +123,11 @@ class SignUpForm extends React.Component {
                                     }
 
                                     if (pwSpecialCharRegex.test(value)) {
-                                        
+
 
                                         pwValidateSpecialChar = true
                                     } else {
-                                        
+
                                         pwValidateSpecialChar = false;
                                     }
 
@@ -139,12 +149,16 @@ class SignUpForm extends React.Component {
                     <div>
                         <Input.Password />
                         {showPwValidator &&
+                           
                             <ValidationHint
                                 pwValidateChar={this.state.pwValidateChar}
                                 pwValidateLength={pwValidateLength}
                                 pwValidateSpecialChar={pwValidateSpecialChar}
 
-                            />}
+                            />
+                        
+                                 
+                            }
 
 
                     </div>
@@ -176,11 +190,9 @@ class SignUpForm extends React.Component {
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item name="remember" valuePropName="checked">
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+ 
 
-                <Form.Item >
+                <Form.Item {...tailLayout} >
                     <Button type="primary" htmlType="submit">
                         Submit
         </Button>

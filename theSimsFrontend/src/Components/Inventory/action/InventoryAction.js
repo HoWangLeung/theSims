@@ -22,3 +22,12 @@ export const fetchInventory= () => {
 
     }
 }
+
+export const savePreviewList= (updatedPreviewList) => {
+    return (dispatch, getState) => {
+       
+        dispatch({ type: 'SAVE_INVENTORY' ,payload: updatedPreviewList})
+
+    }
+
+}

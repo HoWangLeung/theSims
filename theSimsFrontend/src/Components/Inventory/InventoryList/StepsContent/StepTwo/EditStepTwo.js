@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { savePreviewList } from '../../../action/InventoryAction';
 import TweenOne from 'rc-tween-one';
 import classes from '../../../Inventory.less';
 import { Form, Input, Button, Checkbox } from 'antd';
@@ -6,6 +8,7 @@ import PreviewTable from './PreviewTable';
 import Animate from 'rc-animate';
 import styles from './Animation.less'
 import cloneDeep from 'lodash/cloneDeep';
+import intl from 'react-intl-universal';
 import _ from 'lodash'
 
 
@@ -31,7 +34,8 @@ class EditStepTwo extends Component {
         this.state = {
             showAnimation: true,
             addToAllValue: 0,
-            previewList: []
+            previewList: [],
+            undoAdded: false
         }
     }
 
@@ -48,21 +52,31 @@ class EditStepTwo extends Component {
     }
 
     onFinish = values => {
- 
-        if (!_.isUndefined(values.addToAll)) {
+        const { inventoryList,savePreviewList } = this.props
+        const { previewList } = this.state
+        const { undoAdded } = this.state
+        const valueToAdd = parseInt(values.addToAll)
+        const updatedPreviewList = cloneDeep(previewList);
+        if (!_.isUndefined(valueToAdd) && !undoAdded) {
 
-            const { inventoryList } = this.props
-            const valueToAdd = parseInt(values.addToAll)
-            const updatedPreviewList = cloneDeep(previewList);
             updatedPreviewList.forEach((item) => {
                 item.remaining += valueToAdd
             })
-            this.setState({ previewList: updatedPreviewList })
-            const { previewList } = this.state
-
-            
-          
+            this.setState({
+                previewList: updatedPreviewList,
+                undoAdded: !this.state.undoAdded
+            })
+        } else if (undoAdded) {
+            updatedPreviewList.forEach((item) => {
+                item.remaining -= valueToAdd
+            })
+            this.setState({
+                previewList: updatedPreviewList,
+                undoAdded: !this.state.undoAdded
+            })
         }
+
+        savePreviewList(updatedPreviewList)
 
 
     };
@@ -76,8 +90,28 @@ class EditStepTwo extends Component {
 
     };
 
+    handleInputChange=e=>{
+        const { savePreviewList } = this.props
+        const { previewList } = this.state
+        let inputValue = parseInt(e.target.value)
+        let id = e.target.id+1
+        console.log(e.target);
+        console.log(inputValue);
+        console.log(typeof inputValue);
+        this.setState(prevState => ({
+            previewList: prevState.previewList.map(
+                obj => {
+                    console.log(obj);
+                    return obj.id == id ? Object.assign(obj, { remaining: inputValue }) : obj
+                }
+          )
+        }));
+     
+        savePreviewList(previewList)
+    }
+
     getForm = () => {
-        const { showAnimation } = this.state
+        const { showAnimation, undoAdded } = this.state
         return (<Form
             {...layout}
             onFinish={this.onFinish}
@@ -87,16 +121,19 @@ class EditStepTwo extends Component {
             <Form.Item
                 label="Add to All"
                 name="addToAll"
-
+                rules={[{ required: true, message: 'Please input a number' }]}
             >
                 <Input
                     placeholder="number"
-                    type="number" />
+                    type="number"
+                    disabled={undoAdded?true:false}
+                    />
+                
             </Form.Item>
             <Form.Item >
-                <Button type="primary" htmlType="submit">
-                    ADD
-                 </Button>
+                <Button type={undoAdded?"danger":"primary"} htmlType="submit">
+                    {undoAdded ? intl.get('inventory.undo') : intl.get('inventory.add')}
+                </Button>
             </Form.Item>
             <Form.Item >
 
@@ -134,6 +171,7 @@ class EditStepTwo extends Component {
                         key="previewTable"
                         previewList={previewList}
                         addToAllValue={addToAllValue}
+                        handleInputChange={this.handleInputChange}
                     />}
                 </Animate>
             </div>
@@ -141,4 +179,20 @@ class EditStepTwo extends Component {
     }
 }
 
-export default EditStepTwo
+
+const mapStateToProps = (state) => {
+
+
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        savePreviewList: (updatedPreviewList) => { dispatch(savePreviewList(updatedPreviewList)) }
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditStepTwo)

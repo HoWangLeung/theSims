@@ -36,7 +36,7 @@ class NavigationMenu extends Component {
             </SubMenu>
             <Menu.Item key="alipay" icon={<BarcodeOutlined />}>
                 <Link to="/inventory">
-                    {intl.get('inventory')}
+                    {intl.get('inventory.inventory')}
                 </Link>
             </Menu.Item>
             <Menu.Item key="mail" icon={<MailOutlined />}>
