@@ -1,11 +1,134 @@
 
- .backgroundImageContainer{
+// .hover_1{
+//     display: inline-block;
+//     width: 100%;
+//     min-height: 100%;
+//     object-fit: cover;
+//     z-index: -1;
+// }
+
+
+.backgroundImageContainer_show_0{
     height: 810px;
-     background-image:url(../assests/Image/hover_1.jpg);
      display: flex;
      align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_1.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;
+        
+     }
 
- }
+}
+
+
+.backgroundImageContainer_show_1{
+    height: 810px;
+     display: flex;
+     align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_2.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;   
+     }
+}
+.backgroundImageContainer_show_2{
+    height: 810px;
+     display: flex;
+     align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_3.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;   
+     }
+}
+.backgroundImageContainer_show_3{
+    height: 810px;
+     display: flex;
+     align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_4.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;   
+     }
+}
+.backgroundImageContainer_show_4{
+    height: 810px;
+     display: flex;
+     align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_5.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;   
+     }
+}
+.backgroundImageContainer_show_5{
+    height: 810px;
+     display: flex;
+     align-items: center;
+     &::before{
+        box-shadow: 0 0 48px 48px white inset;
+        background-image:url(../assests/Image/hover_6.jpg);
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        animation: fadein 1.5s;
+        transition-property: all;
+        transition-duration: 1s;   
+     }
+}
+
+
+.backgroundImageContainer_hide{
+     height: 810px;
+     box-shadow: 0 0 48px 48px white inset;
+     display: flex;
+     align-items: center;
+ 
+}
 .sixBoxesContainer{
   height: 100%;
  width: 100%;
@@ -26,6 +149,7 @@
 .imageContainer{
     display: inline-block;
 position: relative;
+
 }
 .image{
     height: 200px;
@@ -34,6 +158,7 @@ position: relative;
 }
 
 .overlay {
+
     position: absolute;
     top: 0;
     bottom: 0;
@@ -41,25 +166,58 @@ position: relative;
     right: 0;
     height: 100%;
     width: 100%;
-    opacity: 0;
+ 
     transition: .5s ease;
     // background-color: #008CBA;
   }
   
 
   .overlay:hover{
+    width: 100%;
     opacity: 1;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
     display: inline-block;
     position: relative;
+    cursor: pointer;
   }
 
  .textOverlay{
+     width: 100%;
     color: white;
     font-size: 20px;
+    font-weight: 600;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
  }
+ @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+ } 
+
+ .textIcon{
+     width: 100%;
+     padding-top: 40px;
+     padding-left: 10px;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+
+ 
+ }
+
+ .arrowIcon{
+     padding-left: 5px;
+     padding-bottom: 18px;
+     font-weight: 700;
+ }
+
+ 
