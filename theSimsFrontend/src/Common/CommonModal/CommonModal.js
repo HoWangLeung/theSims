@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'antd';
+import { Modal, Button, Spin } from 'antd';
 import Texty from 'rc-texty';
 import 'rc-texty/assets/index.css';
 import intl from 'react-intl-universal';
@@ -77,12 +77,12 @@ class CommonModal extends Component {
                     opacity: 0,
                 };
             case 8:
-                    return {
-                        scale: 0.8,
-                        x: 30,
-                        y: -10,
-                        opacity: 0,
-                    };
+                return {
+                    scale: 0.8,
+                    x: 30,
+                    y: -10,
+                    opacity: 0,
+                };
             default:
                 return {
                     opacity: 0,
@@ -91,17 +91,22 @@ class CommonModal extends Component {
     }
 
     render() {
+        const { visible, hideModal, footer,isLoading,loadingTip } = this.props
         return (
             <div>
+
                 <Modal
-                    
+
                     title={<Texty enter={this.getEnter} >{intl.get('selection')}</Texty>}
-                    visible={this.props.visible}
-                    onOk={this.props.hideModal}
-                    onCancel={this.props.hideModal}
+                    visible={visible}
+                    onCancel={hideModal}
+                    {...this.props}
                 >
-                    {this.props.content}
+                    <Spin spinning={isLoading} tip={loadingTip} >
+                        {this.props.content}
+                    </Spin>
                 </Modal>
+
             </div>
         )
     }

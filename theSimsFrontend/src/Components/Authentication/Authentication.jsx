@@ -23,12 +23,12 @@ class Authentication extends Component {
     setupAxiosInterceptors(){
         let token = sessionStorage.getItem('USER_TOKEN')
         
-        
+     
 
         axios.interceptors.request.use(
             (config)=>{
                 if(this.isUserLoggedIn()){
-
+                    console.log('set up interceptor');
                     config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
                 }
                 return config

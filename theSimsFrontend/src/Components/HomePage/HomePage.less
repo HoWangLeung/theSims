@@ -12,13 +12,14 @@
     height: 810px;
      display: flex;
      align-items: center;
-     &::before{
-        box-shadow: 0 0 48px 48px white inset;
+     
+     &::before{    
+        box-shadow: 0 0 10px 10px white inset;
         background-image:url(../assests/Image/hover_1.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -35,12 +36,12 @@
      display: flex;
      align-items: center;
      &::before{
-        box-shadow: 0 0 48px 48px white inset;
+        // box-shadow: 0 0 48px 48px white inset;
         background-image:url(../assests/Image/hover_2.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -53,12 +54,12 @@
      display: flex;
      align-items: center;
      &::before{
-        box-shadow: 0 0 48px 48px white inset;
+        box-shadow: 0 0 10px 10px white inset;
         background-image:url(../assests/Image/hover_3.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -71,12 +72,12 @@
      display: flex;
      align-items: center;
      &::before{
-        box-shadow: 0 0 48px 48px white inset;
+        // box-shadow: 0 0 48px 48px white inset;
         background-image:url(../assests/Image/hover_4.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -89,12 +90,12 @@
      display: flex;
      align-items: center;
      &::before{
-        box-shadow: 0 0 48px 48px white inset;
+        box-shadow: 0 0 10px 10px white inset;
         background-image:url(../assests/Image/hover_5.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -107,12 +108,12 @@
      display: flex;
      align-items: center;
      &::before{
-        box-shadow: 0 0 48px 48px white inset;
+     
         background-image:url(../assests/Image/hover_6.jpg);
         content: "";
-        top: 0;
+        top: 65px;
         left: 0;
-        bottom: 0;
+        bottom: 65px;
         right: 0;
         position: absolute;
         animation: fadein 1.5s;
@@ -123,22 +124,31 @@
 
 
 .backgroundImageContainer_hide{
+    
      height: 810px;
-     box-shadow: 0 0 48px 48px white inset;
+    //  box-shadow: 0 0 20px 20px white inset;
      display: flex;
      align-items: center;
  
 }
 .sixBoxesContainer{
-  height: 100%;
- width: 100%;
  
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 200px;
 
+}
+.homePageRow{
+    height: 100%;
+    background-color: rgb(255, 255, 255);
 }
 
 
 .descriptionContainer{
     padding-left: 20px;
+    padding-top: 190px;
 }
 
 .descriptionTitle{
@@ -155,6 +165,8 @@ position: relative;
     height: 200px;
     width: 100%;
     font-size: 0;
+    box-shadow: 0 12px 12px 0 rgba(0,0,0,0.5);
+    border-radius: 5px;
 }
 
 .overlay {
@@ -166,7 +178,7 @@ position: relative;
     right: 0;
     height: 100%;
     width: 100%;
- 
+    border-radius: 5px;
     transition: .5s ease;
     // background-color: #008CBA;
   }
@@ -179,6 +191,7 @@ position: relative;
     display: inline-block;
     position: relative;
     cursor: pointer;
+    border-radius: 5px;
   }
 
  .textOverlay{
@@ -220,4 +233,3 @@ position: relative;
      font-weight: 700;
  }
 
- 

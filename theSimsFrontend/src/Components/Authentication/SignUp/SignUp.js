@@ -26,6 +26,8 @@ class SignUp extends Component {
             "username":values.email,
             "password":values.password
         }
+        payload.enabled=true;
+        payload.roles=[{id:2}]
 
         signUpRequest(payload)
     }

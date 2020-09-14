@@ -25,16 +25,16 @@ class DataBoxes extends Component {
                     <Card   >
                         <Row>
                             <Col xs={24} sm={24} xl={6} >
-                                <Card.Grid  style={gridStyle}><h1>3</h1> <p>Category</p></Card.Grid>
+                                <Card.Grid  style={gridStyle}><h1>1</h1> <p>Category</p></Card.Grid>
                             </Col>
                             <Col xs={24} sm={24} xl={6}   >
-                                <Card.Grid style={gridStyle}><h1>15</h1> <p>Products</p></Card.Grid>
+                                <Card.Grid style={gridStyle}><h1>5</h1> <p>Products</p></Card.Grid>
                             </Col>
                             <Col xs={24} sm={24} xl={6}  >
-                                <Card.Grid style={gridStyle}><h1>159</h1> <p>Sold</p></Card.Grid>
+                                <Card.Grid style={gridStyle}><h1>0</h1> <p>Sold</p></Card.Grid>
                             </Col>
                             <Col xs={24} sm={24} xl={6}  >
-                                <Card.Grid style={gridStyle}><h1>130</h1> <p>Remain</p></Card.Grid>
+                                <Card.Grid style={gridStyle}><h1>0</h1> <p>Remain</p></Card.Grid>
                             </Col>
                         </Row>
                     </Card>

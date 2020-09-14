@@ -30,7 +30,7 @@ class Inventory extends Component {
                 <QueueAnim type="bottom" duration={1500}>
                     <InventoryList
                         key="demo2"
-                        isLoading={isLoading}
+            
                         inventoryList={inventoryList}
                     />
                 </QueueAnim>
@@ -44,7 +44,8 @@ const mapStateToProps = (state) => {
 
     return {
         isLoading: state.InventoryReducer.loading,
-        inventoryList: state.InventoryReducer.inventoryList,
+        inventoryList: state.InventoryReducer.inventoryList
+       
     }
 }
 

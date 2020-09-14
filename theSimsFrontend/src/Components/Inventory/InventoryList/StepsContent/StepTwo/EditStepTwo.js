@@ -31,6 +31,7 @@ const tailLayout = {
 class EditStepTwo extends Component {
     constructor(props) {
         super(props);
+    
         this.state = {
             showAnimation: true,
             addToAllValue: 0,
@@ -38,7 +39,7 @@ class EditStepTwo extends Component {
             undoAdded: false
         }
     }
-
+    formRef = React.createRef();
     componentDidMount() {
         const { inventoryList } = this.props
         const previewList = cloneDeep(inventoryList);
@@ -49,6 +50,17 @@ class EditStepTwo extends Component {
         this.setState(({
             previewList
         }))
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.inventoryList !== this.props.inventoryList) {
+            this.setState({
+                undoAdded:false
+            })
+            this.formRef.current.resetFields()
+        }
+
     }
 
     onFinish = values => {
@@ -95,9 +107,6 @@ class EditStepTwo extends Component {
         const { previewList } = this.state
         let inputValue = parseInt(e.target.value)
         let id = e.target.id+1
-        console.log(e.target);
-        console.log(inputValue);
-        console.log(typeof inputValue);
         this.setState(prevState => ({
             previewList: prevState.previewList.map(
                 obj => {
@@ -117,6 +126,7 @@ class EditStepTwo extends Component {
             onFinish={this.onFinish}
             onFinishFailed={this.onFinishFailed}
             className={classes.formContainer}
+            ref={this.formRef}
         >
             <Form.Item
                 label="Add to All"
@@ -148,7 +158,7 @@ class EditStepTwo extends Component {
     }
 
     render() {
-        const { inventoryList } = this.props
+        const { inventoryList ,updatePreviewList} = this.props
         const { showAnimation, addToAllValue, previewList } = this.state
         const addToAllInput = this.getForm()
 
@@ -184,7 +194,8 @@ const mapStateToProps = (state) => {
 
 
     return {
-
+        updatePreviewList:state.InventoryReducer.previewList,
+        
     }
 }
 

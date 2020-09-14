@@ -12,9 +12,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.Employee;
 import com.example.testjpa.model.Role;
 import com.example.testjpa.model.inventory.Category;
@@ -56,6 +58,12 @@ public class InventoryService {
 	 inventoryRepository.save(products);
 	 return"Saved";
 }
+
+	public List<Product> updateProducts(List<Product> products) {
+	 
+	
+		return inventoryRepository.saveAll(products);
+	}
 	
 }
 

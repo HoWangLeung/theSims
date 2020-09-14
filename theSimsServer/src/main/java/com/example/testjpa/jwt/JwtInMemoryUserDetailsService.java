@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import com.example.testjpa.model.Users;
 import com.example.testjpa.repository.UsersService;
 
-
 @Service
 @Transactional
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
@@ -28,20 +27,17 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	private UsersService internalUserAccountRepository;
 	@Autowired
 	EntityManager em;
+
 	@Transactional
-	public List<Users> findAllwithRoles(){
-		
-		
-	 
-		 List<Users> users = em.createQuery("select u from Users u join fetch u.roles r").getResultList();
+	public List<Users> findAllwithRoles() {
+
+		List<Users> users = em.createQuery("select u from Users u join fetch u.roles r").getResultList();
 		System.out.println(users);
 
 		return users;
-							
 
 	}
-	
-	
+
 //  static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
 //  static {
@@ -53,27 +49,24 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 //            "$2a$10$Z4.xKrMGoiqv08YR6x4ieOQdHD5CEJgCdaaVH2cYS77qw4qg1qQD.", "ROLE_USER_2"));
 //    
 //  }
-  
-  
 
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-  @Override
- @Transactional
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	  
-	  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	  
-	  Users users = internalUserAccountRepository.findByUsername(username);
- 
-	  
-	  System.out.println(users.getUsername() + "********************************************> JWTUSERDETAILSERVICE.JAVA");
-	  if(users == null) {
-		  throw new UsernameNotFoundException ("Could not find the user you are asking for");
-	  }
-	  
-	  return new JwtUserDetails(users);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		Users users = internalUserAccountRepository.findByUsername(username);
+
+		System.out.println(
+				users.getUsername() + "********************************************> JWTUSERDETAILSERVICE.JAVA");
+		if (users == null) {
+			throw new UsernameNotFoundException("Could not find the user you are asking for");
+		}
+
+		return new JwtUserDetails(users);
 //	  return new User(users.getUsername(), users.getPassword(), new ArrayList<>());
-  
+
 //	    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
 //           .filter(user -> user.getUsername().equals(username)).findFirst();
 //			
@@ -85,28 +78,22 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 //    System.out.println(findFirst.get().getUsername() +"YOYOYOYOYOYOYOYOYOYOYOYOYYOYO+++++++++>>>>>");
 //
 //    return findFirst.get();
-  }
+	}
 
-@Transactional
-public Optional<Users> findByUsername(String username) {
-	
-	System.out.println(username);
-	
-	Users user = internalUserAccountRepository.findByUsername(username);
-	System.out.println(user+"NULL???????????????????????");
-	return null;
-}
+	@Transactional
+	public Optional<Users> findByUsername(String username) {
 
+		System.out.println(username);
 
- 
+		Users user = internalUserAccountRepository.findByUsername(username);
+		System.out.println(user + "NULL???????????????????????");
+		return null;
+	}
 
-@Transactional
-public Users saveUser(Users internalUserAccount) {
-	return internalUserAccountRepository.save(internalUserAccount);
-}
-
-
+	@Transactional
+	public Users saveUser(Users internalUserAccount) {
+		System.out.println("reaching 95 iin jwtuserdetail service ===> ");
+		return internalUserAccountRepository.save(internalUserAccount);
+	}
 
 }
-
-

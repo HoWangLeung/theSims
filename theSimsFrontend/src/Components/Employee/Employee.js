@@ -132,7 +132,7 @@ class Employee extends Component {
         let departmentOptions =
             ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
         return (
-            <QueueAnim  duration={800} ease="easeInOutExpo">
+  
                 <SelectDropdown
                     key="selectDropdown"
                     placeHolder={intl.get('selectDepartment')}
@@ -141,7 +141,7 @@ class Employee extends Component {
                     departmentOptions={departmentOptions}
                     handleSelect={this.handleSelect}
                 />
-            </QueueAnim>
+       
         )
     }
 

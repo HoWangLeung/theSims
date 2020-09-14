@@ -19,7 +19,7 @@ export default class Initialdescription extends Component {
                 <h1 className={classes.descriptionTitle}>Explore the website</h1>
 
                 <p>
-                    PCCW Solutions helps service providers grow their business, boost operational efficiencies and reduce cost by tailoring solutions to customer needs, riding on its industry expertise plus an impressive track record of innovation.</p>
+    Integer sapien magna, consequat sed sagittis et, sagittis sed lacus. Maecenas hendrerit erat dolor, ut dictum nulla elementum a.Fusce id euismod felis, sed viverra felis. Pellentesque placerat feugiat metus, ut vestibulum erat tempus ac. Nullam venenatis diam posuere ultrices dictum. Pellentesque at risus nec nisi vehicula euismod quis sit amet mauris. Aenean malesuada rhoncus orci quis semper. Curabitur lobortis odio in leo pharetra cursus.</p>
             </div>
         )
     }

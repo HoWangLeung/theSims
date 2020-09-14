@@ -95,7 +95,8 @@ const headerProductStatus = () => (
         key: 'productStatus',
         align: 'center',
         render: (text, row, index) => {
-
+            console.log(text);
+            console.log(row);
             return (
                 <div className={classes.circleContainer} >
                     <div className={classes.circle} />

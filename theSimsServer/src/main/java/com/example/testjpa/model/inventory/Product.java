@@ -1,6 +1,5 @@
 package com.example.testjpa.model.inventory;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="products")
 public class Product {
@@ -23,6 +24,7 @@ public class Product {
 	
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Category category;
 
 	public Product() {
@@ -77,6 +79,12 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", productName=" + productName + ", cost=" + cost + ", remaining=" + remaining
+				+ ", category=" + category + "]";
 	}
 
 	

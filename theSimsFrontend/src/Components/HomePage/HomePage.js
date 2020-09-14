@@ -8,7 +8,7 @@ import { Row, Col } from 'antd';
 import Initialdescription from './InitialDescription'
 import Animate from 'rc-animate';
 import Hoverslide from './HoverSlide/HoverSlide'
-
+import styles from './Animation.less'
 
 class HomePage extends Component {
     constructor(props) {
@@ -17,52 +17,98 @@ class HomePage extends Component {
         this.state = {
             initiateHoverAction: false,
             showAnimation: false,
-            imageNumber:0
+            activeNumber: 0,
+            showInitialDescription:true
         }
     }
- 
-    showBackgroundImage = (initiateHoverAction,imageNumber) => {
-        console.log(typeof imageNumber);
-        let number = parseInt(imageNumber)
+
+    showBackgroundImage = (initiateHoverAction, activeNumber) => {
+        console.log(typeof activeNumber);
+        let number = parseInt(activeNumber)
         console.log(number);
-     
+
         this.setState({
             initiateHoverAction: true,
             showAnimation: true,
-            imageNumber:number
+            activeNumber: number,
+            showAnimation: true,
+            showInitialDescription:false
         })
- 
-     
+
+
     }
 
-    hideBackgroundImage = (initiateHoverAction,imageId) => {
+    hideBackgroundImage = (initiateHoverAction, imageId) => {
         this.setState({
             initiateHoverAction: false,
-            showAnimation: false
+
         })
+    }
+
+    hideHoverSlider = () => {
+
+        this.setState({
+            showAnimation: false,
+            showInitialDescription:true
+        })
+
+        // setTimeout(() => {
+
+        //     this.setState({
+        //         showInitialDescription:true
+               
+        //     })
+          
+        // }, 10);
+        
+
 
     }
 
+
+
+    getSixBoxes = () => {
+        return (<Thesixboxes
+            showBackgroundImage={this.showBackgroundImage}
+            hideBackgroundImage={this.hideBackgroundImage}
+            hideHoverSlider={this.hideHoverSlider}
+            getActiveBox={this.getActiveBox}
+        />)
+    }
+
+
+
     render() {
-        const { initiateHoverAction, showAnimation } = this.state
+        const { initiateHoverAction, showAnimation, activeNumber,showInitialDescription } = this.state
         return (
-            <div key="background" className={initiateHoverAction ? 
-            classes[`backgroundImageContainer_show_${this.state.imageNumber}`] : 
-            classes.backgroundImageContainer_hide          
+            <div key="background" className={initiateHoverAction ?
+                classes[`backgroundImageContainer_show_${activeNumber}`] :
+                classes.backgroundImageContainer_hide
             } >
-                <Row
-                    xs={24} sm={24} md={24} lg={12} justify="end">
+                <Row xs={24} sm={24} md={24} lg={12} justify="end" className={classes.homePageRow}>
 
                     <Col xs={24} sm={24} md={24} lg={24} xl={9} >
-                        <Thesixboxes
-                            showBackgroundImage={this.showBackgroundImage}
-                            hideBackgroundImage={this.hideBackgroundImage}
-                        />
+                        {this.getSixBoxes()}
                     </Col>
 
                     <Col xs={24} sm={24} md={24} lg={24} xl={12} span={12}>
-                        {/* <Initialdescription /> */}
-                        <Hoverslide/>
+                        <Animate
+                            transitionName={{
+                                enter: styles['fade-enter'],
+                                enterActive: styles['fade-enter-active'],
+                                leave: styles['fade-leave'],
+                                leaveActive: styles['fade-leave-active'],
+                                appear: styles['fade-appear'],
+                                appearActive: styles['fade-appear-active']
+                            }}
+                            transitionAppear
+                        >
+                            {showAnimation ? 
+                            
+                            <Hoverslide  key="hoverSlide" activeNumber={activeNumber} /> : null}
+
+                        </Animate>
+                        {showInitialDescription  && <Initialdescription />}
                     </Col>
 
                 </Row>

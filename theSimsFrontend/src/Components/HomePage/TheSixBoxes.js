@@ -59,8 +59,9 @@ export default class Thesixboxes extends Component {
     getTextIcon = () => (<div className={classes.textIcon} ><p>LEARN MORE</p><ArrowRightOutlined className={classes.arrowIcon} /></div>)
 
     getInnerText = (id) => {
-
+      
         const { [`initateHoverAction_${id}`]: isActive } = this.state
+       
         switch (id) {
             case 0:
                 return <p>{isActive ? this.getTextIcon() : intl.get('dashboard')}</p>
@@ -69,18 +70,22 @@ export default class Thesixboxes extends Component {
             case 2:
                 return <p>{isActive ? this.getTextIcon() : intl.get('payment')}</p>
             case 3:
-                return <p>{isActive ? this.getTextIcon() : intl.get('dashboard')}</p>
+                return <p>{isActive ? this.getTextIcon() : 'React'}</p>
             case 4:
-                return <p>{isActive ? this.getTextIcon() : intl.get('dashboard')}</p>
+                return <p>{isActive ? this.getTextIcon() : 'SpringBoot'}</p>
             case 5:
-                return <p>{isActive ? this.getTextIcon() : intl.get('dashboard')}</p>
+                return <p>{isActive ? this.getTextIcon() : 'Oracle'}</p>
             default:
                 return
         }
+    
     }
-    getHoverText = (id) => (<div className={classes.overlay}>
-        <div className={classes.textOverlay}>{this.getInnerText(id)}</div>
-    </div>)
+    getHoverText = (id) => {
+  
+        return (<div className={classes.overlay}>
+            <div className={classes.textOverlay}>{this.getInnerText(id)}</div>
+        </div>)
+    }
 
     getImage = (item) => (<div
         className={classes.imageContainer}>
@@ -88,12 +93,26 @@ export default class Thesixboxes extends Component {
             className={classes.image}
             src={item} />
     </div>)
+
+
+    confirmTouched=()=>{
+        console.log('touching');
+    }
+
+    hideHoverSlider=()=>{
+        console.log('out now');
+        this.props.hideHoverSlider()
+    }
+
     render() {
         const imageArray_1 = [hover_1, hover_2, hover_3, hover_4, hover_5, hover_6]
         return (
 
       
-                <div className={classes.sixBoxesContainer}>
+                <div className={classes.sixBoxesContainer}
+                onMouseOver={this.confirmTouched}
+                onMouseLeave={this.hideHoverSlider} >
+                
                     <Row gutter={[12, 12]}   >
                  
                             {imageArray_1.map((item, index) => {

@@ -76,7 +76,7 @@ class LoginCard extends Component {
             </Panel>
 
             <Panel
-
+                    className={classes.panelSignUp}
                 showArrow={false}
                 header={
                     <LoginCollapsePanelHeader

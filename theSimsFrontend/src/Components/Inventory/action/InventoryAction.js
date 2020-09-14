@@ -24,10 +24,26 @@ export const fetchInventory= () => {
 }
 
 export const savePreviewList= (updatedPreviewList) => {
-    return (dispatch, getState) => {
-       
+    return (dispatch, getState) => {    
         dispatch({ type: 'SAVE_INVENTORY' ,payload: updatedPreviewList})
+    }
 
+}
+
+export const saveUpdatedList= (updatedPreviewList) => {
+    console.log(updatedPreviewList);
+    return (dispatch, getState) => {    
+        dispatch({ type: 'SAVE_UPDATEDLIST' ,payload: updatedPreviewList})
+        setTimeout(() => {
+            axios.put(`${url}/inventory/updateProducts`,updatedPreviewList)
+                .then(res => {
+                    console.log(res.data);
+                    dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }, 1000);
     }
 
 }
