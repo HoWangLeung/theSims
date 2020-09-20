@@ -17,7 +17,8 @@ class Inventory extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchInventory()
+        const{fetchInventory} = this.props
+        fetchInventory()
     }
 
     render() {
@@ -51,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchInventory: () => { dispatch(fetchInventory()) }
+        fetchInventory: () =>  dispatch(fetchInventory()) 
 
     }
 }

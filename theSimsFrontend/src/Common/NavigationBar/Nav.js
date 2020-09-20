@@ -177,7 +177,7 @@ class Nav extends React.Component {
         return (
             <>
                 {hideNav === false && topNavigationMenu}
-                {this.props.isLoggedIn && <Banner />}
+                {/* {this.props.isLoggedIn && <Banner />} */}
                 {isLoggedIn && < NavigationMenu />}
                 {hideNav === true && <AppNav />}
             </>

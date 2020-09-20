@@ -11,7 +11,7 @@ export const fetchEmployee = () => {
         setTimeout(() => {
             axios.get(`${url}/employee/`)
                 .then(res => {
-                    console.log(res.data);
+                    
                     dispatch({ type: 'FETCH_EMPLOYEE_SUCCESS', payload: res.data })
                 })
                 .catch(error => {
@@ -48,7 +48,7 @@ export const deleteEmployee = (id, res, modal) => {
 }
 
 export const searchEmployee = (values, currentDept) => {
-    console.log(values, currentDept);
+    
 
     const params = {}
     if (values.id) { params.id = parseInt(values.id) }
@@ -58,14 +58,14 @@ export const searchEmployee = (values, currentDept) => {
     else if (!params.name && !values.id) {
         params.department = currentDept
     } else { params.department = "All" }
-    console.log(params);
+    
 
     return (dispatch, getState) => {
         dispatch({ type: 'SEARCH_EMPLOYEE', payload: { values } })
         setTimeout(() => {
             axios.get(`${url}/employee/search`, { params })
                 .then(res => {
-                    console.log(res);
+                    
               
                     if (res.data == null) {
                         dispatch({ type: 'FETCH_EMPLOYEE' })
@@ -88,17 +88,17 @@ export const searchEmployee = (values, currentDept) => {
 }
 
 export const searchByDepartment = (value) => {
-    console.log(value);
+    
     const params = {}
     if (value) { params.department = value }
-    console.log(params);
+    
     return (dispatch, getState) => {
-        console.log('reaching return');
+        
         dispatch({ type: 'SEARCH_DEPARTMENT', payload:params })
         setTimeout(() => {
             axios.get(`${url}/employee/search`, { params })
                 .then(res => {
-                    console.log(res.data);
+                    
                     dispatch({ type: 'SEARCH_DEPARTMENT_SUCCESS', payload: res.data })
                 })
         }, 500);

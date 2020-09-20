@@ -22,16 +22,17 @@ const AuthenticationReducer = (state = initState, action) => {
 
             };
             break;
-        default:
-            return state;
-
-//========================================================================================================================
+            //========================================================================================================================
         case ("SIGNUP_SUCCESS"):
             
             return state;
 
         case ("SIGNUP_FAILURE"):
             return state;
+        default:
+            return state;
+
+
 
 
 }

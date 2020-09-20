@@ -41,10 +41,10 @@ const SearchBar = (props) => {
 
     const onFinish = values => {
         const {currentDept} = props
-        console.log(currentDept);
+        
         const startDate = moment(values.lastModifiedDate??[0]._d).format('L')
         const endDate = moment(values.lastModifiedDate??[1]._d).format('L')
-       console.log(values);
+       
         values.lastModifiedDate = { startDate, endDate }
         props.searchEmployee(values, currentDept)
         

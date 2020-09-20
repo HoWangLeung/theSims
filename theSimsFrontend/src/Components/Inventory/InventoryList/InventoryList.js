@@ -20,11 +20,10 @@ class InventoryList extends Component {
     componentDidUpdate(prevProps, prevState) {
      
         if (prevProps.inventoryList !== this.props.inventoryList) {
-            this.setState({ 
-           
+            this.setState({         
                 showModal: false,
                 selectedRowKeys: []
-            })
+            })         
         }
     }
 

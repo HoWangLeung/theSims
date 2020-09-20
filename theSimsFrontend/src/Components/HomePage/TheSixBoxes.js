@@ -33,7 +33,7 @@ export default class Thesixboxes extends Component {
 
     showOverlay = (e) => {
         let imageId = e.currentTarget.id
-        console.log(imageId);
+        
 
         this.setState({
             [`initateHoverAction_${imageId}`]: true
@@ -45,7 +45,7 @@ export default class Thesixboxes extends Component {
 
     hideOverlay = (e) => {
         let imageId = e.currentTarget.id
-        console.log('leave');
+        
 
         this.setState({
             [`initateHoverAction_${imageId}`]: false,
@@ -96,11 +96,11 @@ export default class Thesixboxes extends Component {
 
 
     confirmTouched=()=>{
-        console.log('touching');
+        
     }
 
     hideHoverSlider=()=>{
-        console.log('out now');
+        
         this.props.hideHoverSlider()
     }
 

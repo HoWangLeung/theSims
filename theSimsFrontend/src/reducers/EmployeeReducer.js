@@ -22,7 +22,7 @@ const EmployeeReducer = (state = initState, action) => {
 
         case ('FETCH_EMPLOYEE_SUCCESS'):
 
-            console.log(action.payload.detail);
+            
             const managementList = action.payload.detail.filter(employee => employee.management === true)
             return {
                 ...state,
@@ -75,15 +75,15 @@ const EmployeeReducer = (state = initState, action) => {
 
         //==================================================================================================================================================================
         case ("SEARCH_EMPLOYEE"):
-            console.log(action.payload);
+            
             return {
                 ...state,
                 loading: true
             }
         case ("SEARCH_EMPLOYEE_SUCCESS"):
 
-            console.log(isArray(action.payload));
-            console.log(action.payload);
+            
+            
             return {
                 ...state,
                 employeeList: action.payload,
@@ -94,7 +94,7 @@ const EmployeeReducer = (state = initState, action) => {
 
         //==================================================================================================================================================================
         case ("SEARCH_DEPARTMENT"):
-            console.log(action.payload);
+            
         
             return {
                 ...state,
@@ -104,7 +104,7 @@ const EmployeeReducer = (state = initState, action) => {
 
             case ("SEARCH_DEPARTMENT_SUCCESS"):
         
-            console.log(action.payload);
+            
                 return {
                     ...state,
                     employeeList:action.payload,

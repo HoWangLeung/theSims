@@ -23,9 +23,9 @@ class HomePage extends Component {
     }
 
     showBackgroundImage = (initiateHoverAction, activeNumber) => {
-        console.log(typeof activeNumber);
+        
         let number = parseInt(activeNumber)
-        console.log(number);
+        
 
         this.setState({
             initiateHoverAction: true,

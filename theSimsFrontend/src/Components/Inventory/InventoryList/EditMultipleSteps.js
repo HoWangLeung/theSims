@@ -28,15 +28,24 @@ class EditMultipleSteps extends Component {
         this.setState({ current });
     }
 
-
-    handleQuantityUpdate = () => {
-        const { previewList, saveUpdatedList } = this.props
-        console.log('line 30', previewList);
-        saveUpdatedList(previewList)
+    componentDidUpdate() {
 
     }
 
-   
+
+    handleQuantityUpdate = async () => {
+        const { previewList, saveUpdatedList } = this.props
+        try {
+            await saveUpdatedList(previewList)
+            CommonModal.success({ content: "Successfully Updated" })
+        } catch (err) {
+            console.log(err);
+        }
+
+
+    }
+
+
     render() {
         const { current } = this.state
         const { inventoryList } = this.props
@@ -88,16 +97,18 @@ class EditMultipleSteps extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+
     return {
         previewList: state.InventoryReducer.previewList,
-        inventoryList: state.InventoryReducer.inventoryList
+        inventoryList: state.InventoryReducer.inventoryList,
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveUpdatedList: (previewList) => { dispatch(saveUpdatedList(previewList)) }
+        saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList))
+
     }
 }
 

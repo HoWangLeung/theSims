@@ -34,7 +34,7 @@ class SelectDropdown extends Component {
     }
     onSelect = (value) => {
         const { handleSelect } = this.props
-        console.log(value, "34");
+        
         handleSelect(value);
     }
     generateSelectDropdown = () => {
@@ -60,7 +60,7 @@ class SelectDropdown extends Component {
         >
 
             {departmentOptions.map((option, index) => {
-                console.log(option);
+                
                 return <Option value={option}>{intl.get(option)}</Option>
             })}
         </Select>)

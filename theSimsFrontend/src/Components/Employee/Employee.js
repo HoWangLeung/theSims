@@ -148,13 +148,13 @@ class Employee extends Component {
     getExportButton = () => (
         <Button key="exportButton" icon={<DownloadOutlined />} onClick={this.hanldleExport} >{intl.get("export")}</Button>)
     hanldleExport = () => {
-                    console.log('sdf');
+                    
         return axios({
                     url: "http://localhost:8080/employee/export", //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then(res => {
-                    console.log(res);
+                    
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
