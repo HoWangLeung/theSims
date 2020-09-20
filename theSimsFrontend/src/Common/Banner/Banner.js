@@ -7,14 +7,31 @@ class Banner extends Component {
         super(props)
 
         this.state = {
-                 
+
         }
     }
 
+    componentDidMount() {
+        const { location } = this.props
+        console.log(location);
+
+    }
+
+    renderBanner = () => {
+        const { location: { pathname } } = this.props
+        if (pathname === '/')
+            return null
+
+        return (
+            <img className={classes.banner} src={bannerImg} alt="banner" />
+        )
+    }
+
     render() {
+
         return (
             <div>
-                <img className={classes.banner} src={bannerImg} alt="banner"  />
+                {this.renderBanner()}
             </div>
         )
     }

@@ -3,7 +3,7 @@ import classes from './NavigationMenu.less'
 import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, ApartmentOutlined, BarcodeOutlined, CreditCardOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 const { SubMenu } = Menu;
 class NavigationMenu extends Component {
     constructor(props) {
@@ -19,8 +19,14 @@ class NavigationMenu extends Component {
     };
 
 
-    generateMenu = () => {
+    renderMenu = () => {
         const { current } = this.state;
+        const { location: { pathname } } = this.props
+
+        if (pathname === '/')  return null
+
+
+      
         return (<Menu onClick={this.handleClick} mode="horizontal" triggerSubMenuAction="click">
             <Menu.Item key="dashboard" icon={<ApartmentOutlined />}>
                 <Link to="/dashboard">{intl.get('dashboard')}</Link>
@@ -49,11 +55,12 @@ class NavigationMenu extends Component {
 
 
     render() {
-        const navigationMenu = this.generateMenu()
+
+
         return (
             <div className={classes.NavigationMenuContainer}>
                 <div className={classes.menuCotainer}>
-                    {navigationMenu}
+                    {this.renderMenu()}
                 </div>
 
             </div>
@@ -61,4 +68,4 @@ class NavigationMenu extends Component {
     }
 }
 
-export default NavigationMenu
+export default withRouter(NavigationMenu)

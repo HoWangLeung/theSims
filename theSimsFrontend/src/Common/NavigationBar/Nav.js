@@ -102,6 +102,7 @@ class Nav extends React.Component {
                 <Menu.Item key="3">3rd menu item</Menu.Item>
             </Menu>
         )
+     
         const userMenuIcon = (<Avatar className={classes.avatar} size={30} icon={<UserOutlined />} />)
         const loginIcon = (<LoginOutlined className={classes.loginIcon} />)
 
@@ -172,13 +173,13 @@ class Nav extends React.Component {
                 {loginOrUserIcon}
             </div>
         </div>)
-
+ 
 
         return (
             <>
                 {hideNav === false && topNavigationMenu}
                 {/* {this.props.isLoggedIn && <Banner />} */}
-                {isLoggedIn && < NavigationMenu />}
+                {/* {isLoggedIn && < NavigationMenu />} */}
                 {hideNav === true && <AppNav />}
             </>
         );
