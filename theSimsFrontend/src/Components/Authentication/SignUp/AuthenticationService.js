@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API } from "../../../ApiConfig";
 
 class AuthenticationService {
 
@@ -6,7 +7,7 @@ class AuthenticationService {
 
     executeJwtAuthenticationService(username, password){
         
-        return axios.post('http://localhost:8080/authenticate',
+        return axios.post(`${API}/authenticate`,
         {
            username,
            password 

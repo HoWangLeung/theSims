@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API } from '../../../../ApiConfig'
 
 export const loginAction=(isLoggedIn)=>{
     
@@ -23,7 +24,7 @@ export const signUpRequest = (payload,ownProps) => {
       const headers = {
         'Content-Type': 'application/json' 
       }
-       axios.post("http://localhost:8080/users/signup", payload,{
+       axios.post(`${API}/users/signup`, payload,{
         headers: headers
       })
       .then(res=>{

@@ -35,7 +35,7 @@ export const saveUpdatedList = (updatedPreviewList) => {
 
         try {
             dispatch({ type: 'SAVE_UPDATEDLIST', payload: updatedPreviewList })
-            await sleep(2000)
+            await sleep(1000)
             let res = await axios.put(`${url}/inventory/updateProducts`, updatedPreviewList)
             dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
             return res

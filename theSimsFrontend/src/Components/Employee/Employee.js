@@ -15,6 +15,7 @@ import ManagementTabTable from './DynamicTabs/InternalUsers/ManagementTabTable'
 import SelectDropdown from '../../Common/SelectDropdown';
 import SearchCollapse from '../../Common/SearchCollapse/SearchCollapse';
 import QueueAnim from 'rc-queue-anim';
+import { API } from '../../ApiConfig';
 
 const { TabPane } = Tabs;
 
@@ -150,7 +151,7 @@ class Employee extends Component {
     hanldleExport = () => {
                     
         return axios({
-                    url: "http://localhost:8080/employee/export", //your url
+                    url: `${API}/employee/export`, //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then(res => {
