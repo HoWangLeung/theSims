@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.derek.onlineShop.Modal.Todo;
 import com.derek.onlineShop.Repository.TodoRepository;
+ 
 
 @RestController
 public class TodoController {
@@ -25,20 +26,20 @@ public class TodoController {
 	private TodoRepository todoRepository;
 
 	
-	@GetMapping("/jpa/users/todos")
+	@GetMapping("/jpa/users/{username}/todos")
 	public List<Todo> getAllTodos(@PathVariable String username){
 		return todoRepository.findByUsername(username);
 		//return todoService.findAll();
 	}
 
-	@GetMapping("/jpa/users/todos/{id}")
+	@GetMapping("/jpa/users/{username}/todos/{id}")
 	public Todo getTodo(@PathVariable String username, @PathVariable long id){
 		return todoRepository.findById(id).get();
 		//return todoService.findById(id);
 	}
 
 	// DELETE /users/{username}/todos/{id}
-	@DeleteMapping("/jpa/users/todos/{id}")
+	@DeleteMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Void> deleteTodo(
 			@PathVariable String username, @PathVariable long id) {
 
@@ -50,7 +51,7 @@ public class TodoController {
 
 	//Edit/Update a Todo
 	//PUT /users/{user_name}/todos/{todo_id}
-	@PutMapping("/jpa/users/todos/{id}")
+	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(
 			@PathVariable String username,
 			@PathVariable long id, @RequestBody Todo todo){
@@ -62,7 +63,7 @@ public class TodoController {
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 	}
 	
-	@PostMapping("/jpa/users/todos")
+	@PostMapping("/jpa/users/{username}/todos")
 	public ResponseEntity<Void> createTodo(
 			@PathVariable String username, @RequestBody Todo todo){
 		

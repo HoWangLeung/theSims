@@ -19,7 +19,7 @@ class Banner extends Component {
 
     renderBanner = () => {
         const { location: { pathname } } = this.props
-        if (pathname === '/')
+        if (pathname === '/'||pathname === '/signup-customer'||pathname === '/signup')
             return null
 
         return (

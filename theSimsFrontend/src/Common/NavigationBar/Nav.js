@@ -25,10 +25,10 @@ class Nav extends React.Component {
         this.state = {
             current: 'mail',
             hideNav: false,
-            visible:false
+            visible: false
         };
 
-        
+
     }
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
@@ -40,26 +40,26 @@ class Nav extends React.Component {
     }
 
     handleClick = e => {
-        
+
         this.setState({
             current: e.key,
         });
     };
 
     logout = async () => {
-        
+
         await AuthenticationService.logout()
-        
+
         let isLoggedIn = AuthenticationService.isUserLoggedIn()
         this.props.logoutAction(isLoggedIn)
         this.props.history.push('/')
     }
 
     handleUserMenuClick = ({ item, key, keyPath, domEvent }) => {
-        
-        
-        
-        
+
+
+
+
         item.onClick = this.testing()
 
         switch (key) {
@@ -72,15 +72,15 @@ class Nav extends React.Component {
         }
     }
     testing = () => {
-        
+
 
     }
 
-    handleSignupClick=()=>{
-        this.setState({visible:false})
+    handleSignupClick = () => {
+        this.setState({ visible: false })
     }
 
-    handleVisibleChange=(visible)=>{
+    handleVisibleChange = (visible) => {
         this.setState({ visible });
     }
     render() {
@@ -93,26 +93,26 @@ class Nav extends React.Component {
         const menu = (
             <Menu>
                 <Menu.Item key="0">
-              <Link to="/createMenu">QR Code Generator</Link>
+                    <Link to="/createMenu">QR Code Generator</Link>
                 </Menu.Item>
                 <Menu.Item key="1">
-                Placeholder
+                    Placeholder
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="3">3rd menu item</Menu.Item>
             </Menu>
         )
-     
+
         const userMenuIcon = (<Avatar className={classes.avatar} size={30} icon={<UserOutlined />} />)
         const loginIcon = (<LoginOutlined className={classes.loginIcon} />)
 
         const userMenu = (
             <Menu className={classes.userMenuDropDown} onClick={this.handleUserMenuClick} >
                 <Menu.Item key="0">
-                <p  >{intl.get('dashboard')}</p>
+                    <p  >{intl.get('dashboard')}</p>
                 </Menu.Item>
                 <Menu.Item key="1">
-                <p>{intl.get('userProfile')}</p>
+                    <p>{intl.get('userProfile')}</p>
                 </Menu.Item>
                 <Menu.Divider />
                 {!isLoggedIn && <Menu.Item key="3"> <Link to="/signup">Sign Up</Link></Menu.Item>}
@@ -132,14 +132,14 @@ class Nav extends React.Component {
                 {userMenuIcon}
             </Dropdown>
         } else {
-            loginOrUserIcon = <Popover  
-             visible={this.state.visible} 
-             content={<LoginCard hanldeSignupClick={this.handleSignupClick} 
-             />} 
-             placement="bottomLeft" 
-             trigger="click"
-             onVisibleChange={this.handleVisibleChange}
-             >
+            loginOrUserIcon = <Popover
+                visible={this.state.visible}
+                content={<LoginCard hanldeSignupClick={this.handleSignupClick}
+                />}
+                placement="bottomLeft"
+                trigger="click"
+                onVisibleChange={this.handleVisibleChange}
+            >
                 {loginIcon}
             </Popover>
         }
@@ -173,14 +173,14 @@ class Nav extends React.Component {
                 {loginOrUserIcon}
             </div>
         </div>)
- 
+
 
         return (
             <>
                 {hideNav === false && topNavigationMenu}
                 {/* {this.props.isLoggedIn && <Banner />} */}
                 {/* {isLoggedIn && < NavigationMenu />} */}
-                {hideNav === true && <AppNav />}
+                {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
             </>
         );
     }
@@ -191,7 +191,7 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    
+
     return {
         isLoggedIn: state.AuthenticationReducer.isLoggedIn
     }

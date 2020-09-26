@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { API } from '../../../ApiConfig';
 import { url } from '../../../apiConstant';
 import CommonModal from '../../../Common/ConfirmModal/CommonModal';
 
@@ -11,7 +12,7 @@ export const fetchInventory =  () => {
         try {
             dispatch({ type: 'FETCH_START' })
             await sleep(1000)
-            let res = await axios.get(`${url}/inventory/`)
+            let res = await axios.get(`${API}/inventory/`)
             dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: res.data })
             return res
         } catch (err) {
@@ -36,7 +37,7 @@ export const saveUpdatedList = (updatedPreviewList) => {
         try {
             dispatch({ type: 'SAVE_UPDATEDLIST', payload: updatedPreviewList })
             await sleep(1000)
-            let res = await axios.put(`${url}/inventory/updateProducts`, updatedPreviewList)
+            let res = await axios.put(`${API}/inventory/updateProducts`, updatedPreviewList)
             dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
             return res
         } catch (err) {

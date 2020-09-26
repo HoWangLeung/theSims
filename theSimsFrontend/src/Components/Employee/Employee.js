@@ -133,7 +133,7 @@ class Employee extends Component {
         let departmentOptions =
             ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
         return (
-  
+            
                 <SelectDropdown
                     key="selectDropdown"
                     placeHolder={intl.get('selectDepartment')}
@@ -142,20 +142,21 @@ class Employee extends Component {
                     departmentOptions={departmentOptions}
                     handleSelect={this.handleSelect}
                 />
-       
+        
+
         )
     }
 
     getExportButton = () => (
         <Button key="exportButton" icon={<DownloadOutlined />} onClick={this.hanldleExport} >{intl.get("export")}</Button>)
     hanldleExport = () => {
-                    
+
         return axios({
-                    url: `${API}/employee/export`, //your url
+            url: `${API}/employee/export`, //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then(res => {
-                    
+
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -166,25 +167,25 @@ class Employee extends Component {
     }
 
     render() {
-        const {currentTab} = this.state
-        const {employeeList, managementList, isLoading} = this.props
+        const { currentTab } = this.state
+        const { employeeList, managementList, isLoading } = this.props
         const dynamicTabs = this.generateTabs()
 
-        let SelectDropdown = this.getSelectDropdown()
+
         let exportButton = this.getExportButton()
         return (
             <div className={classes.employeeContainer}>
-                    <Row className={classes.barAboveTabs} >
-                        {currentTab === 'permanentUsers' && SelectDropdown}
-                        {currentTab === 'permanentUsers' && exportButton}
-                    </Row>
-                    {dynamicTabs}
-                    {currentTab === 'permanentUsers' &&
-                        <ManagementTabTable
-                            managementList={managementList}
-                            isLoading={isLoading}
-                        />}
-                </div>
+                <Row className={classes.barAboveTabs} >
+                    {currentTab === 'permanentUsers' && this.getSelectDropdown()}
+                    {currentTab === 'permanentUsers' && exportButton}
+                </Row>
+                {dynamicTabs}
+                {currentTab === 'permanentUsers' &&
+                    <ManagementTabTable
+                        managementList={managementList}
+                        isLoading={isLoading}
+                    />}
+            </div>
         )
     }
 }
@@ -193,7 +194,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-                    employeeList: state.EmployeeReducer.employeeList,
+        employeeList: state.EmployeeReducer.employeeList,
         managementList: state.EmployeeReducer.managementList,
         isLoading: state.EmployeeReducer.loading
     }
@@ -201,8 +202,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-                    fetchEmployee: () => {dispatch(fetchEmployee())},
-        searchByDepartment: (payload) => {dispatch(searchByDepartment(payload))}
+        fetchEmployee: () => { dispatch(fetchEmployee()) },
+        searchByDepartment: (payload) => { dispatch(searchByDepartment(payload)) }
 
     }
 }

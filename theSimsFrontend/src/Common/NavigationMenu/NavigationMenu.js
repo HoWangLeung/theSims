@@ -23,7 +23,7 @@ class NavigationMenu extends Component {
         const { current } = this.state;
         const { location: { pathname } } = this.props
 
-        if (pathname === '/')  return null
+        if (pathname === '/'||pathname === '/signup-customer'||pathname === '/signup')  return null
 
 
       
@@ -46,7 +46,7 @@ class NavigationMenu extends Component {
                 </Link>
             </Menu.Item>
             <Menu.Item key="mail" icon={<MailOutlined />}>
-                <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+                <a href="" target="_blank" rel="noopener noreferrer">
                     {intl.get('email')}
                 </a>
             </Menu.Item>

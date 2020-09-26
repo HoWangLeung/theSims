@@ -7,19 +7,19 @@
       "environment": [
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "value": "dummypassword"
+          "value": "PASS"
         },
         {
           "name": "MYSQL_USER",
-          "value": "todos-user"
+          "value": "DEREK"
         },
         {
           "name": "MYSQL_PASSWORD",
-          "value": "dummytodos"
+          "value": "PASS"
         },
         {
           "name": "MYSQL_DATABASE",
-          "value": "todos"
+          "value": "thesims"
         }        
       ],
       "essential": true,
@@ -33,12 +33,12 @@
     },
     {
       "name": "todo-rest-api",
-      "image": "in28min/todo-rest-api-mysql:1.0.0.RELEASE",
+      "image": "poiuz88i/testjpa:1.0.0-RELEASE",
       "essential": true,
       "memory": 256,
       "portMappings": [
         {
-          "hostPort": 5000,
+          "hostPort": 80,
           "containerPort": 5000
         }
       ],

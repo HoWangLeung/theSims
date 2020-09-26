@@ -46,7 +46,7 @@ class SelectDropdown extends Component {
             showSearch
             allowClear
             value={currentDept}
-            style={{ width: 200 }}
+             
             placeholder={placeHolder}
             optionFilterProp="children"
             onChange={this.onChange}
@@ -57,11 +57,12 @@ class SelectDropdown extends Component {
             filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
+            
         >
 
             {departmentOptions.map((option, index) => {
                 
-                return <Option value={option}>{intl.get(option)}</Option>
+                return <Option key={index} style={{zIndex:2000}} value={option}>{intl.get(option)}</Option>
             })}
         </Select>)
     }

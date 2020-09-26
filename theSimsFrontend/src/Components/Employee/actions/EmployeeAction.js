@@ -2,6 +2,7 @@
 import axios from 'axios'
 import AuthenticationService from '../../Authentication/SignUp/AuthenticationService'
 import { url } from '../../../apiConstant'
+import { API } from '../../../ApiConfig'
 
 export const fetchEmployee = () => {
 
@@ -9,7 +10,7 @@ export const fetchEmployee = () => {
         
         dispatch({ type: 'FETCH_EMPLOYEE' })
         setTimeout(() => {
-            axios.get(`${url}/employee/`)
+            axios.get(`${API}/employee/`)
                 .then(res => {
                     
                     dispatch({ type: 'FETCH_EMPLOYEE_SUCCESS', payload: res.data })
@@ -28,7 +29,7 @@ export const deleteEmployee = (id, res, modal) => {
 
         dispatch({ type: 'DELETE_EMPLOYEE', payload: { modal } })
         setTimeout(() => {
-            axios.delete(`${url}/employee/delete/${id}`)
+            axios.delete(`${API}/employee/delete/${id}`)
                 .then(response => {
                     dispatch({
                         type: 'DELETE_EMPLOYEE_SUCCESS',
@@ -63,13 +64,13 @@ export const searchEmployee = (values, currentDept) => {
     return (dispatch, getState) => {
         dispatch({ type: 'SEARCH_EMPLOYEE', payload: { values } })
         setTimeout(() => {
-            axios.get(`${url}/employee/search`, { params })
+            axios.get(`${API}/employee/search`, { params })
                 .then(res => {
                     
               
                     if (res.data == null) {
                         dispatch({ type: 'FETCH_EMPLOYEE' })
-                        axios.get(`${url}/employee/`)
+                        axios.get(`${API}/employee/`)
                             .then(res => {
                                 dispatch({ type: 'FETCH_EMPLOYEE_SUCCESS', payload: res.data })
                             })
@@ -96,7 +97,7 @@ export const searchByDepartment = (value) => {
         
         dispatch({ type: 'SEARCH_DEPARTMENT', payload:params })
         setTimeout(() => {
-            axios.get(`${url}/employee/search`, { params })
+            axios.get(`${API}/employee/search`, { params })
                 .then(res => {
                     
                     dispatch({ type: 'SEARCH_DEPARTMENT_SUCCESS', payload: res.data })

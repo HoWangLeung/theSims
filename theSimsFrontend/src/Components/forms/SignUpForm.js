@@ -72,8 +72,6 @@ class SignUpForm extends React.Component {
 
                                 if (value) {
                                     if (value.indexOf('@') == -1 || value.indexOf('.com') == -1) {
-
-
                                         return Promise.reject('invalid email format')
                                     }
                                 }

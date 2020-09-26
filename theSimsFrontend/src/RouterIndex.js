@@ -20,6 +20,8 @@ import SignUp from './Components/Authentication/SignUp/SignUp';
 import { Layout, Menu, Breadcrumb, Dropdown, Typography } from 'antd';
 import Banner from './Common/Banner';
 import NavigationMenu from './Common/NavigationMenu';
+ 
+import ProductMainpage from './Components/ProductMainPage/ProductMainPage';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -51,7 +53,7 @@ export default class RouterIndex extends Component {
                     <NavigationMenu/>
                         <Content className={classes.content}>
                             <Switch>
-                                <Route exact path='/' component={HomePage} />
+                                <Route exact path='/' component={ProductMainpage} />
 
                                 <Route path='/login' component={Login} />
                                 <Route path='/signup' component={SignUpMainPage} />
