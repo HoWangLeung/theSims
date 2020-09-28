@@ -54,7 +54,7 @@ export default class RouterIndex extends Component {
                         <Content className={classes.content}>
                             <Switch>
                                 <Route exact path='/' component={ProductMainpage} />
-
+                                {/* <Route exact path='/' component={Login} /> */}
                                 <Route path='/login' component={Login} />
                                 <Route path='/signup' component={SignUpMainPage} />
                                 <Route path='/signup-customer' component={SignUp} />

@@ -47,10 +47,10 @@ class Nav extends React.Component {
     };
 
     logout = async () => {
-
+        const {isLoggedIn} = this.props
         await AuthenticationService.logout()
 
-        let isLoggedIn = AuthenticationService.isUserLoggedIn()
+        
         this.props.logoutAction(isLoggedIn)
         this.props.history.push('/')
     }
@@ -86,7 +86,8 @@ class Nav extends React.Component {
     render() {
 
         const { hideNav } = this.state
-        const { currentLocale, handleChangeLocale, isLoggedIn } = this.props
+        const { currentLocale, handleChangeLocale } = this.props
+        const isLoggedIn = AuthenticationService.isUserLoggedIn()
         let homeIcon
         let localeChanger
         let loginOrUserIcon
@@ -178,8 +179,7 @@ class Nav extends React.Component {
         return (
             <>
                 {hideNav === false && topNavigationMenu}
-                {/* {this.props.isLoggedIn && <Banner />} */}
-                {/* {isLoggedIn && < NavigationMenu />} */}
+               
                 {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
             </>
         );
@@ -193,7 +193,7 @@ class Nav extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-        isLoggedIn: state.AuthenticationReducer.isLoggedIn
+      
     }
 }
 const mapDispatchToProps = (dispatch) => {

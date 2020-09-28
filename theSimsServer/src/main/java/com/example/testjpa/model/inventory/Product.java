@@ -19,6 +19,7 @@ public class Product {
 	private long id;
 	@Column(unique = true)
 	private String productName;
+	private String countryOrigin;
 	private int cost;
 	private int remaining;
 	
@@ -32,10 +33,11 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(long id, String productName, int cost, int remaining, Category category) {
+	public Product(long id, String productName, String countryOrigin, int cost, int remaining, Category category) {
 		super();
 		this.id = id;
 		this.productName = productName;
+		this.setCountryOrigin(countryOrigin);
 		this.cost = cost;
 		this.remaining = remaining;
 		this.category = category;
@@ -85,6 +87,14 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", cost=" + cost + ", remaining=" + remaining
 				+ ", category=" + category + "]";
+	}
+
+	public String getCountryOrigin() {
+		return countryOrigin;
+	}
+
+	public void setCountryOrigin(String countryOrigin) {
+		this.countryOrigin = countryOrigin;
 	}
 
 	

@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import classes from '../Authentication.less'
 import intl from 'react-intl-universal';
 import 'antd/dist/antd.less';
+import CommonModal from '../../../Common/ConfirmModal/CommonModal';
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -19,27 +20,20 @@ class Login extends Component {
     onFinish = async (values) => {
         
         const { username, password, remember } = values
-        // if (username === 'derek' && password === '123') {
-        //     await AuthenticationService.registerSuccessfulLogin(username)
-        //     let isLoggedIn = AuthenticationService.isUserLoggedIn()
-        //     this.props.loginAction(isLoggedIn)
-
-        //     this.props.history.push('/dashboard')
-        // }
+      
         AuthenticationService
         .executeJwtAuthenticationService(username,password)
         .then((res)=>{
-            
+            console.log(res);
             AuthenticationService.registerSuccessfulLoginForJwt(username,res.data.token)
             let isLoggedIn = AuthenticationService.isUserLoggedIn()
-            // localStorage.setItem('jwtToken', res.data.token);
-
-            this.setState({isLoggedIn:true})
-
-            this.props.loginAction(this.state.isLoggedIn)
+           
+            console.log(isLoggedIn);
+            this.props.loginAction(isLoggedIn)
             this.props.history.push('/dashboard')
         }).catch((error)=>{
-            
+            console.log(error);
+            CommonModal.error({content:"Invalid username/password"})
         })
 
 
@@ -128,7 +122,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     
-
+    console.log(state);
     return {
 
     }

@@ -48,14 +48,7 @@ private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
 		return user;
 	}
 	
-//	@GetMapping("/findjwt")
-//	public InternalUserAccount findjwt(@RequestBody  InternalUserAccount internalUserAccount) {
-//		System.out.println(internalUserAccount.toString());
-//		InternalUserAccount user = jwtInMemoryUserDetailsService.loadUserByUsername(internalUserAccount.getUsername());
-// 
-//		return user;
-//	}
-	
+
 	
 	
 	@PostMapping("/signup")

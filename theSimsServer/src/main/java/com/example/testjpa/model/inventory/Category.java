@@ -30,8 +30,12 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	private long parentCategoryId;
 	@Column(name="name")
 	private String name;
+	
+
+	
 	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
 	@JsonBackReference
 	 private List<Product> product;
@@ -40,7 +44,7 @@ public class Category {
 		
 		// TODO Auto-generated constructor stub
 	}
-	public Category(long id, String name, List<Product> product) {
+	public Category(long id,long parentCategoryId, String name, List<Product> product) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -63,6 +67,12 @@ public class Category {
 	}
 	public void setProduct(List<Product> product) {
 		this.product = product;
+	}
+	public long getParentCategoryId() {
+		return parentCategoryId;
+	}
+	public void setParentCategoryId(long parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
 	}
 
 

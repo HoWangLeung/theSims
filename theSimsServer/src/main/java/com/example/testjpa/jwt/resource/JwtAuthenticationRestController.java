@@ -44,11 +44,10 @@ public class JwtAuthenticationRestController {
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException {
 	  
-	  System.out.println(authenticationRequest.getUsername() + "&&&&&&&&&&&&&&&& JWTAUTHRESTCONTROLLER.JAVA " + authenticationRequest.getPassword());
-	  System.out.println("HELLO____________________");
+
 
     authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-System.out.println(authenticationRequest.getUsername() + "*******<><><><><**********");
+ 
     final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
     final String token = jwtTokenUtil.generateToken(userDetails);

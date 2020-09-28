@@ -37,11 +37,15 @@ class AppNav extends Component {
 
 
         this.props.logoutAction(isLoggedIn)
-        this.setState({ visible: false })
+        this.closeDrawer()
         this.props.history.push('/')
     }
+    closeDrawer=()=>{
+        this.setState({ visible: false })
+    }
+
     render() {
-        const { isLoggedIn } = this.props;
+        const  isLoggedIn  = AuthenticationService.isUserLoggedIn()
 
 
         return (
@@ -59,13 +63,13 @@ class AppNav extends Component {
                     onClose={this.onClose}
                     visible={this.state.visible}
                 >
-                    <Link to="/">Logout</Link>
+                   
                     <p>{isLoggedIn ?
                         <Link to="/login" onClick={this.logout}>Logout</Link> :
-                        <Link to="/login"  >Login</Link>}</p>
+                        <Link to="/login" >Login</Link>}</p>
                     <p>{isLoggedIn ?
                         null :
-                        <Link to="/signup-customer">SignUp</Link>
+                        <Link to="/signup-customer"onClick={this.closeDrawer} >SignUp</Link>
 
                     }
                     </p>
@@ -78,7 +82,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-        isLoggedIn: state.AuthenticationReducer.isLoggedIn
+  
     }
 }
 
