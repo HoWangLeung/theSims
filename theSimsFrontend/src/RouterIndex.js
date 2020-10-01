@@ -7,20 +7,20 @@ import CreateTemplate from './Components/DigitalQrCodeMenu/GettingStrated/Gettin
 import Inventory from './Components/Inventory/';
 import Counter from './Components/Jotto/Counter/Counter';
 import SignUpMainPage from './Components/Authentication/SignUp/MainPage/SignUpMainPage';
-import { ConfigProvider } from 'antd';
+import { BackTop, ConfigProvider } from 'antd';
 import Employee from './Components/Employee/Employee';
 import Login from './Components/Authentication/Login/Login';
 import HomePage from './Components/HomePage/HomePage';
 import { Avatar } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
-import { BrowserRouter as Router, Switch, Route, Link,withRouter  } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import Home from './Components/Home'
 import Nav from './Common/NavigationBar';
 import SignUp from './Components/Authentication/SignUp/SignUp';
 import { Layout, Menu, Breadcrumb, Dropdown, Typography } from 'antd';
 import Banner from './Common/Banner';
 import NavigationMenu from './Common/NavigationMenu';
- 
+
 import ProductMainpage from './Components/ProductMainPage/ProductMainPage';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
@@ -37,7 +37,7 @@ export default class RouterIndex extends Component {
 
     }
 
-  
+
 
     render() {
         return (
@@ -49,9 +49,10 @@ export default class RouterIndex extends Component {
                             handleChangeLocale={this.props.handleChangeLocale}
                             currentLocale={this.props.antdLang}
                         />
-                    <BannerWithRouter/>
-                    <NavigationMenu/>
+                        <BannerWithRouter />
+                        <NavigationMenu />
                         <Content className={classes.content}>
+
                             <Switch>
                                 <Route exact path='/' component={ProductMainpage} />
                                 {/* <Route exact path='/' component={Login} /> */}
@@ -66,6 +67,7 @@ export default class RouterIndex extends Component {
                                 <Route path='/counter' component={Counter} />
                             </Switch>
                         </Content>
+
                         <Footer>
                             <WebFooter />
                         </Footer>

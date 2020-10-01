@@ -30,9 +30,9 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private long parentCategoryId;
 	@Column(name="name")
 	private String name;
+	private long parentCategoryId;
 	
 
 	
@@ -44,11 +44,12 @@ public class Category {
 		
 		// TODO Auto-generated constructor stub
 	}
-	public Category(long id,long parentCategoryId, String name, List<Product> product) {
+	public Category(long id, String name,long parentCategoryId, List<Product> product) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.product = product;
+		this.setParentCategoryId(parentCategoryId);
 	}
 	public long getId() {
 		return id;
@@ -74,6 +75,7 @@ public class Category {
 	public void setParentCategoryId(long parentCategoryId) {
 		this.parentCategoryId = parentCategoryId;
 	}
+	 
 
 
 	

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import classes from './App.less';
-import { Layout, Menu, Breadcrumb, Dropdown,Typography } from 'antd';
+import { Layout, Menu, Breadcrumb, Dropdown,Typography, BackTop } from 'antd';
  
 import { emit } from './emit.js'
 import intl from 'react-intl-universal';
@@ -55,12 +55,13 @@ class App extends Component {
   render() {
     const{antdLang} = this.state
     return (
-      
+  
        <RouterIndex
        antdLang={antdLang}
        handleChangeLocale={this.handleChangeLocale}
        />
-
+  
+ 
     );
   }
 }

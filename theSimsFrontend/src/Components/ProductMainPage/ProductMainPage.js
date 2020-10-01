@@ -1,26 +1,26 @@
 import classes from './ProductMainPage.less'
 import React from 'react'
 import ProductsSearch from './ProductsSearch/ProductsSearch'
-import Pageinformationheader from './PageInformationHeader/PageInformationHeader'
-import { Col, Row } from 'antd'
+import {   Col, Row } from 'antd'
 import Allproducts from './Products/AllProducts'
+import Cart from './Cart/Cart'
 
 function ProductMainpage() {
     return (
-        <div className={classes.productMainpageContainer} >
-            <Row >
+     
+            <Row className={classes.productMainpageContainer}>
                 <Col span={24} className={classes.ProductssearchContainer}  >
                     <ProductsSearch />
+                    <Cart />
                 </Col>
-                <Col span={24}>
-                    <Pageinformationheader />
-                </Col>
+
                 <Col span={24} className={classes.Allproducts}>
-                     <Allproducts  />
+                    <Allproducts />
+              
                 </Col>
             </Row>
-
-        </div>
+          
+     
     )
 }
 

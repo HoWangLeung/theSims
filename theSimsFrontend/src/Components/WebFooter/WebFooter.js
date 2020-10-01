@@ -1,3 +1,4 @@
+ 
 import React, { Component } from 'react'
 
 class WebFooter extends Component {
@@ -5,7 +6,7 @@ class WebFooter extends Component {
         super(props)
 
         this.state = {
-                 
+
         }
     }
 
@@ -13,6 +14,10 @@ class WebFooter extends Component {
         return (
             <div>
                 {/* Footer */}
+                <>
+                    
+
+                </>
             </div>
         )
     }

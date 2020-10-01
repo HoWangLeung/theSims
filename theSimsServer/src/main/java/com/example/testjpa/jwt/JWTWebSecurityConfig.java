@@ -147,7 +147,15 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(
         		 HttpMethod.POST,
                  "/users/signup"
-        		);
+        		)
+            .and()
+            .ignoring()
+            .antMatchers(
+        		 HttpMethod.GET,
+                 "/products/"
+        		)
+            
+            ;
         
     
         

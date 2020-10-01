@@ -7,17 +7,20 @@ import { Col, Row } from 'antd'
 import classes from '../ProductMainPage.less'
 const Allproducts = (props) => {
     return (
+     
 
-        <Row>
-            <Productsorter />
-            <Col span={8}>
-                <LeftFilters />
-            </Col>
-            <Col>
-                <Displayproducts />
-            </Col>
-        </Row>
-
+            <Row className={classes.allProductContainer}>
+                <Col span={24}>
+                    <Productsorter />
+                </Col>
+                <Col span={8}>
+                    <LeftFilters />
+                </Col>
+                <Col span={16}>
+                    <Displayproducts />
+                </Col>
+            </Row>
+    
 
 
     )

@@ -21,6 +21,7 @@ public class Product {
 	private String productName;
 	private String countryOrigin;
 	private int cost;
+	private int basePrice;
 	private int remaining;
 	
 	@ManyToOne(fetch= FetchType.LAZY)
@@ -33,12 +34,13 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(long id, String productName, String countryOrigin, int cost, int remaining, Category category) {
+	public Product(long id, String productName, String countryOrigin, int cost, int basePrice,int remaining, Category category) {
 		super();
 		this.id = id;
 		this.productName = productName;
 		this.setCountryOrigin(countryOrigin);
 		this.cost = cost;
+		this.setBasePrice(basePrice);
 		this.remaining = remaining;
 		this.category = category;
 	}
@@ -95,6 +97,14 @@ public class Product {
 
 	public void setCountryOrigin(String countryOrigin) {
 		this.countryOrigin = countryOrigin;
+	}
+
+	public int getBasePrice() {
+		return basePrice;
+	}
+
+	public void setBasePrice(int basePrice) {
+		this.basePrice = basePrice;
 	}
 
 	

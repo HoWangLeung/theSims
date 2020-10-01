@@ -4,10 +4,12 @@ import JottoReducer from './JottoReducer'
 import AuthenticationReducer from './AuthenticationReducer'
 import InventoryReducer from './InventoryReducer'
 import CounterReducer from './CounterReducer'
+import ProductReducer from './ProductReducer'
 export default combineReducers({
     EmployeeReducer,
     InventoryReducer,
     JottoReducer,
     AuthenticationReducer,
-    CounterReducer
+    CounterReducer,
+    ProductReducer
 })
