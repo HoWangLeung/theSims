@@ -51,8 +51,8 @@ export default class RouterIndex extends Component {
                         />
                         <BannerWithRouter />
                         <NavigationMenu />
+                 
                         <Content className={classes.content}>
-
                             <Switch>
                                 <Route exact path='/' component={ProductMainpage} />
                                 {/* <Route exact path='/' component={Login} /> */}
@@ -66,6 +66,7 @@ export default class RouterIndex extends Component {
                                 <Route path='/createMenu' component={CreateTemplate} />
                                 <Route path='/counter' component={Counter} />
                             </Switch>
+                            <BackTop target={() => document.body}   />
                         </Content>
 
                         <Footer>

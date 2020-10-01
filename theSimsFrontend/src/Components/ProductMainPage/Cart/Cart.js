@@ -30,7 +30,7 @@ function Cart(props) {
             </Badge>
             <Drawer
                 title="Cart"
-                width="25%"
+                width={window.innerWidth <= 760? "80%":"25%"}
                  
                 onClose={closeDrawer}
                 visible={drawerVisible}

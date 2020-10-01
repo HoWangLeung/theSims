@@ -13,10 +13,10 @@ const Allproducts = (props) => {
                 <Col span={24}>
                     <Productsorter />
                 </Col>
-                <Col span={8}>
+                <Col sm={24} xl={8}>
                     <LeftFilters />
                 </Col>
-                <Col span={16}>
+                <Col sm={24} xl={16}>
                     <Displayproducts />
                 </Col>
             </Row>
