@@ -33,7 +33,7 @@ export const signUpRequest = (payload,ownProps) => {
       })
       .then(()=>{
           
-        ownProps.history.push("/")
+        ownProps.history.push("/signup-success")
       })
       
       .catch(e=>{

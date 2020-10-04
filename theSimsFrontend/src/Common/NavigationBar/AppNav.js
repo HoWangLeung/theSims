@@ -66,7 +66,7 @@ class AppNav extends Component {
                    
                     <p>{isLoggedIn ?
                         <Link to="/login" onClick={this.logout}>Logout</Link> :
-                        <Link to="/login" >Login</Link>}</p>
+                        <Link to="/login" onClick={this.closeDrawer} >Login</Link>}</p>
                     <p>{isLoggedIn ?
                         null :
                         <Link to="/signup-customer"onClick={this.closeDrawer} >SignUp</Link>

@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import classes from '../ProductMainPage.less'
 import { Badge, Drawer } from 'antd'
+import { useDispatch } from 'react-redux'
+import { fetchProductsInCart } from '../actions/productActions'
+ 
 
 
 
 
-function Cart(props) {
-
+const Cart=(props)=> {
+  
     const [drawerVisible, setDrawerVisible] = useState(false)
 
     const openDrawer=()=>(
@@ -18,13 +21,18 @@ function Cart(props) {
     const closeDrawer=()=>(
         setDrawerVisible(false)
     )
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchProductsInCart())
+
+    }, []);
 
     return (
         <>
-            <Badge count={5}>
+            <Badge  className={classes.ShoppingCartOutlined}
+                    onClick={openDrawer} count={5}>
                 <ShoppingCartOutlined
-                    className={classes.ShoppingCartOutlined}
-                    onClick={openDrawer}
+                   
 
                 />
             </Badge>

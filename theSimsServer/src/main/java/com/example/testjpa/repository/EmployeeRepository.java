@@ -48,15 +48,9 @@ import org.springframework.stereotype.Repository;
 
 import com.example.testjpa.model.Employee;
 
-
-
-//
-//@Repository
-//public class EmployeeRepository {
 	
 	@Repository
 	public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
-		
 		@Transactional
 		List<Employee> findByFirstNameContainingIgnoreCase(String name);
 		
@@ -65,10 +59,6 @@ import com.example.testjpa.model.Employee;
 
 		@Transactional
 		List<Employee> findByIdAndFirstName(long id, String name);
-		
-//		@Transactional
-//		@Query("FROM Employee emp JOIN FETCH emp.department")
-//		List<Employee> findAllWithRole();
 	}
 	
 	

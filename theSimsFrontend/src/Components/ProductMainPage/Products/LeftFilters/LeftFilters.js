@@ -12,9 +12,9 @@ const onChange = () => {
 const onAfterChange = () => {
     console.log('sdf');
 }
-const renderSlider = () => {
+const useSlider = () => {
     return (<><p>Filter By Price</p>
-        <Slider
+       <Slider
             className={classes.priceSlider}
             range
             step={10}
@@ -27,13 +27,13 @@ const renderSlider = () => {
         <Button>Filter</Button></>)
 }
 
-const renderCategories = () => {
+const useCategories = () => {
     const options = ['Apple', 'Orange', 'Pears', 'Grapes']
     const productList = options.map((option, index) => (<li>{option}</li>))
 
 
     return (<>
-        <p>Product Categories</p>
+       <p>Product Categories</p>
         {productList}
     </>)
 
@@ -45,8 +45,8 @@ const renderCategories = () => {
 const LeftFilters = (props) => {
     return (
         <>
-            {renderSlider()}
-            {renderCategories()}
+            {useSlider()}
+            {useCategories()}
         </>
     )
 

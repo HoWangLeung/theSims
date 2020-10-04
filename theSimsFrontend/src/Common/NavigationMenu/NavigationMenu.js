@@ -23,8 +23,7 @@ class NavigationMenu extends Component {
         const { current } = this.state;
         const { location: { pathname } } = this.props
 
-        if (pathname === '/'||pathname === '/signup-customer'
-          ||pathname === '/signup'||pathname === '/login')  return null
+        if (['/','/signup-customer','/signup','/login','/signup-success'].includes(pathname))  return null
 
 
       

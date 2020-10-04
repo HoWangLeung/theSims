@@ -27,19 +27,7 @@ const Displayproducts = (props) => {
     const isLoading = useSelector(state => state.ProductReducer.isLoading);
     const productList = useSelector(state => state.ProductReducer.productList);
 
-    // const loadMore =
-    //     !initLoading && !loading ? (
-    //         <div
-    //             style={{
-    //                 textAlign: 'center',
-    //                 marginTop: 12,
-    //                 height: 32,
-    //                 lineHeight: '32px',
-    //             }}
-    //         >
-    //             <Button onClick={onLoadMore}>loading more</Button>
-    //         </div>
-    //     ) : null;
+ 
 
     const cardList = (<List
         grid={{

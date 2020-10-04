@@ -22,6 +22,7 @@ import Banner from './Common/Banner';
 import NavigationMenu from './Common/NavigationMenu';
 
 import ProductMainpage from './Components/ProductMainPage/ProductMainPage';
+import Signupsuccess from './Components/Authentication/SignUp/SignUpSuccess/SignUpSuccess';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -59,6 +60,7 @@ export default class RouterIndex extends Component {
                                 <Route path='/login' component={Login} />
                                 <Route path='/signup' component={SignUpMainPage} />
                                 <Route path='/signup-customer' component={SignUp} />
+                                <Route path='/signup-success' component={Signupsuccess} />
                                 <AuthenticatedRoute path='/dashboard' component={Dashboard} />
                                 <AuthenticatedRoute path='/employee' component={Employee} />
                                 <AuthenticatedRoute path='/inventory' component={Inventory} />

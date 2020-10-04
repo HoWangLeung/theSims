@@ -13,7 +13,8 @@ class Login extends Component {
         super(props)
 
         this.state = {
-            isLoggedIn:false
+            isLoggedIn:false,
+            disableLogin:true
         }
     }
 
@@ -44,6 +45,16 @@ class Login extends Component {
         
     };
 
+    onFieldsChange=(changedFields, allFields)=>{
+        
+        let bothFieldsFilled = allFields.every(f => f.value !== undefined && f.value!=="");
+        console.log(bothFieldsFilled);
+        if(bothFieldsFilled)
+        this.setState({disableLogin:false})
+        else
+        this.setState({disableLogin:true})
+    }
+
     generateLoginForm = () => {
         const layout = {
             labelCol: {
@@ -59,6 +70,7 @@ class Login extends Component {
                 span: 16,
             },
         };
+        const {disableLogin} = this.state
         return (
             <>
                 <h1>{intl.get('signin')}</h1>
@@ -67,6 +79,7 @@ class Login extends Component {
                     name="basic"
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
+                    onFieldsChange={this.onFieldsChange}
                 >
                     <Form.Item
                         label={intl.get('username')}
@@ -96,7 +109,7 @@ class Login extends Component {
 
 
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button disabled={disableLogin} type="primary" htmlType="submit">
                            {intl.get('login')}
           </Button>
                     </Form.Item>

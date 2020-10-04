@@ -31,7 +31,7 @@ const tailLayout = {
 class EditStepTwo extends Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
             showAnimation: true,
             addToAllValue: 0,
@@ -56,7 +56,7 @@ class EditStepTwo extends Component {
 
         if (prevProps.inventoryList !== this.props.inventoryList) {
             this.setState({
-                undoAdded:false
+                undoAdded: false
             })
             this.formRef.current.resetFields()
         }
@@ -64,7 +64,7 @@ class EditStepTwo extends Component {
     }
 
     onFinish = values => {
-        const { inventoryList,savePreviewList } = this.props
+        const { inventoryList, savePreviewList } = this.props
         const { previewList } = this.state
         const { undoAdded } = this.state
         const valueToAdd = parseInt(values.addToAll)
@@ -102,20 +102,20 @@ class EditStepTwo extends Component {
 
     };
 
-    handleInputChange=e=>{
+    handleInputChange = e => {
         const { savePreviewList } = this.props
         const { previewList } = this.state
         let inputValue = parseInt(e.target.value)
-        let id = e.target.id+1
+        let id = e.target.id + 1
         this.setState(prevState => ({
             previewList: prevState.previewList.map(
                 obj => {
                     console.log(obj);
                     return obj.id == id ? Object.assign(obj, { remaining: inputValue }) : obj
                 }
-          )
+            )
         }));
-     
+
         savePreviewList(previewList)
     }
 
@@ -125,7 +125,7 @@ class EditStepTwo extends Component {
             {...layout}
             onFinish={this.onFinish}
             onFinishFailed={this.onFinishFailed}
-            className={classes.formContainer}
+            
             ref={this.formRef}
         >
             <Form.Item
@@ -136,12 +136,12 @@ class EditStepTwo extends Component {
                 <Input
                     placeholder="number"
                     type="number"
-                    disabled={undoAdded?true:false}
-                    />
-                
+                    disabled={undoAdded ? true : false}
+                />
+
             </Form.Item>
             <Form.Item >
-                <Button type={undoAdded?"danger":"primary"} htmlType="submit">
+                <Button type={undoAdded ? "danger" : "primary"} htmlType="submit">
                     {undoAdded ? intl.get('inventory.undo') : intl.get('inventory.add')}
                 </Button>
             </Form.Item>
@@ -158,7 +158,7 @@ class EditStepTwo extends Component {
     }
 
     render() {
-        const { inventoryList ,updatePreviewList} = this.props
+        const { inventoryList, updatePreviewList } = this.props
         const { showAnimation, addToAllValue, previewList } = this.state
         const addToAllInput = this.getForm()
 
@@ -194,8 +194,8 @@ const mapStateToProps = (state) => {
 
 
     return {
-        updatePreviewList:state.InventoryReducer.previewList,
-        
+        updatePreviewList: state.InventoryReducer.previewList,
+
     }
 }
 

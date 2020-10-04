@@ -1,10 +1,9 @@
 package com.example.testjpa.model;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,11 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.testjpa.model.Order.Orders;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 //implements UserDetails
 @Entity
 @Table(name="Users")
@@ -41,6 +41,8 @@ public class Users extends Auditable<String>   {
 	@Column(name = "PASSWORD")
 	private String password;
 	
+	
+	
 	private boolean enabled;
 //	cascade = CascadeType.ALL,
 	 @ManyToMany( fetch = FetchType.EAGER)
@@ -50,15 +52,14 @@ public class Users extends Auditable<String>   {
 	            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName ="role_id")
 	            )
 	private Set<Role> roles = new HashSet<>();
+	 
+	
 
 	
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 
 	public Users(long id, String username, String password, boolean enabled, Set<Role> roles) {
@@ -68,10 +69,8 @@ public class Users extends Auditable<String>   {
 		this.password = password;
 		this.enabled = enabled;
 		this.roles = roles;
+	
 	}
-
-
-
 
 
 	public long getId() {
@@ -104,25 +103,9 @@ public class Users extends Auditable<String>   {
 	}
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public boolean isEnabled() {
+		return enabled;
 	}
-	
-	
-	
-
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-
-
-	public void setRoles(Set<Role> roles) {
-		
-		this.roles = roles;
-	}
-
 
 
 	public void setEnabled(boolean enabled) {
@@ -130,19 +113,30 @@ public class Users extends Auditable<String>   {
 	}
 
 
-	public boolean isEnabled() {
-		return enabled;
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 
 
 
-
-	@Override
-	public String toString() {
-		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", roles=" + roles + "]";
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
+
+
+ 
+
+	 
+
+
+
+	
 
 
 

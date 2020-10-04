@@ -3,10 +3,9 @@ import { API } from '../../../ApiConfig'
 
 const sleep = m => new Promise(r => setTimeout(r, m))
 
-
 export const fetchAllProducts = () => {
   
-    return async(dispatch, getState) => {
+    return async (dispatch, getState) => {
       
        try{
          dispatch({ type: 'FETCH_PRODUCTS_START' }) 
@@ -22,4 +21,23 @@ export const fetchAllProducts = () => {
        }
 
     }
+}
+
+export const fetchProductsInCart = () => {
+  console.log('in cart 1 ');
+  return async(dispatch, getState) => {
+    console.log('in cart 2 ');
+    try{
+      let token = sessionStorage.getItem('USER_TOKEN')
+      let res = await axios.get(`${API}/orders/`,{ headers: {"Authorization" : token}})
+      console.log(res);
+      // dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data })
+      return res
+
+    }catch(err){
+        console.log(err);
+
+    }
+
+  }
 }
