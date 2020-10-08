@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import classes from '../ProductMainPage.less'
-import { Badge, Drawer } from 'antd'
-import { useDispatch } from 'react-redux'
+import { Badge, Button, Drawer } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductsInCart } from '../actions/productActions'
+import Cartitemlist from './CartItemList'
  
 
 
@@ -26,7 +27,8 @@ const Cart=(props)=> {
         dispatch(fetchProductsInCart())
 
     }, []);
-
+ 
+ 
     return (
         <>
             <Badge  className={classes.ShoppingCartOutlined}
@@ -38,12 +40,13 @@ const Cart=(props)=> {
             </Badge>
             <Drawer
                 title="Cart"
-                width={window.innerWidth <= 760? "80%":"25%"}
+                width={window.innerWidth <= 760? "100%":"35%"}
                  
                 onClose={closeDrawer}
                 visible={drawerVisible}
             >
-                This is two-level drawer
+               <Cartitemlist/>
+               <Button>Proceed</Button>
           </Drawer>
         
 

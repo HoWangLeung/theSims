@@ -25,40 +25,34 @@ import com.example.testjpa.model.Users;
 @RequestMapping("/users")
 @CrossOrigin(origins = "*")
 public class UsersController {
-	
-private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
-@Autowired
-private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
+	@Autowired
+	private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
 
-	 
 	@GetMapping("/")
 	public List<Users> getAllUsers() {
 		LOGGER.info("GETREQUEST!!!!!!!!!!!!!!!!************************************************************37");
 		List<Users> internalUserAccountList = jwtInMemoryUserDetailsService.findAllwithRoles();
- 
+
 		return internalUserAccountList;
 	}
-	
-	@GetMapping("/find")
-	public Optional<Users> find(@RequestBody  Users internalUserAccount) {
-		System.out.println(internalUserAccount.toString());
-		Optional<Users> user = jwtInMemoryUserDetailsService.findByUsername(internalUserAccount.getUsername());
- 
+
+	@GetMapping("/userProfile")
+	public List<Users> getUserProfile() {
+		System.out.println("I am in get User profile now");
+		List<Users> user = jwtInMemoryUserDetailsService.getUserProfile("derek1");
 		return user;
 	}
-	
+ 
 
-	
-	
 	@PostMapping("/signup")
-	public void signupPost(@RequestBody  Users internalUserAccount) {
+	public void signupPost(@RequestBody Users internalUserAccount) {
 		System.out.println("^^^^^^^^^^^^#$$#$#$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + internalUserAccount);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		internalUserAccount.setPassword(encoder.encode(internalUserAccount.getPassword()));
-	
+
 		jwtInMemoryUserDetailsService.saveUser(internalUserAccount);
- 
-		
+
 	}
 }

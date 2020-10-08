@@ -62,7 +62,7 @@ class SelectDropdown extends Component {
 
             {departmentOptions.map((option, index) => {
                 
-                return <Option key={index} style={{zIndex:2000}} value={option}>{intl.get(option)}</Option>
+                return <Option key={index} value={option}>{intl.get(option)}</Option>
             })}
         </Select>)
     }

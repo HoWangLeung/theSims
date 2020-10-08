@@ -138,8 +138,7 @@ class Employee extends Component {
                     key="selectDropdown"
                     placeHolder={intl.get('selectDepartment')}
                     icon={faBuilding}
-                    options={departmentOptions}
-                    departmentOptions={departmentOptions}
+                    options={departmentOptions}            
                     handleSelect={this.handleSelect}
                 />
         

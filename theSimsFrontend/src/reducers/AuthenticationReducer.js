@@ -1,5 +1,6 @@
 const initState = {
-    isLoggedIn: sessionStorage.getItem('USER_TOKEN')=== null? false:true
+    isLoggedIn: sessionStorage.getItem('USER_TOKEN')=== null? false:true,
+    userProfile:[]
 }
 
 const AuthenticationReducer = (state = initState, action) => {
@@ -29,6 +30,13 @@ const AuthenticationReducer = (state = initState, action) => {
 
         case ("SIGNUP_FAILURE"):
             return state;
+
+        case("GET_USER_PROFILE_SUCCESS"):
+            console.log(action);
+            return {
+                ...state,
+                userProfile:action.payload
+            };
         default:
             return state;
 

@@ -1,45 +1,64 @@
 import axios from 'axios'
 import { API } from '../../../../ApiConfig'
 
-export const loginAction=(isLoggedIn)=>{
-    
-    return{
-        type:'LOGIN_ACTION',
-        isLoggedIn
-    }
+export const loginAction = (isLoggedIn) => {
+
+  return {
+    type: 'LOGIN_ACTION',
+    isLoggedIn
+  }
 }
 
-export const logoutAction=(isLoggedIn)=>{
+export const getUserProfile = () => {
 
-    
-    return{
-        type:'LOGOUT_ACTION',
-        isLoggedIn
+
+  return async (dispatch, getState) => {
+
+    try {
+      let res = await axios.get(`${API}/users/userProfile/`)
+      console.log(res);
+      dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
+      return res
+    } catch (err) {
+      console.log(err);
     }
+
+
+  }
+
 }
 
-export const signUpRequest = (payload,ownProps) => {
-    
-    return (dispatch,getState)=>{
-      const headers = {
-        'Content-Type': 'application/json' 
-      }
-       axios.post(`${API}/users/signup`, payload,{
-        headers: headers
-      })
-      .then(res=>{
-          
+export const logoutAction = (isLoggedIn) => {
+
+
+  return {
+    type: 'LOGOUT_ACTION',
+    isLoggedIn
+  }
+}
+
+export const signUpRequest = (payload, ownProps) => {
+
+  return (dispatch, getState) => {
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    axios.post(`${API}/users/signup`, payload, {
+      headers: headers
+    })
+      .then(res => {
+
         dispatch({ type: 'SIGNUP_SUCCESS' })
       })
-      .then(()=>{
-          
+      .then(() => {
+
         ownProps.history.push("/signup-success")
       })
-      
-      .catch(e=>{
-        dispatch({ type: 'SIGNUP_FAILURE',e })
+
+      .catch(e => {
+        dispatch({ type: 'SIGNUP_FAILURE', e })
       })
 
-    }
+  }
 
 }

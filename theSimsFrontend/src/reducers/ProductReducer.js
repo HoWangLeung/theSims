@@ -1,6 +1,7 @@
 const initState = {
     isLoading: false,
-    productList:[]
+    productList:[],
+    cartList:[],
   
 }
 
@@ -18,12 +19,19 @@ const ProductReducer = (state = initState, action) => {
                 isLoading: true
             };
         case("FETCH_PRODUCTS_SUCCESS"):
-        console.log(action);
+  
         return {
             ...state,
             isLoading: false,
             productList:action.payload.detail 
         };
+
+        case("FETCH_PRODUCTSINCART_SUCCESS"):
+        console.log(action.payload);
+        return{
+            ...state,
+            cartList:action.payload.detail
+        }
         
 
 

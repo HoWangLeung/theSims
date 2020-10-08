@@ -2,57 +2,63 @@ import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import AuthenticationService from '../SignUp/AuthenticationService'
 import { connect } from 'react-redux'
-import { loginAction } from '../SignUp/actions/AuthenticationActions'
+import { getUserProfile, loginAction } from '../SignUp/actions/AuthenticationActions'
 import { withRouter } from 'react-router-dom';
 import classes from '../Authentication.less'
 import intl from 'react-intl-universal';
 import 'antd/dist/antd.less';
 import CommonModal from '../../../Common/ConfirmModal/CommonModal';
+import jwt_decode from "jwt-decode";
 class Login extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isLoggedIn:false,
-            disableLogin:true
+            isLoggedIn: false,
+            disableLogin: true
         }
     }
 
     onFinish = async (values) => {
-        
+        const{getUserProfile}=this.props
         const { username, password, remember } = values
-      
+
         AuthenticationService
-        .executeJwtAuthenticationService(username,password)
-        .then((res)=>{
-            console.log(res);
-            AuthenticationService.registerSuccessfulLoginForJwt(username,res.data.token)
-            let isLoggedIn = AuthenticationService.isUserLoggedIn()
-           
-            console.log(isLoggedIn);
-            this.props.loginAction(isLoggedIn)
-            this.props.history.push('/dashboard')
-        }).catch((error)=>{
-            console.log(error);
-            CommonModal.error({content:"Invalid username/password"})
-        })
+            .executeJwtAuthenticationService(username, password)
+            .then((res) => {
+                console.log(res);
+                let token = res.data.token
+                let decoded = jwt_decode(token);
+                console.log(decoded);
+                AuthenticationService.registerSuccessfulLoginForJwt(username, token)
+                let isLoggedIn = AuthenticationService.isUserLoggedIn()
+                console.log(isLoggedIn);
+                this.props.loginAction(isLoggedIn)
+                this.props.history.push('/dashboard')
+            }).then(()=>{
+               getUserProfile()
+            })
+            .catch((error) => {
+                console.log(error);
+                CommonModal.error({ content: "Invalid username/password" })
+            })
 
 
 
     };
 
     onFinishFailed = errorInfo => {
-        
+
     };
 
-    onFieldsChange=(changedFields, allFields)=>{
-        
-        let bothFieldsFilled = allFields.every(f => f.value !== undefined && f.value!=="");
+    onFieldsChange = (changedFields, allFields) => {
+
+        let bothFieldsFilled = allFields.every(f => f.value !== undefined && f.value !== "");
         console.log(bothFieldsFilled);
-        if(bothFieldsFilled)
-        this.setState({disableLogin:false})
+        if (bothFieldsFilled)
+            this.setState({ disableLogin: false })
         else
-        this.setState({disableLogin:true})
+            this.setState({ disableLogin: true })
     }
 
     generateLoginForm = () => {
@@ -70,7 +76,7 @@ class Login extends Component {
                 span: 16,
             },
         };
-        const {disableLogin} = this.state
+        const { disableLogin } = this.state
         return (
             <>
                 <h1>{intl.get('signin')}</h1>
@@ -110,8 +116,8 @@ class Login extends Component {
 
                     <Form.Item {...tailLayout}>
                         <Button disabled={disableLogin} type="primary" htmlType="submit">
-                           {intl.get('login')}
-          </Button>
+                            {intl.get('login')}
+                        </Button>
                     </Form.Item>
                 </Form>
             </>
@@ -134,7 +140,7 @@ class Login extends Component {
 
 
 const mapStateToProps = (state) => {
-    
+
     console.log(state);
     return {
 
@@ -144,7 +150,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        loginAction: (isLoggedIn) => { dispatch(loginAction(isLoggedIn)) }
+        loginAction: (isLoggedIn) => { dispatch(loginAction(isLoggedIn)) },
+        getUserProfile:()=> dispatch(getUserProfile())
     }
 }
 
