@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton } from 'antd';
+import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllProducts } from '../../actions/productActions';
+import { fetchAllProducts, addToCart } from '../../actions/productActions';
 const { Meta } = Card;
 
-
-
-
-
-
 const Displayproducts = (props) => {
+ 
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
+    const isLoading = useSelector(state => state.ProductReducer.isLoading);
+    const productList = useSelector(state => state.ProductReducer.productList);
+ 
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,10 +23,11 @@ const Displayproducts = (props) => {
         console.log('try to load more');
     };
 
-    const isLoading = useSelector(state => state.ProductReducer.isLoading);
-    const productList = useSelector(state => state.ProductReducer.productList);
 
- 
+    const useOnClick = () => {
+
+        dispatch(addToCart())
+    }
 
     const cardList = (<List
         grid={{
@@ -47,10 +47,10 @@ const Displayproducts = (props) => {
                         <Card
                             title={item.productName}
                             actions={[
-                                <p>add</p>,
+                                <Input />,
+                                <Button onClick={useOnClick} >Add</Button>,
                             ]}
                         >
-
                             Card content</Card>
                     </List.Item>
                 </Skeleton>

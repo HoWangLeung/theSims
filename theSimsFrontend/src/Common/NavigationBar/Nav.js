@@ -47,10 +47,10 @@ class Nav extends React.Component {
     };
 
     logout = async () => {
-        const {isLoggedIn} = this.props
+        const { isLoggedIn } = this.props
         await AuthenticationService.logout()
 
-        
+
         this.props.logoutAction(isLoggedIn)
         this.props.history.push('/')
     }
@@ -110,7 +110,7 @@ class Nav extends React.Component {
         const userMenu = (
             <Menu className={classes.userMenuDropDown} onClick={this.handleUserMenuClick} >
                 <Menu.Item key="0">
-                    <p  >{intl.get('dashboard')}</p>
+                    <Link to="/dashboard"> <p>{intl.get('dashboard')}</p></Link>
                 </Menu.Item>
                 <Menu.Item key="1">
                     <p>{intl.get('userProfile')}</p>
@@ -179,7 +179,7 @@ class Nav extends React.Component {
         return (
             <>
                 {hideNav === false && topNavigationMenu}
-               
+
                 {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
             </>
         );
@@ -193,7 +193,7 @@ class Nav extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-      
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
