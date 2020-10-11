@@ -12,20 +12,11 @@ const InventoryReducer = (state = initState, action) => {
     
  
     switch (action.type) {
-        case ("FETCH_START"):
-            return {
-                ...state,
-                loading: true
-            };
-        case("FETCH_INVENTORY_SUCCESS"):
-        
-        
+        case("FETCH_INVENTORY_SUCCESS"):      
             return{
                 ...state,
-                loading:false,
                 inventoryList:action.payload.detail
             }
-
         case("SAVE_INVENTORY"):
         return{
             ...state,
@@ -33,18 +24,12 @@ const InventoryReducer = (state = initState, action) => {
         }
 //==============================
 
-        case("SAVE_UPDATEDLIST"):
-        return{
-            ...state,
-            loading:true,
-        }
-
+  
 
     case("SAVE_UPDATEDLIST_SUCCESS"):
     
         return{
             ...state,
-            loading:false,
             inventoryList:action.payload.detail,
             showModal:false,     
                 

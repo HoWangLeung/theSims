@@ -5,41 +5,41 @@ class AuthenticationService {
 
 
 
-    executeJwtAuthenticationService(username, password){
-        
+    executeJwtAuthenticationService(username, password) {
+
         return axios.post(`${API}/authenticate`,
-        {
-           username,
-           password 
-        })
+            {
+                username,
+                password
+            })
     }
 
-    registerSuccessfulLoginForJwt(username,token){
+    registerSuccessfulLoginForJwt(username, token) {
         sessionStorage.setItem('authenticatedUser', username)
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }
 
 
     registerSuccessfulLogin(username, password) {
-        
+
         sessionStorage.setItem('authenticatedUser', username)
     }
 
     logout() {
-        
+
         sessionStorage.clear();
     }
 
-    createJWTToken(token){
-        console.log('creating token');
+    createJWTToken(token) {
+        
         sessionStorage.setItem("USER_TOKEN", "Bearer " + token)
         return 'Bearer ' + token
     }
 
     isUserLoggedIn() {
-        console.log('setting token');
+        
         let user = sessionStorage.getItem('authenticatedUser')
-        console.log('current loggedin user = > ' , user);
+        
 
         if (user === null) {
             return false
@@ -48,24 +48,24 @@ class AuthenticationService {
         }
     }
 
-    setupAxiosInterceptors(token){
-        
+    setupAxiosInterceptors(token) {
+
         axios.interceptors.request.use(
-            (config)=>{
-                if(this.isUserLoggedIn()){
-                    console.log('if here ', config);
+            (config) => {
+                if (this.isUserLoggedIn()) {
+                    
                     config.headers.authorization = token
                 }
                 return config
             },
-            error=>{
-                console.log(error);
+            error => {
+                
             }
         )
     }
 
-    componentWillMount(){
-      
+    componentWillMount() {
+
         this.setupAxiosInterceptors()
     }
 

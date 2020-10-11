@@ -1,6 +1,8 @@
 package com.example.testjpa.model;
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +16,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.example.testjpa.model.experiment.Department;
 
@@ -39,16 +43,20 @@ public class Employee {
 	private boolean isManagement;
 	@Column(name = "ADDRESS")
 	private String address;
-	
 	@ManyToOne(  fetch = FetchType.LAZY)
 	private Department department;
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	@UpdateTimestamp
+	private LocalDateTime lastUpdatedDate;
 
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(long id, String firstName, String lastName, String role, boolean isManagement, String address) {
+	public Employee(long id, String firstName, String lastName, String role, boolean isManagement, String address,
+			Department department, LocalDateTime createdDate, LocalDateTime lastUpdatedDate) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -56,6 +64,9 @@ public class Employee {
 		this.role = role;
 		this.isManagement = isManagement;
 		this.address = address;
+		this.department = department;
+		this.createdDate = createdDate;
+		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 	public long getId() {
@@ -114,20 +125,30 @@ public class Employee {
 		this.department = department;
 	}
 
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getLastUpdatedDate() {
+		return lastUpdatedDate;
+	}
+
+	public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role
-				+ ", isManagement=" + isManagement + ", address=" + address + ", department=" + department + "]";
+				+ ", isManagement=" + isManagement + ", address=" + address + ", department=" + department
+				+ ", createdDate=" + createdDate + ", lastUpdatedDate=" + lastUpdatedDate + "]";
 	}
 
-	 
-
-	 
-	
-	
 	
 
-	 
- 
 
 }

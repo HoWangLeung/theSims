@@ -5,20 +5,19 @@ import CommonModal from '../../../Common/ConfirmModal/CommonModal';
 
 const sleep = m => new Promise(r => setTimeout(r, m))
 
-export const fetchInventory =  () => {
-    
-    return async(dispatch, getState) => {
-        
-        try {
-            dispatch({ type: 'FETCH_START' })
-            await sleep(1000)
-            let res = await axios.get(`${API}/inventory/`)
-            dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: res.data })
-            return res
-        } catch (err) {
-            
-        }
+export const fetchInventory = () => {
 
+    return async (dispatch, getState) => {
+
+        try {
+            dispatch({ type: 'FETCH_INVENTORY_REQUEST' })
+            await sleep(1000)
+            let response = await axios.get(`${API}/inventory/`)
+            dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: response.data })
+            return response
+        } catch (err) {
+            console.log(err);
+        }
 
     }
 }
@@ -35,13 +34,13 @@ export const saveUpdatedList = (updatedPreviewList) => {
     return async (dispatch, getState) => {
 
         try {
-            dispatch({ type: 'SAVE_UPDATEDLIST', payload: updatedPreviewList })
+            dispatch({ type: 'SAVE_UPDATEDLIST_REQUEST', payload: updatedPreviewList })
             await sleep(1000)
             let res = await axios.put(`${API}/inventory/updateProducts`, updatedPreviewList)
             dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
             return res
         } catch (err) {
-            
+
         }
 
 

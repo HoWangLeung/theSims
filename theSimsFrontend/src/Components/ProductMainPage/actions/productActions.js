@@ -7,7 +7,7 @@ export const fetchAllProducts = () => {
 
   return async (dispatch, getState) => {
     try {
-      dispatch({ type: 'FETCH_PRODUCTS_START' })
+      dispatch({ type: 'FETCH_PRODUCTS_REQUEST' })
       await sleep(1000)
       let res = await axios.get(`${API}/products/`)
 

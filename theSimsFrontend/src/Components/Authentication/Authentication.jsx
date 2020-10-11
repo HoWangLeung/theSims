@@ -26,7 +26,7 @@ class Authentication extends Component {
         axios.interceptors.request.use(
             (config)=>{
                 if(this.isUserLoggedIn()){
-                    console.log('in jsx => config == ', config);
+            
                     config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
                 }
                 return config
@@ -38,7 +38,7 @@ class Authentication extends Component {
     }
 
     componentWillMount(){
-        console.log('will mount now ************');
+
         if(this.isUserLoggedIn()){
             this.setupAxiosInterceptors()
         }

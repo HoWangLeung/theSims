@@ -2,44 +2,40 @@ import React, { Component } from 'react'
 import { Table, Button, Spin } from 'antd';
 import { GetHeader } from './GetHeader';
 import CommonModal from '../../../Common/CommonModal/CommonModal';
-import EditMultipleSteps from './EditMultipleSteps';
+import EditMultipleSteps from './StepsContent/StepTwo/EditMultipleSteps';
 import { connect } from 'react-redux';
-
+import { isEmpty } from 'lodash';
 class InventoryList extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            selectedRowKeys: [], 
+            selectedRowKeys: [],
             selectedRows: [],
             loading: false,
-            showModal: false
+            showModal: false,
+            disableEdit: true
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-     
+
         if (prevProps.inventoryList !== this.props.inventoryList) {
-            this.setState({         
+            this.setState({
                 showModal: false,
                 selectedRowKeys: []
-            })         
+            })
         }
     }
 
-    showModal = e => {
+    showModal = () => this.setState({ showModal: true });
 
-        this.setState({ showModal: true })
-    };
-
-    hideModal = () => {
-        this.setState({ showModal: false })
-    }
+    hideModal = () => this.setState({ showModal: false })
 
     onSelectChange = (selectedRowKeys, selectedRows) => {
-
-
-        this.setState({ selectedRowKeys, selectedRows });
+        let state = { selectedRowKeys, selectedRows }
+        state.disableEdit = isEmpty(selectedRowKeys) ? true : false
+        this.setState(state);
     };
 
     onSelect = (record, selected, selectedRows, nativeEvent) => {
@@ -47,12 +43,13 @@ class InventoryList extends Component {
     }
 
     getFooter = () => {
-        return ([<Button onClick={this.hideModal}  >Cancel</Button>])
+        const { isFetching } = this.props
+        return ([<Button onClick={this.hideModal} disabled={isFetching['SAVE_UPDATEDLIST']} >Cancel</Button>])
     }
 
     render() {
-        const { loading, selectedRowKeys, showModal, selectedRows } = this.state;
-        const { isLoading, inventoryList } = this.props
+        const { selectedRowKeys, showModal, selectedRows, disableEdit } = this.state;
+        const { inventoryList, isFetching } = this.props
 
         const hasSelected = selectedRowKeys.length > 0;
 
@@ -61,33 +58,32 @@ class InventoryList extends Component {
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
-                    <Button type="primary" onClick={this.showModal} disabled={!hasSelected} loading={loading}>
+                    <Button type="primary" disabled={disableEdit} onClick={this.showModal} >
                         Edit Multiple
-          </Button>
-
+                     </Button>
                     <CommonModal
-                        visible={this.state.showModal}
+                        visible={showModal}
                         hideModal={this.hideModal}
                         content={<EditMultipleSteps inventoryList={inventoryList} content={selectedRows} />}
                         footer={this.getFooter()}
-                        isLoading={isLoading}
+                        isLoading={isFetching['SAVE_UPDATEDLIST']}
                         loadingTip="Saving Your Changes"
+                        closable={!isFetching['SAVE_UPDATEDLIST']}
+                        maskClosable={!isFetching['SAVE_UPDATEDLIST']}
                     />
 
                     <span style={{ marginLeft: 8 }}>
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                     </span>
                 </div>
-                <Spin spinning={isLoading} >
+                <Spin spinning={isFetching['FETCH_INVENTORY']} >
                     <Table
-                    
                         rowKey={record => record.id}
                         rowSelection={{
                             type: "checkbox",
                             selectedRowKeys,
                             onChange: this.onSelectChange
                         }}
-
                         scroll={{ x: true }}
                         columns={columns} dataSource={inventoryList} />
                 </Spin>
@@ -95,13 +91,15 @@ class InventoryList extends Component {
         )
     }
 }
+// const loadingSelector = createLoadingSelector(['FETCH_INVENTORY','SAVE_UPDATEDLIST']);
 const mapStateToProps = (state) => {
 
-
+    console.log(state);
     return {
         isLoading: state.InventoryReducer.loading,
         showModal: state.InventoryReducer.showModal,
-        inventoryList:state.InventoryReducer.inventoryList
+        inventoryList: state.InventoryReducer.inventoryList,
+        isFetching: state.LoadingReducer
     }
 }
 

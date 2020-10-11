@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name="Users")
 @NamedEntityGraph(name = "Users.roles", 
 attributeNodes = @NamedAttributeNode("roles"))
-public class Users extends Auditable<String>   {
+public class Users  {
 	 private static final long serialVersionUID = 5155720064139820502L;
 	@Id
 	@Column(name = "user_id")

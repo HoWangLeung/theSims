@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Steps, Button, message, Spin } from 'antd';
-import EditMultiple from './EditMultiple';
-import classes from '../Inventory.less'
-import EditStepTwo from './StepsContent/StepTwo/EditStepTwo';
-import { saveUpdatedList } from '../action/InventoryAction';
-import CommonModal from '../../../Common/ConfirmModal/CommonModal';
+import EditStepOne from './EditStepOne';
+import classes from '../../../Inventory.less'
+import EditStepTwo from './EditStepTwo';
+import { saveUpdatedList } from '../../../action/InventoryAction';
+import CommonModal from '../../../../../Common/ConfirmModal/CommonModal';
 import intl from 'react-intl-universal';
 const { Step } = Steps;
 
@@ -52,7 +52,7 @@ class EditMultipleSteps extends Component {
         const steps = [
             {
                 title: 'Selected',
-                content: <EditMultiple content={this.props.content} />,
+                content: <EditStepOne content={this.props.content} />,
             },
             {
                 title: 'Edit & Preview',
@@ -72,9 +72,8 @@ class EditMultipleSteps extends Component {
                     ))}
                 </Steps>
                 <div className={classes.stepsContent}>{steps[current].content}</div>
+
                 <div className="steps-action">
-
-
                     {current > 0 && (
                         <Button style={{ margin: '0 8px' }} onClick={() => this.prev()}>
                             Previous

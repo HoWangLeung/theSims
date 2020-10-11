@@ -15,6 +15,7 @@ import ManagementTabTable from './DynamicTabs/InternalUsers/ManagementTabTable'
 import SelectDropdown from '../../Common/SelectDropdown';
 import SearchCollapse from '../../Common/SearchCollapse/SearchCollapse';
 import QueueAnim from 'rc-queue-anim';
+import CommonDropDown from '../../Common/CommonDropdown/CommonDropdown'
 import { API } from '../../ApiConfig';
 
 const { TabPane } = Tabs;
@@ -22,35 +23,25 @@ const { TabPane } = Tabs;
 class Employee extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             currentTab: "permanentUsers"
         }
     }
-
     componentDidMount() {
         const { fetchEmployee } = this.props
-
-
         fetchEmployee()
-
-    }
-
-    componentDidUpdate() {
-
-
     }
     handleTabChange = (activeKey) => {
-
         this.setState({
             currentTab: activeKey
         })
     }
-
     handleSelect = (value) => {
+        console.log(value);
+        const payload = {}
+        if (value) { payload.department = value }
         const { searchByDepartment } = this.props
-        searchByDepartment(value)
-
+        searchByDepartment(payload)
     }
 
     generateTabs = () => {
@@ -130,20 +121,18 @@ class Employee extends Component {
     }
 
     getSelectDropdown = () => {
+        const {currentDept}=this.props
         let departmentOptions =
             ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
         return (
-            
-                <SelectDropdown
-                    key="selectDropdown"
-                    placeHolder={intl.get('selectDepartment')}
-                    icon={faBuilding}
-                    options={departmentOptions}            
-                    handleSelect={this.handleSelect}
-                />
-        
-
+            <CommonDropDown
+                  value={currentDept}
+                placeholder="Select a Department"
+                className={classes.deptDropdown}
+                options={departmentOptions}
+                onSelect={this.handleSelect} />
         )
+
     }
 
     getExportButton = () => (
@@ -151,9 +140,9 @@ class Employee extends Component {
     hanldleExport = () => {
 
         return axios({
-            url: `${API}/employee/export`, //your url
+            url: `${API}/employee/export`,
             method: 'GET',
-            responseType: 'blob', // important
+            responseType: 'blob',
         }).then(res => {
 
             const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -194,6 +183,7 @@ const mapStateToProps = (state) => {
 
     return {
         employeeList: state.EmployeeReducer.employeeList,
+        currentDept:state.EmployeeReducer.currentDept,
         managementList: state.EmployeeReducer.managementList,
         isLoading: state.EmployeeReducer.loading
     }

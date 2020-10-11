@@ -3,24 +3,26 @@ import PropTypes from 'prop-types'
 import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart } from '../../actions/productActions';
+
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
- 
+
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
-    const isLoading = useSelector(state => state.ProductReducer.isLoading);
+    const isLoading = useSelector(state => {
+        return state.ProductReducer.isLoading
+    });
     const productList = useSelector(state => state.ProductReducer.productList);
- 
+
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAllProducts())
-
     }, []);
 
     const onLoadMore = () => {
-        console.log('try to load more');
+
     };
 
 

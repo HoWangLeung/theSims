@@ -14,20 +14,33 @@ INSERT INTO department(NAME,DESCRIPTION) values('Information Technology','IT rel
 INSERT INTO department(NAME,DESCRIPTION) values('Human Resource','Recruitment and Benefit');
 INSERT INTO department(NAME,DESCRIPTION) values('Finance','Capital Management');
 
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Lux','Leung','Business Analyst',0,'xxx building, HK' ,2);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Braum','Leung','Programmer',0,'xxx building, HK' ,2);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Ryze','Leung','Programmer',0,'xxx building, HK' ,2);
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Lux','Leung','Business Analyst',0,'xxx building, HK' ,2, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Braum','Leung','Programmer',0,'xxx building, HK' ,2, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Ryze','Leung','Programmer',0,'xxx building, HK' ,2, sysdate(), sysdate());
 
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Ezreal','Leung','Head',1,'xxx building, HK' ,1);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Nicho','Leung','Head',1,'xxx building, HK' ,2);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Zed','Leung','Head',1,'xxx building, HK' ,3);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Mike','Leung','Head',1,'xxx building, HK' ,4);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Tom','Tong','Account Executive',0,'xxx building, HK',1);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Jack','Lee','HR Officer',0,'xxx building, HK',3);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Jay','Max','HR Assistant',0,'xxx building, HK',3);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Jayce','Tsui','HR Officer',0,'xxx building, HK',3);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Mike','Fang','Financial Analyst',0,'xxx building, HK',4);
-INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID) values('Fred','Foo','Financial Planner',0,'xxx building, HK',4);
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Ezreal','Leung','Head',1,'xxx building, HK' ,1, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Nicho','Leung','Head',1,'xxx building, HK' ,2, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Zed','Leung','Head',1,'xxx building, HK' ,3, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Mike','Leung','Head',1,'xxx building, HK' ,4, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Tom','Tong','Account Executive',0,'xxx building, HK',1, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Jack','Lee','HR Officer',0,'xxx building, HK',3, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Jay','Max','HR Assistant',0,'xxx building, HK',3, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Jayce','Tsui','HR Officer',0,'xxx building, HK',3, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Mike','Fang','Financial Analyst',0,'xxx building, HK',4, sysdate(), sysdate());
+INSERT INTO employee(FIRST_NAME,LAST_NAME, ROLE,IS_MANAGEMENT,ADDRESS, DEPARTMENT_ID,CREATED_DATE,LAST_UPDATED_DATE) 
+values('Fred','Foo','Financial Planner',0,'xxx building, HK',4, sysdate(), sysdate());
 
 
 

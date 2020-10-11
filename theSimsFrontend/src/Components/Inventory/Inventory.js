@@ -7,6 +7,8 @@ import { fetchInventory } from './action/InventoryAction';
 import { connect } from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
 import CommonButton from '../../Common/CommonButton/CommonButton';
+import { createLoadingSelector } from '../../reducers/api/selectors';
+
 class Inventory extends Component {
     constructor(props) {
         super(props)
@@ -30,8 +32,7 @@ class Inventory extends Component {
                 </QueueAnim>
                 <QueueAnim type="bottom" duration={1500}>
                     <InventoryList
-                        key="demo2"
-            
+                        key="demo2"             
                         inventoryList={inventoryList}
                     />
                 </QueueAnim>
@@ -45,8 +46,8 @@ const mapStateToProps = (state) => {
 
     return {
         isLoading: state.InventoryReducer.loading,
-        inventoryList: state.InventoryReducer.inventoryList
-       
+        inventoryList: state.InventoryReducer.inventoryList,
+     
     }
 }
 

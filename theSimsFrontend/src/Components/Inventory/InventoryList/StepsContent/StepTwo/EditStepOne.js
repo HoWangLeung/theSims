@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import QueueAnim from 'rc-queue-anim';
 import { List, Typography, Divider } from 'antd';
 
-class EditMultiple extends Component {
+class EditStepOne extends Component {
     constructor(props) {
         super(props)
 
@@ -48,4 +48,4 @@ class EditMultiple extends Component {
     }
 }
 
-export default EditMultiple
+export default EditStepOne

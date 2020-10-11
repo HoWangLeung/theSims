@@ -40,21 +40,25 @@ const SearchBar = (props) => {
             : null;
 
     const onFinish = values => {
-        const {currentDept} = props
-        
-        const startDate = moment(values.lastModifiedDate??[0]._d).format('L')
-        const endDate = moment(values.lastModifiedDate??[1]._d).format('L')
-       
+        const { currentDept } = props
+
+        const startDate = moment(values.lastModifiedDate ?? [0]._d).format('L')
+        const endDate = moment(values.lastModifiedDate ?? [1]._d).format('L')
+
         values.lastModifiedDate = { startDate, endDate }
-        props.searchEmployee(values, currentDept)
-        
+        const payload = { values, currentDept }
+        props.searchEmployee(payload)
+
 
     };
 
     const handleReset = () => {
-        const values={}
-        props.searchEmployee(values)
+        const payload = {
+            values: "",
+            currentDept: null
+        }
         form.resetFields();
+        props.searchEmployee(payload)
     }
 
     useEffect(() => {
@@ -69,19 +73,10 @@ const SearchBar = (props) => {
                 layout={formLayout}
                 form={form}
                 initialValues={{ layout: formLayout }}
-                // onValuesChange={onFormLayoutChange}
-
                 onFinish={onFinish}
             >
 
-                <Form.Item name="lastModifiedDate" label={intl.get('lastModifiedDate')}>
-                    {/* <CustomDatePicker  /> */}
-                    {/* <RangePicker
-                        defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
-                        format={dateFormat}
-                    /> */}
-
-
+                <Form.Item name="lastModifiedDate" label={intl.get('lastModifiedDate')}>   
                     <RangePicker />
                 </Form.Item>
 
@@ -112,13 +107,13 @@ const mapStateToProps = (state) => {
 
     return {
         employeeList: state.EmployeeReducer.employeeList,
-        currentDept:state.EmployeeReducer.currentDept
+        currentDept: state.EmployeeReducer.currentDept
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        searchEmployee: (values,currentDept) => dispatch(searchEmployee(values,currentDept))
+        searchEmployee: (payload) => dispatch(searchEmployee(payload))
     }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar))

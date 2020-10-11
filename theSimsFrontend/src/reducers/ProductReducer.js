@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const initState = {
     isLoading: false,
     productList: [],
@@ -11,7 +13,7 @@ const ProductReducer = (state = initState, action) => {
 
     switch (action.type) {
 
-        case ("FETCH_PRODUCTS_START"):
+        case ("FETCH_PRODUCTS_REQUEST"):
 
             return {
                 ...state,
@@ -36,14 +38,12 @@ const ProductReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: true,
-             
-           
             }
 
         case ("ADD_TO_CART_SUCCESS"):
             console.log(action);
             return {
-    
+
                 ...state,
 
             }

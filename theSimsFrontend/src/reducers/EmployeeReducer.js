@@ -5,7 +5,7 @@ const initState = {
     employeeList: [],
     managementList: [],
     loading: false,
-    currentDept:"All"
+    currentDept: null
 
 }
 
@@ -22,7 +22,7 @@ const EmployeeReducer = (state = initState, action) => {
 
         case ('FETCH_EMPLOYEE_SUCCESS'):
 
-            
+
             const managementList = action.payload.detail.filter(employee => employee.management === true)
             return {
                 ...state,
@@ -75,15 +75,15 @@ const EmployeeReducer = (state = initState, action) => {
 
         //==================================================================================================================================================================
         case ("SEARCH_EMPLOYEE"):
-            
+
             return {
                 ...state,
                 loading: true
             }
         case ("SEARCH_EMPLOYEE_SUCCESS"):
 
-            
-            
+
+            console.log(action);
             return {
                 ...state,
                 employeeList: action.payload,
@@ -93,24 +93,24 @@ const EmployeeReducer = (state = initState, action) => {
         //==================================================================================================================================================================
 
         //==================================================================================================================================================================
-        case ("SEARCH_DEPARTMENT"):
-            
-        
+        case ("SEARCH_DEPARTMENT_REQUEST"):
+
+
             return {
                 ...state,
                 loading: true,
-                currentDept:action.payload.department
+                currentDept: action.payload.department
             }
 
-            case ("SEARCH_DEPARTMENT_SUCCESS"):
-        
-            
-                return {
-                    ...state,
-                    employeeList:action.payload,
-                    loading: false,
-                    // currentDept:action.payload[0]?action.payload[0].department.name:"All"
-                }
+        case ("SEARCH_DEPARTMENT_SUCCESS"):
+
+            console.log(action);
+            return {
+                ...state,
+                employeeList: action.payload,
+                loading: false,
+                currentDept:action.payload[0]?action.payload[0].department.name:null
+            }
 
         default:
             return state;

@@ -70,14 +70,15 @@ const headerProductRemainingWithInput = (handleInputChange) => {
         align: 'center',
         key: 'remaining',
         render: (text, row, index) => {
-         
+console.log(row);
+console.log(text);
+console.log(index);
             return (
 
-                <Input
-
-                    id={index}
+                <Input       
+                    id={row.id}   
                     onChange={handleInputChange}
-                    key={index} defaultValue={row.remaining}
+                    key={row.id} defaultValue={row.remaining}
                     type="number"
                     value={row.remaining}
                 />
@@ -94,7 +95,7 @@ const headerProductStatus = () => (
         key: 'productStatus',
         align: 'center',
         render: (text, row, index) => {
-           
+
             return (
                 <div className={classes.circleContainer} >
                     <div className={classes.circle} />
