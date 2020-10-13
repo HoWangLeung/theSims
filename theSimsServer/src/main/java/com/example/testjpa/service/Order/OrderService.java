@@ -2,32 +2,37 @@ package com.example.testjpa.service.Order;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.example.testjpa.model.Employee;
-import com.example.testjpa.model.Order.OrderBasic;
+import com.example.testjpa.model.Users;
 import com.example.testjpa.model.Order.Orders;
 import com.example.testjpa.repository.Order.OrderRepository;
 
 @Service
+@Transactional
 public class OrderService {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	OrderRepository orderRepository;
 
-	public List<OrderBasic> getAll() {
- 
-		
-		List<OrderBasic> ordersList = orderRepository.findBy();
+	public List<Orders> getAll() {
+		List<Orders> ordersList = orderRepository.getAllOrders();
 		return ordersList;
 	}
+
+	public void addOrder(Orders order) {
+		System.out.println("################################################################");
+		logger.info(order.getUsers().toString()+ " ##########");
+		
+		orderRepository.addOrder(order);
+		
+	}
+
+
 	
 }

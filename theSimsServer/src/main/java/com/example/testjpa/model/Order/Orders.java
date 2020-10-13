@@ -9,29 +9,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.example.testjpa.model.Auditable;
 import com.example.testjpa.model.Users;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
-public class Orders extends Auditable<String> {
+public class Orders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String status;
-
-
-	@ManyToOne
-	@JoinColumn(name = "users_id")
-	private Users users;
 	
+ 
+	@ManyToOne
+	private Users users;
 	 
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 @JsonIgnore
@@ -44,21 +41,20 @@ public class Orders extends Auditable<String> {
 	}
 
 
-	public Orders(long id, String status, Users users, List<OrderedProductDetail> orderedProductDetail) {
-		super();
-		this.id = id;
+	public Orders(String status, Users users, List<OrderedProductDetail> orderedProductDetail) {
+	
 		this.status = status;
 		this.users = users;
 		this.orderedProductDetail = orderedProductDetail;
 	}
 
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

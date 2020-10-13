@@ -2,7 +2,7 @@ package com.example.testjpa.model.EmployeeTest;
 
  interface EmployeeBasic {
 
-	    long getId();  
+	 	Long getId();  
 	    String getFirstName();  
 	
 }

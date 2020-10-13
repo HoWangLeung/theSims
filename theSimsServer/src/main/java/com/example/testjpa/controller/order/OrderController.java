@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.model.ApiResponse;
-import com.example.testjpa.model.Order.OrderBasic;
+import com.example.testjpa.model.Users;
 import com.example.testjpa.model.Order.Orders;
 import com.example.testjpa.service.Order.OrderService;
 
@@ -22,11 +24,19 @@ public class OrderController {
 	OrderService orderService;
 	
 	@GetMapping("/")
-	public ResponseEntity<ApiResponse<List<OrderBasic>>> getAll() {
-		System.out.println("trying to get orders---------------------------------------");
-		List<OrderBasic> orderList = orderService.getAll();
+	public List<Orders> getAll() {
+		List<Orders> orderList = orderService.getAll();
 	 
-		return ResponseEntity.ok(new ApiResponse<List<OrderBasic>>(orderList));
+		return orderList;
 
 	}
+	@PostMapping("/addOrder")
+	public void addOrder(@RequestBody Orders order) {
+		
+		
+		orderService.addOrder(order);
+
+	}
+	
+	
 }

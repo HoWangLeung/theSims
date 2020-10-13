@@ -1,5 +1,6 @@
 package com.example.testjpa.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,10 +30,8 @@ attributeNodes = @NamedAttributeNode("roles"))
 public class Users  {
 	 private static final long serialVersionUID = 5155720064139820502L;
 	@Id
-	@Column(name = "user_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
-	private long id;
+	private Long id;
 	
 	@Column(name = "USERNAME", unique=true)
 	private String username;
@@ -41,6 +40,10 @@ public class Users  {
 	@Column(name = "PASSWORD")
 	private String password;
 	
+
+	@OneToMany(mappedBy = "users")
+	@JsonIgnore
+	private List<Orders> orders = new ArrayList<>();
 	
 	
 	private boolean enabled;
@@ -48,7 +51,7 @@ public class Users  {
 	 @ManyToMany( fetch = FetchType.EAGER)
 	    @JoinTable(
 	            name = "users_roles",
-	            joinColumns = @JoinColumn(name = "user_id", referencedColumnName ="user_id"),
+	            joinColumns = @JoinColumn(name = "user_id", referencedColumnName ="id"),
 	            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName ="role_id")
 	            )
 	private Set<Role> roles = new HashSet<>();
@@ -62,15 +65,21 @@ public class Users  {
 	}
 
 
-	public Users(long id, String username, String password, boolean enabled, Set<Role> roles) {
+ 
+
+
+	public Users(Long id, String username, String password, List<Orders> orders, boolean enabled, Set<Role> roles) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.orders = orders;
 		this.enabled = enabled;
 		this.roles = roles;
-	
 	}
+
+
+
 
 
 	public long getId() {
@@ -125,8 +134,29 @@ public class Users  {
 
 
 
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+
+
+	public void addOrder(Orders order) {
+		this.orders.add(order);
+	}
+
+
+
+
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", roles=" + roles + "]";
 	}
 
 
