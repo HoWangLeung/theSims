@@ -25,6 +25,7 @@ public class OrderController {
 	
 	@GetMapping("/")
 	public List<Orders> getAll() {
+		System.out.println("hi");
 		List<Orders> orderList = orderService.getAll();
 	 
 		return orderList;
