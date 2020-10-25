@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,74 +15,97 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="category")
-@NamedEntityGraph(
-		  name = "category-product",
-		  attributeNodes = {
-		    @NamedAttributeNode(value="product")
-		  }
-		)
+//@NamedEntityGraph(name = "category-product", attributeNodes = { @NamedAttributeNode(value = "products") })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Category {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="name")
+	
+	@Column(name = "name")
 	private String name;
+	
 	private Long parentCategoryId;
 	
+	@OneToMany(mappedBy = "category",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private List<Product> products = new ArrayList<>();
 
-	
-	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-	@JsonBackReference
-	 private List<Product> product;
 	public Category() {
 		super();
-		
+
 		// TODO Auto-generated constructor stub
 	}
-	public Category(long id, String name,long parentCategoryId, List<Product> product) {
-		super();
-		this.id = id;
+
+
+
+	public Category(String name, Long parentCategoryId ) {
+	
 		this.name = name;
-		this.product = product;
-		this.setParentCategoryId(parentCategoryId);
+		this.parentCategoryId = parentCategoryId;
+ 
 	}
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Product> getProduct() {
-		return product;
-	}
-	public void setProduct(List<Product> product) {
-		this.product = product;
-	}
-	public long getParentCategoryId() {
+
+
+
+
+	public Long getParentCategoryId() {
 		return parentCategoryId;
 	}
-	public void setParentCategoryId(long parentCategoryId) {
+
+
+
+
+	public void setParentCategoryId(Long parentCategoryId) {
 		this.parentCategoryId = parentCategoryId;
 	}
-	 
 
 
+
+	@JsonIgnore
+	public List<Product> getProducts() {
+		return products;
+	}
+
+
+
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public void addProduct(Product product) {
+		this.products.add(product);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Category [name=" + name + "]";
+	}
 	
 	
-	
-
-
 
 }

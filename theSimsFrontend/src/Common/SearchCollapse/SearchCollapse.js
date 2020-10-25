@@ -29,7 +29,6 @@ class SearchCollapse extends Component {
     >
         <Panel header={intl.get('search')} key="1" className="site-collapse-custom-panel">
             <SearchBar
-            
             />
         </Panel>
     </Collapse>)

@@ -14,6 +14,8 @@ import com.example.testjpa.model.inventory.Category;
 @Repository
 @Transactional
 public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
+
+	Category findByName(String name);
 	
 //	@EntityGraph("category-product")
 //	List<Category> findAllproduct();

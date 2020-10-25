@@ -21,15 +21,14 @@ public class OrderService {
 	OrderRepository orderRepository;
 
 	public List<Orders> getAll() {
-		List<Orders> ordersList = orderRepository.getAllOrders();
+		List<Orders> ordersList = orderRepository.findAll();
 		return ordersList;
 	}
 
 	public void addOrder(Orders order) {
-		System.out.println("################################################################");
-		logger.info(order.getUsers().toString()+ " ##########");
+		 
 		
-		orderRepository.addOrder(order);
+		orderRepository.save(order);
 		
 	}
 

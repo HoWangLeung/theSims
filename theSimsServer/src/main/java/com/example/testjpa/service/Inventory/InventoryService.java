@@ -1,68 +1,107 @@
 package com.example.testjpa.service.Inventory;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import com.example.testjpa.model.ApiResponse;
-import com.example.testjpa.model.Employee;
-import com.example.testjpa.model.Role;
 import com.example.testjpa.model.inventory.Category;
 import com.example.testjpa.model.inventory.Product;
-import com.example.testjpa.repository.EmployeeRepository;
+import com.example.testjpa.repository.Inventory.CategoryRepository;
 import com.example.testjpa.repository.Inventory.InventoryRepository;
 
 @Service
+@Transactional
 public class InventoryService {
 	@Autowired
 	InventoryRepository inventoryRepository;
+	@Autowired
+	CategoryRepository categoryRepository;
+	@Autowired
+	EntityManager em;
 	public List<Product> getAll(){
 
-		 Specification<Product> spec = new Specification<Product>() {
-			private static final long serialVersionUID = 1L;
+	List<Product> products = inventoryRepository.getProductWithCateogry();
+	 
 
-
-				public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query,
-						CriteriaBuilder cb) {
-					root.fetch("category", JoinType.INNER);
-					return cb.conjunction() ;
-	
-				}
-		    };
 		
-		
-		return inventoryRepository.findAll(spec);
+		return products;
 	}
 	
-	public String addProduct(Product products) {
-	
-	Category category = new Category();
-		category.setId(products.getCategory().getId());
-		category.setName(products.getCategory().getName());
-	 inventoryRepository.save(category);
-		products.setCategory(category);
+	public String addProduct(Product product) {
+		System.out.println("get category name -=>" + product.getCategory().getName());
 		
- 	
-	 inventoryRepository.save(products);
-	 return"Saved";
+		Category category = categoryRepository.findByName(product.getCategory().getName());
+		System.out.println(category + " <= cat name");
+		if(category!=null) {
+
+
+			product.setCategory(category);
+			em.persist(product);
+			 
+//			inventoryRepository.save(product);
+		
+		}else {
+			System.out.println("category is null");
+			product.setCategory(new Category(product.getCategory().getName(),product.getCategory().getParentCategoryId()));
+			em.persist(product);
+		}
+		
+		return "hi";
+//		if(product.getCategory().getId()==null) {
+//			System.out.println("want to create a new category");
+//			String categoryName = product.getCategory().getName();
+//			Long categoryParentId = product.getCategory().getParentCategoryId();
+//	
+//			product.setCategory(new Category(categoryName,categoryParentId));
+//
+//			em.persist(product);
+////			inventoryRepository.save(product);
+//		}else {
+//			Category category = em.find(Category.class, product.getCategory().getId());
+//			System.out.println("want to insert a new product to EXISTING category");
+//			product.setCategory(category);
+////			category.addProduct(product);
+////			em.persist(category);
+//			em.persist(product);
+//			 
+////			inventoryRepository.save(product);
+//		}
+//
+//		
+//
+//		
+//
+//		return "saved";
+ 
 }
 
 	public List<Product> updateProducts(List<Product> products) {
 	 
 	
 		return inventoryRepository.saveAll(products);
+	}
+
+	public void delteProductById(Long id) {
+		System.out.println("ID ->{}" + id);
+	
+		Product product = em.find(Product.class, id);
+		System.out.println("productName => " + product.getProductName());
+		em.remove(product);
+		
+	}
+
+	public void updateProductById(Long id,Product updatedProduct) {
+		Product product = em.find(Product.class, id);
+		int newCost = updatedProduct.getCost();
+		product.setCost(newCost);
+		em.persist(product);
+		
+		
 	}
 	
 }

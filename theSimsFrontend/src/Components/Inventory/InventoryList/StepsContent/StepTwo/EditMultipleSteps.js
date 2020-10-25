@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Steps, Button, message, Spin } from 'antd';
-import EditStepOne from './EditStepOne';
+import EditStepOne from '../StepOne/EditStepOne';
 import classes from '../../../Inventory.less'
 import EditStepTwo from './EditStepTwo';
 import { saveUpdatedList } from '../../../action/InventoryAction';
@@ -48,11 +48,14 @@ class EditMultipleSteps extends Component {
 
     render() {
         const { current } = this.state
-        const { inventoryList } = this.props
+        const { inventoryList,selectedRows } = this.props
         const steps = [
             {
                 title: 'Selected',
-                content: <EditStepOne content={this.props.content} />,
+                content: <EditStepOne 
+                content={this.props.content}
+                selectedRows={selectedRows}
+                />,
             },
             {
                 title: 'Edit & Preview',

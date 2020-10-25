@@ -5,6 +5,8 @@ import CommonModal from '../../../Common/CommonModal/CommonModal';
 import EditMultipleSteps from './StepsContent/StepTwo/EditMultipleSteps';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
+import Createproduct from './StepsContent/StepOne/CreateProduct/Createproduct';
+import Selectedlist from './StepsContent/StepOne/SelectedList/SelectedList';
 class InventoryList extends Component {
     constructor(props) {
         super(props)
@@ -14,7 +16,8 @@ class InventoryList extends Component {
             selectedRows: [],
             loading: false,
             showModal: false,
-            disableEdit: true
+            disableEdit: true,
+            stepOneContent: {}
         }
     }
 
@@ -28,7 +31,14 @@ class InventoryList extends Component {
         }
     }
 
-    showModal = () => this.setState({ showModal: true });
+    showModal = (e) => {
+        console.log(e.currentTarget );
+        const contentType = e.currentTarget.id
+        this.setState({
+            showModal: true,
+            stepOneContent: contentType
+        });
+    }
 
     hideModal = () => this.setState({ showModal: false })
 
@@ -47,8 +57,10 @@ class InventoryList extends Component {
         return ([<Button onClick={this.hideModal} disabled={isFetching['SAVE_UPDATEDLIST']} >Cancel</Button>])
     }
 
+     
+
     render() {
-        const { selectedRowKeys, showModal, selectedRows, disableEdit } = this.state;
+        const { selectedRowKeys, showModal, selectedRows, disableEdit,stepOneContent } = this.state;
         const { inventoryList, isFetching } = this.props
 
         const hasSelected = selectedRowKeys.length > 0;
@@ -58,13 +70,25 @@ class InventoryList extends Component {
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
-                    <Button type="primary" disabled={disableEdit} onClick={this.showModal} >
+                    <Button type="primary" id="createProduct" onClick={this.showModal} >
+                        Create new Product
+                     </Button>
+                    <Button type="primary" id="editMultiple" disabled={disableEdit} onClick={this.showModal} >
                         Edit Multiple
                      </Button>
                     <CommonModal
+                    
                         visible={showModal}
                         hideModal={this.hideModal}
-                        content={<EditMultipleSteps inventoryList={inventoryList} content={selectedRows} />}
+                        content=
+                        {
+                            <EditMultipleSteps
+                                inventoryList={inventoryList}
+                                content={stepOneContent}
+                                selectedRows={selectedRows}
+                            />
+                        }
+
                         footer={this.getFooter()}
                         isLoading={isFetching['SAVE_UPDATEDLIST']}
                         loadingTip="Saving Your Changes"

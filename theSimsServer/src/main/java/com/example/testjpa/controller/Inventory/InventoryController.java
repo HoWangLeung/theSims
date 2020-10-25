@@ -2,10 +2,13 @@ package com.example.testjpa.controller.Inventory;
 
 import java.util.List;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,21 +38,37 @@ public class InventoryController {
 	}
 	
 	@PostMapping("/add")
-	public String addProduct(@RequestBody Product products) {
+	public String addProduct(@RequestBody Product product) {
+	System.out.println("adding!!!");
 	
-		inventoryService.addProduct(products);
+		inventoryService.addProduct(product);
+		
 		return "saved";		
 	}
+	
+	@DeleteMapping("/deleteProduct/{id}")
+	public void delteProductById(@PathVariable Long id) {
+		System.out.println("deelteing product!!!" + id);
+		inventoryService.delteProductById(id);
+		
+	}
+	
 	
 	
 	@PutMapping("/updateProducts")
 	public  ResponseEntity<ApiResponse<List<Product>>>  updateProducts(@RequestBody List<Product> products){
 	
-		 List<Product> productList = inventoryService.updateProducts(products);
-		  
-				 
-		 
+		 List<Product> productList = inventoryService.updateProducts(products); 
+				  
 		 return ResponseEntity.ok(new ApiResponse<List<Product>>(productList));
+	}
+	
+	@PutMapping("/updateProductById/{id}")
+	public  void  updateProductById(@PathVariable Long id,@RequestBody Product updatedProduct){
+		 
+		  inventoryService.updateProductById(id, updatedProduct); 
+				  
+	
 	}
 	
 
