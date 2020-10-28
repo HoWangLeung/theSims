@@ -83,7 +83,7 @@ const EmployeeReducer = (state = initState, action) => {
         case ("SEARCH_EMPLOYEE_SUCCESS"):
 
 
-            console.log(action);
+            
             return {
                 ...state,
                 employeeList: action.payload,
@@ -104,7 +104,7 @@ const EmployeeReducer = (state = initState, action) => {
 
         case ("SEARCH_DEPARTMENT_SUCCESS"):
 
-            console.log(action);
+            
             return {
                 ...state,
                 employeeList: action.payload,

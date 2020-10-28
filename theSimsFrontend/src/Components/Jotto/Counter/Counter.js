@@ -40,7 +40,7 @@ class Counter extends Component {
 }
 const mapStateToProps = (state) => {
 
-    console.log(state);
+    
     return {
         count: state.CounterReducer.count
     }

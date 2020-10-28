@@ -18,7 +18,9 @@ class EditMultipleSteps extends Component {
         };
     }
 
-    next = () => {
+    next = (e) => {
+        // e.preventDefault()
+        console.log('next');
         const current = this.state.current + 1;
         this.setState({ current });
     }
@@ -48,18 +50,20 @@ class EditMultipleSteps extends Component {
 
     render() {
         const { current } = this.state
-        const { inventoryList,selectedRows } = this.props
+        const { inventoryList, selectedRows } = this.props
         const steps = [
             {
                 title: 'Selected',
-                content: <EditStepOne 
-                content={this.props.content}
-                selectedRows={selectedRows}
+                content: <EditStepOne
+                    key="EditStepOne"
+                    content={this.props.content}
+                    selectedRows={selectedRows}
                 />,
             },
             {
                 title: 'Edit & Preview',
                 content: <EditStepTwo
+                    key="EditStepTwo"
                     inventoryList={inventoryList}
                     handleQuantityUpdate={this.handleQuantityUpdate}
                 />,
@@ -83,7 +87,9 @@ class EditMultipleSteps extends Component {
                         </Button>
                     )}
                     {current < steps.length - 1 && (
-                        <Button type="primary" onClick={this.next}>
+                        <Button
+                            form="createproductForm" key="submit" htmlType="submit"
+                            type="primary"  >
                             Next
                         </Button>
                     )}

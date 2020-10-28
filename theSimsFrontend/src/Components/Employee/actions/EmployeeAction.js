@@ -94,7 +94,7 @@ export const searchByDepartment = (payload) => {
         setTimeout(() => {
             axios.get(`${API}/employee/search`, { params })
                 .then(res => {
-                    console.log(res);
+                    
                     dispatch({ type: 'SEARCH_DEPARTMENT_SUCCESS', payload: res.data })
                 })
         }, 500);

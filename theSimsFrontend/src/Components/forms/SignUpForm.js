@@ -20,7 +20,7 @@ class SignUpForm extends React.Component {
     }
     onFinish = values => {
         const { handleSubmit } = this.props
-        console.log(values);
+        
         handleSubmit(values)
 
     };

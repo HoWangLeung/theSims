@@ -16,7 +16,7 @@ export const fetchInventory = () => {
             dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: response.data })
             return response
         } catch (err) {
-            console.log(err);
+            
         }
 
     }

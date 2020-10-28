@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { List } from 'antd'
 
 function Selectedlist(props) {
-    console.log(props);
+    
     const { content } = props
     return content.map((e, i) => {
         return (

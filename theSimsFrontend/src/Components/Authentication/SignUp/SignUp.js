@@ -19,7 +19,7 @@ class SignUp extends Component {
     }
 
     handleSubmit=(values)=>{
-        console.log(values);
+        
         const {signUpRequest} = this.props
         const payload =
         {

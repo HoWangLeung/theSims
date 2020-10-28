@@ -26,20 +26,20 @@ class Login extends Component {
         AuthenticationService
             .executeJwtAuthenticationService(username, password)
             .then((res) => {
-                console.log(res);
+                
                 let token = res.data.token
                 let decoded = jwt_decode(token);
-                console.log(decoded);
+                
                 AuthenticationService.registerSuccessfulLoginForJwt(username, token)
                 let isLoggedIn = AuthenticationService.isUserLoggedIn()
-                console.log(isLoggedIn);
+                
                 this.props.loginAction(isLoggedIn)
                 this.props.history.push('/dashboard')
             }).then(()=>{
                getUserProfile()
             })
             .catch((error) => {
-                console.log(error);
+                
                 CommonModal.error({ content: "Invalid username/password" })
             })
 
@@ -54,7 +54,7 @@ class Login extends Component {
     onFieldsChange = (changedFields, allFields) => {
 
         let bothFieldsFilled = allFields.every(f => f.value !== undefined && f.value !== "");
-        console.log(bothFieldsFilled);
+        
         if (bothFieldsFilled)
             this.setState({ disableLogin: false })
         else
@@ -141,7 +141,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
 
-    console.log(state);
+    
     return {
 
     }

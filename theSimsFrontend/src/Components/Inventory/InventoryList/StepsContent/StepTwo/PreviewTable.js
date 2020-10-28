@@ -30,7 +30,7 @@ class PreviewTable extends Component {
     }
 
     handleChange = () => {
-        console.log('changing');
+        
     }
 
     handleSubmission = (currentData) => {

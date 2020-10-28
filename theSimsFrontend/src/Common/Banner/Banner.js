@@ -13,7 +13,7 @@ class Banner extends Component {
 
     componentDidMount() {
         const { location } = this.props
-        console.log(location);
+        
 
     }
 

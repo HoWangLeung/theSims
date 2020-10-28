@@ -54,7 +54,7 @@ const headerDepartment = () => (
         width:200,
         sorter:(a, b) => a.department.name.localeCompare(b.department.name),
         render: (text, row, index) => {
-            console.log(row);
+            
             return (
                <span>{row.department.name}</span>
             )
@@ -136,7 +136,7 @@ const headerDelete = (config) => {
             render: (text, record, index) => {
                      
                 return (<Button
-                    key={index}
+                    key={`temrinate${index}`}
                     id={record.id}
                     onClick={handleDelete}
                     >{intl.get('terminate')}</Button>)

@@ -70,9 +70,9 @@ const headerProductRemainingWithInput = (handleInputChange) => {
         align: 'center',
         key: 'remaining',
         render: (text, row, index) => {
-console.log(row);
-console.log(text);
-console.log(index);
+
+
+
             return (
 
                 <Input       

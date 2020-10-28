@@ -37,7 +37,7 @@ class Employee extends Component {
         })
     }
     handleSelect = (value) => {
-        console.log(value);
+        
         const payload = {}
         if (value) { payload.department = value }
         const { searchByDepartment } = this.props

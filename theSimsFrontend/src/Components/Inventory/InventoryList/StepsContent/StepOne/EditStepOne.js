@@ -18,7 +18,7 @@ class EditStepOne extends Component {
         if (content === "createProduct")
             return <Createproduct />
         if (content === "editMultiple"){
-            console.log('shoudl return  editmultiple');
+            
             return <Selectedlist key="selectedList" content={selectedRows} />
         }
           

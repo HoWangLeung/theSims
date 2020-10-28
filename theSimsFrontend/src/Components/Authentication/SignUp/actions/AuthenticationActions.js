@@ -16,11 +16,11 @@ export const getUserProfile = () => {
 
     try {
       let res = await axios.get(`${API}/users/userProfile/`)
-      console.log(res);
+      
       dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
       return res
     } catch (err) {
-      console.log(err);
+      
     }
 
 

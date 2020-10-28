@@ -103,7 +103,7 @@ class EditStepTwo extends Component {
     };
 
     handleInputChange = e => {
-        console.log(e.target);
+        
         const { savePreviewList } = this.props
         const { previewList } = this.state
         let inputValue = parseInt(e.target.value)
@@ -111,7 +111,7 @@ class EditStepTwo extends Component {
         this.setState(prevState => ({
             previewList: prevState.previewList.map(
                 obj => {
-                    console.log(obj);
+                    
                     return obj.id == id ? Object.assign(obj, { remaining: inputValue }) : obj
                 }
             )

@@ -1,118 +1,204 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Space, Select, Row } from 'antd';
 import { DeleteFilled, MinusCircleOutlined, MinusSquareOutlined, PlusOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { Collapse } from 'antd';
+import { values } from 'lodash';
 const { Panel } = Collapse;
 const { Option } = Select;
 
-const areas = [
-    { label: 'Beijing', value: 'Beijing' },
-    { label: 'Shanghai', value: 'Shanghai' },
-];
-
-const sights = {
-    Beijing: ['Tiananmen', 'Great Wall'],
-    Shanghai: ['Oriental Pearl', 'The Bund'],
-};
-
-const Createproductform = () => {
+function Createproductform() {
     const [form] = Form.useForm();
     const [currentFields, setCurrentFields] = useState({
-        "createProduct": [
-            {
-                fieldKey: 0,
-                isListField: true,
-                key: 0,
-                name: 0
-            }]
+        addedFirst: false,
+        inCompleteFields: [],
+        anyundefined: false
     })
+
+
+    useEffect(() => {
+        if (!currentFields.addedFirst) form.current()
+
+
+
+
+    }, []);
     const onFinish = values => {
-        console.log('Received values of form:', values);
+        form.validateFields()
+            .then(() => {
+
+
+
+            }).catch(errorInfo => {
+                console.log(errorInfo);
+                console.log('sdf');
+
+
+            })
+
     };
+    const onFinishFailed = ({ values, errorFields, outOfDate }) => {
+        let inCompleteFields = []
+        let anyundefined = false
+        let panelFields = values.createProduct
+        panelFields.forEach((field, index) => {
 
+            inCompleteFields.push(index)
+            if (field === undefined) {
+                anyundefined = true
+            } else {
 
+                console.log('checked');
 
-    const renderFormFields = (field, remove) => {
-        const fieldNames = ['Name', 'Country', 'Cost', 'Price', 'Remaining']
-        return (
-            <Collapse
-                bordered={false}
-                expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
-                className="site-collapse-custom-collapse"
+            }
+            setCurrentFields({
+                ...currentFields,
+                anyundefined,
+                inCompleteFields,
+                addedFirst: true
+            })
 
-            >
-                <Panel header={`Product ${field.key +1} `} 
-                extra={
-                    <div>
-                        <DeleteFilled  onClick={() => remove(field.name)} />            
-                    </div>
-                }
-                
-                
-                key={field.key} className="site-collapse-custom-panel">
-                    <Row key={field.key}>
-                        {fieldNames.map(fieldName => {
-                            console.log(fieldName);
-                            return (<Form.Item
-                                {...field}
-                                label={fieldName}
-                                name={[field.name, fieldName]}
-                                fieldKey={[field.fieldKey, fieldName]}
-                                rules={[{ required: true, message: `Missing ${fieldName}` }]}
-                            >
-                                <Input />
-                            </Form.Item>)
-                        })}
+        })
+    }
+    const handlePanelClick = () => {
 
-                        
-                    </Row>
-                </Panel>
-              
-            </Collapse>
-        
-        )
     }
 
-    const handleAdd = (add, fields) => {
-        console.log(fields);
-        console.log('handling add');
-        add()
+    const handleDelete = (e, remove, field) => {
+        e.preventDefault()
+        e.stopPropagation();
+
+        let id = parseInt(e.currentTarget.id)
+
+
+        let isClickedFirst = (id === 0) ? true : false
+        let isClickedLast = (id === form.currentData.length - 1) ? true : false
+
+
+        const updatedList1 = currentFields.inCompleteFields.filter((inCompleteField, index) => {
+            return inCompleteField !== id
+        })
+
+
+        if (!isClickedFirst && !isClickedLast) {
+            for (let i = id; i < updatedList1.length; i++) {
+                updatedList1[i] -= 1
+            }
+        }
+
+        if (isClickedFirst && !isClickedLast) {
+            for (let i = 0; i < updatedList1.length; i++) {
+                updatedList1[i] -= 1
+            }
+        }
+
+
+        setCurrentFields({
+            ...currentFields,
+            inCompleteFields: updatedList1
+        })
+
+        remove(field.name)
+
+
     }
+
+
 
     return (
         <Form
-            initialValues={
-                currentFields
-            }
+            id="createproductForm"
             form={form}
-            name="dynamic_form_nest_item"
             onFinish={onFinish}
-            autoComplete="off">
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            onFieldsChange={(changedFields, allFields) => {
 
 
-            <Form.Item name={"productCategory"} label={intl.get("productCategory")} rules={[{ required: true }]}>
+
+            }}
+        >
+
+
+            <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >
                 <Input></Input>
             </Form.Item>
             <Form.List
                 name="createProduct"
+
 
             >
 
 
                 {(fields, { add, remove }) => {
 
-                    console.log(fields);
+                    form.current = add
+                    form.currentData = fields
 
                     return (
                         <>
                             {fields.map(field => {
+                                let panelWarning = null
+                                const { inCompleteFields } = currentFields
 
-                                return renderFormFields(field, remove)
+
+                                inCompleteFields.forEach(inCompleteField => {
+                                    if (inCompleteField === field.name) {
+                                        panelWarning = (<p>Missing Fields </p>)
+                                    }
+
+                                })
+
+
+
+                                const fieldNames = ['Name', 'Country', 'Cost', 'Price', 'Remaining']
+                                return (
+                                    <Collapse
+                                        bordered={false}
+                                        expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
+
+                                    >
+                                        <Panel header={`Product ${field.key}`}
+                                            onClick={handlePanelClick}
+                                            extra={
+                                                <Row>
+                                                    {panelWarning}
+                                                    <DeleteFilled name={field.name} id={field.name} style={{ fontSize: "150%" }} onClick={(e) => handleDelete(e, remove, field)} />
+                                                </Row>
+                                            }>
+                                            <Row >
+                                                {fieldNames.map((fieldName, index) => {
+
+                                                    return (<Form.Item
+                                                        key={index}
+                                                        // {...field}
+                                                        label={fieldName}
+                                                        name={[field.name, fieldName]}
+                                                        fieldKey={[field.fieldKey, index]}
+                                                        validateTrigger={["onload"]}
+                                                        rules={[
+                                                            {
+                                                                required: true,
+                                                                message: 'Please input your name',
+                                                            },
+                                                        ]}
+
+                                                    >
+                                                        <Input />
+                                                    </Form.Item>)
+                                                })}
+
+
+                                            </Row>
+                                        </Panel>
+
+                                    </Collapse>
+
+                                )
                             })}
 
                             <Form.Item>
-                                <Button type="dashed" onClick={() => handleAdd(add, fields)} block icon={<PlusOutlined />}>
+                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                                     Add Product
                   </Button>
                             </Form.Item>

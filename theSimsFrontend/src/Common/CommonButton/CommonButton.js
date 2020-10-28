@@ -35,7 +35,7 @@ class CommonButton extends Component {
             backgroundColor,
             color
         };
-        console.log(this.props);
+        
         return (
             <div>
                 <Button onClick={this.props.onClick} style={divStyle} >

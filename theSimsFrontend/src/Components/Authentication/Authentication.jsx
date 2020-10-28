@@ -32,7 +32,7 @@ class Authentication extends Component {
                 return config
             },
             error=>{
-                console.log(error);
+                
             }
         )
     }

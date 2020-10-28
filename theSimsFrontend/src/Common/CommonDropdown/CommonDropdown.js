@@ -18,7 +18,7 @@ class Commondropdown extends Component {
 
     render() {
         const {options, ...restProps} = this.props;
-        console.log(this.props);
+        
         return (
             <Select
                 {...restProps}

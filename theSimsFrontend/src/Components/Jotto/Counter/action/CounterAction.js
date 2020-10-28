@@ -4,7 +4,7 @@ import { fetchUser } from './api'
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
 function* helloSaga() {
-  console.log('Hello Sagas!')
+  
 }
 
 export function* incrementAsync() {

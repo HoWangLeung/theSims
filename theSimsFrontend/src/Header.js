@@ -6,7 +6,7 @@ const { Option } = Select;
 class Header extends Component {
     handleChange(val) {
  
-        console.log(typeof val);
+        
         emit.emit('change_language', val);
     }
     render() {

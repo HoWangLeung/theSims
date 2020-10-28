@@ -23,18 +23,18 @@ const Cartitemlist = (props) => {
         },
     ];
     const cartList = useSelector(state => state.ProductReducer.cartList);
-    console.log(cartList);
+    
     const cartListItem = cartList.productDetail
-    console.log(cartListItem);
+    
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
-    console.log(userProfile);
+    
     return (
 
         <List
             itemLayout="horizontal"
             dataSource={cartListItem}
             renderItem={item => {
-                    console.log(item);
+                    
                 return (
                     <List.Item title={<a href="https://ant.design">{item.productName}</a>}
                         actions={

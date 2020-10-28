@@ -32,7 +32,7 @@ class InventoryList extends Component {
     }
 
     showModal = (e) => {
-        console.log(e.currentTarget );
+        
         const contentType = e.currentTarget.id
         this.setState({
             showModal: true,
@@ -118,7 +118,7 @@ class InventoryList extends Component {
 // const loadingSelector = createLoadingSelector(['FETCH_INVENTORY','SAVE_UPDATEDLIST']);
 const mapStateToProps = (state) => {
 
-    console.log(state);
+    
     return {
         isLoading: state.InventoryReducer.loading,
         showModal: state.InventoryReducer.showModal,

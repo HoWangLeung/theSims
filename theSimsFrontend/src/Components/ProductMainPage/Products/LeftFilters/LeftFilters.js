@@ -6,11 +6,11 @@ import classes from '../../ProductMainPage.less';
 
 
 const onChange = () => {
-    console.log('changing');
+    
 }
 
 const onAfterChange = () => {
-    console.log('sdf');
+    
 }
 const useSlider = () => {
     return (<><p>Filter By Price</p>
