@@ -24,6 +24,27 @@ function Createproductform() {
 
     }, []);
     const onFinish = values => {
+        let inCompleteFields = []
+        let anyundefined = false
+        let panelFields = values.createProduct
+        panelFields.forEach((field, index) => {
+
+            inCompleteFields.push(index)
+            if (field === undefined) {
+                anyundefined = true
+            } else {
+
+                console.log('checked');
+
+            }
+            setCurrentFields({
+                ...currentFields,
+                anyundefined,
+                inCompleteFields,
+                addedFirst: true
+            })
+
+        })
         form.validateFields()
             .then(() => {
 
