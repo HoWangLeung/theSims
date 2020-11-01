@@ -10,7 +10,7 @@ const columns = [
  
     },
     {
-      title: 'Cash Assets',
+      title: 'Cash Assetss',
       className: 'column-money',
       dataIndex: 'money',
       align: 'right',
