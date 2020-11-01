@@ -17,7 +17,9 @@ class InventoryList extends Component {
             loading: false,
             showModal: false,
             disableEdit: true,
-            stepOneContent: {}
+            stepOneContent: {},
+            stepTwoContent: {},
+            channel: ''
         }
     }
 
@@ -31,12 +33,14 @@ class InventoryList extends Component {
         }
     }
 
-    showModal = (e) => {
-        
+    showModal = (e, channel) => {
+
         const contentType = e.currentTarget.id
         this.setState({
             showModal: true,
-            stepOneContent: contentType
+            stepOneContent: contentType,
+            stepTwoContent: contentType,
+            channel: channel
         });
     }
 
@@ -57,10 +61,10 @@ class InventoryList extends Component {
         return ([<Button onClick={this.hideModal} disabled={isFetching['SAVE_UPDATEDLIST']} >Cancel</Button>])
     }
 
-     
+
 
     render() {
-        const { selectedRowKeys, showModal, selectedRows, disableEdit,stepOneContent } = this.state;
+        const { selectedRowKeys, showModal, selectedRows, disableEdit, stepOneContent, stepTwoContent } = this.state;
         const { inventoryList, isFetching } = this.props
 
         const hasSelected = selectedRowKeys.length > 0;
@@ -70,14 +74,15 @@ class InventoryList extends Component {
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
-                    <Button type="primary" id="createProduct" onClick={this.showModal} >
+                    <Button type="primary" id="createProduct" onClick={(e) => this.showModal(e, "createProduct")} >
                         Create new Product
                      </Button>
-                    <Button type="primary" id="editMultiple" disabled={disableEdit} onClick={this.showModal} >
+                    <Button type="primary" id="editMultiple" disabled={disableEdit}
+                        onClick={(e) => this.showModal(e, "editMultiple")} >
                         Edit Multiple
                      </Button>
                     <CommonModal
-                    
+
                         visible={showModal}
                         hideModal={this.hideModal}
                         content=
@@ -85,7 +90,9 @@ class InventoryList extends Component {
                             <EditMultipleSteps
                                 inventoryList={inventoryList}
                                 content={stepOneContent}
+                                stepTwoContent={stepTwoContent}
                                 selectedRows={selectedRows}
+                                channel={this.state.channel}
                             />
                         }
 
@@ -118,7 +125,7 @@ class InventoryList extends Component {
 // const loadingSelector = createLoadingSelector(['FETCH_INVENTORY','SAVE_UPDATEDLIST']);
 const mapStateToProps = (state) => {
 
-    
+
     return {
         isLoading: state.InventoryReducer.loading,
         showModal: state.InventoryReducer.showModal,

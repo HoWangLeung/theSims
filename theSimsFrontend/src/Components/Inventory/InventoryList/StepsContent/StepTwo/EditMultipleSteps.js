@@ -4,7 +4,7 @@ import { Steps, Button, message, Spin } from 'antd';
 import EditStepOne from '../StepOne/EditStepOne';
 import classes from '../../../Inventory.less'
 import EditStepTwo from './EditStepTwo';
-import { saveUpdatedList } from '../../../action/InventoryAction';
+import { nextPage, prevPage, saveUpdatedList } from '../../../action/InventoryAction';
 import CommonModal from '../../../../../Common/ConfirmModal/CommonModal';
 import intl from 'react-intl-universal';
 const { Step } = Steps;
@@ -18,19 +18,13 @@ class EditMultipleSteps extends Component {
         };
     }
 
-    next = (e) => {
-        // e.preventDefault()
-        console.log('next');
-        const current = this.state.current + 1;
-        this.setState({ current });
-    }
-
-    prev() {
-        const current = this.state.current - 1;
-        this.setState({ current });
-    }
-
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        if (prevProps.propStep !== this.props.propStep) {
+            console.log('setState now');
+            this.setState({
+                current: this.props.propStep
+            })
+        }
 
     }
 
@@ -49,8 +43,20 @@ class EditMultipleSteps extends Component {
 
 
     render() {
+        const { nextPage, prevPage } = this.props
+        let editBtnProps = {
+            type: "primary",
+            onClick: () => nextPage()
+        }
+        let createBtnProps = {
+            form: "createproductForm",
+            key: "submit",
+            htmlType: "submit",
+            type: "primary",
+        }
         const { current } = this.state
-        const { inventoryList, selectedRows } = this.props
+        console.log(current);
+        const { inventoryList, selectedRows, channel } = this.props
         const steps = [
             {
                 title: 'Selected',
@@ -66,6 +72,7 @@ class EditMultipleSteps extends Component {
                     key="EditStepTwo"
                     inventoryList={inventoryList}
                     handleQuantityUpdate={this.handleQuantityUpdate}
+                    stepTwoContent={this.props.stepTwoContent}
                 />,
             },
 
@@ -82,14 +89,18 @@ class EditMultipleSteps extends Component {
 
                 <div className="steps-action">
                     {current > 0 && (
-                        <Button style={{ margin: '0 8px' }} onClick={() => this.prev()}>
+                        <Button
+                            style={{ margin: '0 8px' }}
+                            onClick={() => prevPage()}>
                             Previous
                         </Button>
                     )}
                     {current < steps.length - 1 && (
                         <Button
-                            form="createproductForm" key="submit" htmlType="submit"
-                            type="primary"  >
+                            {...(channel === "createProduct" ?
+                                createBtnProps :
+                                editBtnProps)}
+                        >
                             Next
                         </Button>
                     )}
@@ -109,13 +120,16 @@ const mapStateToProps = (state) => {
     return {
         previewList: state.InventoryReducer.previewList,
         inventoryList: state.InventoryReducer.inventoryList,
+        propStep: state.InventoryReducer.currentStep
 
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList))
+        saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList)),
+        nextPage: () => dispatch(nextPage()),
+        prevPage: () => dispatch(prevPage())
 
     }
 }

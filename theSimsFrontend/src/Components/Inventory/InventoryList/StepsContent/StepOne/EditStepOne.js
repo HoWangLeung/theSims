@@ -19,7 +19,9 @@ class EditStepOne extends Component {
             return <Createproduct />
         if (content === "editMultiple"){
             
-            return <Selectedlist key="selectedList" content={selectedRows} />
+            return(<>  <h3>You have Selected:</h3>
+                <Selectedlist key="selectedList" content={selectedRows} /></>)
+          
         }
           
     }
@@ -28,7 +30,7 @@ class EditStepOne extends Component {
 
         return (
             <div>
-                <h3>You have Selected:</h3>
+          
                
 
                     {this.renderStepOne()}

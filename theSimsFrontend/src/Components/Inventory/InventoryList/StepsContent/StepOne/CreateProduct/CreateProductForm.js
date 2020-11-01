@@ -1,225 +1,151 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, Input, Button, Space, Select, Row } from 'antd';
 import { DeleteFilled, MinusCircleOutlined, MinusSquareOutlined, PlusOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { Collapse } from 'antd';
 import { values } from 'lodash';
+import CommonModal from '../../../../../../Common/ConfirmModal/CommonModal';
+import { returnInfoMessage, returnMessage } from '../../../../../../Common/utilities/helpers';
+import { nextPage } from '../../../../action/InventoryAction';
+import { useDispatch, useSelector } from 'react-redux'
+import classes from '../../../../Inventory.less';
 const { Panel } = Collapse;
 const { Option } = Select;
-
 function Createproductform() {
     const [form] = Form.useForm();
     const [currentFields, setCurrentFields] = useState({
+        currentData: [],
         addedFirst: false,
         inCompleteFields: [],
-        anyundefined: false
+        anyundefined: false,
+        missinFields: []
     })
-
-
+    const prevRef = useRef();
+    const dispatch = useDispatch();
     useEffect(() => {
-        if (!currentFields.addedFirst) form.current()
-
-
-
-
-    }, []);
-    const onFinish = values => {
-        let inCompleteFields = []
-        let anyundefined = false
-        let panelFields = values.createProduct
-        panelFields.forEach((field, index) => {
-
-            inCompleteFields.push(index)
-            if (field === undefined) {
-                anyundefined = true
-            } else {
-
-                console.log('checked');
-
-            }
-            setCurrentFields({
-                ...currentFields,
-                anyundefined,
-                inCompleteFields,
-                addedFirst: true
-            })
-
+        form.setFieldsValue({
+            "createProduct": [{
+                name: 0,
+                key: 0,
+                anyMissingField: false,
+                fieldKey: 0
+            }]
         })
-        form.validateFields()
-            .then(() => {
-
-
-
-            }).catch(errorInfo => {
-                console.log(errorInfo);
-                console.log('sdf');
-
-
-            })
-
+    }, []);
+    const prevCurrentFields = prevRef.current;
+    const onFinish = values => {
+        console.log(values);
+        dispatch(nextPage())
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
-        let inCompleteFields = []
-        let anyundefined = false
-        let panelFields = values.createProduct
-        panelFields.forEach((field, index) => {
-
-            inCompleteFields.push(index)
-            if (field === undefined) {
-                anyundefined = true
-            } else {
-
-                console.log('checked');
-
-            }
-            setCurrentFields({
-                ...currentFields,
-                anyundefined,
-                inCompleteFields,
-                addedFirst: true
-            })
-
+        let data = form.getFieldValue("createProduct")
+        let combinedList = values.createProduct.map((item, i) => Object.assign({}, item, data[i]));
+        combinedList.map(key => {
+            const missingFields = Object.values(key).some(val => (val === undefined || val === ""))
+            key['anyMissingField'] = missingFields ? true : false
+        })
+        form.setFieldsValue({
+            "createProduct": combinedList
         })
     }
-    const handlePanelClick = () => {
-
-    }
-
     const handleDelete = (e, remove, field) => {
-        e.preventDefault()
+        const currentFormValue = form.getFieldValue("createProduct")
         e.stopPropagation();
-
-        let id = parseInt(e.currentTarget.id)
-
-
-        let isClickedFirst = (id === 0) ? true : false
-        let isClickedLast = (id === form.currentData.length - 1) ? true : false
-
-
-        const updatedList1 = currentFields.inCompleteFields.filter((inCompleteField, index) => {
-            return inCompleteField !== id
-        })
-
-
-        if (!isClickedFirst && !isClickedLast) {
-            for (let i = id; i < updatedList1.length; i++) {
-                updatedList1[i] -= 1
-            }
+        if (field.name === 0 && currentFormValue.length === 1) {
+            return returnInfoMessage("At least one product is required for this operation")
         }
-
-        if (isClickedFirst && !isClickedLast) {
-            for (let i = 0; i < updatedList1.length; i++) {
-                updatedList1[i] -= 1
-            }
-        }
-
-
-        setCurrentFields({
-            ...currentFields,
-            inCompleteFields: updatedList1
-        })
-
-        remove(field.name)
-
-
+        const filtered = currentFormValue.filter(e => e.name !== field.name)
+        for (let i = field.name; i < filtered.length; i++)
+            filtered[i].name -= 1
+        form.setFieldsValue({ "createProduct": filtered })
     }
-
-
-
+    const handleCollapseKeyChange = e => { }
+    const handleAdd = (e, add, fields) => {
+        const currentFormValue = form.getFieldValue("createProduct")
+        if (currentFormValue.length > 10) return returnInfoMessage("Th Maximum Limit (10) is reached")
+        form.setFieldsValue(
+            {
+                "createProduct": [
+                    ...currentFormValue,
+                    {
+                        name: currentFormValue[currentFormValue.length - 1].name + 1,
+                        key: currentFormValue[currentFormValue.length - 1].key + 1,
+                        anyMissingField: false,
+                        fieldKey: currentFormValue[currentFormValue.length - 1].fieldKey + 1
+                    }
+                ]
+            })
+    }
+    const handleInputChange = () => {
+        console.log('changing');
+    }
     return (
         <Form
+            className={classes.createproductForm}
             id="createproductForm"
             form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             onFieldsChange={(changedFields, allFields) => {
-
-
-
+                console.log(changedFields);
+                console.log(allFields);
             }}
         >
-
-
             <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >
-                <Input></Input>
+                <Input/>
             </Form.Item>
             <Form.List
                 name="createProduct"
-
-
             >
-
-
                 {(fields, { add, remove }) => {
-
                     form.current = add
                     form.currentData = fields
-
                     return (
                         <>
-                            {fields.map(field => {
-                                let panelWarning = null
-                                const { inCompleteFields } = currentFields
-
-
-                                inCompleteFields.forEach(inCompleteField => {
-                                    if (inCompleteField === field.name) {
-                                        panelWarning = (<p>Missing Fields </p>)
-                                    }
-
-                                })
-
-
-
-                                const fieldNames = ['Name', 'Country', 'Cost', 'Price', 'Remaining']
+                            {fields.map((field, index) => {
+                                const fieldNames = ['productName', 'Country', 'Cost', 'Price', 'Remaining']
                                 return (
                                     <Collapse
+                                        key={field.name}
                                         bordered={false}
                                         expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
-
+                                        // defaultActiveKey="0"
+                                        onChange={handleCollapseKeyChange}
                                     >
-                                        <Panel header={`Product ${field.key}`}
-                                            onClick={handlePanelClick}
+                                        <Panel className={classes.createProductPanel} key={field.name} header={`Product ${field.key}`}
+                                            forceRender={true}
                                             extra={
                                                 <Row>
-                                                    {panelWarning}
-                                                    <DeleteFilled name={field.name} id={field.name} style={{ fontSize: "150%" }} onClick={(e) => handleDelete(e, remove, field)} />
+                                                    {form.getFieldValue("createProduct")[index].anyMissingField
+                                                        && <p style={{ margin: "0", color: "red" }}>One or More Field(s) Missing</p>}
+                                                    <DeleteFilled id={field.name} style={{ fontSize: "150%" }} onClick={(e) => handleDelete(e, remove, field)} />
                                                 </Row>
                                             }>
                                             <Row >
                                                 {fieldNames.map((fieldName, index) => {
-
                                                     return (<Form.Item
                                                         key={index}
-                                                        // {...field}
                                                         label={fieldName}
                                                         name={[field.name, fieldName]}
                                                         fieldKey={[field.fieldKey, index]}
-                                                        validateTrigger={["onload"]}
                                                         rules={[
                                                             {
                                                                 required: true,
                                                                 message: 'Please input your name',
                                                             },
                                                         ]}
-
                                                     >
-                                                        <Input />
+                                                        <Input onChange={handleInputChange} />
                                                     </Form.Item>)
                                                 })}
-
-
                                             </Row>
                                         </Panel>
-
                                     </Collapse>
-
                                 )
                             })}
-
                             <Form.Item>
-                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                <Button type="dashed" onClick={(e) => handleAdd(e, add, fields)} block icon={<PlusOutlined />}>
                                     Add Product
                   </Button>
                             </Form.Item>
@@ -227,11 +153,7 @@ function Createproductform() {
                     )
                 }}
             </Form.List>
-
         </Form>
     );
 };
-
-
-
 export default Createproductform

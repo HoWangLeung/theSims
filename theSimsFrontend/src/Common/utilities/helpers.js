@@ -10,3 +10,11 @@ export const returnMessage = (msg) => {
         centered:true
     })
 }
+
+export const returnInfoMessage = (msg) => {
+    CommonModal.info({
+        content: msg,
+        okText: intl.get('ok'),
+        centered:true
+    })
+}

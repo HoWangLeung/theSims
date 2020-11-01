@@ -40,14 +40,22 @@ export const saveUpdatedList = (updatedPreviewList) => {
             dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
             return res
         } catch (err) {
-
         }
+    }
+}
 
-
-
-
-
+export const nextPage = () => {
+    return (dispatch, getState) => {
+   
+        dispatch({ type: 'NEXT', payload: {} })
     }
 
+}
+
+export const prevPage = () => {
+    return (dispatch, getState) => {
+   
+        dispatch({ type: 'PREV', payload: {} })
+    }
 
 }

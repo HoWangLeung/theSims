@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { List } from 'antd'
 
 function Selectedlist(props) {
-    
+
     const { content } = props
     return content.map((e, i) => {
         return (
@@ -12,7 +12,6 @@ function Selectedlist(props) {
                 <List
                     bordered={true}
                     size="small"
-
                 >
 
                     <List.Item  >

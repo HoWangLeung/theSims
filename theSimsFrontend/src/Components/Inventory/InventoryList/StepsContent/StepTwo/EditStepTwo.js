@@ -103,7 +103,7 @@ class EditStepTwo extends Component {
     };
 
     handleInputChange = e => {
-        
+
         const { savePreviewList } = this.props
         const { previewList } = this.state
         let inputValue = parseInt(e.target.value)
@@ -111,7 +111,7 @@ class EditStepTwo extends Component {
         this.setState(prevState => ({
             previewList: prevState.previewList.map(
                 obj => {
-                    
+
                     return obj.id == id ? Object.assign(obj, { remaining: inputValue }) : obj
                 }
             )
@@ -126,7 +126,7 @@ class EditStepTwo extends Component {
             {...layout}
             onFinish={this.onFinish}
             onFinishFailed={this.onFinishFailed}
-            
+
             ref={this.formRef}
         >
             <Form.Item
@@ -158,14 +158,16 @@ class EditStepTwo extends Component {
         )
     }
 
-    render() {
-        const { inventoryList, updatePreviewList } = this.props
+
+    renderScreen = () => {
+        const { inventoryList, updatePreviewList,stepTwoContent } = this.props
         const { showAnimation, addToAllValue, previewList } = this.state
         const addToAllInput = this.getForm()
-
-
-        return (
-            <div className={classes.stepTwoContainer} >
+        console.log(stepTwoContent);
+        if(stepTwoContent==="createProduct"){
+            return <p>success</p>
+        }else{
+            return (<div className={classes.stepTwoContainer} >
                 {addToAllInput}
                 <Animate
                     transitionName={{
@@ -185,7 +187,17 @@ class EditStepTwo extends Component {
                         handleInputChange={this.handleInputChange}
                     />}
                 </Animate>
-            </div>
+            </div>)
+
+        }
+    }
+
+    render() {
+
+
+
+        return (
+            this.renderScreen()
         );
     }
 }
