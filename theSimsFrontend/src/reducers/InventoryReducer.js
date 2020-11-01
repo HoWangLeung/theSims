@@ -4,7 +4,8 @@ const initState = {
     previewList: [],
     showModal: true,
     showUpdateSuccess: false,
-    currentStep: 0
+    currentStep: 0,
+    createProductList:[]
 }
 
 
@@ -44,9 +45,15 @@ const InventoryReducer = (state = initState, action) => {
             }
 
         case ("NEXT"):
+            console.log(action.payload);
+            let createProductList = action.payload.createProduct
+            createProductList.map(p=>p['productCategory']= action.payload.productCategory)
+            console.log(createProductList);
+           
             return {
                 ...state,
-                currentStep: state.currentStep + 1
+                currentStep: state.currentStep + 1,
+                createProductList
             }
         case ("PREV"):
             return {

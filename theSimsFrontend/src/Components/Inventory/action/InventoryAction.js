@@ -44,10 +44,10 @@ export const saveUpdatedList = (updatedPreviewList) => {
     }
 }
 
-export const nextPage = () => {
+export const nextPage = (values) => {
     return (dispatch, getState) => {
    
-        dispatch({ type: 'NEXT', payload: {} })
+        dispatch({ type: 'NEXT', payload: values })
     }
 
 }

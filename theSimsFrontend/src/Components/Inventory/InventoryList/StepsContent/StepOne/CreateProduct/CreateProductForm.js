@@ -13,13 +13,13 @@ const { Panel } = Collapse;
 const { Option } = Select;
 function Createproductform() {
     const [form] = Form.useForm();
-    const [currentFields, setCurrentFields] = useState({
-        currentData: [],
-        addedFirst: false,
-        inCompleteFields: [],
-        anyundefined: false,
-        missinFields: []
-    })
+    // const [currentFields, setCurrentFields] = useState({
+    //     currentData: [],
+    //     addedFirst: false,
+    //     inCompleteFields: [],
+    //     anyundefined: false,
+    //     missinFields: []
+    // })
     const prevRef = useRef();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -35,7 +35,7 @@ function Createproductform() {
     const prevCurrentFields = prevRef.current;
     const onFinish = values => {
         console.log(values);
-        dispatch(nextPage())
+        dispatch(nextPage(values))
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
         let data = form.getFieldValue("createProduct")
@@ -58,6 +58,7 @@ function Createproductform() {
         for (let i = field.name; i < filtered.length; i++)
             filtered[i].name -= 1
         form.setFieldsValue({ "createProduct": filtered })
+        console.log(form.getFieldsError());
     }
     const handleCollapseKeyChange = e => { }
     const handleAdd = (e, add, fields) => {

@@ -10,6 +10,7 @@ import styles from './Animation.less'
 import cloneDeep from 'lodash/cloneDeep';
 import intl from 'react-intl-universal';
 import _ from 'lodash'
+import CreateProductPreview from './CreateProductPreview'
 
 
 const layout = {
@@ -165,7 +166,7 @@ class EditStepTwo extends Component {
         const addToAllInput = this.getForm()
         console.log(stepTwoContent);
         if(stepTwoContent==="createProduct"){
-            return <p>success</p>
+            return <CreateProductPreview/>
         }else{
             return (<div className={classes.stepTwoContainer} >
                 {addToAllInput}
