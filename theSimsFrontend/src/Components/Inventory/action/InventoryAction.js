@@ -5,6 +5,24 @@ import CommonModal from '../../../Common/ConfirmModal/CommonModal';
 
 const sleep = m => new Promise(r => setTimeout(r, m))
 
+export const createProduct = () => {
+
+    return async (dispatch, getState) => {
+        console.log('creating action pr');
+        try {
+            console.log('before dispatch');
+             dispatch({ type: 'CREATE_PRODUCT_REQUEST' })
+             await sleep(1000)
+             //let response = await axios.get(`${API}/inventory/`)
+            // dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: response.data })
+            // return response
+        } catch (err) {
+            
+        }
+
+    }
+}
+
 export const fetchInventory = () => {
 
     return async (dispatch, getState) => {

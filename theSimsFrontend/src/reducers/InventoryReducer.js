@@ -60,6 +60,11 @@ const InventoryReducer = (state = initState, action) => {
                 ...state,
                 currentStep: state.currentStep -1
             }
+        case ("CREATE_PRODUCT_REQUEST"):
+            console.log('sdfcr');
+            return{
+                ...state
+            }
 
         default:
             return state;

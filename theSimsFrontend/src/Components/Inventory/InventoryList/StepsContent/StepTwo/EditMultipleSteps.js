@@ -4,7 +4,7 @@ import { Steps, Button, message, Spin } from 'antd';
 import EditStepOne from '../StepOne/EditStepOne';
 import classes from '../../../Inventory.less'
 import EditStepTwo from './EditStepTwo';
-import { nextPage, prevPage, saveUpdatedList } from '../../../action/InventoryAction';
+import { nextPage, prevPage, saveUpdatedList,createProduct } from '../../../action/InventoryAction';
 import CommonModal from '../../../../../Common/ConfirmModal/CommonModal';
 import intl from 'react-intl-universal';
 const { Step } = Steps;
@@ -29,11 +29,19 @@ class EditMultipleSteps extends Component {
     }
 
 
-    handleQuantityUpdate = async () => {
-        const { previewList, saveUpdatedList } = this.props
-        try {
-            await saveUpdatedList(previewList)
-            CommonModal.success({ content: "Successfully Updated" })
+    handleUpdate = async () => {
+      
+      
+        try {       
+         const { previewList, saveUpdatedList,channel ,createProduct } = this.props
+            if(channel==="createProduct"){
+                console.log('creating product');
+                await createProduct()
+            }else{
+                await saveUpdatedList(previewList)
+                CommonModal.success({ content: "Successfully Updated" })
+            }
+
         } catch (err) {
             console.log(err);
         }
@@ -105,7 +113,7 @@ class EditMultipleSteps extends Component {
                         </Button>
                     )}
                     {current === steps.length - 1 && (
-                        <Button type="primary" onClick={this.handleQuantityUpdate}>
+                        <Button type="primary" onClick={this.handleUpdate}>
                             Confirm
                         </Button>
                     )}
@@ -128,6 +136,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList)),
+        createProduct: ()=> dispatch(createProduct()),
         nextPage: () => dispatch(nextPage()),
         prevPage: () => dispatch(prevPage())
 

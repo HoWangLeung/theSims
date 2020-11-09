@@ -10,22 +10,22 @@ const columns = [
  
     },
     {
-      title: 'Cash Assetss',
-      className: 'column-money',
-      dataIndex: 'money',
+      title: 'Country',
+      className: 'Country',
+      dataIndex: 'Country',
       align: 'right',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Cost',
+      dataIndex: 'Cost',
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
+        title: 'Price',
+        dataIndex: 'Price',
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
+        title: 'Remaining',
+        dataIndex: 'Remaining',
       },
   ];
 
