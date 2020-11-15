@@ -32,51 +32,29 @@ public class InventoryService {
 		return products;
 	}
 	
-	public String addProduct(Product product) {
-		System.out.println("get category name -=>" + product.getCategory().getName());
-		
-		Category category = categoryRepository.findByName(product.getCategory().getName());
-		System.out.println(category + " <= cat name");
-		if(category!=null) {
+	public List<Product> addProduct(List<Product> products) {
+		 products.stream().forEach(product->{
+			 Category category = categoryRepository.findByName(product.getCategory().getName());
+				System.out.println(category + " <= cat name");
+				if(category!=null) {
 
 
-			product.setCategory(category);
-			em.persist(product);
-			 
-//			inventoryRepository.save(product);
+					product.setCategory(category);
+					em.persist(product);
+					 
+//					inventoryRepository.save(product);
+				
+				}else {
+					System.out.println("category is null");
+					product.setCategory(new Category(product.getCategory().getName(),product.getCategory().getParentCategoryId()));
+					em.persist(product);
+				}
+				
+			
+		 });
+			return this.getAll();	
 		
-		}else {
-			System.out.println("category is null");
-			product.setCategory(new Category(product.getCategory().getName(),product.getCategory().getParentCategoryId()));
-			em.persist(product);
-		}
-		
-		return "hi";
-//		if(product.getCategory().getId()==null) {
-//			System.out.println("want to create a new category");
-//			String categoryName = product.getCategory().getName();
-//			Long categoryParentId = product.getCategory().getParentCategoryId();
-//	
-//			product.setCategory(new Category(categoryName,categoryParentId));
-//
-//			em.persist(product);
-////			inventoryRepository.save(product);
-//		}else {
-//			Category category = em.find(Category.class, product.getCategory().getId());
-//			System.out.println("want to insert a new product to EXISTING category");
-//			product.setCategory(category);
-////			category.addProduct(product);
-////			em.persist(category);
-//			em.persist(product);
-//			 
-////			inventoryRepository.save(product);
-//		}
-//
-//		
-//
-//		
-//
-//		return "saved";
+ 
  
 }
 

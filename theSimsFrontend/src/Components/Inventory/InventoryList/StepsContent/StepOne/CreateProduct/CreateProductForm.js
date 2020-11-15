@@ -105,7 +105,7 @@ function Createproductform() {
                     return (
                         <>
                             {fields.map((field, index) => {
-                                const fieldNames = ['productName', 'Country', 'Cost', 'Price', 'Remaining']
+                                const fieldNames = ['productName', 'countryOrigin', 'cost', 'basePrice', 'Remaining']
                                 return (
                                     <Collapse
                                         key={field.name}

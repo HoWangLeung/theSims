@@ -59,7 +59,7 @@ class EditStepTwo extends Component {
             this.setState({
                 undoAdded: false
             })
-            this.formRef.current.resetFields()
+            //this.formRef.current.resetFields()
         }
 
     }

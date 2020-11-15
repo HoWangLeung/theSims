@@ -10,7 +10,6 @@ import Selectedlist from './StepsContent/StepOne/SelectedList/SelectedList';
 class InventoryList extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             selectedRowKeys: [],
             selectedRows: [],
@@ -31,6 +30,8 @@ class InventoryList extends Component {
                 selectedRowKeys: []
             })
         }
+
+
     }
 
     showModal = (e, channel) => {
@@ -93,6 +94,7 @@ class InventoryList extends Component {
                                 stepTwoContent={stepTwoContent}
                                 selectedRows={selectedRows}
                                 channel={this.state.channel}
+                                hideModal={this.hideModal}
                             />
                         }
 

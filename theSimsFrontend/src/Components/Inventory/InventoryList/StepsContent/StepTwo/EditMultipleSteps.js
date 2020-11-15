@@ -33,13 +33,50 @@ class EditMultipleSteps extends Component {
       
       
         try {       
-         const { previewList, saveUpdatedList,channel ,createProduct } = this.props
+         const { previewList, saveUpdatedList,channel ,createProduct , createProductList} = this.props
             if(channel==="createProduct"){
                 console.log('creating product');
-                await createProduct()
+                CommonModal.confirm({
+        
+                    content: "Are you sure",
+                    okText: intl.get('confirm'),
+                    centered: true,
+                    maskClosable: false,
+                    // okButtonProps: { loading: this.props.isLoading },
+                    keyboard: false,
+                    margin: 0,
+                    onOk: async () => {
+                        await createProduct(createProductList)
+                        CommonModal.success({ 
+                            content: "Successfully Created"      
+                        })
+                        this.props.hideModal();
+        
+                    }
+                })
+           
             }else{
-                await saveUpdatedList(previewList)
-                CommonModal.success({ content: "Successfully Updated" })
+              
+                CommonModal.confirm({
+        
+                    content: "Are you sure",
+                    okText: intl.get('confirm'),
+                    centered: true,
+                    maskClosable: false,
+                    // okButtonProps: { loading: this.props.isLoading },
+                    keyboard: false,
+                    margin: 0,
+                    onOk: async () => {
+                        await saveUpdatedList(previewList)
+                        this.props.hideModal();
+                        CommonModal.success({ 
+                            content: "Successfully Updated"      
+                        })
+                     
+        
+                    }
+                })
+
             }
 
         } catch (err) {
@@ -51,10 +88,12 @@ class EditMultipleSteps extends Component {
 
 
     render() {
-        const { nextPage, prevPage } = this.props
+        const { nextPage, prevPage,previewList,inventoryList, selectedRows, channel } = this.props
+        console.log("channel ---->", channel);
         let editBtnProps = {
             type: "primary",
-            onClick: () => nextPage()
+            onClick: () => nextPage(previewList,channel),
+            
         }
         let createBtnProps = {
             form: "createproductForm",
@@ -64,7 +103,7 @@ class EditMultipleSteps extends Component {
         }
         const { current } = this.state
         console.log(current);
-        const { inventoryList, selectedRows, channel } = this.props
+     
         const steps = [
             {
                 title: 'Selected',
@@ -128,16 +167,18 @@ const mapStateToProps = (state) => {
     return {
         previewList: state.InventoryReducer.previewList,
         inventoryList: state.InventoryReducer.inventoryList,
-        propStep: state.InventoryReducer.currentStep
+        propStep: state.InventoryReducer.currentStep,
+        createProductList:state.InventoryReducer.createProductList
 
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
+    
     return {
         saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList)),
-        createProduct: ()=> dispatch(createProduct()),
-        nextPage: () => dispatch(nextPage()),
+        createProduct: createProductList=> dispatch(createProduct(createProductList)),
+        nextPage: (previewList,channel) => dispatch(nextPage(previewList,channel)),
         prevPage: () => dispatch(prevPage())
 
     }

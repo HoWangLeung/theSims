@@ -38,12 +38,12 @@ public class InventoryController {
 	}
 	
 	@PostMapping("/add")
-	public String addProduct(@RequestBody Product product) {
+	public List<Product> addProduct(@RequestBody List<Product> product) {
 	System.out.println("adding!!!");
 	
 		inventoryService.addProduct(product);
 		
-		return "saved";		
+		return inventoryService.addProduct(product);		
 	}
 	
 	@DeleteMapping("/deleteProduct/{id}")
