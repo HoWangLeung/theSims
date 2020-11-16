@@ -8,8 +8,8 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 export const createProduct = (createProductList) => {
 
     return async (dispatch, getState) => {
-        console.log('creating action pr');
-        console.log(createProductList);
+        
+        
        let payload = []
        createProductList.forEach(field=>payload.push({
         productName: field.productName,
@@ -23,14 +23,14 @@ export const createProduct = (createProductList) => {
 
        }))
 
-       console.log(payload);
+       
     
         try {
-            console.log('before dispatch');
+            
             dispatch({ type: 'CREATE_PRODUCT_REQUEST' })
             await sleep(1000)
             let response = await axios.post(`${API}/inventory/add/`, payload)
-            console.log(response);
+            
              dispatch({ type: 'CREATE_PRODUCT_SUCCESS', payload: response.data })
              return response
         } catch (err) {
@@ -81,8 +81,8 @@ export const saveUpdatedList = (updatedPreviewList) => {
 
 export const nextPage = (values,channel) => {
     return (dispatch, getState) => {
-        console.log("channel=> ", channel);
-        console.log("values=> ", values);
+        
+        
         dispatch({ type: 'NEXT', payload: {values,channel} })
     }
 

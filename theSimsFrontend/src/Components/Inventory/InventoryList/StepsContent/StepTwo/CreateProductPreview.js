@@ -31,7 +31,7 @@ const columns = [
 
 function CreateProductPreview(props) {
     const createProductList = useSelector(state => state.InventoryReducer.createProductList);
-    console.log(createProductList);
+    
     return (<Table
         columns={columns}
         dataSource={createProductList}

@@ -95,6 +95,7 @@ class InventoryList extends Component {
                                 selectedRows={selectedRows}
                                 channel={this.state.channel}
                                 hideModal={this.hideModal}
+                                selectedRowKeys={selectedRowKeys}
                             />
                         }
 

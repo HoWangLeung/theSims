@@ -22,6 +22,7 @@ public class OrderService {
 
 	public List<Orders> getAll() {
 		List<Orders> ordersList = orderRepository.findAll();
+		 
 		return ordersList;
 	}
 
@@ -30,6 +31,11 @@ public class OrderService {
 		
 		orderRepository.save(order);
 		
+	}
+
+	public Orders getOrderById(Long id) {
+		 
+		return orderRepository.findById(id).orElse(null);
 	}
 
 

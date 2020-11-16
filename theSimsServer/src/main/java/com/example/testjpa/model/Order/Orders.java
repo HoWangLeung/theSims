@@ -1,26 +1,26 @@
 package com.example.testjpa.model.Order;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.testjpa.model.Users;
+import com.example.testjpa.model.inventory.Product;
 
 @Entity
 @Table
 public class Orders {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String status;
 	
@@ -28,10 +28,12 @@ public class Orders {
 	@ManyToOne
 	private Users users;
 	 
-	@OneToMany(mappedBy = "order")
-//	@JsonIgnore
-//	@JsonManagedReference
-	private List<OrderedProductDetail> orderedProductDetail = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(
+			  name = "Orders_Product", 
+			  joinColumns = @JoinColumn(name = "order_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "product_id"))
+	private Set<Product> productList;
 
 
 	public Orders() {
@@ -40,11 +42,12 @@ public class Orders {
 	}
 
 
-	public Orders(String status, Users users, List<OrderedProductDetail> orderedProductDetail) {
-	
+	public Orders(Long id, String status, Users users, Set<Product> productList) {
+		super();
+		this.id = id;
 		this.status = status;
 		this.users = users;
-		this.orderedProductDetail = orderedProductDetail;
+		this.productList = productList;
 	}
 
 
@@ -77,15 +80,19 @@ public class Orders {
 		this.users = users;
 	}
 
-//	@JsonManagedReference(value="order-detail")
-	public List<OrderedProductDetail> getOrderedProductDetail() {
-		return orderedProductDetail;
+
+	public Set<Product> getProductList() {
+		return productList;
 	}
 
 
-	public void setOrderedProductDetail(List<OrderedProductDetail> orderedProductDetail) {
-		this.orderedProductDetail = orderedProductDetail;
+	public void setProductList(Set<Product> productList) {
+		this.productList = productList;
 	}
+
+
+	
+ 
 
 	 
 

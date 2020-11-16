@@ -95,11 +95,10 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, CA
 --INSERT INTO orders(STATUS, USERS_ID)VALUES('pending',1);
 --INSERT INTO orders(STATUS,USERS_ID)VALUES('pending',2);
 --
---INSERT INTO ordered_product_detail(ordered_product_id, ordered_product_name, ordered_product_price, orders_id)VALUES(3,'Gala Apple',20, 1);
---INSERT INTO ordered_product_detail(ordered_product_id, ordered_product_name, ordered_product_price, orders_id)VALUES(7,'Golden Kiwi',125,1);
+--INSERT INTO orders_product(order_id, product_id)VALUES(1,15);
+--INSERT INTO orders_product(order_id, product_id)VALUES(1,18);
+--INSERT INTO orders_product(order_id, product_id)VALUES(2,12);
 --
 --
 --INSERT INTO ordered_product_detail(ordered_product_id, ordered_product_name, ordered_product_price, orders_id)VALUES(4,'Fuji Apple',20, 2);
 --INSERT INTO ordered_product_detail(ordered_product_id, ordered_product_name, ordered_product_price, orders_id)VALUES(9,'Tangerine',20,2);
-
-

@@ -20,7 +20,7 @@ class EditMultipleSteps extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.propStep !== this.props.propStep) {
-            console.log('setState now');
+            
             this.setState({
                 current: this.props.propStep
             })
@@ -35,7 +35,7 @@ class EditMultipleSteps extends Component {
         try {       
          const { previewList, saveUpdatedList,channel ,createProduct , createProductList} = this.props
             if(channel==="createProduct"){
-                console.log('creating product');
+                
                 CommonModal.confirm({
         
                     content: "Are you sure",
@@ -80,7 +80,7 @@ class EditMultipleSteps extends Component {
             }
 
         } catch (err) {
-            console.log(err);
+            
         }
 
 
@@ -88,8 +88,8 @@ class EditMultipleSteps extends Component {
 
 
     render() {
-        const { nextPage, prevPage,previewList,inventoryList, selectedRows, channel } = this.props
-        console.log("channel ---->", channel);
+        const { nextPage, prevPage,previewList,inventoryList, selectedRows, channel ,selectedRowKeys} = this.props
+        
         let editBtnProps = {
             type: "primary",
             onClick: () => nextPage(previewList,channel),
@@ -102,7 +102,7 @@ class EditMultipleSteps extends Component {
             type: "primary",
         }
         const { current } = this.state
-        console.log(current);
+        
      
         const steps = [
             {
@@ -120,6 +120,7 @@ class EditMultipleSteps extends Component {
                     inventoryList={inventoryList}
                     handleQuantityUpdate={this.handleQuantityUpdate}
                     stepTwoContent={this.props.stepTwoContent}
+                    selectedRowKeys={selectedRowKeys}
                 />,
             },
 

@@ -34,7 +34,7 @@ function Createproductform() {
     }, []);
     const prevCurrentFields = prevRef.current;
     const onFinish = values => {
-        console.log(values);
+        
         dispatch(nextPage(values))
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
@@ -58,7 +58,7 @@ function Createproductform() {
         for (let i = field.name; i < filtered.length; i++)
             filtered[i].name -= 1
         form.setFieldsValue({ "createProduct": filtered })
-        console.log(form.getFieldsError());
+        
     }
     const handleCollapseKeyChange = e => { }
     const handleAdd = (e, add, fields) => {
@@ -78,7 +78,7 @@ function Createproductform() {
             })
     }
     const handleInputChange = () => {
-        console.log('changing');
+        
     }
     return (
         <Form
@@ -89,8 +89,8 @@ function Createproductform() {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             onFieldsChange={(changedFields, allFields) => {
-                console.log(changedFields);
-                console.log(allFields);
+                
+                
             }}
         >
             <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >

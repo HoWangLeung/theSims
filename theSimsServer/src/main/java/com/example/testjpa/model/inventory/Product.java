@@ -1,6 +1,6 @@
 package com.example.testjpa.model.inventory;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,13 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import com.example.testjpa.model.Order.OrderedProductDetail;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.testjpa.model.Order.Orders;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Product {
@@ -30,10 +29,12 @@ public class Product {
 	private int remaining;
 
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Category category;
 
-	@OneToMany( mappedBy = "product")
-	private List<OrderedProductDetail> orderedProductDetails;
+	@ManyToMany (mappedBy = "productList")
+	@JsonIgnore
+	private Set<Orders>orderList;
 
 	public Product() {
 		super();
@@ -41,7 +42,7 @@ public class Product {
 	}
 
 	public Product(Long id, String productName, String countryOrigin, int cost, int basePrice, int remaining,
-			Category category, List<OrderedProductDetail> orderedProductDetails) {
+			Category category, Set<Orders> orderList) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -50,7 +51,7 @@ public class Product {
 		this.basePrice = basePrice;
 		this.remaining = remaining;
 		this.category = category;
-		this.orderedProductDetails = orderedProductDetails;
+		this.orderList = orderList;
 	}
 
 	public Long getId() {
@@ -109,16 +110,17 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<OrderedProductDetail> getOrderedProductDetails() {
-		return orderedProductDetails;
+	public Set<Orders> getOrderList() {
+		return orderList;
 	}
 
-	public void setOrderedProductDetails(List<OrderedProductDetail> orderedProductDetails) {
-		this.orderedProductDetails = orderedProductDetails;
+	public void setOrderList(Set<Orders> orderList) {
+		this.orderList = orderList;
 	}
 
  
 
+ 
  
  
 	

@@ -42,7 +42,10 @@ class EditStepTwo extends Component {
     }
     formRef = React.createRef();
     componentDidMount() {
-        const { inventoryList } = this.props
+        const { inventoryList,selectedRowKeys } = this.props
+
+        console.log(inventoryList);
+        console.log(selectedRowKeys);
         const previewList = cloneDeep(inventoryList);
         previewList.forEach((item) => {
             item.remaining += this.state.addToAllValue
@@ -70,6 +73,7 @@ class EditStepTwo extends Component {
         const { undoAdded } = this.state
         const valueToAdd = parseInt(values.addToAll)
         const updatedPreviewList = cloneDeep(previewList);
+        console.log(values);
         if (!_.isUndefined(valueToAdd) && !undoAdded) {
 
             updatedPreviewList.forEach((item) => {
@@ -164,7 +168,7 @@ class EditStepTwo extends Component {
         const { inventoryList, updatePreviewList,stepTwoContent } = this.props
         const { showAnimation, addToAllValue, previewList } = this.state
         const addToAllInput = this.getForm()
-        console.log(stepTwoContent);
+        
         if(stepTwoContent==="createProduct"){
             return <CreateProductPreview/>
         }else{

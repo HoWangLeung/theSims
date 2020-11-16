@@ -20,6 +20,7 @@ const InventoryReducer = (state = initState, action) => {
                 inventoryList: action.payload.detail
             }
         case ("SAVE_INVENTORY"):
+            
             return {
                 ...state,
                 previewList: action.payload
@@ -45,11 +46,11 @@ const InventoryReducer = (state = initState, action) => {
             }
 
         case ("NEXT"):
-            console.log(action.payload);
+            
             if(action.payload.channel==="createProduct"){
                 let createProductList = action.payload.createProduct
                 createProductList.map(p=>p['productCategory']= action.payload.productCategory)
-                console.log(createProductList);
+                
                 return {
                     ...state,
                     currentStep: state.currentStep + 1,
@@ -70,7 +71,7 @@ const InventoryReducer = (state = initState, action) => {
             }
 //===============================================
         case ("CREATE_PRODUCT_SUCCESS"):
-            console.log(action.payload);
+            
             return{        
                 ...state,
                 inventoryList:action.payload
