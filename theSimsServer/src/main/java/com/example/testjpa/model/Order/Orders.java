@@ -1,15 +1,14 @@
 package com.example.testjpa.model.Order;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.testjpa.model.Users;
@@ -28,68 +27,61 @@ public class Orders {
 	@ManyToOne
 	private Users users;
 	 
-	@ManyToMany
-	@JoinTable(
-			  name = "Orders_Product", 
-			  joinColumns = @JoinColumn(name = "order_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> productList;
-
+ 
+	@OneToMany(mappedBy = "orders")
+    private List<OrdersProduct> orderProductList;
 
 	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Orders(Long id, String status, Users users, Set<Product> productList) {
+	public Orders( String status, Users users
+//			, List<OrdersProduct> orderProductList
+			) {
 		super();
-		this.id = id;
 		this.status = status;
 		this.users = users;
-		this.productList = productList;
+//		this.orderProductList = orderProductList;
 	}
-
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 	public Users getUsers() {
 		return users;
 	}
 
-
 	public void setUsers(Users users) {
 		this.users = users;
 	}
 
-
-	public Set<Product> getProductList() {
-		return productList;
+	public List<OrdersProduct> getOrderProductList() {
+		return orderProductList;
 	}
 
-
-	public void setProductList(Set<Product> productList) {
-		this.productList = productList;
+	public void setOrderProductList(List<OrdersProduct> orderProductList) {
+		this.orderProductList = orderProductList;
 	}
 
+	
+	
+	
+	 
+	 
 
 	
  

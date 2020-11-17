@@ -1,5 +1,6 @@
 package com.example.testjpa.model.inventory;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,11 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.example.testjpa.model.Order.Orders;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -32,17 +32,17 @@ public class Product {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Category category;
 
-	@ManyToMany (mappedBy = "productList")
-	@JsonIgnore
-	private Set<Orders>orderList;
+
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public Product(Long id, String productName, String countryOrigin, int cost, int basePrice, int remaining,
-			Category category, Set<Orders> orderList) {
+			Category category) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -51,76 +51,94 @@ public class Product {
 		this.basePrice = basePrice;
 		this.remaining = remaining;
 		this.category = category;
-		this.orderList = orderList;
+	
 	}
+
+
 
 	public Long getId() {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public String getProductName() {
 		return productName;
 	}
 
+
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
+
 
 	public String getCountryOrigin() {
 		return countryOrigin;
 	}
 
+
+
 	public void setCountryOrigin(String countryOrigin) {
 		this.countryOrigin = countryOrigin;
 	}
+
+
 
 	public int getCost() {
 		return cost;
 	}
 
+
+
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+
+
 
 	public int getBasePrice() {
 		return basePrice;
 	}
 
+
+
 	public void setBasePrice(int basePrice) {
 		this.basePrice = basePrice;
 	}
+
+
 
 	public int getRemaining() {
 		return remaining;
 	}
 
+
+
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;
 	}
+
+
 
 	public Category getCategory() {
 		return category;
 	}
 
+
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-	public Set<Orders> getOrderList() {
-		return orderList;
-	}
 
-	public void setOrderList(Set<Orders> orderList) {
-		this.orderList = orderList;
-	}
-
- 
-
- 
  
  
 	
