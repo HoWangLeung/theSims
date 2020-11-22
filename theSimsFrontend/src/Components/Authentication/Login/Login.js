@@ -20,26 +20,28 @@ class Login extends Component {
     }
 
     onFinish = async (values) => {
-        const{getUserProfile}=this.props
+        const { getUserProfile } = this.props
         const { username, password, remember } = values
 
         AuthenticationService
             .executeJwtAuthenticationService(username, password)
             .then((res) => {
-                
+
                 let token = res.data.token
-                let decoded = jwt_decode(token);
-                
+
                 AuthenticationService.registerSuccessfulLoginForJwt(username, token)
                 let isLoggedIn = AuthenticationService.isUserLoggedIn()
-                
+
                 this.props.loginAction(isLoggedIn)
                 this.props.history.push('/dashboard')
-            }).then(()=>{
-               getUserProfile()
+            }).then(() => {
+                getUserProfile()
+                    .then(
+                        res => sessionStorage.setItem('userId', parseInt(res.data[0].id))
+                    )
             })
             .catch((error) => {
-                
+
                 CommonModal.error({ content: "Invalid username/password" })
             })
 
@@ -54,7 +56,7 @@ class Login extends Component {
     onFieldsChange = (changedFields, allFields) => {
 
         let bothFieldsFilled = allFields.every(f => f.value !== undefined && f.value !== "");
-        
+
         if (bothFieldsFilled)
             this.setState({ disableLogin: false })
         else
@@ -141,7 +143,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
 
-    
+
     return {
 
     }
@@ -151,7 +153,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         loginAction: (isLoggedIn) => { dispatch(loginAction(isLoggedIn)) },
-        getUserProfile:()=> dispatch(getUserProfile())
+        getUserProfile: () => dispatch(getUserProfile())
     }
 }
 

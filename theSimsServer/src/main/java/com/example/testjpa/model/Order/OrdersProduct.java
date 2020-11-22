@@ -87,6 +87,7 @@ public class OrdersProduct  {
 			this.product = product;
 		}    
 	    
+	 
 	    
 	    
 	  

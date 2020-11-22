@@ -22,8 +22,8 @@ class NavigationMenu extends Component {
     renderMenu = () => {
         const { current } = this.state;
         const { location: { pathname } } = this.props
-
-        if (['/','/signup-customer','/signup','/login','/signup-success'].includes(pathname))  return null
+        let id=pathname.substring(pathname.lastIndexOf('/') + 1)
+        if (['/','/signup-customer','/signup','/login','/signup-success',`/product/${id}`].includes(pathname))  return null
 
 
       

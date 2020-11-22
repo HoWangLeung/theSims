@@ -92,12 +92,12 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, CA
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, CATEGORY_ID) VALUES ('Shine Muscat', 'Japan', 45,20,525, 8);
 
 
-INSERT INTO orders(STATUS, USERS_ID)VALUES('pending',1);
-INSERT INTO orders(STATUS,USERS_ID)VALUES('pending',2);
+--INSERT INTO orders(STATUS, USERS_ID)VALUES('pending',1);
+----INSERT INTO orders(STATUS,USERS_ID)VALUES('pending',2);
 --
-INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(80,1,15);
-INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(55,1,18);
-INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(78,2,12);
+--INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(80,1,15);
+--INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(55,1,18);
+--INSERT INTO orders_product(quantity, orders_id, product_id)VALUES(78,2,12);
 --
 --
 --INSERT INTO ordered_product_detail(ordered_product_id, ordered_product_name, ordered_product_price, orders_id)VALUES(4,'Fuji Apple',20, 2);

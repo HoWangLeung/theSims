@@ -20,10 +20,10 @@ class AuthenticationService {
     }
 
 
-    registerSuccessfulLogin(username, password) {
+    // registerSuccessfulLogin(username, password) {
 
-        sessionStorage.setItem('authenticatedUser', username)
-    }
+    //     sessionStorage.setItem('authenticatedUser', username)
+    // }
 
     logout() {
 
@@ -65,7 +65,7 @@ class AuthenticationService {
     }
 
     componentWillMount() {
-
+        console.log('trying to will mount...');
         this.setupAxiosInterceptors()
     }
 

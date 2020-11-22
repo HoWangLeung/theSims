@@ -2,6 +2,8 @@ package com.example.testjpa.service.Product;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
+	@Autowired
+	EntityManager em;
+	
 	public List<Product> getAllProducts(){
 
 
@@ -20,5 +25,12 @@ public class ProductService {
 		List<Product> productList = productRepository.findAll();
 	
 		return productList;
+	}
+
+	public Product getOneProduct(Long id) {
+		
+		Product product = em.find(Product.class, id);
+	 
+		return product;
 	}
 }

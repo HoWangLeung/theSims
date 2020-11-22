@@ -20,10 +20,10 @@ const headerProductCategory = () => (
         key: 'category',
         align: 'center',
         render: (text, row, index) => {
-
+          console.log(row);
             return (
                 <p>
-                    {text.name}
+                    {row.category}
                 </p>
             )
         }

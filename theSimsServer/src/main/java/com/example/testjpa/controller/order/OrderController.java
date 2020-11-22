@@ -1,9 +1,11 @@
 package com.example.testjpa.controller.order;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,16 +31,27 @@ public class OrderController {
 	}
 	
 	@GetMapping("/{id}")
-	public Orders getOrderById(@PathVariable Long id) {
-	 
-		Orders specificOrder = orderService.getOrderById(id); 
-	return specificOrder;
+	public  Map<String, Object> getOrderById(@PathVariable Long id) { 
+		return orderService.getOrderById(id); 	
 	}
+	
+	@GetMapping("user/{id}")
+	public  Map<String, Object> getOrderByUserId(@PathVariable Long id) { 
+		return orderService.getOrderByUserId(id); 	
+	}
+	
+	
 	@PostMapping("/addOrder")
-	public void addOrder(@RequestBody Orders order) {
+	public Map<String, Object> addOrder(@RequestBody Map<String,Object>req) {
+				
+		return orderService.addOrder(req);
+
+	}
+	
+	@DeleteMapping("/removeProduct")
+	public Map<String, Object> removeOneProduct(@RequestBody Map<String,Object>req) {
 		
-		
-		orderService.addOrder(order);
+		return orderService.removeOneProduct(req);
 
 	}
 	

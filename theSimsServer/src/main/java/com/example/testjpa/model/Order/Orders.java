@@ -3,6 +3,7 @@ package com.example.testjpa.model.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.testjpa.model.Users;
-import com.example.testjpa.model.inventory.Product;
 
 @Entity
 @Table
@@ -28,8 +28,8 @@ public class Orders {
 	private Users users;
 	 
  
-	@OneToMany(mappedBy = "orders")
-    private List<OrdersProduct> orderProductList;
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrdersProduct> orderProductList = new ArrayList<>();
 
 	public Orders() {
 		super();
@@ -42,7 +42,7 @@ public class Orders {
 		super();
 		this.status = status;
 		this.users = users;
-//		this.orderProductList = orderProductList;
+//	this.orderProductList = orderProductList;
 	}
 
 	public Long getId() {
@@ -73,8 +73,19 @@ public class Orders {
 		return orderProductList;
 	}
 
+	
 	public void setOrderProductList(List<OrdersProduct> orderProductList) {
 		this.orderProductList = orderProductList;
+	}
+
+	public void addProductToList(OrdersProduct orderProduct) {
+		System.out.println("orderProduct >>" + orderProduct);
+		this.orderProductList.add(orderProduct);
+	}
+	
+	public void removeProductFromList(OrdersProduct orderProduct) {
+		System.out.println("orderProduct to be removed === >>" + orderProduct);
+		this.orderProductList.remove(orderProduct);
 	}
 
 	

@@ -39,7 +39,7 @@ public class InventoryController {
 			  resultMap.put("id", product.getId());
 			  resultMap.put("productName", product.getProductName());
 			  resultMap.put("country", product.getCountryOrigin());
-			  resultMap.put("cateogry", product.getCategory().getName());
+			  resultMap.put("category", product.getCategory().getName());
 			  resultMapList.add(resultMap);
 		 }
 		 System.out.println(resultMapList);

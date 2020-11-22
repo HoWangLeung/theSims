@@ -23,6 +23,8 @@ import NavigationMenu from './Common/NavigationMenu';
 
 import ProductMainpage from './Components/ProductMainPage/ProductMainPage';
 import Signupsuccess from './Components/Authentication/SignUp/SignUpSuccess/SignUpSuccess';
+import Specificproduct from './Components/ProductMainPage/Products/SpecificProduct/SpecificProduct';
+import Pagenotfound from './Components/ProductMainPage/Products/SpecificProduct/PageNotFound';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -56,7 +58,8 @@ export default class RouterIndex extends Component {
                         <Content className={classes.content}>
                             <Switch>
                                 <Route exact path='/' component={ProductMainpage} />
-                                {/* <Route exact path='/' component={Login} /> */}
+                                <Route path='/product/:id' component={Specificproduct} /> 
+                                <Route path='/404' component={Pagenotfound} /> 
                                 <Route path='/login' component={Login} />
                                 <Route path='/signup' component={SignUpMainPage} />
                                 <Route path='/signup-customer' component={SignUp} />

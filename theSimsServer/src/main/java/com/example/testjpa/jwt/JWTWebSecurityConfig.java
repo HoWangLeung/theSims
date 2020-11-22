@@ -154,6 +154,12 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
         		 HttpMethod.GET,
                  "/products/"
         		)
+            .and()
+            .ignoring()
+            .antMatchers(
+        		 HttpMethod.GET,
+                 "/products/**"
+        		)
             
             ;
         

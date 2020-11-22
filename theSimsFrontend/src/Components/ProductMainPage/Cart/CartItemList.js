@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { List, Avatar } from 'antd';
+import { List, Avatar, Button } from 'antd';
 import Quantselecter from './QuantSelecter';
-import { useSelector } from 'react-redux';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProductInCart } from '../actions/productActions';
+ 
 const Cartitemlist = (props) => {
 
 
@@ -23,29 +23,42 @@ const Cartitemlist = (props) => {
         },
     ];
     const cartList = useSelector(state => state.ProductReducer.cartList);
-    
-    const cartListItem = cartList.productDetail
-    
+
+    const cartListItem = cartList.orderProductList
+    console.log(cartList);
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
-    
+
+    const dispatch = useDispatch()
+    const handleDelete=(item,e)=>{
+        console.log(item);
+        let payload={
+            userId:parseInt(sessionStorage.getItem("userId")),
+            productId:item.id,
+            status:"status",
+         
+        }
+        dispatch(deleteProductInCart(payload))
+      
+    }
+
     return (
 
         <List
             itemLayout="horizontal"
             dataSource={cartListItem}
             renderItem={item => {
-                    
+                console.log(item);
                 return (
-                    <List.Item title={<a href="https://ant.design">{item.productName}</a>}
+                    <List.Item title={<a href="https://ant.design">{item.product.productName} </a>}
                         actions={
                             [
                                 <Quantselecter />,
-                                <a key="list-loadmore-more">delete</a>
+                                <Button onClick={e=>handleDelete(item,e)}>delete</Button>
                             ]}>
                         <List.Item.Meta
                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
 
-                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                            description={`${item.product.productName} ${item.quantity} `}
                         />
                     </List.Item>
                 )

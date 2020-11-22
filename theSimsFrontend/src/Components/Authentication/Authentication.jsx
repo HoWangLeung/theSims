@@ -22,7 +22,7 @@ class Authentication extends Component {
 
     setupAxiosInterceptors(){
    
-        
+            console.log('intercepting');
         axios.interceptors.request.use(
             (config)=>{
                 if(this.isUserLoggedIn()){
@@ -38,7 +38,7 @@ class Authentication extends Component {
     }
 
     componentWillMount(){
-
+        console.log('will mount');
         if(this.isUserLoggedIn()){
             this.setupAxiosInterceptors()
         }

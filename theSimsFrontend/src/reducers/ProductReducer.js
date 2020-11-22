@@ -3,7 +3,8 @@ import _ from 'lodash';
 const initState = {
     isLoading: false,
     productList: [],
-    cartList: []
+    cartList: [],
+    specificProduct:{}
 }
 
 
@@ -28,25 +29,21 @@ const ProductReducer = (state = initState, action) => {
             };
 
         case ("FETCH_PRODUCTSINCART_SUCCESS"):
-
+            console.log(action.payload);
             return {
                 ...state,
-                cartList: action.payload.detail
+                cartList: action.payload
             }
-        case ("ADD_TO_CART"):
-            
-            return {
-                ...state,
-                isLoading: true,
-            }
+  
 
-        case ("ADD_TO_CART_SUCCESS"):
-            
-            return {
+        case("FETCH_ONE_PRODUCT_SUCCESS"):
 
-                ...state,
 
-            }
+        return {  
+            ...state,
+            specificProduct:action.payload.detail
+
+        }
 
 
 

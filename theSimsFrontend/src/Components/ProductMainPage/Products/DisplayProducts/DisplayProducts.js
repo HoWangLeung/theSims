@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart } from '../../actions/productActions';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -21,14 +22,12 @@ const Displayproducts = (props) => {
         dispatch(fetchAllProducts())
     }, []);
 
-    const onLoadMore = () => {
-
-    };
+   
 
 
-    const useOnClick = () => {
-
-        dispatch(addToCart())
+    const useOnClick = e => {
+        console.log(e.currentTarget);
+        // dispatch(addToCart())
     }
 
     const cardList = (<List
@@ -47,11 +46,9 @@ const Displayproducts = (props) => {
                 <Skeleton avatar title={false} loading={item.loading} active>
                     <List.Item>
                         <Card
-                            title={item.productName}
-                            actions={[
-                                <Input />,
-                                <Button onClick={useOnClick} >Add</Button>,
-                            ]}
+                            title={
+                            <Link to={`/product/${item.id}`}>{item.productName}</Link>
+                            }                 
                         >
                             Card content</Card>
                     </List.Item>
