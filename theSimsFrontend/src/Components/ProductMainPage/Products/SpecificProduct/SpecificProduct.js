@@ -7,14 +7,14 @@ import ProductPicture from './pictureArea/ProductPicture';
 import Productdetail from './purchaseArea/ProductDetail';
 
 function Specificproduct(props) {
-    console.log(props);
+    
     const { match: { params: { id } } } = props
 
     const product = useSelector(state => {
-        console.log(state.ProductReducer.specificProduct);
+        
         return state.ProductReducer.specificProduct
     });
-    console.log(product);
+    
     const dispatch = useDispatch();
     useEffect(() => {
 

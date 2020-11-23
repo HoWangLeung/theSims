@@ -26,7 +26,7 @@ const Displayproducts = (props) => {
 
 
     const useOnClick = e => {
-        console.log(e.currentTarget);
+        
         // dispatch(addToCart())
     }
 

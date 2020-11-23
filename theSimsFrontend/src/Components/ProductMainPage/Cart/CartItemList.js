@@ -25,16 +25,16 @@ const Cartitemlist = (props) => {
     const cartList = useSelector(state => state.ProductReducer.cartList);
 
     const cartListItem = cartList.orderProductList
-    console.log(cartList);
+    
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
 
     const dispatch = useDispatch()
     const handleDelete=(item,e)=>{
-        console.log(item);
+        
         let payload={
             userId:parseInt(sessionStorage.getItem("userId")),
-            productId:item.id,
-            status:"status",
+            productId:parseInt(item.id),
+            status:"pending",
          
         }
         dispatch(deleteProductInCart(payload))
@@ -47,7 +47,7 @@ const Cartitemlist = (props) => {
             itemLayout="horizontal"
             dataSource={cartListItem}
             renderItem={item => {
-                console.log(item);
+                
                 return (
                     <List.Item title={<a href="https://ant.design">{item.product.productName} </a>}
                         actions={

@@ -25,6 +25,8 @@ import ProductMainpage from './Components/ProductMainPage/ProductMainPage';
 import Signupsuccess from './Components/Authentication/SignUp/SignUpSuccess/SignUpSuccess';
 import Specificproduct from './Components/ProductMainPage/Products/SpecificProduct/SpecificProduct';
 import Pagenotfound from './Components/ProductMainPage/Products/SpecificProduct/PageNotFound';
+import AuthenticationService from './Components/Authentication/SignUp/AuthenticationService';
+import axios from 'axios';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -40,7 +42,7 @@ export default class RouterIndex extends Component {
 
     }
 
-
+   
 
     render() {
         return (

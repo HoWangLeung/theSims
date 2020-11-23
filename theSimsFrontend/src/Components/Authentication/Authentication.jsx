@@ -22,7 +22,7 @@ class Authentication extends Component {
 
     setupAxiosInterceptors(){
    
-            console.log('intercepting');
+            console.log('intercepting from Authentication .jsx , is it working on refresh ? ');
         axios.interceptors.request.use(
             (config)=>{
                 if(this.isUserLoggedIn()){

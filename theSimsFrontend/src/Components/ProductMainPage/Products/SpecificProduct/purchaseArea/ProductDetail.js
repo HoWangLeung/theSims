@@ -16,10 +16,10 @@ function Productdetail(props) {
     const[quantity, setQuantity] =useState(1)
     const user = useSelector(state =>state.AuthenticationReducer.userProfile);
     const[currentUser , setCurrentUser] = useState(user)
-    console.log(currentUser);
-    console.log(user);
+    
+    
     function onChange(value) {
-        console.log('changed', value);
+        
         setQuantity(value)
     }
 
@@ -51,7 +51,7 @@ function Productdetail(props) {
             status:"pending"   
         }
 
-        console.log(payload);
+        
         dispatch(addToCart(payload))
         
     }

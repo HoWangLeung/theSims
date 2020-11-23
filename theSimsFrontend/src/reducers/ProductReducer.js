@@ -29,7 +29,7 @@ const ProductReducer = (state = initState, action) => {
             };
 
         case ("FETCH_PRODUCTSINCART_SUCCESS"):
-            console.log(action.payload);
+            
             return {
                 ...state,
                 cartList: action.payload

@@ -44,8 +44,8 @@ class EditStepTwo extends Component {
     componentDidMount() {
         const { inventoryList,selectedRowKeys } = this.props
 
-        console.log(inventoryList);
-        console.log(selectedRowKeys);
+        
+        
         const previewList = cloneDeep(inventoryList);
         previewList.forEach((item) => {
             item.remaining += this.state.addToAllValue
@@ -73,7 +73,7 @@ class EditStepTwo extends Component {
         const { undoAdded } = this.state
         const valueToAdd = parseInt(values.addToAll)
         const updatedPreviewList = cloneDeep(previewList);
-        console.log(values);
+        
         if (!_.isUndefined(valueToAdd) && !undoAdded) {
 
             updatedPreviewList.forEach((item) => {

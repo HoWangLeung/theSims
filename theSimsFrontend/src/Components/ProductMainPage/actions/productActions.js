@@ -1,8 +1,20 @@
 import axios from 'axios'
 import { API } from '../../../ApiConfig'
+import AuthenticationService from '../../Authentication/SignUp/AuthenticationService'
 
 const sleep = m => new Promise(r => setTimeout(r, m))
-
+// axios.interceptors.request.use(
+//   (config)=>{
+//       if(AuthenticationService.isUserLoggedIn()){
+//           console.log('setting in actiono !!!!!!!!');
+//           config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
+//       }
+//       return config
+//   },
+//   error=>{
+      
+//   }
+// )
 export const fetchAllProducts = () => {
 
   return async (dispatch, getState) => {
@@ -10,7 +22,7 @@ export const fetchAllProducts = () => {
       dispatch({ type: 'FETCH_PRODUCTS_REQUEST' })
       await sleep(300)
       let res = await axios.get(`${API}/products/`)
-      console.log(res);
+      
       dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data })
       return res
 
@@ -27,7 +39,9 @@ export const fetchProductsInCart = () => {
     try {
       let userId = sessionStorage.getItem("userId")
       let token = sessionStorage.getItem('USER_TOKEN')
-      let res = await axios.get(`${API}/orders/user/${userId}`, { headers: { "Authorization": token }} )
+      let res = await axios.get(`${API}/orders/user/${userId}`
+      // , { headers: { "Authorization": token }} 
+      )
       dispatch({ type: 'FETCH_PRODUCTSINCART_SUCCESS', payload: res.data })
     
       return res
@@ -41,7 +55,7 @@ export const fetchProductsInCart = () => {
 }
 
 export const fetchOneProduct = (id) => {
-  console.log('id=> ', id);
+  
   return async (dispatch, getState) => {
 
     try {
@@ -65,11 +79,15 @@ export const addToCart = (payload) => {
     
     try {
       let token = sessionStorage.getItem('USER_TOKEN')
-      console.log(payload);
+      
       dispatch({ type: 'ADD_TO_CART_REQUEST' })
-      let res = await axios.post(`${API}/orders/addOrder`, payload,{ headers: { "Authorization": token }})
-      dispatch({ type: 'ADD_TO_CART_SUCCESS' })
+      let res = await axios.post(`${API}/orders/addOrder`, payload
+   
+      // ,{ headers: { "Authorization": token }}
+      )
       console.log(res);
+      dispatch({ type: 'ADD_TO_CART_SUCCESS' })
+      
 
 
     } catch (err) {
@@ -85,16 +103,16 @@ export const deleteProductInCart = (payload) => {
     
     try {
       let token = sessionStorage.getItem('USER_TOKEN')
-      console.log(payload);
+      
       dispatch({ type: 'DELETE_PRODUCT_CART_REQUEST' })
-     
+     console.log(payload);
       let res = await axios.delete(`${API}/orders/removeProduct`, 
       {data: payload},
       { headers: { "Authorization": token }},
   
     
       )
-      console.log(res);
+      
       dispatch({ type: 'DELETE_PRODUCT_CART_SUCCESS' })
     return res
     } catch (err) {

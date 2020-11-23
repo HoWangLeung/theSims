@@ -50,7 +50,7 @@ public class OrderController {
 	
 	@DeleteMapping("/removeProduct")
 	public Map<String, Object> removeOneProduct(@RequestBody Map<String,Object>req) {
-		
+		System.out.println(req.get("userId"));
 		return orderService.removeOneProduct(req);
 
 	}

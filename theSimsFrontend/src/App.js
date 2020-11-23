@@ -10,6 +10,8 @@ import zh_CN from 'antd/es/locale/zh_CN';
 import en_US from 'antd/es/locale/en_US';
 
 import RouterIndex from './RouterIndex'
+import axios from 'axios'
+import AuthenticationService from './Components/Authentication/SignUp/AuthenticationService';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -29,6 +31,19 @@ class App extends Component {
   componentDidMount() {
     emit.on('change_language', lang => this.loadLocales(lang)); 
     this.loadLocales(); 
+    console.log('mounted');
+    axios.interceptors.request.use(
+        (config)=>{
+            if(AuthenticationService.isUserLoggedIn()){
+                console.log('setting in actiono !!!!!!!!');
+                config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
+            }
+            return config
+        },
+        error=>{
+            
+        }
+      )
   }
 
   loadLocales =  (lang = 'en-US') => {
