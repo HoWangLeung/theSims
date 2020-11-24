@@ -144,15 +144,22 @@ public class OrderService {
 		System.out.println("specificOrder=========> " + specificOrder);
 
 		if (specificOrder.getOrderProductList().size() == 1) {
-			System.out.println("ONLY ONE PRODUCT REMAINS");
+			System.out.println("ONLY ONE PRODUCT REMAINS => size " + specificOrder.getOrderProductList().size());
+			specificOrder.getOrderProductList().stream().forEach(e->System.out.println(e.getProduct().getId()));
 			OrdersProduct productToBeRemoved = specificOrder.getOrderProductList().stream()
 					.filter(e -> e.getProduct().getId().equals(reqPrdocutId)).findFirst().get();
 			System.out.println("GETTING");
 			specificOrder.removeProductFromList(productToBeRemoved);
 			em.remove(specificOrder);
+		
 			return null;
 		} else {
 			System.out.println("MORE THEN ONE REMAINS");
+			specificOrder.getOrderProductList().stream().forEach(e->System.out.println(e.getProduct().getId()));
+			OrdersProduct productToBeRemoved = specificOrder.getOrderProductList().stream()
+					.filter(e -> e.getProduct().getId().equals(reqPrdocutId)).findFirst().get();
+			
+			specificOrder.removeProductFromList(productToBeRemoved);
 			em.merge(specificOrder);
 			Map<String, Object> userOrder = this.getOrderByUserId(userId);
 			return userOrder;

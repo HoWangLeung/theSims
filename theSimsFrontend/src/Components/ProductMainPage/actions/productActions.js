@@ -1,4 +1,6 @@
+import responsiveObserve from 'antd/lib/_util/responsiveObserve'
 import axios from 'axios'
+import { result } from 'lodash'
 import { API } from '../../../ApiConfig'
 import AuthenticationService from '../../Authentication/SignUp/AuthenticationService'
 
@@ -107,13 +109,14 @@ export const deleteProductInCart = (payload) => {
       dispatch({ type: 'DELETE_PRODUCT_CART_REQUEST' })
      console.log(payload);
       let res = await axios.delete(`${API}/orders/removeProduct`, 
+
       {data: payload},
       { headers: { "Authorization": token }},
   
     
       )
-      
-      dispatch({ type: 'DELETE_PRODUCT_CART_SUCCESS' })
+      console.log(res);
+      dispatch({ type: 'DELETE_PRODUCT_CART_SUCCESS', payload:res})
     return res
     } catch (err) {
 

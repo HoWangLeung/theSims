@@ -6,6 +6,7 @@ import { Badge, Button, Drawer } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductsInCart } from '../actions/productActions'
 import Cartitemlist from './CartItemList'
+import { withRouter } from 'react-router-dom'
  
 
 
@@ -28,7 +29,9 @@ const Cart=(props)=> {
 
     }, []);
  
- 
+    const handleProceed=()=>{
+         props.history.push("/checkout")
+    }
     return (
         <>
             <Badge  className={classes.ShoppingCartOutlined}
@@ -46,7 +49,7 @@ const Cart=(props)=> {
                 visible={drawerVisible}
             >
                <Cartitemlist/>
-               <Button>Proceed</Button>
+               <Button onClick={handleProceed}>Proceed</Button>
           </Drawer>
         
 
@@ -58,4 +61,4 @@ Cart.propTypes = {
 
 }
 
-export default Cart
+export default withRouter(Cart)

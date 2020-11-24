@@ -45,7 +45,24 @@ const ProductReducer = (state = initState, action) => {
 
         }
 
+        case("DELETE_PRODUCT_CART_SUCCESS"):
+            console.log(action.payload);
+            if(action.payload.data && action.payload.data==="" && action.payload.status===200){
+                console.log('only one remain');
+                return{
+                    ...state,
+                    cartList:[]
+                }
+            }else{
 
+                console.log('more then one remains');
+                console.log(action.payload.data.orderProductList);
+                return {
+                    ...state,
+                    cartList:action.payload.data
+                }
+            }
+            
 
 
 

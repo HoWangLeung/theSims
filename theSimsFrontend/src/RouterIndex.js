@@ -27,6 +27,7 @@ import Specificproduct from './Components/ProductMainPage/Products/SpecificProdu
 import Pagenotfound from './Components/ProductMainPage/Products/SpecificProduct/PageNotFound';
 import AuthenticationService from './Components/Authentication/SignUp/AuthenticationService';
 import axios from 'axios';
+import Checkout from './Components/Checkout/Checkout';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -69,6 +70,7 @@ export default class RouterIndex extends Component {
                                 <AuthenticatedRoute path='/dashboard' component={Dashboard} />
                                 <AuthenticatedRoute path='/employee' component={Employee} />
                                 <AuthenticatedRoute path='/inventory' component={Inventory} />
+                                <AuthenticatedRoute path='/checkout' component={Checkout} />
                                 <Route path='/jotto' component={Home} />
                                 <Route path='/createMenu' component={CreateTemplate} />
                                 <Route path='/counter' component={Counter} />

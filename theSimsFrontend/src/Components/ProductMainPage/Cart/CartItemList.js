@@ -23,17 +23,17 @@ const Cartitemlist = (props) => {
         },
     ];
     const cartList = useSelector(state => state.ProductReducer.cartList);
-
+    console.log('cartList ' , cartList);
     const cartListItem = cartList.orderProductList
     
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
 
     const dispatch = useDispatch()
     const handleDelete=(item,e)=>{
-        
+        console.log(item);
         let payload={
             userId:parseInt(sessionStorage.getItem("userId")),
-            productId:parseInt(item.id),
+            productId:parseInt(item.product.id),
             status:"pending",
          
         }
