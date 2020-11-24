@@ -83,6 +83,7 @@ export const addToCart = (payload) => {
       let token = sessionStorage.getItem('USER_TOKEN')
       
       dispatch({ type: 'ADD_TO_CART_REQUEST' })
+      await sleep(400)
       let res = await axios.post(`${API}/orders/addOrder`, payload
    
       // ,{ headers: { "Authorization": token }}

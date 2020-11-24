@@ -15,8 +15,10 @@ function Productdetail(props) {
     const dispatch = useDispatch();
     const[quantity, setQuantity] =useState(1)
     const user = useSelector(state =>state.AuthenticationReducer.userProfile);
+    const isFetching = useSelector(state =>state.LoadingReducer);
+    console.log(isFetching);
     const[currentUser , setCurrentUser] = useState(user)
-    
+
     
     function onChange(value) {
         
@@ -53,6 +55,11 @@ function Productdetail(props) {
 
         
         dispatch(addToCart(payload))
+        .then(res=>{
+            CommonModal.success({
+                content: "Successfully Added"  
+            })
+        })
         
     }
     return (
@@ -60,7 +67,7 @@ function Productdetail(props) {
             <h2> {product.productName}</h2>
             <p>Price: {product.basePrice}</p>
             <InputNumber size="large" min={1} max={100000} defaultValue={quantity} onChange={onChange} />
-            <Button onClick={handleClick}>Confirm</Button>
+            <Button loading={isFetching["ADD_TO_CART"]} onClick={handleClick}>Confirm</Button>
         </div>
     )
 }

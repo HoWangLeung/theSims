@@ -23,7 +23,8 @@ class NavigationMenu extends Component {
         const { current } = this.state;
         const { location: { pathname } } = this.props
         let id=pathname.substring(pathname.lastIndexOf('/') + 1)
-        if (['/','/signup-customer','/signup','/login','/signup-success',`/product/${id}`].includes(pathname))  return null
+        if (['/','/signup-customer','/signup','/login','/signup-success',
+        `/product/${id}`,'/checkout'].includes(pathname))  return null
 
 
       

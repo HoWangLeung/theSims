@@ -22,7 +22,7 @@ class Banner extends Component {
     
         let id=pathname.substring(pathname.lastIndexOf('/') + 1)
         if (['/','/signup-customer','/signup','/login','/signup-success'
-        ,`/product/${id}`].includes(pathname))
+        ,`/product/${id}`, '/checkout'].includes(pathname))
             return null
 
         return (
