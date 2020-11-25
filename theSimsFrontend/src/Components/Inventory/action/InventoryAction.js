@@ -28,7 +28,7 @@ export const createProduct = (createProductList) => {
         try {
             
             dispatch({ type: 'CREATE_PRODUCT_REQUEST' })
-            await sleep(1000)
+           
             let response = await axios.post(`${API}/inventory/add/`, payload)
             
              dispatch({ type: 'CREATE_PRODUCT_SUCCESS', payload: response.data })
@@ -46,7 +46,7 @@ export const fetchInventory = () => {
 
         try {
             dispatch({ type: 'FETCH_INVENTORY_REQUEST' })
-            await sleep(1000)
+    
             let response = await axios.get(`${API}/inventory/`)
             dispatch({ type: 'FETCH_INVENTORY_SUCCESS', payload: response.data })
             return response
@@ -70,7 +70,7 @@ export const saveUpdatedList = (updatedPreviewList) => {
 
         try {
             dispatch({ type: 'SAVE_UPDATEDLIST_REQUEST', payload: updatedPreviewList })
-            await sleep(1000)
+    
             let res = await axios.put(`${API}/inventory/updateProducts`, updatedPreviewList)
             dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
             return res

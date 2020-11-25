@@ -90,7 +90,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
+            .antMatchers("/").hasAnyAuthority("CUSTOMER", "CREATOR", "EDITOR", "ADMIN")
             .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
             .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
             .antMatchers("/employee/1").hasAuthority("ADMIN")

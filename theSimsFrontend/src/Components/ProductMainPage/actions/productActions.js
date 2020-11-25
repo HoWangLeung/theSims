@@ -22,7 +22,7 @@ export const fetchAllProducts = () => {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: 'FETCH_PRODUCTS_REQUEST' })
-      await sleep(300)
+
       let res = await axios.get(`${API}/products/`)
       
       dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data })
@@ -83,7 +83,6 @@ export const addToCart = (payload) => {
       let token = sessionStorage.getItem('USER_TOKEN')
       
       dispatch({ type: 'ADD_TO_CART_REQUEST' })
-      await sleep(400)
       let res = await axios.post(`${API}/orders/addOrder`, payload
    
       // ,{ headers: { "Authorization": token }}

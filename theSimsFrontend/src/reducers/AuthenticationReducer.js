@@ -35,7 +35,7 @@ const AuthenticationReducer = (state = initState, action) => {
             console.log(action.payload);
             return {
                 ...state,
-                userProfile:action.payload
+                userProfile:action.payload.detail
             };
         default:
             return state;

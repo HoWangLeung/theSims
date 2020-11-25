@@ -9,7 +9,7 @@ export const fetchEmployee = () => {
     return (dispatch, getState) => {
 
         dispatch({ type: 'FETCH_EMPLOYEE' })
-        setTimeout(() => {
+   
             axios.get(`${API}/employee/`)
                 .then(res => {
 
@@ -18,7 +18,7 @@ export const fetchEmployee = () => {
                 .catch(error => {
                     dispatch({ type: 'FETCH_EMPLOYEE_FAILURE', payload: error })
                 })
-        }, 1200);
+  
 
     }
 }
@@ -28,7 +28,7 @@ export const deleteEmployee = (id, res, modal) => {
     return (dispatch, getState) => {
 
         dispatch({ type: 'DELETE_EMPLOYEE', payload: { modal } })
-        setTimeout(() => {
+
             axios.delete(`${API}/employee/delete/${id}`)
                 .then(response => {
                     dispatch({
@@ -43,7 +43,7 @@ export const deleteEmployee = (id, res, modal) => {
                 .catch(error => {
                     dispatch({ type: 'DELETE_EMPLOYEE_FAILURE' })
                 })
-        }, 1200);
+   
 
     };
 }
@@ -62,7 +62,7 @@ export const searchEmployee = (payload) => {
 
     return (dispatch, getState) => {
         dispatch({ type: 'SEARCH_EMPLOYEE', payload: { values } })
-        setTimeout(() => {
+
             axios.get(`${API}/employee/search`, { params })
                 .then(res => {
 
@@ -81,7 +81,7 @@ export const searchEmployee = (payload) => {
                     }
 
                 })
-        }, 500);
+  
 
     }
 
@@ -91,13 +91,13 @@ export const searchByDepartment = (payload) => {
     const params = { department: payload.department }
     return (dispatch, getState) => {
         dispatch({ type: 'SEARCH_DEPARTMENT_REQUEST', payload })
-        setTimeout(() => {
+    
             axios.get(`${API}/employee/search`, { params })
                 .then(res => {
                     
                     dispatch({ type: 'SEARCH_DEPARTMENT_SUCCESS', payload: res.data })
                 })
-        }, 500);
+    
 
     }
 

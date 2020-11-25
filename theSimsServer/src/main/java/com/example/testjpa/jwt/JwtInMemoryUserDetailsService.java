@@ -1,7 +1,7 @@
 package com.example.testjpa.jwt;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -54,12 +54,10 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	}
 
 	@Transactional
-	public List<Users> getUserProfile(String username) {
-
-		 System.out.println("GETUSERPROFILE QUERYYYY  ----");
-
-		List<Users> user =  em.createQuery("select u from Users u where u.username = 'derek1'").getResultList();
-		System.out.println(user + "USER ===========================================================<");
+	public Users getUserProfile(Map<String,Object> req) {
+		String username = (String) req.get("username");
+		Users user = internalUserAccountRepository.findByUsername(username);
+		System.out.println(user.getId() + "USER id ===========================================================<");
 		return user;
 	}
 

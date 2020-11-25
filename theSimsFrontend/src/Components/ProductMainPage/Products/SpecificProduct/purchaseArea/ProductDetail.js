@@ -43,23 +43,27 @@ function Productdetail(props) {
     const handleClick = () => {
      
         let isLoggedIn = AuthenticationService.isUserLoggedIn()
-        if(!isLoggedIn) askForLogin()
-
-
-        let payload={
-            userId: parseInt(sessionStorage.getItem('userId')),
-            quantity,
-            productId:product.id,
-            status:"pending"   
+        if(!isLoggedIn){
+            askForLogin()
+        }else{
+            let payload={
+                userId: parseInt(sessionStorage.getItem('userId')),
+                quantity,
+                productId:product.id,
+                status:"pending"   
+            }
+    
+            
+            dispatch(addToCart(payload))
+            .then(res=>{
+                CommonModal.success({
+                    content: "Successfully Added"  
+                })
+            })
         }
 
-        
-        dispatch(addToCart(payload))
-        .then(res=>{
-            CommonModal.success({
-                content: "Successfully Added"  
-            })
-        })
+
+     
         
     }
     return (
