@@ -16,6 +16,9 @@ const Cart=(props)=> {
   
     const [drawerVisible, setDrawerVisible] = useState(false)
 
+    const orderInfo = useSelector(state => state.ProductReducer.cartList);
+    const cartListItem = orderInfo.orderProductList
+
     const openDrawer=()=>(
         setDrawerVisible(true)
     )
@@ -31,6 +34,10 @@ const Cart=(props)=> {
  
     const handleProceed=()=>{
          props.history.push("/checkout")
+         console.log(orderInfo);
+   
+
+
     }
     return (
         <>

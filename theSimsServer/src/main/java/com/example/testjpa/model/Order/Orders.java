@@ -88,6 +88,11 @@ public class Orders {
 		this.orderProductList.remove(orderProduct);
 	}
 
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", status=" + status + "]";
+	}
+
 	
 	
 	

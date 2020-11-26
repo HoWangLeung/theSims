@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.model.Order.Orders;
@@ -52,8 +54,17 @@ public class OrderController {
 	public Map<String, Object> removeOneProduct(@RequestBody Map<String,Object>req) {
 		System.out.println(req.get("userId"));
 		return orderService.removeOneProduct(req);
-
 	}
+	
+	
+	@PutMapping("/changeOrderStatus/{id}")
+	public  Map<String, Object> proceedToCheckout(@RequestParam(name = "status") String status, @PathVariable Long id) {
+		
+		System.out.println("status => " + status);
+ 
+		return orderService.changeStatus(id, status);
+	}
+	
 	
 	
 }

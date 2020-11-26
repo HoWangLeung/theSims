@@ -167,4 +167,15 @@ public class OrderService {
 
 	}
 
+	public Map<String, Object> changeStatus(Long id, String status) {
+		
+		System.out.println("id ==> " + id);
+		Orders targetOrder = em.find(Orders.class, id);
+		System.out.println("order = > " + targetOrder.toString());
+		targetOrder.setStatus(status);
+		em.merge(targetOrder);
+
+		return null;
+	}
+
 }
