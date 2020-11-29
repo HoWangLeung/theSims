@@ -34,7 +34,7 @@ const Cart=(props)=> {
  
     const handleProceed=()=>{
          props.history.push("/checkout")
-         console.log(orderInfo);
+    
    
 
 

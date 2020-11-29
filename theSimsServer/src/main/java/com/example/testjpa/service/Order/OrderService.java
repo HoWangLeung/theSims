@@ -56,28 +56,50 @@ public class OrderService {
 			System.out.println("isProductExist => " + isProductExist);
 
 			if (isProductExist) {
-				System.out.println("product alread exist, should append to current product");
+				System.out.println("producst alread exist, should append to current product");
 				int quantity2 = ((Integer) req.get("quantity")).intValue();
 				System.out.println("quantity 2 => " + quantity2);
 				OrdersProduct oldOrderedProduct = oldOrder.getOrderProductList().stream()
 						.filter(e -> e.getProduct().getId().equals(productId)).collect(Collectors.toList()).get(0);
 
 				int newQuantity = oldOrderedProduct.getQuantity() + quantity2;
-				System.out.println(newQuantity);
+
+				System.out.println("newQuantity ==>" + newQuantity);
 				oldOrderedProduct.setQuantity(newQuantity);
-				oldOrder.addProductToList(oldOrderedProduct);
+				
+				
+				int newSum = 0;
+				List<OrdersProduct> oldProductsList = oldOrder.getOrderProductList();
+				for (OrdersProduct o : oldProductsList) {
+					System.out.println("olddSum" + o.getQuantity() * o.getProduct().getBasePrice());
+					newSum += o.getQuantity() * o.getProduct().getBasePrice();
+				}
+				oldOrder.setTotal(newSum);
 				em.persist(oldOrder);
 
 			} else {
 
-				System.out.println("new Product need to be added");
+				System.out.println("new Products need to be added");
 				OrdersProduct osp = new OrdersProduct();
 				int quantity1 = ((Integer) req.get("quantity")).intValue();
 				osp.setQuantity(quantity1);
 				osp.setProduct(product);
 				osp.setOrders(oldOrder);
-
 				oldOrder.addProductToList(osp);
+
+				int newSum = 0;
+
+				List<OrdersProduct> oldProductsList = oldOrder.getOrderProductList();
+
+				for (OrdersProduct o : oldProductsList) {
+
+					System.out.println("olddSum" + o.getQuantity() * o.getProduct().getBasePrice());
+					newSum += o.getQuantity() * o.getProduct().getBasePrice();
+				}
+
+				oldOrder.setTotal(newSum);
+
+				System.out.println("newSum 92  => " + newSum);
 				em.persist(oldOrder);
 			}
 
@@ -100,6 +122,11 @@ public class OrderService {
 			newOrders.setUsers(specificUser);
 			newOrders.setStatus(req.get("status").toString());
 			newOrders.setOrderProductList(ordersProductList);
+
+			int newSum = newOrdersProduct1.getProduct().getBasePrice() * newOrdersProduct1.getQuantity();
+			newOrders.setTotal(newSum);
+
+			System.out.println("newSum 120  => " + newSum);
 			em.persist(newOrders);
 		}
 
@@ -130,45 +157,70 @@ public class OrderService {
 		resultMap.put("userId", specificOrder.getUsers().getId());
 		resultMap.put("userName", specificOrder.getUsers().getUsername());
 		resultMap.put("orderProductList", specificOrder.getOrderProductList());
+		resultMap.put("total", specificOrder.getTotal());
 		System.out.println(resultMap);
 		return resultMap;
 	}
 
 	public Map<String, Object> removeOneProduct(Map<String, Object> req) {
-		System.out.println("SDFSDFSDFsDFSDFSDFSDFf=====================>");
+
 		Long userId = ((Integer) req.get("userId")).longValue();
-		System.out.println("SDFSDFSDFsDFSDFSDFSDFf============2222222222222222222222222222=========>");
+
 		Long reqPrdocutId = ((Integer) req.get("productId")).longValue();
-		System.out.println("SDFSDFSDFsDFSDFSDFSDFf============333333322222222222222222222222222222=========>");
+
 		Orders specificOrder = orderRepository.findOrdersByUsersId(userId);
-		System.out.println("specificOrder=========> " + specificOrder);
 
 		if (specificOrder.getOrderProductList().size() == 1) {
 			System.out.println("ONLY ONE PRODUCT REMAINS => size " + specificOrder.getOrderProductList().size());
-			specificOrder.getOrderProductList().stream().forEach(e->System.out.println(e.getProduct().getId()));
+			specificOrder.getOrderProductList().stream().forEach(e -> System.out.println(e.getProduct().getId()));
 			OrdersProduct productToBeRemoved = specificOrder.getOrderProductList().stream()
 					.filter(e -> e.getProduct().getId().equals(reqPrdocutId)).findFirst().get();
 			System.out.println("GETTING");
 			specificOrder.removeProductFromList(productToBeRemoved);
+			
+			
 			em.remove(specificOrder);
-		
+
 			return null;
 		} else {
 			System.out.println("MORE THEN ONE REMAINS");
-			specificOrder.getOrderProductList().stream().forEach(e->System.out.println(e.getProduct().getId()));
+			specificOrder.getOrderProductList().stream().forEach(e -> System.out.println(e.getProduct().getId()));
 			OrdersProduct productToBeRemoved = specificOrder.getOrderProductList().stream()
 					.filter(e -> e.getProduct().getId().equals(reqPrdocutId)).findFirst().get();
-			
+
 			specificOrder.removeProductFromList(productToBeRemoved);
+			
+			int newSum = 0;
+
+			List<OrdersProduct> oldProductsList = specificOrder.getOrderProductList();
+
+			for (OrdersProduct o : oldProductsList) {
+
+				System.out.println("olddSum" + o.getQuantity() * o.getProduct().getBasePrice());
+				newSum += o.getQuantity() * o.getProduct().getBasePrice();
+			}
+
+			specificOrder.setTotal(newSum);
+			
+			
+			
+			
+			
+			
 			em.merge(specificOrder);
 			Map<String, Object> userOrder = this.getOrderByUserId(userId);
+			
+			
+			
+			
+			
 			return userOrder;
 		}
 
 	}
 
 	public Map<String, Object> changeStatus(Long id, String status) {
-		
+
 		System.out.println("id ==> " + id);
 		Orders targetOrder = em.find(Orders.class, id);
 		System.out.println("order = > " + targetOrder.toString());

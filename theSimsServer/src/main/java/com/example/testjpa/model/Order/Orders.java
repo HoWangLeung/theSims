@@ -23,13 +23,15 @@ public class Orders {
 	private Long id;
 	private String status;
 	
- 
+
 	@ManyToOne
 	private Users users;
 	 
  
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdersProduct> orderProductList = new ArrayList<>();
+	
+	private int total;
 
 	public Orders() {
 		super();
@@ -42,6 +44,7 @@ public class Orders {
 		super();
 		this.status = status;
 		this.users = users;
+		this.total=0;
 //	this.orderProductList = orderProductList;
 	}
 
@@ -86,6 +89,20 @@ public class Orders {
 	public void removeProductFromList(OrdersProduct orderProduct) {
 		System.out.println("orderProduct to be removed === >>" + orderProduct);
 		this.orderProductList.remove(orderProduct);
+	}
+	
+	
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		List<OrdersProduct> ops =  this.getOrderProductList();
+	
+		
+		
+		this.total = total;
 	}
 
 	@Override
