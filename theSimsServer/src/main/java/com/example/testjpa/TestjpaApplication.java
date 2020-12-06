@@ -6,19 +6,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import com.example.testjpa.model.SpringSecurityAuditorAware;
+import com.example.testjpa.model.AuditorAwareImpl;
+
+
 
 @SpringBootApplication
-@EnableJpaAuditing (auditorAwareRef="auditorAware")
-
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class TestjpaApplication {
 	
-	 @Bean
-	  public AuditorAware<String> auditorAware(){
-		return new SpringSecurityAuditorAware();
-		 
-	 }
-	  
+	@Bean
+    public AuditorAware<String> auditorAware() {
+        return new AuditorAwareImpl();
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(TestjpaApplication.class, args);

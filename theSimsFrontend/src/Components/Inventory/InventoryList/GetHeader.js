@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import intl from 'react-intl-universal';
 import classes from '../Inventory.less'
 import { Input } from 'antd';
-import TweenOne from 'rc-tween-one';
+
 
 const headerId = () => (
     {
@@ -106,6 +106,16 @@ const headerProductStatus = () => (
     }
 )
 
+const createdDate = () => (
+    {
+        title: "Created Date",
+        dataIndex: 'createdDate',
+        align: 'center',
+        key: 'createdDate',
+
+    }
+)
+
 const lastModifiedBy = () => (
     {
         title: () => (intl.get('lastModifiedBy')),
@@ -138,6 +148,7 @@ export const GetHeader = (config) => {
             headerProductCost(),
             headerProductRemaining(),
             headerProductStatus(),
+            createdDate(),
             lastModifiedBy(),
             lastModifiedDate(),
         ])

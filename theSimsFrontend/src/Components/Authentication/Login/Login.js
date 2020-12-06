@@ -22,7 +22,7 @@ class Login extends Component {
     onFinish = async (values) => {
         const { getUserProfile } = this.props
         const { username, password, remember } = values
-        console.log(username,password);
+        
         AuthenticationService
             .executeJwtAuthenticationService(username, password)
             .then((res) => {
@@ -35,13 +35,13 @@ class Login extends Component {
                 this.props.loginAction(isLoggedIn)
            
             }).then(() => {
-                console.log(username,password);
+                
                 let payload={username,password}
                 getUserProfile(payload)
                     .then(
                         res => {
                             sessionStorage.setItem('userId', parseInt(res.data.detail.id))
-                            console.log(res.data.detail.role );
+                            
                             if (res.data.detail.role === 'CUSTOMER'){
 
                                 this.props.history.push('/')
@@ -49,7 +49,7 @@ class Login extends Component {
                               
 
                             if (res.data.detail.role === 'ADMIN')
-                                this.props.history.push('/dashboard')
+                                this.props.history.push('/inventory')
 
                         }
                     )

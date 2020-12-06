@@ -1,23 +1,23 @@
 package com.example.testjpa.model.inventory;
 
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import com.example.testjpa.model.Order.Orders;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.example.testjpa.model.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class Product {
+@EntityListeners(AuditingEntityListener.class)
+public class Product extends Auditable<String>   {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,6 +27,9 @@ public class Product {
 	private int cost;
 	private int basePrice;
 	private int remaining;
+	
+ 
+ 
 
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -137,6 +140,41 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+
+
+//	public LocalDateTime getCreatedDate() {
+//		return createdDate;
+//	}
+//
+//
+//
+//	public void setCreatedDate(LocalDateTime createdDate) {
+//		this.createdDate = createdDate;
+//	}
+
+
+
+//	public LocalDateTime getLastUpdatedDate() {
+//		return lastUpdatedDate;
+//	}
+//
+//
+//
+//	public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+//		this.lastUpdatedDate = lastUpdatedDate;
+//	}
+
+
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", productName=" + productName + ", remaining=" + remaining + "]";
+	}
+
+
+
+	 
 
 
  

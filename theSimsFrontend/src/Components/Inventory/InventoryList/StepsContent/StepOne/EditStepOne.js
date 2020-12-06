@@ -15,10 +15,10 @@ class EditStepOne extends Component {
 
     renderStepOne = () => {
         const { content,selectedRows } = this.props
+        
         if (content === "createProduct")
             return <Createproduct />
-        if (content === "editMultiple"){
-            
+        if (content === "editMultiple"){  
             return(<>  <h3>You have Selected:</h3>
                 <Selectedlist key="selectedList" content={selectedRows} /></>)
           

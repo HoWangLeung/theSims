@@ -12,6 +12,7 @@ import LoginCard from '../../Components/Authentication/MainPageLogin/LoginCard'
 import intl from 'react-intl-universal';
 import Banner from '../Banner';
 import NavigationMenu from '../NavigationMenu';
+import Cart from '../../Components/ProductMainPage/Cart/Cart';
 
 
 const { Title } = Typography;
@@ -110,7 +111,7 @@ class Nav extends React.Component {
         const userMenu = (
             <Menu className={classes.userMenuDropDown} onClick={this.handleUserMenuClick} >
                 <Menu.Item key="0">
-                    <Link to="/dashboard"> <p>{intl.get('dashboard')}</p></Link>
+                    <Link to="/inventory"> <p>{intl.get('dashboard')}</p></Link>
                 </Menu.Item>
                 <Menu.Item key="1">
                     <p>{intl.get('userProfile')}</p>
@@ -169,6 +170,7 @@ class Nav extends React.Component {
             </Dropdown>
 
             <div className={classes.functionGroups}>
+                <Cart/>
                 {localeChanger}
                 {homeIcon}
                 {loginOrUserIcon}

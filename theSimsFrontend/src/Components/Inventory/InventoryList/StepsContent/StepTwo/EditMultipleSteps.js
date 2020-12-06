@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import { connect } from 'react-redux';
 import { Steps, Button, message, Spin } from 'antd';
 import EditStepOne from '../StepOne/EditStepOne';
 import classes from '../../../Inventory.less'
 import EditStepTwo from './EditStepTwo';
-import { nextPage, prevPage, saveUpdatedList,createProduct } from '../../../action/InventoryAction';
+import { nextPage, prevPage, saveUpdatedList, createProduct } from '../../../action/InventoryAction';
 import CommonModal from '../../../../../Common/ConfirmModal/CommonModal';
 import intl from 'react-intl-universal';
+import { FormInstance } from 'antd/lib/form';
 const { Step } = Steps;
 
 
@@ -19,25 +20,32 @@ class EditMultipleSteps extends Component {
     }
 
     componentDidUpdate(prevProps) {
+
+
+
         if (prevProps.propStep !== this.props.propStep) {
-            
+
             this.setState({
                 current: this.props.propStep
             })
         }
 
     }
+    componentWillUnmount() {
+
+    }
+
 
 
     handleUpdate = async () => {
-      
-      
-        try {       
-         const { previewList, saveUpdatedList,channel ,createProduct , createProductList} = this.props
-            if(channel==="createProduct"){
-                
+
+
+        try {
+            const { previewList, saveUpdatedList, channel, createProduct, createProductList } = this.props
+            if (channel === "createProduct") {
+
                 CommonModal.confirm({
-        
+
                     content: "Are you sure",
                     okText: intl.get('confirm'),
                     centered: true,
@@ -46,41 +54,72 @@ class EditMultipleSteps extends Component {
                     keyboard: false,
                     margin: 0,
                     onOk: async () => {
+
                         await createProduct(createProductList)
-                        CommonModal.success({ 
-                            content: "Successfully Created"      
+                        CommonModal.success({
+                            content: "Successfully Created"
                         })
+                        this.setState({ current: 0 })
                         this.props.hideModal();
-        
+
+
                     }
                 })
-           
-            }else{
-              
-                CommonModal.confirm({
-        
-                    content: "Are you sure",
-                    okText: intl.get('confirm'),
-                    centered: true,
-                    maskClosable: false,
-                    // okButtonProps: { loading: this.props.isLoading },
-                    keyboard: false,
-                    margin: 0,
-                    onOk: async () => {
-                        await saveUpdatedList(previewList)
-                        this.props.hideModal();
-                        CommonModal.success({ 
-                            content: "Successfully Updated"      
-                        })
-                     
-        
-                    }
-                })
+
+            } else {
+
+                console.log(this.child);
+                this.child.formRef.current.validateFields()
+                    .then(() => {
+
+                        if (this.child.state.isValueChanged) {
+                            CommonModal.confirm({
+                                content: "Are you sure",
+                                okText: intl.get('confirm'),
+                                centered: true,
+                                maskClosable: false,
+                                // okButtonProps: { loading: this.props.isLoading },
+                                keyboard: false,
+                                margin: 0,
+                                onOk: async () => {
+                                    let payload = []
+                                    previewList.forEach(e => {
+                                        let content = {
+                                            id: e.id,
+                                            remaining: e.remaining
+                                        }
+
+                                        payload.push(content)
+                                    })
+                                  await saveUpdatedList(payload)
+                                    this.props.hideModal();
+                                    this.props.disableEdit();
+                                    CommonModal.success({
+                                        content: "Successfully Updated"
+                                    })
+                                }
+                            })
+
+                        }else{
+
+                            CommonModal.error({
+                                content: "You didn't change any of the values, make change to at least one of the products to proceed.",
+                                okText: "Got it",
+                                centered: true,
+                                maskClosable: false,
+                                keyboard: false,
+     
+                                 
+                            })
+                        }
+
+                    })
+
 
             }
 
         } catch (err) {
-            
+
         }
 
 
@@ -88,12 +127,12 @@ class EditMultipleSteps extends Component {
 
 
     render() {
-        const { nextPage, prevPage,previewList,inventoryList, selectedRows, channel ,selectedRowKeys} = this.props
-        
+        const { nextPage, prevPage, previewList, inventoryList, selectedRows, channel, selectedRowKeys } = this.props
+
         let editBtnProps = {
             type: "primary",
-            onClick: () => nextPage(previewList,channel),
-            
+            onClick: () => nextPage(previewList, channel),
+
         }
         let createBtnProps = {
             form: "createproductForm",
@@ -102,8 +141,8 @@ class EditMultipleSteps extends Component {
             type: "primary",
         }
         const { current } = this.state
-        
-     
+
+
         const steps = [
             {
                 title: 'Selected',
@@ -118,9 +157,12 @@ class EditMultipleSteps extends Component {
                 content: <EditStepTwo
                     key="EditStepTwo"
                     inventoryList={inventoryList}
+                    selectedRows={selectedRows}
                     handleQuantityUpdate={this.handleQuantityUpdate}
                     stepTwoContent={this.props.stepTwoContent}
                     selectedRowKeys={selectedRowKeys}
+                    onRef={ref => (this.child = ref)}
+
                 />,
             },
 
@@ -169,17 +211,17 @@ const mapStateToProps = (state) => {
         previewList: state.InventoryReducer.previewList,
         inventoryList: state.InventoryReducer.inventoryList,
         propStep: state.InventoryReducer.currentStep,
-        createProductList:state.InventoryReducer.createProductList
+        createProductList: state.InventoryReducer.createProductList
 
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    
+
     return {
         saveUpdatedList: previewList => dispatch(saveUpdatedList(previewList)),
-        createProduct: createProductList=> dispatch(createProduct(createProductList)),
-        nextPage: (previewList,channel) => dispatch(nextPage(previewList,channel)),
+        createProduct: createProductList => dispatch(createProduct(createProductList)),
+        nextPage: (previewList, channel) => dispatch(nextPage(previewList, channel)),
         prevPage: () => dispatch(prevPage())
 
     }

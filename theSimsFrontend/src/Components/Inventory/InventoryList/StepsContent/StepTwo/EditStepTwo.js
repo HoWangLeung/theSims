@@ -37,33 +37,65 @@ class EditStepTwo extends Component {
             showAnimation: true,
             addToAllValue: 0,
             previewList: [],
-            undoAdded: false
+            undoAdded: false,
+            isValueChanged:false
         }
     }
     formRef = React.createRef();
-    componentDidMount() {
-        const { inventoryList,selectedRowKeys } = this.props
 
-        
+   
+    componentDidMount() {
+        this.props.onRef(this)
+        const { inventoryList,selectedRowKeys,selectedRows } = this.props
+       
+        // console.log(this.formRef.current);
         
         const previewList = cloneDeep(inventoryList);
+       
         previewList.forEach((item) => {
             item.remaining += this.state.addToAllValue
         })
-
+      let filteredPreviewList =   previewList.filter(p=>{
+          return  selectedRows.some(s=>{     
+                return p.id===s.id
+            })
+        })
+ 
         this.setState(({
-            previewList
+            previewList:filteredPreviewList,
+            isValueChanged:false
         }))
     }
+
+    
+    
 
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.inventoryList !== this.props.inventoryList) {
+           
             this.setState({
                 undoAdded: false
             })
             //this.formRef.current.resetFields()
         }
+      
+
+        if (prevState.previewList !== this.state.previewList) {
+
+
+            //If user did change any of the values -> return true
+            //If at the end values are the same as intital values for whatever reasons -> return false
+            const isValueChanged =  this.props.inventoryList.filter(prev=>
+                  this.state.previewList.some(curr=> curr.remaining===prev.remaining)
+            ).length==0
+            console.log("isValueChanged => " ,isValueChanged);
+            this.setState({isValueChanged})
+
+
+          
+        }
+        
 
     }
 
@@ -92,7 +124,7 @@ class EditStepTwo extends Component {
                 undoAdded: !this.state.undoAdded
             })
         }
-
+ 
         savePreviewList(updatedPreviewList)
 
 
@@ -126,12 +158,13 @@ class EditStepTwo extends Component {
     }
 
     getForm = () => {
+        
         const { showAnimation, undoAdded } = this.state
         return (<Form
             {...layout}
             onFinish={this.onFinish}
             onFinishFailed={this.onFinishFailed}
-
+            name="editProductsStepTwo"
             ref={this.formRef}
         >
             <Form.Item

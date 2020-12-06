@@ -2,17 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classes from '../ProductMainPage.less'
 import { Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { searchProduct } from '../actions/productActions';
 const Search = Input.Search;
 
 function ProductsSearch(props) {
+
+
+    const dispatch = useDispatch();
+    const handleSearch =values=>{
+        
+        let payload= {values}
+        dispatch(searchProduct(payload))
+    }
+
+
     return (
 
             <Search
                 placeholder="input search text"
-                onSearch={value => console.log(value)}
+                onSearch={(values)=>handleSearch(values)}
                 enterButton
-                size="large"
-                style={{width:"80%"}}
+                // size="large"
+                style={{width:"90%"}}
             />
     
     )

@@ -38,8 +38,8 @@ public class OrderController {
 	}
 	
 	@GetMapping("user/{id}")
-	public  Map<String, Object> getOrderByUserId(@PathVariable Long id) { 
-		return orderService.getOrderByUserId(id); 	
+	public  Map<String, Object> getPendingOrderByUserId(@PathVariable Long id) { 
+		return orderService.getPendingOrderByUserId(id); 	
 	}
 	
 	

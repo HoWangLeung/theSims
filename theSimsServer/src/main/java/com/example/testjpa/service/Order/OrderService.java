@@ -43,11 +43,12 @@ public class OrderService {
 
 		System.out.println("does the user have order already: => {} " + specificUser.getOrders().size());
 		boolean isOrderExist = specificUser.getOrders().size() != 0;
-
-		if (isOrderExist) {
+		boolean isPendingOrderExist = !specificUser.getOrders().stream().filter(e->e.getStatus().equals("pending")).collect(Collectors.toList()).isEmpty();
+		System.out.println("isPendingOrderExist => "+ isPendingOrderExist);
+		if (isPendingOrderExist) {
 			System.out.println("Order id already exist, not adding new one, should merge ");
-			List<Orders> orderList = specificUser.getOrders();
-			Orders oldOrder = orderList.stream().findFirst().get();
+			List<Orders> pendingOrderList = specificUser.getOrders().stream().filter(e->e.getStatus().equals("pending")).collect(Collectors.toList());
+			Orders oldOrder = pendingOrderList.stream().findFirst().get();
 
 			Product product = em.find(Product.class, ((Integer) req.get("productId")).longValue());
 			Long productId = ((Integer) req.get("productId")).longValue();
@@ -130,7 +131,7 @@ public class OrderService {
 			em.persist(newOrders);
 		}
 
-		Map<String, Object> userOrder = this.getOrderByUserId(userId);
+		Map<String, Object> userOrder = this.getPendingOrderByUserId(userId);
 
 		return userOrder;
 	}
@@ -138,7 +139,7 @@ public class OrderService {
 	public Map<String, Object> getOrderById(Long id) {
 
 		Orders specificOrder = orderRepository.findById(id).orElse(null);
-
+		System.out.println("get order by id ===> " + specificOrder);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("id", specificOrder.getId());
 		resultMap.put("status", specificOrder.getStatus());
@@ -148,17 +149,32 @@ public class OrderService {
 		return resultMap;
 	}
 
-	public Map<String, Object> getOrderByUserId(Long id) {
-		Orders specificOrder = orderRepository.findOrdersByUsersId(id);
-
+	public Map<String, Object> getPendingOrderByUserId(Long id) {
+		List<Orders> specificOrders = orderRepository.findOrdersByUsersId(id);
+		System.out.println("specificOrderss==> " + specificOrders.size() + specificOrders);
+		
+		
+		
+		Orders pencdingOrder = specificOrders
+								.stream()
+								.filter(e->e.getStatus().equals("pending"))
+								.findAny()
+								.orElse(null);
+		
+		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("id", specificOrder.getId());
-		resultMap.put("status", specificOrder.getStatus());
-		resultMap.put("userId", specificOrder.getUsers().getId());
-		resultMap.put("userName", specificOrder.getUsers().getUsername());
-		resultMap.put("orderProductList", specificOrder.getOrderProductList());
-		resultMap.put("total", specificOrder.getTotal());
-		System.out.println(resultMap);
+		if(pencdingOrder!=null) {
+			resultMap.put("id", pencdingOrder.getId());
+			resultMap.put("status", pencdingOrder.getStatus());
+			resultMap.put("userId", pencdingOrder.getUsers().getId());
+			resultMap.put("userName", pencdingOrder.getUsers().getUsername());
+			resultMap.put("orderProductList", pencdingOrder.getOrderProductList());
+			resultMap.put("total", pencdingOrder.getTotal());
+			System.out.println(resultMap);
+			
+			}
+	
+	
 		return resultMap;
 	}
 
@@ -168,7 +184,7 @@ public class OrderService {
 
 		Long reqPrdocutId = ((Integer) req.get("productId")).longValue();
 
-		Orders specificOrder = orderRepository.findOrdersByUsersId(userId);
+		Orders specificOrder = orderRepository.findOrdersByUsersId(userId).stream().filter(e->e.getStatus().equals("pending")).findFirst().get();
 
 		if (specificOrder.getOrderProductList().size() == 1) {
 			System.out.println("ONLY ONE PRODUCT REMAINS => size " + specificOrder.getOrderProductList().size());
@@ -208,7 +224,7 @@ public class OrderService {
 			
 			
 			em.merge(specificOrder);
-			Map<String, Object> userOrder = this.getOrderByUserId(userId);
+			Map<String, Object> userOrder = this.getPendingOrderByUserId(userId);
 			
 			
 			

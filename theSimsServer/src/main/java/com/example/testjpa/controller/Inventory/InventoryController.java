@@ -32,27 +32,18 @@ public class InventoryController {
 	@GetMapping("/")
 	public ResponseEntity<ApiResponse< List<Map<String, Object>>>> getAll() {
 	
-		List<Product> productList = inventoryService.getAll(); 
-		List<Map<String, Object>> resultMapList = new ArrayList<Map<String,Object>>();
-		 for(Product product:productList) {	
-			  Map<String, Object> resultMap = new HashMap<String, Object>();
-			  resultMap.put("id", product.getId());
-			  resultMap.put("productName", product.getProductName());
-			  resultMap.put("country", product.getCountryOrigin());
-			  resultMap.put("category", product.getCategory().getName());
-			  resultMapList.add(resultMap);
-		 }
-		 System.out.println(resultMapList);
+		List<Map<String, Object>> resultMapList = inventoryService.getAll(); 
+	
 		 return ResponseEntity.ok(new ApiResponse<List<Map<String, Object>>>(resultMapList));
 		 
 
 	}
 	
 	@PostMapping("/add")
-	public List<Product> addProduct(@RequestBody List<Product> product) {
+	public List<Map<String, Object>> addProduct(@RequestBody List<Product> product) {
 	System.out.println("adding!!!");
 	
-		inventoryService.addProduct(product);
+//		inventoryService.addProduct(product);
 		
 		return inventoryService.addProduct(product);		
 	}
@@ -67,11 +58,11 @@ public class InventoryController {
 	
 	
 	@PutMapping("/updateProducts")
-	public  ResponseEntity<ApiResponse<List<Product>>>  updateProducts(@RequestBody List<Product> products){
+	public  ResponseEntity<ApiResponse< List<Map<String, Object>>>>  updateProducts(@RequestBody List<Product> products){
 	
-		 List<Product> productList = inventoryService.updateProducts(products); 
+		List<Map<String, Object>> productList = inventoryService.updateProducts(products); 
 				  
-		 return ResponseEntity.ok(new ApiResponse<List<Product>>(productList));
+		 return ResponseEntity.ok(new ApiResponse<List<Map<String, Object>>>(productList));
 	}
 	
 	@PutMapping("/updateProductById/{id}")

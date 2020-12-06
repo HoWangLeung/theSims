@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, InputNumber, Row } from 'antd'
+import { Button, Divider, Input, InputNumber, Row, Select } from 'antd'
 import CommonModal from '../../../../../Common/ConfirmModal/CommonModal';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,24 +8,26 @@ import AuthenticationService from '../../../../Authentication/SignUp/Authenticat
 import intl from 'react-intl-universal';
 import { Redirect, withRouter } from 'react-router-dom';
 import { addToCart } from '../../../actions/productActions';
-
-
+import classes from '../SpecificProduct.less'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTruck } from '@fortawesome/free-solid-svg-icons'
+const { Option } = Select;
 function Productdetail(props) {
     const { product } = props
     const dispatch = useDispatch();
-    const[quantity, setQuantity] =useState(1)
-    const user = useSelector(state =>state.AuthenticationReducer.userProfile);
-    const isFetching = useSelector(state =>state.LoadingReducer);
-    console.log(isFetching);
-    const[currentUser , setCurrentUser] = useState(user)
+    const [quantity, setQuantity] = useState(1)
+    const user = useSelector(state => state.AuthenticationReducer.userProfile);
+    const isFetching = useSelector(state => state.LoadingReducer);
 
-    
-    function onChange(value) {
-        
+    const [currentUser, setCurrentUser] = useState(user)
+
+
+    function handleChange(value) {
+
         setQuantity(value)
     }
 
-    const askForLogin=()=> (
+    const askForLogin = () => (
         CommonModal.warning({
             content: "Please Login first",
             okText: "Redirect",
@@ -34,44 +36,87 @@ function Productdetail(props) {
             // okButtonProps: { loading: this.props.isLoading },
             keyboard: false,
             margin: 0,
-            onOk:  () => {
+            onOk: () => {
                 props.history.push("/login")
             }
         })
     )
 
     const handleClick = () => {
-     
+
         let isLoggedIn = AuthenticationService.isUserLoggedIn()
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             askForLogin()
-        }else{
-            let payload={
+        } else {
+            let payload = {
                 userId: parseInt(sessionStorage.getItem('userId')),
                 quantity,
-                productId:product.id,
-                status:"pending"   
+                productId: product.id,
+                status: "pending"
             }
-    
-            
+
+
             dispatch(addToCart(payload))
-            .then(res=>{
-                CommonModal.success({
-                    content: "Successfully Added"  
+                .then(res => {
+                    CommonModal.success({
+                        content: "Successfully Added"
+                    })
                 })
-            })
         }
 
-
-     
-        
     }
+
+    const renderNumberOptions = () => {
+
+        const options = Array.from(Array(101).keys()).filter(f=>f!=0).map(e => <Option value={e}>{e}</Option>)
+
+        return options
+    }
+
+    
     return (
-        <div>
-            <h2> {product.productName}</h2>
-            <p>Price: {product.basePrice}</p>
-            <InputNumber size="large" min={1} max={100000} defaultValue={quantity} onChange={onChange} />
-            <Button loading={isFetching["ADD_TO_CART"]} onClick={handleClick}>Confirm</Button>
+        <div className={classes.productdetailContainer_inner} >
+            <div>
+                <h1> {product.productName}</h1>
+                
+                <h3>Availability: In Stock</h3>
+                <Divider />
+                <h2>$ {product.basePrice}</h2>
+            </div>
+            <div>
+                <h2>Description</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software l
+                   ike Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+       
+            <div>
+                <h2>Quantity</h2>
+                <Select defaultValue={1} size="large" className={classes.productDetailSelect} onChange={handleChange}>
+                    {renderNumberOptions()}
+                </Select>
+            </div>
+
+
+
+            <Row justify='center'>
+                <Button
+                    loading={isFetching["ADD_TO_CART"]}
+                    onClick={handleClick}
+                    className={classes.addToCartButton}
+                >
+                    Confirm
+             </Button>
+            </Row>
+            <Divider />
+            <Row>
+                <FontAwesomeIcon icon={faTruck} />
+                <p>Free HK shipping over $999999999 and easy returns. Learn more.</p>
+            </Row>
         </div>
     )
 }

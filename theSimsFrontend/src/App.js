@@ -31,19 +31,19 @@ class App extends Component {
   componentDidMount() {
     emit.on('change_language', lang => this.loadLocales(lang)); 
     this.loadLocales(); 
-    console.log('mounted');
-    // axios.interceptors.request.use(
-    //     (config)=>{
-    //         if(AuthenticationService.isUserLoggedIn()){
-    //             console.log('setting in actiono !!!!!!!!');
-    //             config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
-    //         }
-    //         return config
-    //     },
-    //     error=>{
+    
+    axios.interceptors.request.use(
+        (config)=>{
+            if(AuthenticationService.isUserLoggedIn()){
+                
+                 config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
+            }
+            return config
+        },
+        error=>{
             
-    //     }
-    //   )
+        }
+      )
   }
 
   loadLocales =  (lang = 'en-US') => {

@@ -24,12 +24,12 @@ const Productsorter = (props) => {
 
   return (
     <div className={classes.productSorter}>
-      <p>SHOWING 1–20 OF 44 RESULTS</p>
+      
 
       <Select
         size="small"
         style={{ width: 200 }}
-        placeholder="Select a person"
+        placeholder="Sort By"
         optionFilterProp="children"
         onChange={onChange}
         onFocus={onFocus}
@@ -38,9 +38,10 @@ const Productsorter = (props) => {
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        <Option value="jack">Jack</Option>
-        <Option value="lucy">Lucy</Option>
-        <Option value="tom">Tom</Option>
+        <Option value="HL">Price: Highest To Lowest</Option>
+        <Option value="LH">Price: Lowest To Highest</Option>
+        <Option value="Asc">Order: Ascending</Option>
+        <Option value="Desc">Order: Descending</Option>
       </Select>
     </div>
   )

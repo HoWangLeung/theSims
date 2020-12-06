@@ -12,11 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.testjpa.model.Auditable;
 import com.example.testjpa.model.Users;
 
 @Entity
 @Table
-public class Orders {
+public class Orders extends Auditable<String> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

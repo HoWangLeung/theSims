@@ -5,7 +5,8 @@ const initState = {
     showModal: true,
     showUpdateSuccess: false,
     currentStep: 0,
-    createProductList:[]
+    createProductList: [],
+    categoryInfo: []
 }
 
 
@@ -20,7 +21,7 @@ const InventoryReducer = (state = initState, action) => {
                 inventoryList: action.payload.detail
             }
         case ("SAVE_INVENTORY"):
-            
+
             return {
                 ...state,
                 previewList: action.payload
@@ -30,7 +31,7 @@ const InventoryReducer = (state = initState, action) => {
 
 
         case ("SAVE_UPDATEDLIST_SUCCESS"):
-
+            
             return {
                 ...state,
                 inventoryList: action.payload.detail,
@@ -46,36 +47,68 @@ const InventoryReducer = (state = initState, action) => {
             }
 
         case ("NEXT"):
-            
-            if(action.payload.channel==="createProduct"){
-                let createProductList = action.payload.createProduct
-                createProductList.map(p=>p['productCategory']= action.payload.productCategory)
-                
+
+
+            if (action.payload.channel === "createProduct") {
+
+
+                let createProductList = action.payload.values.createProduct
+                createProductList.map(p => p['productCategory'] = action.payload.values.productCategory)
+
+
                 return {
                     ...state,
                     currentStep: state.currentStep + 1,
                     createProductList
                 }
-            }  else{
+            } else {
                 return {
                     ...state,
                     currentStep: state.currentStep + 1
-      
+
                 }
-            }      
-          
+            }
+
         case ("PREV"):
             return {
                 ...state,
-                currentStep: state.currentStep -1
+                currentStep: state.currentStep - 1
             }
-//===============================================
-        case ("CREATE_PRODUCT_SUCCESS"):
-            
-            return{        
+
+        case ("RESET_MODAL_STEP"):
+            return {
                 ...state,
-                inventoryList:action.payload
+                currentStep: 0
             }
+        case ("CREATE_PRODUCT_SUCCESS"):
+
+            return {
+                ...state,
+                inventoryList: action.payload
+            }
+
+        case ("FETCH_ALL_CATEGORY_SUCCESS"):
+
+            return {
+                ...state,
+                categoryInfo: action.payload
+            }
+
+        case ("ADD_TEMP_TO_CATEOGRY_INFO"):
+            
+            action.payload.temporary = true;
+        
+            return {
+                ...state,
+                 categoryInfo:[
+                    action.payload,
+                    ...state.categoryInfo,
+                   
+            
+                ]
+            }
+
+
 
         default:
             return state;

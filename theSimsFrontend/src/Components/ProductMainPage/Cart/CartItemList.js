@@ -1,56 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { List, Avatar, Button } from 'antd';
+import { List, Avatar, Button, Table } from 'antd';
 import Quantselecter from './QuantSelecter';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductInCart } from '../actions/productActions';
- 
+import { GetCartHeader } from './CartHeader';
+import classes from './Cart.less'
+
 const Cartitemlist = (props) => {
- 
+
     const cartList = useSelector(state => state.ProductReducer.cartList);
-    console.log('cartList ' , cartList);
+
     const cartListItem = cartList.orderProductList
-    
+
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
 
     const dispatch = useDispatch()
-    const handleDelete=(item,e)=>{
-        console.log(item);
-        let payload={
-            userId:parseInt(sessionStorage.getItem("userId")),
-            productId:parseInt(item.product.id),
-            status:"pending",
-         
+    const handleDelete = (item, e) => {
+
+        let payload = {
+            userId: parseInt(sessionStorage.getItem("userId")),
+            productId: parseInt(item.product.id),
+            status: "pending",
+
         }
         dispatch(deleteProductInCart(payload))
-      
+
+    }
+    const callbacks =  {
+        handleDelete
     }
 
     return (
 
-        <List
-            itemLayout="horizontal"
-            dataSource={cartListItem}
-            renderItem={item => {
-                
-                return (
-                    <List.Item title={<a href="https://ant.design">{item.product.productName} </a>}
-                        actions={
-                            [
-                                <Quantselecter />,
-                                <Button onClick={e=>handleDelete(item,e)}>delete</Button>
-                            ]}>
-                        <List.Item.Meta
-                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-
-                            description={`${item.product.productName} ${item.quantity} `}
-                        />
-                    </List.Item>
-                )
-
-
-            }}
-        />
+        <Table
+        className={classes.cartTable}
+         columns={GetCartHeader(callbacks)} 
+         dataSource={cartListItem} />
 
     )
 }

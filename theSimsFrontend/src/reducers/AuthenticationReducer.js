@@ -32,7 +32,7 @@ const AuthenticationReducer = (state = initState, action) => {
             return state;
 
         case("GET_USER_PROFILE_SUCCESS"):
-            console.log(action.payload);
+            
             return {
                 ...state,
                 userProfile:action.payload.detail

@@ -1,28 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, Button, Space, Select, Row } from 'antd';
-import { DeleteFilled, MinusCircleOutlined, MinusSquareOutlined, PlusOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Space, Select, Row, Divider, Tag, Tooltip } from 'antd';
+import { DeleteFilled, MinusCircleOutlined, MinusSquareOutlined, PlusOutlined, PlusSquareOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
-import { Collapse } from 'antd';
+import { Collapse, message } from 'antd';
 import { values } from 'lodash';
 import CommonModal from '../../../../../../Common/ConfirmModal/CommonModal';
 import { returnInfoMessage, returnMessage } from '../../../../../../Common/utilities/helpers';
-import { nextPage } from '../../../../action/InventoryAction';
+import { nextPage, fetchCategoryInfo, addTempItemToCategoryInfo } from '../../../../action/InventoryAction';
 import { useDispatch, useSelector } from 'react-redux'
 import classes from '../../../../Inventory.less';
 const { Panel } = Collapse;
 const { Option } = Select;
 function Createproductform() {
+
+
     const [form] = Form.useForm();
-    // const [currentFields, setCurrentFields] = useState({
-    //     currentData: [],
-    //     addedFirst: false,
-    //     inCompleteFields: [],
-    //     anyundefined: false,
-    //     missinFields: []
-    // })
+    const [name, setName] = useState("")
+
+    const categoryInfo = useSelector(state => state.InventoryReducer.categoryInfo)
+    
     const prevRef = useRef();
     const dispatch = useDispatch();
     useEffect(() => {
+
+        dispatch(fetchCategoryInfo())
+
         form.setFieldsValue({
             "createProduct": [{
                 name: 0,
@@ -35,7 +37,7 @@ function Createproductform() {
     const prevCurrentFields = prevRef.current;
     const onFinish = values => {
         
-        dispatch(nextPage(values))
+        dispatch(nextPage(values, 'createProduct'))
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
         let data = form.getFieldValue("createProduct")
@@ -58,7 +60,7 @@ function Createproductform() {
         for (let i = field.name; i < filtered.length; i++)
             filtered[i].name -= 1
         form.setFieldsValue({ "createProduct": filtered })
-        
+
     }
     const handleCollapseKeyChange = e => { }
     const handleAdd = (e, add, fields) => {
@@ -78,8 +80,33 @@ function Createproductform() {
             })
     }
     const handleInputChange = () => {
-        
+
     }
+
+    const addItem = (e) => {
+        
+        let payload = {
+            name
+        }
+
+        if(name!=""){ dispatch(addTempItemToCategoryInfo(payload))
+            message.success({
+                content: "Added a temporary Category",
+                // className: 
+                style: {
+                    marginTop: '18vh',
+                },
+            })}
+       
+
+    }
+    const onNameChange = (e) => {
+        let value = e.currentTarget.value
+        
+        setName(value)
+    }
+
+
     return (
         <Form
             className={classes.createproductForm}
@@ -89,12 +116,58 @@ function Createproductform() {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             onFieldsChange={(changedFields, allFields) => {
-                
-                
+
+
             }}
         >
             <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >
-                <Input/>
+                <Select
+                    style={{ width: 240 }}
+                    placeholder="Select a Category"
+                    dropdownRender={menu => (
+                        <div>
+                            <div className={classes.selectCategoryDividerContainer}  >
+                                <Divider className={classes.selectCategoryDivider}>Existing</Divider>
+                            </div>
+                            {menu}
+                            <div className={classes.selectCategoryDividerContainer}  >
+                                <Divider className={classes.selectCategoryDivider}>Or</Divider>
+                            </div>
+                            <Input placeholder="New Category" style={{ flex: 'auto' }} value={name} onChange={onNameChange} />
+                            <a
+                                style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
+                                onClick={addItem}
+                            >
+                                <PlusOutlined /> Confirm
+              </a>
+
+                        </div>
+                    )}
+                >
+
+                    {categoryInfo.map(info => {
+                        
+                        return (
+                            <Option key={info.name} className={classes.createProductFormOption}>
+                               <span style={{paddingRight:"5px"}}> {info.name}</span>
+                                {info.temporary ?
+                                    <Tag style={{paddingLeft:"5px"}}>
+                                        temporary
+                                        <Tooltip title="This category is not saved to the database yet, proceed to the end in order to save it">
+                                            <QuestionCircleOutlined style={{paddingLeft:"5px", cursor:"pointer"}} />
+                                        </Tooltip>
+
+                                    </Tag>
+                                    : null}
+
+                            </Option>
+                        )
+                    }
+
+                    )
+
+                    }
+                </Select>
             </Form.Item>
             <Form.List
                 name="createProduct"

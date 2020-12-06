@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 import Createproduct from './StepsContent/StepOne/CreateProduct/Createproduct';
 import Selectedlist from './StepsContent/StepOne/SelectedList/SelectedList';
+import { resetCurrentStep } from '../action/InventoryAction';
 class InventoryList extends Component {
     constructor(props) {
         super(props)
@@ -18,13 +19,16 @@ class InventoryList extends Component {
             disableEdit: true,
             stepOneContent: {},
             stepTwoContent: {},
-            channel: ''
+            channel: '',
+            resetCurrentStep:false,
+            
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.inventoryList !== this.props.inventoryList) {
+            
             this.setState({
                 showModal: false,
                 selectedRowKeys: []
@@ -45,6 +49,8 @@ class InventoryList extends Component {
         });
     }
 
+    disableEdit=()=>(this.setState({disableEdit:true}))
+
     hideModal = () => this.setState({ showModal: false })
 
     onSelectChange = (selectedRowKeys, selectedRows) => {
@@ -62,7 +68,11 @@ class InventoryList extends Component {
         return ([<Button onClick={this.hideModal} disabled={isFetching['SAVE_UPDATEDLIST']} >Cancel</Button>])
     }
 
-
+    resetCurrentStep=()=>{
+        const{resetCurrentStep}=this.props
+        resetCurrentStep()
+       
+    }
 
     render() {
         const { selectedRowKeys, showModal, selectedRows, disableEdit, stepOneContent, stepTwoContent } = this.state;
@@ -71,7 +81,7 @@ class InventoryList extends Component {
         const hasSelected = selectedRowKeys.length > 0;
 
         const columns = GetHeader();
-
+        
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
@@ -83,19 +93,24 @@ class InventoryList extends Component {
                         Edit Multiple
                      </Button>
                     <CommonModal
-
+                       
                         visible={showModal}
                         hideModal={this.hideModal}
+                        afterClose={this.resetCurrentStep}
                         content=
                         {
                             <EditMultipleSteps
+
                                 inventoryList={inventoryList}
                                 content={stepOneContent}
                                 stepTwoContent={stepTwoContent}
                                 selectedRows={selectedRows}
                                 channel={this.state.channel}
                                 hideModal={this.hideModal}
+                                disableEdit={this.disableEdit}
                                 selectedRowKeys={selectedRowKeys}
+                  
+                            
                             />
                         }
 
@@ -139,7 +154,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        resetCurrentStep:()=>dispatch(resetCurrentStep())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InventoryList)

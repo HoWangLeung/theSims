@@ -39,7 +39,7 @@ class CommonModal {
     warning=(props)=>{
 
         return Modal.warning({
-            title: 'Confirm',
+            title: 'Warning',
 
             ...props
         });

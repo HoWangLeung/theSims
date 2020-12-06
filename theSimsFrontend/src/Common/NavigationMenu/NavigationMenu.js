@@ -24,13 +24,13 @@ class NavigationMenu extends Component {
         const { location: { pathname } } = this.props
         let id=pathname.substring(pathname.lastIndexOf('/') + 1)
         if (['/','/signup-customer','/signup','/login','/signup-success',
-        `/product/${id}`,'/checkout'].includes(pathname))  return null
+        `/product/${id}`,'/checkout',, '/checkout-success'].includes(pathname))  return null
 
 
       
         return (<Menu onClick={this.handleClick} mode="horizontal" triggerSubMenuAction="click">
             <Menu.Item key="dashboard" icon={<ApartmentOutlined />}>
-                <Link to="/dashboard">{intl.get('dashboard')}</Link>
+                <Link to="/dashboard">{intl.get('statistic')}</Link>
             </Menu.Item>
             <Menu.Item key="app" icon={<AppstoreOutlined />}>
                 <Link to="/employee">{intl.get('management')}</Link>

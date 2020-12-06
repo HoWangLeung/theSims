@@ -64,15 +64,17 @@ export const savePreviewList = (updatedPreviewList) => {
 
 }
 
-export const saveUpdatedList = (updatedPreviewList) => {
+export const saveUpdatedList = (payload) => {
 
     return async (dispatch, getState) => {
 
+      
         try {
-            dispatch({ type: 'SAVE_UPDATEDLIST_REQUEST', payload: updatedPreviewList })
-    
-            let res = await axios.put(`${API}/inventory/updateProducts`, updatedPreviewList)
-            dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload: res.data })
+            dispatch({ type: 'SAVE_UPDATEDLIST_REQUEST', payload })
+            
+            let res = await axios.put(`${API}/inventory/updateProducts`, payload)
+      
+            dispatch({ type: 'SAVE_UPDATEDLIST_SUCCESS', payload:res.data })
             return res
         } catch (err) {
         }
@@ -95,3 +97,34 @@ export const prevPage = () => {
     }
 
 }
+
+export const resetCurrentStep = () => {
+    return (dispatch, getState) => {
+
+        dispatch({ type: 'RESET_MODAL_STEP', payload: {} })
+    }
+
+}
+
+
+export const fetchCategoryInfo = () => {
+    return async (dispatch, getState) => {
+        dispatch({ type: 'FETCH_ALL_CATEGORY_REQUEST'})
+        let res = await axios.get(`${API}/category/`)
+        
+        dispatch({ type: 'FETCH_ALL_CATEGORY_SUCCESS', payload:res.data })
+        return res
+
+    }
+
+}
+export const addTempItemToCategoryInfo = payload => {
+    return  (dispatch, getState) => {
+        dispatch({ type: 'ADD_TEMP_TO_CATEOGRY_INFO',payload})
+
+
+    }
+
+}
+
+

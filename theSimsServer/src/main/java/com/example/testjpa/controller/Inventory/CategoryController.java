@@ -1,6 +1,7 @@
 package com.example.testjpa.controller.Inventory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,8 +24,11 @@ public class CategoryController {
 	
 	@GetMapping("/")
 	public List<Category> getAll() {
-		System.out.println("getting the Category*********************************************");
-		List<Category> list = categoryService.getAll(); 
+		System.out.println("getting the Castegory*********************************************");
+		List<Category> list = categoryService.getAll().stream()
+				.filter(e-> !e.getName().equals("Food") &&  !e.getName().equals("Fruit") )
+				.collect(Collectors.toList());
+		System.out.println(list.toString());
 		return list; 
 	}
 

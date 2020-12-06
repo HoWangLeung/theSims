@@ -11,12 +11,12 @@ export const loginAction = (isLoggedIn) => {
 
 export const getUserProfile = (payload) => {
 
-  console.log(payload);
+  
   return async (dispatch, getState) => {
 
     try {
       let res = await axios.post(`${API}/users/userProfile`,payload)
-      console.log(res);
+      
       dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
       return res
     } catch (err) {

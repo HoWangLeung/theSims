@@ -4,7 +4,7 @@ import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'ant
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart } from '../../actions/productActions';
 import { Link } from 'react-router-dom';
-
+import classes from '../../ProductMainPage.less'
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
@@ -22,54 +22,50 @@ const Displayproducts = (props) => {
         dispatch(fetchAllProducts())
     }, []);
 
-   
 
+    const renderProductScreen = () => {
+        return productList.map(item => {
 
-    const useOnClick = e => {
-        
-        // dispatch(addToCart())
+            console.log(item);
+            return (
+                <Col xs={24} sm={24} sm={12} md={8} xl={6}  span={6} >
+                    <Link to={`/product/${item.id}`}>
+                        <Card
+                            hoverable
+                            cover={<img
+                                className={classes.productNamePriceContainerImg}
+                                alt="example"
+                                src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" />}
+                            className={classes.productNamePriceContainer}
+                        >
+
+                            <Meta
+                                title={item.productName}
+                                description={`$${item.basePrice}`} />
+
+                        </Card>
+                    </Link>
+                </Col>
+            )
+        })
+
     }
 
-    const cardList = (<List
-        grid={{
-            gutter: 16,
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 2,
-            xl: 3,
-            xxl: 3,
-        }}
-        dataSource={productList}
-        renderItem={item => (
-            <List.Item>
-                <Skeleton avatar title={false} loading={item.loading} active>
-                    <List.Item>
-                        <Card
-                            title={
-                            <Link to={`/product/${item.id}`}>{item.productName}</Link>
-                            }                 
-                        >
-                            Card content</Card>
-                    </List.Item>
-                </Skeleton>
-            </List.Item>
-        )}
-    />)
 
-
+    //productNamePriceContainer
+    // <Link to={`/product/${item.id}`}>{item.productName}</Link>
 
     return (
-        <>
-            <Spin spinning={isLoading}>
-                <Row>
+        <div className={classes.displayProductOuterContainer}>
+            <Spin spinning={isLoading} >
+                <Row gutter={[8, 8]} >
 
-                    {cardList}
+                    {renderProductScreen()}
 
                 </Row>
             </Spin>
 
-        </>
+        </div>
     )
 }
 

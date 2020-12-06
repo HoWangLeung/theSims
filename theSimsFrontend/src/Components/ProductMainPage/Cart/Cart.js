@@ -17,8 +17,9 @@ const Cart=(props)=> {
     const [drawerVisible, setDrawerVisible] = useState(false)
 
     const orderInfo = useSelector(state => state.ProductReducer.cartList);
+    
     const cartListItem = orderInfo.orderProductList
-
+    console.log(cartListItem);
     const openDrawer=()=>(
         setDrawerVisible(true)
     )
@@ -42,7 +43,9 @@ const Cart=(props)=> {
     return (
         <>
             <Badge  className={classes.ShoppingCartOutlined}
-                    onClick={openDrawer} count={5}>
+                    onClick={openDrawer} count={
+                        cartListItem && cartListItem.length
+                    }>
                 <ShoppingCartOutlined
                    
 
@@ -51,12 +54,13 @@ const Cart=(props)=> {
             <Drawer
                 title="Cart"
                 width={window.innerWidth <= 760? "100%":"35%"}
-                 
+                 className={classes.cartDrawer}
                 onClose={closeDrawer}
                 visible={drawerVisible}
+                bodyStyle={{padding:"0px"}}
             >
                <Cartitemlist/>
-               <Button onClick={handleProceed}>Proceed</Button>
+               <Button   className={classes.cartProceedButton} onClick={handleProceed}>Proceed</Button>
           </Drawer>
         
 

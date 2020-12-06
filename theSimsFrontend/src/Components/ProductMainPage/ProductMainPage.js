@@ -9,11 +9,7 @@ function ProductMainpage() {
     return (
       
             <Row className={classes.productMainpageContainer}>
-                    
-                <Col span={24} className={classes.ProductssearchContainer}  >
-                    <ProductsSearch />
-                    <Cart />
-                </Col>
+              
         
                 <Col span={24} className={classes.Allproducts}>
                     <Allproducts />

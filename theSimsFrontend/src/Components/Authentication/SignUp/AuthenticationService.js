@@ -65,8 +65,8 @@ class AuthenticationService {
     }
 
     componentWillMount() {
-        console.log('trying to will mount...');
-        this.setupAxiosInterceptors()
+        
+        // this.setupAxiosInterceptors()
     }
 
 
