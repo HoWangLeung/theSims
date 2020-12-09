@@ -43,6 +43,7 @@ public class InventoryService {
 		  resultMap.put("cost", product.getCost());
 		  resultMap.put("country", product.getCountryOrigin());
 		  resultMap.put("remaining", product.getRemaining());
+		  resultMap.put("productUrl", product.getProductUrl());
 		  resultMap.put("category", product.getCategory().getName());
 		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		  if(product.getLastModifiedDate()!=null) {
@@ -73,7 +74,7 @@ public class InventoryService {
 	public List<Map<String, Object>> addProduct(List<Product> products) {
 		 products.stream().forEach(product->{
 			 Category category = categoryRepository.findByName(product.getCategory().getName());
-				System.out.println(category + " <= cat name");
+				System.out.println(category + " <= cat  name");
 				if(category!=null) {
 
 

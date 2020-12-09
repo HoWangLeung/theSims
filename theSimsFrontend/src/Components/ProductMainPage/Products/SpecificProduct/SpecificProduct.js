@@ -17,6 +17,7 @@ function Specificproduct(props) {
 
         return state.ProductReducer.specificProduct
     });
+    console.log(product);
     const isFetching = useSelector(state => {
 
         return state.LoadingReducer
@@ -47,7 +48,9 @@ function Specificproduct(props) {
                     style={{ cursor: "pointer" }}
                   height="100%"
                     width="100%"
-                    src="https://source.unsplash.com/random/?apple"
+                    src={product.productUrl===null? "https://source.unsplash.com/random/?apple":product.productUrl}
+                    
+                   
                 />
 
             </Col>

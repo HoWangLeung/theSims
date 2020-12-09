@@ -177,7 +177,7 @@ export const addToCart = (payload) => {
 
         // ,{ headers: { "Authorization": token }}
       )
-      console.log(res);
+      
       dispatch({ type: 'ADD_TO_CART_SUCCESS' , payload:res.data})
 
 

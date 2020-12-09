@@ -35,7 +35,15 @@ const Displayproducts = (props) => {
                             cover={<img
                                 className={classes.productNamePriceContainerImg}
                                 alt="example"
-                                src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" />}
+                                
+                               
+                                src={
+
+                                    item.productUrl===null?
+                                    "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
+                                    :item.productUrl
+                               
+                                } />}
                             className={classes.productNamePriceContainer}
                         >
 

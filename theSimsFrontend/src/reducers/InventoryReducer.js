@@ -6,7 +6,8 @@ const initState = {
     showUpdateSuccess: false,
     currentStep: 0,
     createProductList: [],
-    categoryInfo: []
+    categoryInfo: [],
+    uploadedproductUrl: [],
 }
 
 
@@ -94,20 +95,24 @@ const InventoryReducer = (state = initState, action) => {
                 categoryInfo: action.payload
             }
 
-        case ("ADD_TEMP_TO_CATEOGRY_INFO"):
-            
+        case ("ADD_TEMP_TO_CATEOGRY_INFO"):      
             action.payload.temporary = true;
-        
             return {
                 ...state,
                  categoryInfo:[
                     action.payload,
-                    ...state.categoryInfo,
-                   
-            
+                    ...state.categoryInfo,   
                 ]
             }
+            case ("SET_UPLOADED_PRODUCT_URL"):
+                console.log(action.payload);
+               
 
+
+                return {
+                    ...state,
+                    uploadedproductUrl: [...state.uploadedproductUrl,action.payload]
+                }
 
 
         default:

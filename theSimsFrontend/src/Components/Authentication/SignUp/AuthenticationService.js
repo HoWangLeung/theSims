@@ -50,18 +50,18 @@ class AuthenticationService {
 
     setupAxiosInterceptors(token) {
 
-        axios.interceptors.request.use(
-            (config) => {
-                if (this.isUserLoggedIn()) {
+        // axios.interceptors.request.use(
+        //     (config) => {
+        //         if (this.isUserLoggedIn()) {
                     
-                    config.headers.authorization = token
-                }
-                return config
-            },
-            error => {
+        //             config.headers.authorization = token
+        //         }
+        //         return config
+        //     },
+        //     error => {
                 
-            }
-        )
+        //     }
+        // )
     }
 
     componentWillMount() {

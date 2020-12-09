@@ -19,7 +19,7 @@ const Cart=(props)=> {
     const orderInfo = useSelector(state => state.ProductReducer.cartList);
     
     const cartListItem = orderInfo.orderProductList
-    console.log(cartListItem);
+    
     const openDrawer=()=>(
         setDrawerVisible(true)
     )

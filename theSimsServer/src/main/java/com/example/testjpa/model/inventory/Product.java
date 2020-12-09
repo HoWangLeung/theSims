@@ -27,6 +27,7 @@ public class Product extends Auditable<String>   {
 	private int cost;
 	private int basePrice;
 	private int remaining;
+	private String productUrl;
 	
  
  
@@ -45,6 +46,7 @@ public class Product extends Auditable<String>   {
 
 
 	public Product(Long id, String productName, String countryOrigin, int cost, int basePrice, int remaining,
+			String productUrl,
 			Category category) {
 		super();
 		this.id = id;
@@ -53,6 +55,7 @@ public class Product extends Auditable<String>   {
 		this.cost = cost;
 		this.basePrice = basePrice;
 		this.remaining = remaining;
+		this.productUrl = productUrl;
 		this.category = category;
 	
 	}
@@ -167,12 +170,24 @@ public class Product extends Auditable<String>   {
 
 
 
+
+
+
+	public String getProductUrl() {
+		return productUrl;
+	}
+
+
+
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", remaining=" + remaining + "]";
 	}
-
-
 
 	 
 

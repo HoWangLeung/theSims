@@ -68,7 +68,7 @@ class EditMultipleSteps extends Component {
 
             } else {
 
-                console.log(this.child);
+                
                 this.child.formRef.current.validateFields()
                     .then(() => {
 

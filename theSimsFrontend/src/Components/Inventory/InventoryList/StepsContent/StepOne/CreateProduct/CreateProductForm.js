@@ -9,6 +9,7 @@ import { returnInfoMessage, returnMessage } from '../../../../../../Common/utili
 import { nextPage, fetchCategoryInfo, addTempItemToCategoryInfo } from '../../../../action/InventoryAction';
 import { useDispatch, useSelector } from 'react-redux'
 import classes from '../../../../Inventory.less';
+import Imageuploader from './ImageUploader';
 const { Panel } = Collapse;
 const { Option } = Select;
 function Createproductform() {
@@ -18,7 +19,7 @@ function Createproductform() {
     const [name, setName] = useState("")
 
     const categoryInfo = useSelector(state => state.InventoryReducer.categoryInfo)
-    
+
     const prevRef = useRef();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -36,10 +37,11 @@ function Createproductform() {
     }, []);
     const prevCurrentFields = prevRef.current;
     const onFinish = values => {
-        
+        console.log(values);
         dispatch(nextPage(values, 'createProduct'))
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
+        console.log(values, 'failed');
         let data = form.getFieldValue("createProduct")
         let combinedList = values.createProduct.map((item, i) => Object.assign({}, item, data[i]));
         combinedList.map(key => {
@@ -84,25 +86,27 @@ function Createproductform() {
     }
 
     const addItem = (e) => {
-        
+
         let payload = {
             name
         }
 
-        if(name!=""){ dispatch(addTempItemToCategoryInfo(payload))
+        if (name != "") {
+            dispatch(addTempItemToCategoryInfo(payload))
             message.success({
                 content: "Added a temporary Category",
                 // className: 
                 style: {
                     marginTop: '18vh',
                 },
-            })}
-       
+            })
+        }
+
 
     }
     const onNameChange = (e) => {
         let value = e.currentTarget.value
-        
+
         setName(value)
     }
 
@@ -116,9 +120,14 @@ function Createproductform() {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             onFieldsChange={(changedFields, allFields) => {
-
+                console.log('onFieldsChange')
+                console.log(changedFields);
 
             }}
+            onValuesChange={(changedFields, allFields) => {
+                console.log('onValuesChange');
+            }}
+            validateTrigger={'onChange'}
         >
             <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >
                 <Select
@@ -146,15 +155,15 @@ function Createproductform() {
                 >
 
                     {categoryInfo.map(info => {
-                        
+
                         return (
                             <Option key={info.name} className={classes.createProductFormOption}>
-                               <span style={{paddingRight:"5px"}}> {info.name}</span>
+                                <span style={{ paddingRight: "5px" }}> {info.name}</span>
                                 {info.temporary ?
-                                    <Tag style={{paddingLeft:"5px"}}>
+                                    <Tag style={{ paddingLeft: "5px" }}>
                                         temporary
                                         <Tooltip title="This category is not saved to the database yet, proceed to the end in order to save it">
-                                            <QuestionCircleOutlined style={{paddingLeft:"5px", cursor:"pointer"}} />
+                                            <QuestionCircleOutlined style={{ paddingLeft: "5px", cursor: "pointer" }} />
                                         </Tooltip>
 
                                     </Tag>
@@ -178,7 +187,7 @@ function Createproductform() {
                     return (
                         <>
                             {fields.map((field, index) => {
-                                const fieldNames = ['productName', 'countryOrigin', 'cost', 'basePrice', 'Remaining']
+                                const fieldNames = ['productName', 'countryOrigin', 'cost', 'basePrice', 'Remaining', 'productUrl']
                                 return (
                                     <Collapse
                                         key={field.name}
@@ -198,22 +207,41 @@ function Createproductform() {
                                             }>
                                             <Row >
                                                 {fieldNames.map((fieldName, index) => {
-                                                    return (<Form.Item
-                                                        key={index}
-                                                        label={fieldName}
-                                                        name={[field.name, fieldName]}
-                                                        fieldKey={[field.fieldKey, index]}
-                                                        rules={[
-                                                            {
-                                                                required: true,
-                                                                message: 'Please input your name',
-                                                            },
-                                                        ]}
-                                                    >
-                                                        <Input onChange={handleInputChange} />
-                                                    </Form.Item>)
-                                                })}
+
+
+                                                    if (fieldName === 'productUrl') {
+                                                        return <Imageuploader fieldKey={field.name} form={form} />
+
+
+                                                    } else {
+
+                                                        return (<Form.Item
+                                                            key={index}
+                                                            label={fieldName}
+                                                            name={[field.name, fieldName]}
+                                                            fieldKey={[field.fieldKey, index]}
+                                                            rules={[
+                                                                {
+                                                                  required: true,
+                                                                  message: 'Please input value',
+                                                                }
+                                                                
+                                                            ]}
+                                                            valuePropName="fileList"
+                                                        //   getValueFromEvent={normFile}
+                                                        >
+                                                            <Input onChange={handleInputChange} />
+                                                        </Form.Item>)
+                                                    }
+
+                                                }
+
+
+
+                                                )
+                                                }
                                             </Row>
+
                                         </Panel>
                                     </Collapse>
                                 )

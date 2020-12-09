@@ -48,7 +48,7 @@ class EditStepTwo extends Component {
         this.props.onRef(this)
         const { inventoryList,selectedRowKeys,selectedRows } = this.props
        
-        // console.log(this.formRef.current);
+        // 
         
         const previewList = cloneDeep(inventoryList);
        
@@ -89,7 +89,7 @@ class EditStepTwo extends Component {
             const isValueChanged =  this.props.inventoryList.filter(prev=>
                   this.state.previewList.some(curr=> curr.remaining===prev.remaining)
             ).length==0
-            console.log("isValueChanged => " ,isValueChanged);
+            
             this.setState({isValueChanged})
 
 
