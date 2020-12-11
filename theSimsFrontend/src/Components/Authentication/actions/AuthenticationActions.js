@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { API } from '../../../../ApiConfig'
+import { API } from '../../../ApiConfig'
+ 
 
 export const loginAction = (isLoggedIn) => {
 
@@ -10,7 +11,6 @@ export const loginAction = (isLoggedIn) => {
 }
 
 export const getUserProfile = (payload) => {
-
   
   return async (dispatch, getState) => {
 
@@ -23,10 +23,48 @@ export const getUserProfile = (payload) => {
       
     }
 
+  }
+}
+
+export const getUserOrderHistory = ({userId}) => {
+  
+  return async (dispatch, getState) => {
+
+    try {
+      console.log(userId);
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_REQUEST'})
+      let res = await axios.get(`${API}/orders/confirmedOrders?id=${userId}`)
+      console.log(res);
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_SUCCESS', payload: res.data })
+      return res
+    } catch (err) {
+      
+    }
 
   }
-
 }
+
+export const getUserOrderHistoryInvoice = ({userId}) => {
+  
+  return async (dispatch, getState) => {
+
+    try {
+      console.log(userId);
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_INVOICE_REQUEST'})
+      let res = await axios.get(`${API}/orders/confirmedOrders/exportPdf/`)
+      console.log(res);
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_INVOICE_SUCCESS', payload: res })
+      return res
+    } catch (err) {
+      
+    }
+
+  }
+}
+
+
+
+
 
 export const logoutAction = (isLoggedIn) => {
 

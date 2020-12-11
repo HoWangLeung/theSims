@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart } from '../../actions/productActions';
 import { Link } from 'react-router-dom';
 import classes from '../../ProductMainPage.less'
+import { getUserProfile } from '../../../Authentication/actions/AuthenticationActions';
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
@@ -14,25 +15,38 @@ const Displayproducts = (props) => {
     const isLoading = useSelector(state => {
         return state.ProductReducer.isLoading
     });
-    const productList = useSelector(state => state.ProductReducer.productList);
-
-
+    const productInfo = useSelector(state => state.ProductReducer.productInfo);
+    const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
+  
+    const {categories,productList} = productInfo
+    let isLoggedIn = sessionStorage.getItem("userId")!==null
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAllProducts())
-    }, []);
+       
+        if(isLoggedIn)
+        dispatch(getUserProfile({username:sessionStorage.getItem("authenticatedUser")}))
+         
+
+        return ()=>{
+            console.log('clean up ' , isLoggedIn);
+        }
+ 
+       
+    }, [isLoggedIn]);
 
 
     const renderProductScreen = () => {
-        return productList.map(item => {
+        return productList && productList.map(item => {
 
-            console.log(item);
+            
             return (
                 <Col xs={24} sm={24} sm={12} md={8} xl={6}  span={6} >
                     <Link to={`/product/${item.id}`}>
                         <Card
                             hoverable
-                            cover={<img
+                            cover={
+                            <img
                                 className={classes.productNamePriceContainerImg}
                                 alt="example"
                                 
@@ -60,15 +74,14 @@ const Displayproducts = (props) => {
     }
 
 
-    //productNamePriceContainer
-    // <Link to={`/product/${item.id}`}>{item.productName}</Link>
+  
 
     return (
         <div className={classes.displayProductOuterContainer}>
             <Spin spinning={isLoading} >
                 <Row gutter={[8, 8]} >
 
-                    {renderProductScreen()}
+                {renderProductScreen()}
 
                 </Row>
             </Spin>

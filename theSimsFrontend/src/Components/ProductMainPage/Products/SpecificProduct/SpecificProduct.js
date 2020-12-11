@@ -17,7 +17,7 @@ function Specificproduct(props) {
 
         return state.ProductReducer.specificProduct
     });
-    console.log(product);
+    
     const isFetching = useSelector(state => {
 
         return state.LoadingReducer

@@ -1,24 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Form, Input, Button, Space, Select, Row, Divider, Tag, Tooltip } from 'antd';
+import { Form, Input, Button, Space, Select, Row, Divider, Tag, Tooltip, Col } from 'antd';
 import { DeleteFilled, MinusCircleOutlined, MinusSquareOutlined, PlusOutlined, PlusSquareOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
-import { Collapse, message } from 'antd';
+import { Collapse, message, Upload } from 'antd';
 import { values } from 'lodash';
 import CommonModal from '../../../../../../Common/ConfirmModal/CommonModal';
 import { returnInfoMessage, returnMessage } from '../../../../../../Common/utilities/helpers';
-import { nextPage, fetchCategoryInfo, addTempItemToCategoryInfo } from '../../../../action/InventoryAction';
+import { nextPage, fetchCategoryInfo, addTempItemToCategoryInfo, setUploadedProductUrl } from '../../../../action/InventoryAction';
 import { useDispatch, useSelector } from 'react-redux'
 import classes from '../../../../Inventory.less';
 import Imageuploader from './ImageUploader';
+import { storage } from './UploadIndex'
+import { CheckCircleFilled, UploadOutlined } from '@ant-design/icons';
 const { Panel } = Collapse;
 const { Option } = Select;
+
 function Createproductform() {
+
+    const formItemLayout = {
+        labelCol: { span: 6 },
+        wrapperCol: { span: 18 },
+    };
+    const [fileList, setFileList] = useState([]);
+    const [uploading, setUploading] = useState(false);
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
+
+    //form
+
+
+
+
+
 
 
     const [form] = Form.useForm();
     const [name, setName] = useState("")
 
     const categoryInfo = useSelector(state => state.InventoryReducer.categoryInfo)
+
 
     const prevRef = useRef();
     const dispatch = useDispatch();
@@ -34,10 +54,15 @@ function Createproductform() {
                 fieldKey: 0
             }]
         })
+
+
+
+
     }, []);
     const prevCurrentFields = prevRef.current;
     const onFinish = values => {
-        console.log(values);
+
+        console.log(values, " success");
         dispatch(nextPage(values, 'createProduct'))
     };
     const onFinishFailed = ({ values, errorFields, outOfDate }) => {
@@ -110,6 +135,83 @@ function Createproductform() {
         setName(value)
     }
 
+    const normFile = (e) => {
+
+
+        return e && e.fileList;
+    }
+    ///////====================
+    const handleUpload = (options) => {
+        const { onSuccess, onError, file, onProgress } = options;
+
+        setUploading(true)
+
+
+        const uploadTask = storage.ref(`images/products/${file.name}_${file.uid}`).put(file);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+
+
+                setProgress(progress);
+
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+
+                storage
+                    .ref("images/products/")
+                    .child(`${file.name}_${file.uid}`)
+                    .getDownloadURL()
+                    .then(result => {
+
+                        setUrl(result);
+
+
+
+
+                        setUploading(false)
+
+                        onSuccess("OK", result)
+                        // dispatch(setUploadedProductUrl(result))
+
+                    })
+                    .catch(e => { console.log(e); })
+            }
+        );
+
+    };
+    const handleOnChange = (info) => {
+        const { fileList: newFileList } = info
+        console.log("newFileList, ", newFileList);
+        setFileList(newFileList);
+    };
+    const Uprops = {
+        beforeUpload: file => {
+            setFileList(state => [...state, file])
+            return true;
+        },
+        fileList,
+    };
+    const onPreview = async file => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+    };
 
     return (
         <Form
@@ -120,16 +222,26 @@ function Createproductform() {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             onFieldsChange={(changedFields, allFields) => {
-                console.log('onFieldsChange')
-                console.log(changedFields);
 
             }}
             onValuesChange={(changedFields, allFields) => {
-                console.log('onValuesChange');
+
             }}
             validateTrigger={'onChange'}
         >
-            <Form.Item name={"productCategory"} label={intl.get("productCategory")}  >
+            <Form.Item
+            
+             name={"productCategory"} 
+             label={intl.get("productCategory")}
+             rules={[
+                {
+                    required: true,
+                    message: 'This field is mandatory.',
+                }
+
+            ]}
+             
+             >
                 <Select
                     style={{ width: 240 }}
                     placeholder="Select a Category"
@@ -193,10 +305,13 @@ function Createproductform() {
                                         key={field.name}
                                         bordered={false}
                                         expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
-                                        // defaultActiveKey="0"
+                                        defaultActiveKey="0"
                                         onChange={handleCollapseKeyChange}
                                     >
-                                        <Panel className={classes.createProductPanel} key={field.name} header={`Product ${field.key}`}
+                                        <Panel
+                                            className={classes.createProductPanel}
+                                            key={field.name}
+                                            header={`Product ${field.key}`}
                                             forceRender={true}
                                             extra={
                                                 <Row>
@@ -206,40 +321,93 @@ function Createproductform() {
                                                 </Row>
                                             }>
                                             <Row >
-                                                {fieldNames.map((fieldName, index) => {
+                                                <Col span={24} >
+                                                    {fieldNames.map((fieldName, index) => {
+                                                        if (fieldName === 'productUrl') {
+                                                            return (
+
+                                                                <Form.Item
+                                                                    required={true}
+                                                                    {...formItemLayout}
+                                                                    key={index}
+                                                                    label={fieldName}
+                                                                    name={[field.name, fieldName]}
+                                                                    fieldKey={[field.fieldKey, index]}
+                                                                    valuePropName="fileList"
+                                                                    getValueFromEvent={normFile}
+                                                                    rules={[
+
+                                                                        // ({ getFieldValue }) => ({
+                                                                        //     validator(rule, value) {
+
+                                                                        //         if (!value) {
+                                                                        //             return Promise.reject('Please proivde an image for the product');
+                                                                        //         }
+                                                                        //         return Promise.resolve();
+                                                                        //     },
+                                                                        // })
+                                                                    ]
 
 
-                                                    if (fieldName === 'productUrl') {
-                                                        return <Imageuploader fieldKey={field.name} form={form} />
+
+                                                                    }
+                                                                >
+                                                                    <Upload
+
+                                                                        onPreview={onPreview}
+                                                                        onChange={handleOnChange}
+                                                                        listType="picture-card"
+
+                                                                        progress={
+                                                                            {
+                                                                                format: (percent) => {
 
 
-                                                    } else {
+                                                                                    return progress < 100 ? progress + "%" : <CheckCircleFilled />
+                                                                                },
+                                                                                percent: progress,
+                                                                                // showInfo:true,
+                                                                                type: "line",
+                                                                                success: { percent: progress }
+                                                                            }
+                                                                        }
+                                                                        customRequest={handleUpload}
+                                                                        {...Uprops}>
+                                                                        {fileList.length < 5 && '+ Upload'}
+                                                                    </Upload>
+                                                                </Form.Item>
+                                                            )
 
-                                                        return (<Form.Item
-                                                            key={index}
-                                                            label={fieldName}
-                                                            name={[field.name, fieldName]}
-                                                            fieldKey={[field.fieldKey, index]}
-                                                            rules={[
-                                                                {
-                                                                  required: true,
-                                                                  message: 'Please input value',
-                                                                }
-                                                                
-                                                            ]}
-                                                            valuePropName="fileList"
-                                                        //   getValueFromEvent={normFile}
-                                                        >
-                                                            <Input onChange={handleInputChange} />
-                                                        </Form.Item>)
+
+                                                        } else {
+
+                                                            return (<Form.Item
+                                                                {...formItemLayout}
+                                                                key={index}
+                                                                label={fieldName}
+                                                                name={[field.name, fieldName]}
+                                                                fieldKey={[field.fieldKey, index]}
+                                                                rules={[
+                                                                    {
+                                                                        required: true,
+                                                                        message: 'This field is mandatory.',
+                                                                    }
+
+                                                                ]}
+
+                                                            //   getValueFromEvent={normFile}
+                                                            >
+                                                                <Input onChange={handleInputChange} />
+                                                            </Form.Item>)
+                                                        }
+
                                                     }
 
-                                                }
 
 
-
-                                                )
-                                                }
+                                                    )
+                                                    }
+                                                </Col>
                                             </Row>
 
                                         </Panel>
@@ -255,7 +423,7 @@ function Createproductform() {
                     )
                 }}
             </Form.List>
-        </Form>
+        </Form >
     );
 };
 export default Createproductform

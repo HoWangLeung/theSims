@@ -137,7 +137,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/v2/api-docs",
                 "/swagger-resources/**",
                 "/swagger-ui.html**",
-                "/webjars/**" //Other Stuff You want to Ignore 
+                "/webjars/**" ,//Other Stuff You want to Ignore 
+                "/orders/confirmedOrders/exportPdf/"
             )
             .and()
             .ignoring()

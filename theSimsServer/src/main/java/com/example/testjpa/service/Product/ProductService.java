@@ -1,6 +1,10 @@
 package com.example.testjpa.service.Product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
@@ -18,13 +22,24 @@ public class ProductService {
 	@Autowired
 	EntityManager em;
 	
-	public List<Product> getAllProducts(){
+	public Map<String, Object>getAllProducts(){
 
 
 		
 		List<Product> productList = productRepository.findAll();
+		List<String> categories = productList
+				.stream()
+				.map(e->e.getCategory().getName())
+				.distinct()
+				.collect(Collectors.toList());
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("productList", productList);
+		resultMap.put("categories", categories);
+		resultMap.put("numberOfProducts", productList.size());
+		
 	
-		return productList;
+		return resultMap;
 	}
 
 	public Product getOneProduct(Long id) {

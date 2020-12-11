@@ -70,6 +70,9 @@ public class JwtAuthenticationRestController {
       return ResponseEntity.badRequest().body(null);
     }
   }
+  
+  
+  
 
   @ExceptionHandler({ AuthenticationException.class })
   public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {

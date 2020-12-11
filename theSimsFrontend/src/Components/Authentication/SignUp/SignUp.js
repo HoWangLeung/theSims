@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SignUpForm from '../../forms/SignUpForm'
 import styles from '../Authentication.less'
 import { connect } from 'react-redux'
-import {signUpRequest} from './actions/AuthenticationActions'
+import {signUpRequest} from '../actions/AuthenticationActions'
 import { withRouter } from 'react-router-dom';
 class SignUp extends Component {
     constructor(props) {

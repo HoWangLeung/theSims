@@ -29,9 +29,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     emit.on('change_language', lang => this.loadLocales(lang)); 
     this.loadLocales(); 
-    
     axios.interceptors.request.use(
         (config)=>{
             if(AuthenticationService.isUserLoggedIn()){
@@ -44,6 +44,15 @@ class App extends Component {
             
         }
       )
+
+
+
+
+
+
+
+
+      
   }
 
   loadLocales =  (lang = 'en-US') => {

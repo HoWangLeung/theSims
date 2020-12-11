@@ -7,6 +7,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -244,6 +249,29 @@ public class OrderService {
 		em.merge(targetOrder);
 
 		return null;
+	}
+
+	public Map<String, Object> getConfirmedrderByUserId(Long id) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+		Root<Orders> orderRoot = cq.from(Orders.class);
+
+
+		
+		Predicate likeConfirmed = cb.like(orderRoot.get("status"), "%confirmed");
+		Predicate equalUserId = cb.equal(orderRoot.get("users").get("id"), id);
+		Predicate finalPredicate= cb.and(equalUserId, likeConfirmed);
+		cq.where(finalPredicate);
+		
+		TypedQuery<Orders> query = 
+				em.createQuery(cq.select(orderRoot));
+		System.out.println("query => " + query);
+		List<Orders> result = query.getResultList();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("confirmedOrder",result );
+		
+		return resultMap;
 	}
 
 }

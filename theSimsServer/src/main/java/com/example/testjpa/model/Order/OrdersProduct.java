@@ -31,6 +31,8 @@ public class OrdersProduct  {
 	    @ManyToOne
 	   
 	    private Product product;
+	    
+	    private int subTotal;
 
 
 		public OrdersProduct() {
@@ -45,6 +47,7 @@ public class OrdersProduct  {
 			this.quantity = quantity;
 			this.orders = orders;
 			this.product = product;
+//			this.subTotal = this.product.getBasePrice()*this.quantity;
 		}
 
 
@@ -85,6 +88,16 @@ public class OrdersProduct  {
 
 		public void setProduct(Product product) {
 			this.product = product;
+		}
+
+
+		public int getSubTotal() {
+			return subTotal;
+		}
+
+
+		public void setSubTotal(int subTotal) {
+			this.subTotal = subTotal;
 		}    
 	    
 	 

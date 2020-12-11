@@ -20,8 +20,10 @@ const LeftFilters = (props) => {
 
 
     const [filterValue, setFilterValue] = useState([1, 50])
-    const productList = useSelector(state => state.ProductReducer.productList);
-
+    const productInfo = useSelector(state => state.ProductReducer.productInfo);
+    
+ 
+   
     const dispatch = useDispatch();
     const handleReset = () => {
 
@@ -51,7 +53,9 @@ const LeftFilters = (props) => {
 
     }
     const useSlider = () => {
-        return (<><h4>FILTER BY PRICE</h4>
+        return (<>
+        <Divider/>
+        <h4>FILTER BY PRICE</h4>
             <Slider
                 className={classes.priceSlider}
                 range
@@ -83,27 +87,19 @@ const LeftFilters = (props) => {
 
             })
     }
+  
+    const getCategories = () => {
+        const {categories} = productInfo
 
-    const useCategories = () => {
-        const options =
-            ['Apple',
-                'Bananna',
-                'Orange',
-                'Lemon',
-                'PineApple',
-                'Grapes',
-                'Berries',
-                'Melons',
-                'Kiwi']
-
-        const productList = options.map((option, index) => {
+        const displayList = categories && categories.map((option, index) => {
+            
             return (
 
                 <li
-
+                    key={option}
                     onClick={handleCategoryClick}
                 >
-                    <span>{option}</span>
+                    <span key={option}>{option}</span>
                 </li>
 
             )
@@ -112,9 +108,9 @@ const LeftFilters = (props) => {
 
         return (<>
             <Divider />
-            <h4>Product Categories</h4>
+            <h4>CATEGORIES</h4>
             <ul >
-                {productList}
+                {displayList}
             </ul>
 
             <Divider />
@@ -122,13 +118,17 @@ const LeftFilters = (props) => {
 
 
     }
+    
+    const {categories,productList, numberOfProducts} = productInfo
     return (
         <div className={classes.LeftFiltersContainer}>
-            <p>{`SHOWING ${productList.length} OF 20 RESULTS`}</p>
+
+           
+            {/* <p>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</p> */}
             <ProductsSearch />
 
             {useSlider()}
-            {useCategories()}
+            {getCategories()}
             <Button 
             type="primary" 
             onClick={handleReset}

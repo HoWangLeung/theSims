@@ -7,7 +7,7 @@ const initState = {
     currentStep: 0,
     createProductList: [],
     categoryInfo: [],
-    uploadedproductUrl: [],
+    uploadedproductUrl: "",
 }
 
 
@@ -105,13 +105,13 @@ const InventoryReducer = (state = initState, action) => {
                 ]
             }
             case ("SET_UPLOADED_PRODUCT_URL"):
-                console.log(action.payload);
+                
                
 
 
                 return {
                     ...state,
-                    uploadedproductUrl: [...state.uploadedproductUrl,action.payload]
+                    uploadedproductUrl: action.payload
                 }
 
 

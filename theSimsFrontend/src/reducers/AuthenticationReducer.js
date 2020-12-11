@@ -1,15 +1,17 @@
 const initState = {
-    isLoggedIn: sessionStorage.getItem('USER_TOKEN')=== null? false:true,
-    userProfile:[]
+    isLoggedIn: sessionStorage.getItem('USER_TOKEN') === null ? false : true,
+    userProfile: [],
+    orderHistory:[],
+    invoicePdfUrl:""
 }
 
 const AuthenticationReducer = (state = initState, action) => {
 
     switch (action.type) {
-  
+
         case ("LOGIN_ACTION"):
-        
-        
+
+
             return {
                 ...state,
                 isLoggedIn: action.isLoggedIn
@@ -23,27 +25,50 @@ const AuthenticationReducer = (state = initState, action) => {
 
             };
             break;
-            //========================================================================================================================
+        //========================================================================================================================
         case ("SIGNUP_SUCCESS"):
-            
+
             return state;
 
         case ("SIGNUP_FAILURE"):
             return state;
 
-        case("GET_USER_PROFILE_SUCCESS"):
-            
+        case ("GET_USER_PROFILE_SUCCESS"):
+
             return {
                 ...state,
-                userProfile:action.payload.detail
+                userProfile: action.payload.detail
             };
+
+
+        case ("GET_USER_ORDER_HISTORY_SUCCESS"):
+
+    
+
+            return {
+                ...state,
+                orderHistory:action.payload.detail
+            };
+        case ("GET_USER_ORDER_HISTORY_INVOICE_SUCCESS"):
+
+                console.log(action.payload.config);
+                console.log(action.payload.config.url);
+                return {
+                    ...state,
+                    //invoicePdfUrl:action.payload.config.url
+                };
+
+
+              
+
+
         default:
             return state;
 
 
 
 
-}
+    }
 
 }
 

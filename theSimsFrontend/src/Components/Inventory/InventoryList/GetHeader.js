@@ -160,10 +160,10 @@ export const GetPreviewTableHeader = ({ handleInputChange }) => {
     return (
         [
             headerId(),
-            headerProductCategory(),
-            headerProductName(),
-            headerProductRemainingWithInput(handleInputChange),
-            headerProductStatus(),
+            // headerProductCategory(),
+            // headerProductName(),
+            // headerProductRemainingWithInput(handleInputChange),
+            // headerProductStatus(),
         ])
 
 }

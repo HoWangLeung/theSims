@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import AuthenticationService from '../SignUp/AuthenticationService'
 import { connect } from 'react-redux'
-import { getUserProfile, loginAction } from '../SignUp/actions/AuthenticationActions'
+import { getUserProfile, loginAction } from '../actions/AuthenticationActions'
 import { withRouter } from 'react-router-dom';
 import classes from '../Authentication.less'
 import intl from 'react-intl-universal';

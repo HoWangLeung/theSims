@@ -17,7 +17,7 @@ export const createProduct = (createProductList) => {
         cost: field.cost,
         basePrice: field.basePrice,
         remaining: field.remaining,
-        productUrl:field.productUrl,
+        productUrl:field.productUrl[0].xhr,
         category: {
             name: field.productCategory
         }
@@ -128,9 +128,9 @@ export const addTempItemToCategoryInfo = payload => {
 
 }
 
-export const setUploadedProductUrl = (url,fieldId) => {
+export const setUploadedProductUrl = (url) => {
     return  (dispatch, getState) => {
-        dispatch({ type: 'SET_UPLOADED_PRODUCT_URL',payload:{ fieldId,url}} )
+        dispatch({ type: 'SET_UPLOADED_PRODUCT_URL',payload: url} )
 
 
     }

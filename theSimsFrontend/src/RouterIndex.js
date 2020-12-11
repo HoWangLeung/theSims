@@ -29,6 +29,8 @@ import AuthenticationService from './Components/Authentication/SignUp/Authentica
 import axios from 'axios';
 import Checkout from './Components/Checkout/Checkout';
 import Checkoutsuccess from './Components/Checkout/CheckoutSuccess';
+import Userprofile from './Components/Authentication/UserProfile/UserProfile';
+
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -72,6 +74,7 @@ export default class RouterIndex extends Component {
                                 <AuthenticatedRoute path='/employee' component={Employee} />
                                 <AuthenticatedRoute path='/inventory' component={Inventory} />
                                 <AuthenticatedRoute path='/checkout' component={Checkout} />
+                                <AuthenticatedRoute path='/userProfile/:id' component={Userprofile} />
                                 <AuthenticatedRoute path='/checkout-success' component={Checkoutsuccess} />
                                 <Route path='/jotto' component={Home} />
                                 <Route path='/createMenu' component={CreateTemplate} />

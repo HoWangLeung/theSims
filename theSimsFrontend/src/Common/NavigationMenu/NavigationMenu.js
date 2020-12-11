@@ -4,6 +4,8 @@ import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, ApartmentOutlined, BarcodeOutlined, CreditCardOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { Link, withRouter } from 'react-router-dom';
+import { getUserProfile } from '../../Components/Authentication/actions/AuthenticationActions';
+import { connect } from 'react-redux';
 const { SubMenu } = Menu;
 class NavigationMenu extends Component {
     constructor(props) {
@@ -18,13 +20,27 @@ class NavigationMenu extends Component {
 
     };
 
+    componentDidMount=()=>{
+        let isLoggedIn = sessionStorage.getItem("userId")!==null
+       if(isLoggedIn){this.props.getUserProfile()}
+
+    }
+
 
     renderMenu = () => {
         const { current } = this.state;
-        const { location: { pathname } } = this.props
+        const { 
+            location: { pathname },
+            userProfile:{username}
+        
+        
+        } = this.props
         let id=pathname.substring(pathname.lastIndexOf('/') + 1)
         if (['/','/signup-customer','/signup','/login','/signup-success',
-        `/product/${id}`,'/checkout',, '/checkout-success'].includes(pathname))  return null
+        `/product/${id}`,'/checkout',
+         '/checkout-success',
+         `/userProfile/${username}`,
+        ].includes(pathname))  return null
 
 
       
@@ -69,4 +85,20 @@ class NavigationMenu extends Component {
     }
 }
 
-export default withRouter(NavigationMenu)
+const mapStateToProps = (state) => {
+    
+
+    return {
+        userProfile:state.AuthenticationReducer.userProfile
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    
+    return {
+        getUserProfile:()=>dispatch(getUserProfile())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationMenu))

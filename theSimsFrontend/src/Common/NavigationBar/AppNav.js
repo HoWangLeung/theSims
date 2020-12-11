@@ -8,7 +8,7 @@ import intl from 'react-intl-universal';
 import AuthenticationService from '../../Components/Authentication/SignUp/AuthenticationService';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { logoutAction } from '../../Components/Authentication/SignUp/actions/AuthenticationActions';
+import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions';
 import { withRouter } from 'react-router-dom';
 
 class AppNav extends Component {

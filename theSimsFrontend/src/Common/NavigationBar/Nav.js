@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AuthenticationService from '../../Components/Authentication/SignUp/AuthenticationService';
 import { withRouter } from 'react-router-dom';
-import { logoutAction } from '../../Components/Authentication/SignUp/actions/AuthenticationActions'
+import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions'
 import LoginCard from '../../Components/Authentication/MainPageLogin/LoginCard'
 import intl from 'react-intl-universal';
 import Banner from '../Banner';
@@ -31,6 +31,7 @@ class Nav extends React.Component {
 
 
     }
+   
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
@@ -89,9 +90,11 @@ class Nav extends React.Component {
         const { hideNav } = this.state
         const { currentLocale, handleChangeLocale } = this.props
         const isLoggedIn = AuthenticationService.isUserLoggedIn()
+        let {userProfile:{username}}= this.props
         let homeIcon
         let localeChanger
         let loginOrUserIcon
+        console.log(this.props);
         const menu = (
             <Menu>
                 <Menu.Item key="0">
@@ -114,7 +117,7 @@ class Nav extends React.Component {
                     <Link to="/inventory"> <p>{intl.get('dashboard')}</p></Link>
                 </Menu.Item>
                 <Menu.Item key="1">
-                    <p>{intl.get('userProfile')}</p>
+                <Link to={`/userProfile/${username}`}>   <p>{intl.get('userProfile')}</p></Link>
                 </Menu.Item>
                 <Menu.Divider />
                 {!isLoggedIn && <Menu.Item key="3"> <Link to="/signup">Sign Up</Link></Menu.Item>}
@@ -195,7 +198,7 @@ class Nav extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-
+        userProfile:state.AuthenticationReducer.userProfile
     }
 }
 const mapDispatchToProps = (dispatch) => {

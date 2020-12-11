@@ -1,6 +1,7 @@
 package com.example.testjpa.controller.prodcut;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,10 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	@GetMapping("/")
-	public ResponseEntity<ApiResponse<List<Product>>> getAllProducts() {
+	public ResponseEntity<ApiResponse<Map<String, Object>>> getAllProducts() {
 	
-		List<Product> productList = productService.getAllProducts(); 
-		return ResponseEntity.ok(new ApiResponse<List<Product>>(productList));
+		Map<String, Object> resultMap = productService.getAllProducts(); 
+		return ResponseEntity.ok(new ApiResponse<Map<String, Object>>(resultMap));
 
 	}
 	
