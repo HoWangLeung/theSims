@@ -44,9 +44,16 @@ public class Users  {
 	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<Orders> orders = new ArrayList<>();
-	
-	
 	private boolean enabled;
+	
+	private String firstname;
+	private String lastname;
+	private String phoneNumber;
+	private String addressBuilding;
+	private String addressBlock;
+	private String addressFloor;
+	private String addressFlat;
+	
 //	cascade = CascadeType.ALL,
 	 @ManyToMany( fetch = FetchType.EAGER)
 	    @JoinTable(
@@ -66,17 +73,30 @@ public class Users  {
 
 
  
-
-
-	public Users(Long id, String username, String password, List<Orders> orders, boolean enabled, Set<Role> roles) {
+	public Users(Long id, String username, String password, List<Orders> orders, boolean enabled, String firstname,
+			String lastname, String phoneNumber, String addressBuilding, String addressBlock, String addressFloor,
+			String addressFlat, Set<Role> roles) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.orders = orders;
 		this.enabled = enabled;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phoneNumber = phoneNumber;
+		this.addressBuilding = addressBuilding;
+		this.addressBlock = addressBlock;
+		this.addressFloor = addressFloor;
+		this.addressFlat = addressFlat;
 		this.roles = roles;
 	}
+
+
+
+
+
+
 
 
 
@@ -151,6 +171,106 @@ public class Users  {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
+	
+	
+	
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
+	public String getAddressBuilding() {
+		return addressBuilding;
+	}
+
+
+
+	public void setAddressBuilding(String addressBuilding) {
+		this.addressBuilding = addressBuilding;
+	}
+
+
+
+	public String getAddressBlock() {
+		return addressBlock;
+	}
+
+
+
+	public void setAddressBlock(String addressBlock) {
+		this.addressBlock = addressBlock;
+	}
+
+
+
+	public String getAddressFloor() {
+		return addressFloor;
+	}
+
+
+
+	public void setAddressFloor(String addressFloor) {
+		this.addressFloor = addressFloor;
+	}
+
+
+
+	public String getAddressFlat() {
+		return addressFlat;
+	}
+
+
+
+	public void setAddressFlat(String addressFlat) {
+		this.addressFlat = addressFlat;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
 
 
 	@Override

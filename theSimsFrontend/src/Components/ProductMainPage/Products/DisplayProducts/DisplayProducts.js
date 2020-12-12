@@ -17,47 +17,47 @@ const Displayproducts = (props) => {
     });
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
-  
-    const {categories,productList} = productInfo
-    let isLoggedIn = sessionStorage.getItem("userId")!==null
+
+    const { categories, productList } = productInfo
+    let isLoggedIn = sessionStorage.getItem("userId") !== null
     const dispatch = useDispatch();
     useEffect(() => {
+        
         dispatch(fetchAllProducts())
-       
-        if(isLoggedIn)
-        dispatch(getUserProfile({username:sessionStorage.getItem("authenticatedUser")}))
-         
+        if (isLoggedIn)
+            dispatch(getUserProfile({ username: sessionStorage.getItem("authenticatedUser") }))
 
-        return ()=>{
-            console.log('clean up ' , isLoggedIn);
+
+        return () => {
+            
         }
- 
-       
+
+
     }, [isLoggedIn]);
 
 
     const renderProductScreen = () => {
         return productList && productList.map(item => {
 
-            
+
             return (
-                <Col xs={24} sm={24} sm={12} md={8} xl={6}  span={6} >
+                <Col xs={24} sm={24} sm={12} md={8} xl={6} span={6} >
                     <Link to={`/product/${item.id}`}>
                         <Card
                             hoverable
                             cover={
-                            <img
-                                className={classes.productNamePriceContainerImg}
-                                alt="example"
-                                
-                               
-                                src={
+                                <img
+                                    className={classes.productNamePriceContainerImg}
+                                    alt="example"
 
-                                    item.productUrl===null?
-                                    "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
-                                    :item.productUrl
-                               
-                                } />}
+
+                                    src={
+
+                                        item.productUrl === null ?
+                                            "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+                                            : item.productUrl
+
+                                    } />}
                             className={classes.productNamePriceContainer}
                         >
 
@@ -74,14 +74,14 @@ const Displayproducts = (props) => {
     }
 
 
-  
+
 
     return (
         <div className={classes.displayProductOuterContainer}>
             <Spin spinning={isLoading} >
                 <Row gutter={[8, 8]} >
 
-                {renderProductScreen()}
+                    {renderProductScreen()}
 
                 </Row>
             </Spin>

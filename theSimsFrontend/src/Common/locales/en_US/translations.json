@@ -68,7 +68,19 @@
                     "add":"Add",
                     "undo":"Undo"
                     
-                }
+                },
+    "userProfilePage":{
+        "username":"Username",
+        "firstname":"Frist Name",
+        "lastname":"Last Name",
+        "phoneNumber":"Phone",
+        "addressBuilding":"Building",
+        "addressBlock":"Building",
+        "addressFloor":"Floor",
+        "addressFlat":"Flat"
+      
+
+    }
     
  
     

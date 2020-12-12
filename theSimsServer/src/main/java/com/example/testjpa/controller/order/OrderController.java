@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.Order.Orders;
+import com.example.testjpa.model.Order.OrdersProduct;
 import com.example.testjpa.service.Order.OrderService;
 import com.itextpdf.awt.geom.Rectangle;
 import com.itextpdf.text.BaseColor;
@@ -96,8 +97,8 @@ public class OrderController {
 	}
 
 	@GetMapping("/confirmedOrders/exportPdf/")
-	public void downloadPDF(HttpServletRequest request, HttpServletResponse response, @RequestParam Long id) throws Exception {
-
+	public void downloadPDF(HttpServletRequest request, HttpServletResponse response, @RequestParam Long userId, @RequestParam Long orderId) throws Exception {
+		System.out.println("ID >>>>>>>>>" + userId);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
 		Root<Orders> orderRoot = cq.from(Orders.class);
@@ -105,14 +106,22 @@ public class OrderController {
 
 		
 		Predicate likeConfirmed = cb.like(orderRoot.get("status"), "%confirmed");
-		Predicate equalUserId = cb.equal(orderRoot.get("users").get("id"), id);
-		Predicate finalPredicate= cb.and(equalUserId, likeConfirmed);
+		Predicate equalUserId = cb.equal(orderRoot.get("users").get("id"), userId);
+		Predicate equalOrderId = cb.equal(orderRoot.get("id"), orderId);
+		Predicate targetOrder = cb.and(equalUserId, equalOrderId);
+		
+		
+		Predicate finalPredicate= cb.and(targetOrder, likeConfirmed);
 		cq.where(finalPredicate);
 		
 		TypedQuery<Orders> query = 
 				em.createQuery(cq.select(orderRoot));
 	 
 		List<Orders> orderList = query.getResultList();
+	
+		System.out.println("orderList ===> " + orderList);
+		
+		Orders specificOrder = orderList.get(0);
 		
 		
 		// 告诉浏览器用什么软件可以打开此文件
@@ -181,7 +190,7 @@ public class OrderController {
 		table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.getDefaultCell().setPadding(10);
-		Orders specificOrder  = orderList.get(0);
+	 
 		
 		specificOrder.getOrderProductList().stream().forEach(e->{
 			System.out.println("NAME = "+ e.getProduct().getProductName().toString());
@@ -218,7 +227,7 @@ public class OrderController {
 		calTable.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
 		calTable.getDefaultCell().setPadding(5);
 		
-		
+		 
 		calTable.addCell(new Phrase(String.format("Subtotal:  $ %d ", specificOrder.getTotal()), fontNormal));
 		calTable.addCell(new Phrase("Discount: $ 0", fontNormal));
 		calTable.addCell(new Phrase(String.format("Total:       $ %d ", specificOrder.getTotal()), fontNormal));
@@ -226,8 +235,7 @@ public class OrderController {
 		calTable.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		float[] columnWidths = new float[]{1f};
 		 calTable.setWidthPercentage(18);
- 
-		document.add(calTable);
+	document.add(calTable);
 		document.close();
 
 		

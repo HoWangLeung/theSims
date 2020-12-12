@@ -51,11 +51,11 @@ const AuthenticationReducer = (state = initState, action) => {
             };
         case ("GET_USER_ORDER_HISTORY_INVOICE_SUCCESS"):
 
-                console.log(action.payload.config);
-                console.log(action.payload.config.url);
+                
+                
                 return {
                     ...state,
-                    //invoicePdfUrl:action.payload.config.url
+                    invoicePdfUrl:action.payload.config.url
                 };
 
 

@@ -34,6 +34,7 @@ const Cart=(props)=> {
     }, []);
  
     const handleProceed=()=>{
+        setDrawerVisible(false)
          props.history.push("/checkout")
     
    

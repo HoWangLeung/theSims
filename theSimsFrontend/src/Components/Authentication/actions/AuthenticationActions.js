@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API } from '../../../ApiConfig'
- 
 
+const sleep = m => new Promise(r => setTimeout(r, m))
 export const loginAction = (isLoggedIn) => {
 
   return {
@@ -11,52 +11,61 @@ export const loginAction = (isLoggedIn) => {
 }
 
 export const getUserProfile = (payload) => {
-  
+
   return async (dispatch, getState) => {
 
     try {
-      let res = await axios.post(`${API}/users/userProfile`,payload)
-      
+      let res = await axios.post(`${API}/users/userProfile`, payload)
+
       dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
       return res
     } catch (err) {
-      
+
     }
 
   }
 }
 
-export const getUserOrderHistory = ({userId}) => {
-  
+export const getUserOrderHistory = ({ userId }) => {
+
   return async (dispatch, getState) => {
 
     try {
-      console.log(userId);
-      dispatch({ type: 'GET_USER_ORDER_HISTORY_REQUEST'})
+      
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_REQUEST' })
       let res = await axios.get(`${API}/orders/confirmedOrders?id=${userId}`)
-      console.log(res);
+      
       dispatch({ type: 'GET_USER_ORDER_HISTORY_SUCCESS', payload: res.data })
       return res
     } catch (err) {
-      
+
     }
 
   }
 }
 
-export const getUserOrderHistoryInvoice = ({userId}) => {
-  
+export const getUserOrderHistoryInvoice = ({ userId, orderId }) => {
+
   return async (dispatch, getState) => {
 
     try {
-      console.log(userId);
-      dispatch({ type: 'GET_USER_ORDER_HISTORY_INVOICE_REQUEST'})
-      let res = await axios.get(`${API}/orders/confirmedOrders/exportPdf/`)
-      console.log(res);
+      
+      dispatch({ type: 'GET_USER_ORDER_HISTORY_INVOICE_REQUEST' })
+    
+      let res = await axios(
+        {
+          url: `${API}/orders/confirmedOrders/exportPdf/?userId=${userId}&orderId=${orderId}`,
+          method: 'GET',
+          responseType: 'blob',
+        }
+      )
+
+
+      
       dispatch({ type: 'GET_USER_ORDER_HISTORY_INVOICE_SUCCESS', payload: res })
       return res
     } catch (err) {
-      
+
     }
 
   }

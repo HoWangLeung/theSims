@@ -64,6 +64,22 @@ const LeftFilters = (props) => {
                 max={50}
                 min={0}
                 onChange={onChange}
+                // trackStyle={{
+                //     backgroundColor: 'red',
+                //     height: '5px',
+                //   }}
+                //   railStyle={{
+                //     backgroundColor: 'red',
+                //     height: '5px',
+                //   }}
+                //   handleStyle={{
+                //     borderColor: 'blue',
+                //     height: '14px',
+                //     width: '14px',
+                //     marginLeft: '-7px',
+                //     marginTop: '-4.5px',
+                //     backgroundColor: 'blue',
+                //   }}
             // onAfterChange={onAfterChange}
             />
             <Row   className={classes.filterResult}>

@@ -94,7 +94,7 @@ class Nav extends React.Component {
         let homeIcon
         let localeChanger
         let loginOrUserIcon
-        console.log(this.props);
+        
         const menu = (
             <Menu>
                 <Menu.Item key="0">

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import intl from 'react-intl-universal';
 
 import { Input } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 
@@ -17,19 +17,25 @@ const headerId = () => (
 
 
 
-const headerInvoice = (handlePdfExport, invoicePdfUrl) => (
+const headerInvoice = (handlePdfExport, isFecting,onClickId) => (
     {
         title: "Invoice",
         dataIndex: 'Invoice',
         align: 'center',
         key: 'invoice',
         render: (text, row, index) => {
-            console.log(invoicePdfUrl)
+
+            
+            
+            
             return (
-               
-                <a href={invoicePdfUrl && invoicePdfUrl}>   <DownloadOutlined
-                    onClick={handlePdfExport}
-                    style={{ fontSize: "18px", cursor: "pointer" }} /></a>
+                isFecting["GET_USER_ORDER_HISTORY_INVOICE"] && row.id ===parseInt(onClickId)? <LoadingOutlined /> :
+                    <DownloadOutlined
+                        id={row.id}
+                        key={row.id}
+
+                        onClick={handlePdfExport}
+                        style={{ fontSize: "18px", cursor: "pointer" }} />
 
             )
 
@@ -43,17 +49,17 @@ const headerInvoice = (handlePdfExport, invoicePdfUrl) => (
 
 const headerTotal = () => {
     return ({
-        title: "Total",
+        title: "Total (HKD)",
         dataIndex: 'total',
         align: 'center',
         key: 'total',
         render: (text, row, index) => {
 
 
-
+            
             return (
 
-                <>sdf</>
+                <>{`${row.total}`}</>
             )
         }
     })
@@ -72,7 +78,7 @@ const headerCreatedDate = (handleInputChange) => {
 
             return (
 
-                <>sdf</>
+                <>{row.createdDate}</>
             )
         }
 
@@ -94,15 +100,15 @@ const headerOrderStatus = () => (
 
 
 
-export const getPreviewTableHeader = ({ handlePdfExport, invoicePdfUrl }) => {
-    console.log(invoicePdfUrl);
+export const getPreviewTableHeader = ({ handlePdfExport, isFecting ,onClickId}) => {
+
     return (
         [
             headerId(),
             headerOrderStatus(),
             headerTotal(),
             headerCreatedDate(),
-            headerInvoice(handlePdfExport,invoicePdfUrl),
+            headerInvoice(handlePdfExport, isFecting,onClickId),
 
         ])
 

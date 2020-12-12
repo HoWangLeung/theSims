@@ -1,6 +1,6 @@
 package com.example.testjpa.controller;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.jwt.JwtInMemoryUserDetailsService;
@@ -38,20 +40,25 @@ public class UsersController {
 	}
 
 	@PostMapping("/userProfile")
-	public ResponseEntity<ApiResponse<Map<String, Object>>> getUserProfile(@RequestBody Map<String,Object>req) {
+	public ResponseEntity<ApiResponse<LinkedHashMap<String, Object>>> getUserProfile(@RequestBody Map<String,Object>req) {
 		System.out.println("I am in get User profile now");
 		Users user = jwtInMemoryUserDetailsService.getUserProfile(req);
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> resultMap = new LinkedHashMap<String, Object>();
 	
 		
 			  resultMap.put("id", user.getId());
 			  resultMap.put("username", user.getUsername());
 			  resultMap.put("role", user.getRoles().stream().findFirst().get().getName()); 
-	
-		
+			  resultMap.put("addressBuilding", user.getAddressBuilding());
+			  resultMap.put("firstname", user.getFirstname());
+			  resultMap.put("addressBlock", user.getAddressBlock());
+			  resultMap.put("lastname", user.getLastname());
+			  resultMap.put("addressFloor", user.getAddressFloor()); 
+			  resultMap.put("phoneNumber", user.getPhoneNumber());
+			  resultMap.put("addressFlat", user.getAddressFlat());
 		
 		System.out.println(resultMap);
-		return ResponseEntity.ok(new ApiResponse<Map<String, Object>>(resultMap));
+		return ResponseEntity.ok(new ApiResponse<LinkedHashMap<String, Object>>(resultMap));
 	}
  
 
@@ -62,6 +69,12 @@ public class UsersController {
 		internalUserAccount.setPassword(encoder.encode(internalUserAccount.getPassword()));
 
 		jwtInMemoryUserDetailsService.saveUser(internalUserAccount);
+
+	}
+	
+	@PutMapping("/editBasicInfo/")
+	public void editBasicInfo(@RequestParam Long userId, @RequestBody Users req ) {
+	 
 
 	}
 }

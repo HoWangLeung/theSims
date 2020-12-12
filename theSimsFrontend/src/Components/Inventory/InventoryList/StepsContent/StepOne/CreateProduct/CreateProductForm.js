@@ -216,6 +216,7 @@ function Createproductform() {
     return (
         <Form
             className={classes.createproductForm}
+            labelAlign="left"
             id="createproductForm"
             form={form}
             onFinish={onFinish}
@@ -335,6 +336,7 @@ function Createproductform() {
                                                                     fieldKey={[field.fieldKey, index]}
                                                                     valuePropName="fileList"
                                                                     getValueFromEvent={normFile}
+                                                                   
                                                                     rules={[
 
                                                                         // ({ getFieldValue }) => ({
