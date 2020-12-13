@@ -1,8 +1,8 @@
 const initState = {
     isLoggedIn: sessionStorage.getItem('USER_TOKEN') === null ? false : true,
     userProfile: [],
-    orderHistory:[],
-    invoicePdfUrl:""
+    orderHistory: [],
+    invoicePdfUrl: ""
 }
 
 const AuthenticationReducer = (state = initState, action) => {
@@ -43,23 +43,29 @@ const AuthenticationReducer = (state = initState, action) => {
 
         case ("GET_USER_ORDER_HISTORY_SUCCESS"):
 
-    
+
 
             return {
                 ...state,
-                orderHistory:action.payload.detail
+                orderHistory: action.payload.detail
             };
         case ("GET_USER_ORDER_HISTORY_INVOICE_SUCCESS"):
 
-                
-                
-                return {
-                    ...state,
-                    invoicePdfUrl:action.payload.config.url
-                };
 
 
-              
+            return {
+                ...state,
+                invoicePdfUrl: action.payload.config.url
+            };
+        case ("EDIT_BASIC_INFO_SUCCESS"):
+        
+      
+            return {
+                ...state,
+                // userProfile:[]
+            };
+
+
 
 
         default:

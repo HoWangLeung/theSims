@@ -51,7 +51,7 @@ class CommonModal {
         return Modal.confirm({
             title:<CommonTexty text={'confirm'}/> ,
             cancelText: intl.get('cancel'),
-            okButtonProps:props.okButtonProps,
+           // okButtonProps:props.okButtonProps,
             ...props
         });
 

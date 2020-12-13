@@ -61,7 +61,7 @@ export default class LocationSearchInput extends React.Component {
                                             })}
                                         >
                                             <Spin spinning={loading}>
-                                                <Input  placeholder={suggestion.description} />
+                                                <Input size="large"  placeholder={suggestion.description} />
                                             </Spin>
                                         </div>
                                     );

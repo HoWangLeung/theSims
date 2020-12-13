@@ -4,10 +4,12 @@ import classes from '../UserProfile.less'
 import { Typography, Space } from 'antd';
 import intl from 'react-intl-universal';
 import { values } from 'lodash';
+import { useDispatch } from 'react-redux';
+import { editBasicInfoRequest, getUserProfile } from '../../actions/AuthenticationActions'
 const { Text, Link } = Typography;
 
 export default function Editbasicinfoform(props) {
-    const { userProfile, initialValues } = props
+    const { userProfile, initialValues,toggleEditMode } = props
     const layout = {
         labelCol: { span: 9 },
         wrapperCol: { span: 16 },
@@ -15,11 +17,13 @@ export default function Editbasicinfoform(props) {
     const tailLayout = {
         wrapperCol: { offset: 20, span: 4 },
     };
-
+    const dispatch = useDispatch();
     const sleep = m => new Promise(r => setTimeout(r, m))
     const onFinish = async (values) => {
         console.log("userProfileForm =>", values);
-        
+        props.onFinish(values)
+      
+    
     }
 
     return (
@@ -47,7 +51,7 @@ export default function Editbasicinfoform(props) {
 
                                 <Input
                                     className={classes.userInfoInputField}
-                                     
+                                    disabled={field === "username" ? true : false}
                                 />
 
                             </Form.Item>
@@ -60,7 +64,7 @@ export default function Editbasicinfoform(props) {
 
 
 
-           
+
 
         </Form>
     )

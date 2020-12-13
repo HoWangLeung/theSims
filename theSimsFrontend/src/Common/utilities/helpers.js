@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 export const returnMessage = (msg) => {
     CommonModal.success({
         content: msg,
-        okText: intl.get('confirm'),
+        okText: intl.get('ok'),
         centered:true
     })
 }

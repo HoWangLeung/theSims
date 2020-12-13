@@ -62,6 +62,10 @@ public class OrderController {
 	public Map<String, Object> getOrderById(@PathVariable Long id) {
 		return orderService.getOrderById(id);
 	}
+	
+	
+	
+	
 
 	@GetMapping("/confirmedOrders")
 	public ResponseEntity<ApiResponse<Map<String, Object>>> getConfirmedrderByUserId(@RequestParam Long id) {
@@ -81,6 +85,8 @@ public class OrderController {
 		return orderService.addOrder(req);
 
 	}
+	
+ 
 
 	@DeleteMapping("/removeProduct")
 	public Map<String, Object> removeOneProduct(@RequestBody Map<String, Object> req) {

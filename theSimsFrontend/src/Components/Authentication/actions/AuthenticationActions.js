@@ -71,7 +71,32 @@ export const getUserOrderHistoryInvoice = ({ userId, orderId }) => {
   }
 }
 
+export const editBasicInfoRequest =  (payload) => {
 
+  return async (dispatch, getState) => {
+
+    try {
+
+    
+       dispatch({ type: 'EDIT_BASIC_INFO_REQUEST' })
+  
+       let userId = parseInt(sessionStorage.getItem("userId"))
+      // console.log(typeof userId);
+      // console.log(payload);
+      // const sleep = (m) => new Promise((r) => setTimeout(r, m))
+      // sleep(3000)
+      let res = await axios.put(`${API}/users/editBasicInfo?userId=${userId}`, payload);
+
+     // dispatch({ type: 'EDIT_BASIC_INFO_SUCCESS' })
+
+   //    return res
+ 
+    } catch (err) {
+
+    }
+
+  }
+}
 
 
 

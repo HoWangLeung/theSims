@@ -27,6 +27,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	private UsersService internalUserAccountRepository;
 	@Autowired
 	EntityManager em;
+	
 	@Transactional
 	public List<Users> findAllwithRoles() {
 		List<Users> users = em.createQuery("select u from Users u join fetch u.roles r").getResultList();
@@ -66,5 +67,23 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 		System.out.println("reaching 95 iin jwtuserdetail service ===> ");
 		return internalUserAccountRepository.save(internalUserAccount);
 	}
+	
+	@Transactional
+	public void editUserProfile(Long userId,Users user) {
+		System.out.println("reaching 95 iin jwtuserdetail service ====================???????????????=> ");
+		Users targetUser = em.find(Users.class, userId);
+		targetUser.setFirstname(user.getFirstname());
+		targetUser.setLastname(user.getLastname());
+		targetUser.setPhoneNumber(user.getPhoneNumber());
+		targetUser.setAddressBuilding(user.getAddressBuilding());
+		targetUser.setAddressBlock(user.getAddressBlock());
+		targetUser.setAddressFlat(user.getAddressFlat());
+		targetUser.setAddressFloor(user.getAddressFloor());
+		em.merge(targetUser);
+	 
+ 		  
+	}
+	
+	
 
 }

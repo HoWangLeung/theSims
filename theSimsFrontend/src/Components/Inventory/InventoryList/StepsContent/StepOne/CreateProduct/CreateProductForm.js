@@ -12,6 +12,7 @@ import classes from '../../../../Inventory.less';
 import Imageuploader from './ImageUploader';
 import { storage } from './UploadIndex'
 import { CheckCircleFilled, UploadOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
 const { Panel } = Collapse;
 const { Option } = Select;
 
@@ -231,18 +232,18 @@ function Createproductform() {
             validateTrigger={'onChange'}
         >
             <Form.Item
-            
-             name={"productCategory"} 
-             label={intl.get("productCategory")}
-             rules={[
-                {
-                    required: true,
-                    message: 'This field is mandatory.',
-                }
 
-            ]}
-             
-             >
+                name={"productCategory"}
+                label={intl.get("productCategory")}
+                rules={[
+                    {
+                        required: true,
+                        message: 'This field is mandatory.',
+                    }
+
+                ]}
+
+            >
                 <Select
                     style={{ width: 240 }}
                     placeholder="Select a Category"
@@ -336,7 +337,7 @@ function Createproductform() {
                                                                     fieldKey={[field.fieldKey, index]}
                                                                     valuePropName="fileList"
                                                                     getValueFromEvent={normFile}
-                                                                   
+
                                                                     rules={[
 
                                                                         // ({ getFieldValue }) => ({
@@ -354,29 +355,31 @@ function Createproductform() {
 
                                                                     }
                                                                 >
-                                                                    <Upload
+                                                                  
+                                                                        <Upload
 
-                                                                        onPreview={onPreview}
-                                                                        onChange={handleOnChange}
-                                                                        listType="picture-card"
+                                                                            onPreview={onPreview}
+                                                                            onChange={handleOnChange}
+                                                                            listType="picture-card"
 
-                                                                        progress={
-                                                                            {
-                                                                                format: (percent) => {
+                                                                            progress={
+                                                                                {
+                                                                                    format: (percent) => {
 
 
-                                                                                    return progress < 100 ? progress + "%" : <CheckCircleFilled />
-                                                                                },
-                                                                                percent: progress,
-                                                                                // showInfo:true,
-                                                                                type: "line",
-                                                                                success: { percent: progress }
+                                                                                        return progress < 100 ? progress + "%" : <CheckCircleFilled />
+                                                                                    },
+                                                                                    percent: progress,
+                                                                                    // showInfo:true,
+                                                                                    type: "line",
+                                                                                    success: { percent: progress }
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        customRequest={handleUpload}
-                                                                        {...Uprops}>
-                                                                        {fileList.length < 5 && '+ Upload'}
-                                                                    </Upload>
+                                                                            customRequest={handleUpload}
+                                                                            {...Uprops}>
+                                                                            {fileList.length < 5 && '+ Upload'}
+                                                                        </Upload>
+                                                                  
                                                                 </Form.Item>
                                                             )
 

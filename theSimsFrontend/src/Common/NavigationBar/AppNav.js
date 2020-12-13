@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Drawer, Button } from 'antd';
+import { Drawer, Button, Row } from 'antd';
 import {
     UnorderedListOutlined
 } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions';
 import { withRouter } from 'react-router-dom';
+import Cart from '../../Components/ProductMainPage/Cart/Cart';
 
 class AppNav extends Component {
     constructor(props) {
@@ -40,22 +41,25 @@ class AppNav extends Component {
         this.closeDrawer()
         this.props.history.push('/')
     }
-    closeDrawer=()=>{
+    closeDrawer = () => {
         this.setState({ visible: false })
     }
 
     render() {
-        const  isLoggedIn  = AuthenticationService.isUserLoggedIn()
+        const isLoggedIn = AuthenticationService.isUserLoggedIn()
 
 
         return (
             <>
-                <div className={classes.listIconContainer}>
+                <Row justify="end" className={classes.listIconContainer}>
+                    <div className={classes.navCartIconContainer}>
+                        <Cart  />
+                    </div>
                     <UnorderedListOutlined
                         onClick={this.showDrawer}
                         className={classes.listIcon}
                     />
-                </div>
+                </Row>
                 <Drawer
                     title={intl.get('webTitle')}
                     placement="right"
@@ -63,16 +67,22 @@ class AppNav extends Component {
                     onClose={this.onClose}
                     visible={this.state.visible}
                 >
-                   
+
                     <p>{isLoggedIn ?
                         <Link to="/login" onClick={this.logout}>Logout</Link> :
-                        <Link to="/login" onClick={this.closeDrawer} >Login</Link>}</p>
+                        <Link to="/login" onClick={this.closeDrawer} >Login</Link>
+
+
+
+                    }</p>
                     <p>{isLoggedIn ?
                         null :
-                        <Link to="/signup-customer"onClick={this.closeDrawer} >SignUp</Link>
+                        <Link to="/signup-customer" onClick={this.closeDrawer} >SignUp</Link>
 
                     }
                     </p>
+
+
                 </Drawer>
             </>
         )
@@ -82,7 +92,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-  
+
     }
 }
 

@@ -72,9 +72,13 @@ public class UsersController {
 
 	}
 	
-	@PutMapping("/editBasicInfo/")
+	@PutMapping("/editBasicInfo")
 	public void editBasicInfo(@RequestParam Long userId, @RequestBody Users req ) {
+	 System.out.println("EDIT BASC INFO CONTROLLER");
 	 
-
+	 
+	 jwtInMemoryUserDetailsService.editUserProfile(userId,req);
+	 
+	 //return this.getUserProfile(req)
 	}
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import intl from 'react-intl-universal';
 import classes from '../Inventory.less'
-import { Input } from 'antd';
+import { Input, Tooltip } from 'antd';
 
 
 const headerId = () => (
@@ -20,7 +20,7 @@ const headerProductCategory = () => (
         key: 'category',
         align: 'center',
         render: (text, row, index) => {
-          
+
             return (
                 <p>
                     {row.category}
@@ -75,8 +75,8 @@ const headerProductRemainingWithInput = (handleInputChange) => {
 
             return (
 
-                <Input       
-                    id={row.id}   
+                <Input
+                    id={row.id}
                     onChange={handleInputChange}
                     key={row.id} defaultValue={row.remaining}
                     type="number"
@@ -95,10 +95,12 @@ const headerProductStatus = () => (
         key: 'productStatus',
         align: 'center',
         render: (text, row, index) => {
-
+            console.log(row);
             return (
                 <div className={classes.circleContainer} >
-                    <div className={classes.circle} />
+                    <Tooltip title="less then 100 shows RED, else GREEN">
+                        <div className={row.remaining < 100 ? classes.circleRed : classes.circleGreen} />
+                    </Tooltip>
                 </div>
             )
         }
@@ -160,10 +162,10 @@ export const GetPreviewTableHeader = ({ handleInputChange }) => {
     return (
         [
             headerId(),
-            // headerProductCategory(),
-            // headerProductName(),
-            // headerProductRemainingWithInput(handleInputChange),
-            // headerProductStatus(),
+            headerProductCategory(),
+            headerProductName(),
+            headerProductRemainingWithInput(handleInputChange),
+            headerProductStatus(),
         ])
 
 }

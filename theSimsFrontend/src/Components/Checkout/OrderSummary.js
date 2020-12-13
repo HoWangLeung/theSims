@@ -21,9 +21,12 @@ function Ordersummary(props) {
         })
     }
     return (
-        <div className={classes.orderSummaryContainer}>
+        <div
+        //className={classes.orderSummaryContainer}
+
+        >
             <h3>Order Summary</h3>
-            <Divider > Product Names </Divider>
+            <Divider />
             <Row className={classes.productNamesContainer}>
                 <Col>
 
