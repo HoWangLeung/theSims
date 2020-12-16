@@ -24,7 +24,7 @@ class Banner extends Component {
         if (['/','/signup-customer','/signup','/login','/signup-success'
         ,`/product/${id}`, '/checkout',
          '/checkout-success',
-         `/userProfile/${sessionStorage.getItem("authenticatedUser")}`,
+       //  `/userProfile/${sessionStorage.getItem("authenticatedUser")}`,
         
         ].includes(pathname))
             return null

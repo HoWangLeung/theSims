@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Dropdown, Typography, Avatar, Popover } from 'antd';
+import { Menu, Dropdown, Typography, Avatar, Popover, Divider } from 'antd';
 import { UserOutlined, DownOutlined, LoginOutlined, HomeOutlined } from '@ant-design/icons';
 import classes from './Nav.less'
 import AppNav from './AppNav'
@@ -152,7 +152,7 @@ class Nav extends React.Component {
         homeIcon = <Link to="/"><HomeOutlined className={classes.pointer} /></Link>
 
 
-        const topNavigationMenu = (<div className={classes.appHeaderContainer}>
+        const topNavigationMenu = (<><div className={classes.appHeaderContainer}>
             <Title style={{ padding: 10 }} level={3}><Link to="/" >{intl.get('webTitle')}</Link></Title>
 
             <Dropdown overlay={menu} trigger={['hover']}>
@@ -178,7 +178,9 @@ class Nav extends React.Component {
                 {homeIcon}
                 {loginOrUserIcon}
             </div>
-        </div>)
+     
+        </div>
+               <Divider style={{margin:"0px", padding:"0px 0px 0px 0px", background:"white", }}/></>)
 
 
         return (

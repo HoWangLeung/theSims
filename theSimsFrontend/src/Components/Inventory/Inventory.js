@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
 import CommonButton from '../../Common/CommonButton/CommonButton';
 import { createLoadingSelector } from '../../reducers/api/selectors';
+import { fetchProductsInCart } from '../ProductMainPage/actions/productActions';
 
 class Inventory extends Component {
     constructor(props) {
@@ -19,8 +20,9 @@ class Inventory extends Component {
     }
 
     componentDidMount() {
-        const{fetchInventory} = this.props
+        const{fetchInventory,fetchProductsInCart} = this.props
         fetchInventory()
+        fetchProductsInCart()
     }
 
     render() {
@@ -53,7 +55,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchInventory: () =>  dispatch(fetchInventory()) 
+        fetchInventory: () =>  dispatch(fetchInventory()) ,
+        fetchProductsInCart:()=>dispatch(fetchProductsInCart())
 
     }
 }

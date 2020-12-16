@@ -63,9 +63,9 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	}
 
 	@Transactional
-	public Users saveUser(Users internalUserAccount) {
+	public void saveUser(Users internalUserAccount) {
 		System.out.println("reaching 95 iin jwtuserdetail service ===> ");
-		return internalUserAccountRepository.save(internalUserAccount);
+		 em.persist(internalUserAccount);
 	}
 	
 	@Transactional

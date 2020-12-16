@@ -7,6 +7,7 @@ import { UndoOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts, filterProductByCategory, filterProductByPrice } from '../../actions/productActions';
+import Text from 'antd/lib/typography/Text';
 
 
 
@@ -139,8 +140,8 @@ const LeftFilters = (props) => {
     return (
         <div className={classes.LeftFiltersContainer}>
 
-           
-            {/* <p>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</p> */}
+        
+            {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
             <ProductsSearch />
 
             {useSlider()}

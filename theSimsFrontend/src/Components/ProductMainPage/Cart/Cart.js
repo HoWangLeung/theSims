@@ -29,7 +29,10 @@ const Cart=(props)=> {
     )
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchProductsInCart())
+        console.log('sdfsfsdfsdfdsfdsf');
+           let isLoggedIn = sessionStorage.getItem("userId")!==null
+        if(isLoggedIn){
+            dispatch(fetchProductsInCart())}
 
     }, []);
  

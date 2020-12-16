@@ -6,7 +6,7 @@ import InventoryReducer from './InventoryReducer'
 import CounterReducer from './CounterReducer'
 import ProductReducer from './ProductReducer'
 import LoadingReducer from './api/LoadingReducer'
-export default combineReducers({
+const  rootReducer = combineReducers({
     EmployeeReducer,
     InventoryReducer,
     JottoReducer,
@@ -15,3 +15,9 @@ export default combineReducers({
     ProductReducer,
     LoadingReducer,
 })
+
+export default (state, action) =>{
+    console.log(action);
+    return rootReducer(action.type === 'LOGOUT_ACTION' ? undefined : state, action);
+}
+  

@@ -13,8 +13,7 @@ const Allproducts = (props) => {
 
 
             <Row className={classes.allProductContainer}>
-
-                <Col sm={24} xl={8}    >
+                <Col sm={24} xl={8} className={classes.allProductCol1}   >
                     <LeftFilters />
                 </Col>
                 <Col sm={24} xl={16} className={classes.allProductCol2} >

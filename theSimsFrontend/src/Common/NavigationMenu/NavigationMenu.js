@@ -22,7 +22,11 @@ class NavigationMenu extends Component {
 
     componentDidMount=()=>{
         let isLoggedIn = sessionStorage.getItem("userId")!==null
-       if(isLoggedIn){this.props.getUserProfile()}
+       if(isLoggedIn){
+        console.log('fired nav');
+        
+        //this.props.getUserProfile({ username: sessionStorage.getItem("authenticatedUser") })
+    }
 
     }
 
@@ -97,7 +101,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     
     return {
-        getUserProfile:()=>dispatch(getUserProfile())
+        getUserProfile:(payload)=>dispatch(getUserProfile(payload))
     }
 }
 

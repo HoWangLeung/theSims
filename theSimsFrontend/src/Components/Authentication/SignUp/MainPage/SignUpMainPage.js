@@ -14,7 +14,7 @@ const renderCards = () => (
       <Card className={classes.signUpMainCard} title={content.title} extra={<a href="#">More</a>}  >
         {content.intro}
         <Link to={content.linkTo}>
-          <Button>{content.button}</Button>
+          <Button disabled={content.title==="Apply For a Job"?true:false} >{content.button}</Button>
         </Link>
       </Card>
     </Col>

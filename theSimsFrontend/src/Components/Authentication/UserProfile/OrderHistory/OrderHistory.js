@@ -28,9 +28,9 @@ function Orderhistory(props) {
     useEffect(() => {
 
         dispatch(getUserOrderHistory({ userId: sessionStorage.getItem("userId") }))
-        return () => {
+        // return () => {
             
-        }
+        // }
     }, [])
 
     const handlePdfExport = (e) => {
@@ -38,7 +38,7 @@ function Orderhistory(props) {
         setOnClickId(orderId)
         dispatch(getUserOrderHistoryInvoice({ userId: sessionStorage.getItem("userId"), orderId }))
             .then(res => {
-                
+                console.log(res);
                 const url = window.URL.createObjectURL(new Blob([res.data]));
                 const link = document.createElement('a');
                 link.href = url;
@@ -47,6 +47,7 @@ function Orderhistory(props) {
                 link.click();
                
             })
+            .catch(e=>console.log(e))
 
     }
 

@@ -72,7 +72,7 @@ class EditMultipleSteps extends Component {
                 this.child.formRef.current.validateFields()
                     .then(() => {
 
-                        if (this.child.state.isValueChanged) {
+                        // if (this.child.state.isValueChanged) {
                             CommonModal.confirm({
                                 content: "Are you sure",
                                 okText: intl.get('confirm'),
@@ -100,18 +100,18 @@ class EditMultipleSteps extends Component {
                                 }
                             })
 
-                        }else{
+                        // }else{
 
-                            CommonModal.error({
-                                content: "You didn't change any of the values, make change to at least one of the products to proceed.",
-                                okText: "Got it",
-                                centered: true,
-                                maskClosable: false,
-                                keyboard: false,
+                        //     CommonModal.error({
+                        //         content: "You didn't change any of the values, make change to at least one of the products to proceed.",
+                        //         okText: "Got it",
+                        //         centered: true,
+                        //         maskClosable: false,
+                        //         keyboard: false,
      
                                  
-                            })
-                        }
+                        //     })
+                        // }
 
                     })
 

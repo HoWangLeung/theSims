@@ -8,6 +8,8 @@ import { isEmpty } from 'lodash';
 import Createproduct from './StepsContent/StepOne/CreateProduct/Createproduct';
 import Selectedlist from './StepsContent/StepOne/SelectedList/SelectedList';
 import { resetCurrentStep } from '../action/InventoryAction';
+import intl from 'react-intl-universal';
+import { withRouter } from 'react-router-dom';
 class InventoryList extends Component {
     constructor(props) {
         super(props)
@@ -20,15 +22,15 @@ class InventoryList extends Component {
             stepOneContent: {},
             stepTwoContent: {},
             channel: '',
-            resetCurrentStep:false,
-            
+            resetCurrentStep: false,
+
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.inventoryList !== this.props.inventoryList) {
-            
+
             this.setState({
                 showModal: false,
                 selectedRowKeys: []
@@ -49,7 +51,7 @@ class InventoryList extends Component {
         });
     }
 
-    disableEdit=()=>(this.setState({disableEdit:true}))
+    disableEdit = () => (this.setState({ disableEdit: true }))
 
     hideModal = () => this.setState({ showModal: false })
 
@@ -68,10 +70,10 @@ class InventoryList extends Component {
         return ([<Button onClick={this.hideModal} disabled={isFetching['SAVE_UPDATEDLIST']} >Cancel</Button>])
     }
 
-    resetCurrentStep=()=>{
-        const{resetCurrentStep}=this.props
+    resetCurrentStep = () => {
+        const { resetCurrentStep } = this.props
         resetCurrentStep()
-       
+
     }
 
     render() {
@@ -81,19 +83,19 @@ class InventoryList extends Component {
         const hasSelected = selectedRowKeys.length > 0;
 
         const columns = GetHeader();
-        
+
         return (
             <div>
                 <div style={{ marginBottom: 16 }}>
                     <Button type="primary" id="createProduct" onClick={(e) => this.showModal(e, "createProduct")} >
-                        Create new Product
-                     </Button>
+                        {intl.get('inventory.create')}
+                    </Button>
                     <Button type="primary" id="editMultiple" disabled={disableEdit}
                         onClick={(e) => this.showModal(e, "editMultiple")} >
-                        Edit Multiple
-                     </Button>
+                        {intl.get("inventory.editMultiple")}
+                    </Button>
                     <CommonModal
-                       
+
                         visible={showModal}
                         hideModal={this.hideModal}
                         afterClose={this.resetCurrentStep}
@@ -109,8 +111,8 @@ class InventoryList extends Component {
                                 hideModal={this.hideModal}
                                 disableEdit={this.disableEdit}
                                 selectedRowKeys={selectedRowKeys}
-                  
-                            
+
+
                             />
                         }
 
@@ -154,7 +156,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        resetCurrentStep:()=>dispatch(resetCurrentStep())
+        resetCurrentStep: () => dispatch(resetCurrentStep())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(InventoryList)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(InventoryList))

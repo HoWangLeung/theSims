@@ -27,10 +27,10 @@ export default function Userprofile(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUserProfile({ username: sessionStorage.getItem("authenticatedUser") }))
-        dispatch(getUserOrderHistory({ userId: sessionStorage.getItem("userId") }))
-        return () => {
+        //dispatch(getUserOrderHistory({ userId: sessionStorage.getItem("userId") }))
+        // return () => {
             
-        }
+        // }
     }, [])
 
 

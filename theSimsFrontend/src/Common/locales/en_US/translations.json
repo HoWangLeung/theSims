@@ -60,14 +60,20 @@
     "productName":"Product Name",
     "productCost":"Product Cost",
     "productRemaining":"Remaining Quantity",
+    "createdDate":"Created Date",
     "productStatus":"Product Status",
     "selection":"Selection",
     "next":"Next",
     "inventory":{
                     "inventory":"Inventory",
+                    "category":"Category",
+                    "product":"Product",
+                    "totalRevenue":"Total Revenue",
+                    "totalCost":"Total Cost",
                     "add":"Add",
-                    "undo":"Undo"
-                    
+                    "undo":"Undo",
+                    "create":"Create",
+                    "editMultiple":"Edit Multiple"
                 },
     "userProfilePage":{
         "username":"Username",
@@ -78,7 +84,7 @@
         "addressBlock":"Building",
         "addressFloor":"Floor",
         "addressFlat":"Flat"
-      
+ 
 
     }
     

@@ -24,7 +24,7 @@ public class PaymentController {
 	  
 	  
 	  @PostMapping("/charge")
-	    public Map<String, Object>  charge(@RequestBody ChargeRequest chargeRequest)
+	    public Map<String, Object> charge(@RequestBody ChargeRequest chargeRequest)
 	      throws StripeException {
 		  System.out.println("incoming chargeRequest  ====>  " + chargeRequest.getAmount());
 		  System.out.println("incoming chargeRequests  ====>  " + chargeRequest.getToken());

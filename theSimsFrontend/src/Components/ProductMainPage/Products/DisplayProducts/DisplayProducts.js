@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllProducts, addToCart } from '../../actions/productActions';
+import { fetchAllProducts, addToCart, fetchProductsInCart } from '../../actions/productActions';
 import { Link } from 'react-router-dom';
 import classes from '../../ProductMainPage.less'
 import { getUserProfile } from '../../../Authentication/actions/AuthenticationActions';
@@ -21,15 +21,15 @@ const Displayproducts = (props) => {
     const { categories, productList } = productInfo
     let isLoggedIn = sessionStorage.getItem("userId") !== null
     const dispatch = useDispatch();
-    useEffect(() => {
-        
-        dispatch(fetchAllProducts())
+    useEffect( () => {
+
+         dispatch(fetchAllProducts())
         if (isLoggedIn)
             dispatch(getUserProfile({ username: sessionStorage.getItem("authenticatedUser") }))
-
+            dispatch(fetchProductsInCart())
 
         return () => {
-            
+
         }
 
 
@@ -37,11 +37,18 @@ const Displayproducts = (props) => {
 
 
     const renderProductScreen = () => {
-        return productList && productList.map(item => {
 
-
-            return (
-                <Col xs={24} sm={24} sm={12} md={8} xl={6} span={6} >
+        if (isLoading)
+            return Array.from(Array(20).keys()).map(e => {
+                return <Col xs={24} sm={24} sm={12} md={12} xl={8} span={6} >
+                   
+                    <Skeleton key={e} active />
+                </Col>
+            })
+        else
+            return productList && productList.map(item => {
+                console.log(item);
+                return <Col xs={24} sm={24} sm={12} md={8} xl={6} span={6} >
                     <Link to={`/product/${item.id}`}>
                         <Card
                             hoverable
@@ -68,8 +75,7 @@ const Displayproducts = (props) => {
                         </Card>
                     </Link>
                 </Col>
-            )
-        })
+            })
 
     }
 
@@ -78,13 +84,13 @@ const Displayproducts = (props) => {
 
     return (
         <div className={classes.displayProductOuterContainer}>
-            <Spin spinning={isLoading} >
-                <Row gutter={[8, 8]} >
 
-                    {renderProductScreen()}
+            <Row gutter={[8, 8]} >
 
-                </Row>
-            </Spin>
+                {renderProductScreen()}
+
+            </Row>
+
 
         </div>
     )

@@ -6,7 +6,8 @@ INSERT INTO roles (name) VALUES ('ADMIN');
 
 INSERT INTO users(USERNAME,PASSWORD, ENABLED,firstname,lastname,phone_number,address_building,address_block,address_floor, address_flat )
 values('derek1','$2a$10$Z4.xKrMGoiqv08YR6x4ieOQdHD5CEJgCdaaVH2cYS77qw4qg1qQD.',1 , 'Derek','Leung','92591883','ABC Building','Block A', '20','E');
-INSERT INTO users(USERNAME,PASSWORD,ENABLED) values('derek2','$2a$10$Z4.xKrMGoiqv08YR6x4ieOQdHD5CEJgCdaaVH2cYS77qw4qg1qQD.',1);
+INSERT INTO users(USERNAME,PASSWORD, ENABLED,firstname,lastname,phone_number,address_building,address_block,address_floor, address_flat )
+values('derek2','$2a$10$Z4.xKrMGoiqv08YR6x4ieOQdHD5CEJgCdaaVH2cYS77qw4qg1qQD.',1 , 'Derek2','Leung2','92591883','ABC Building','Block A', '20','E');
 
 
 

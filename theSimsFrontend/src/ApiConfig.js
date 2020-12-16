@@ -1,3 +1,3 @@
 //export const API = "http://localhost:5000"
-export const API = "http://testjpa-env-1.eba-tum9xr2n.us-east-1.elasticbeanstalk.com"
+export const API = "http://reactspringboottest1-env.eba-jcahmut6.ap-northeast-2.elasticbeanstalk.com"
 

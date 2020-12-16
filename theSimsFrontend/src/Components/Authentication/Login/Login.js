@@ -35,7 +35,7 @@ class Login extends Component {
                 this.props.loginAction(isLoggedIn)
            
             }).then(() => {
-                
+                console.log('first get uerprofile');
                 let payload={username,password}
                 getUserProfile(payload)
                     .then(

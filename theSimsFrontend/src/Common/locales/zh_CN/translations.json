@@ -59,14 +59,21 @@
     "productCategory": "產品類別",
     "productName": "產品名稱",
     "productCost": "成本",
-    "productRemaing": "剩餘",
-    "ProductStatus": "狀態",
+    "productRemaining": "剩餘",
+    "productStatus": "狀態",
+    "createdDate":"創建日期",
     "selection": "你的選擇",
     "next": "下一步",
     "inventory": {
         "inventory": "貨品庫存",
+        "category":"產品類別",
+        "product":"產品數量",
+        "totalRevenue":"總收入",
+        "totalCost":"總成本",
         "add": "增加",
-        "undo": "還原"
+        "undo": "還原",
+        "create":"新增",
+        "editMultiple":"同時變更多項"
     },
     "userProfilePage": {
         "username":"帳戶名稱",

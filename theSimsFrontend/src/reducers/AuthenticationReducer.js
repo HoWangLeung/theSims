@@ -18,7 +18,7 @@ const AuthenticationReducer = (state = initState, action) => {
             };
             break;
         case ("LOGOUT_ACTION"):
-
+                console.log(state);
             return {
                 ...state,
                 isLoggedIn: false

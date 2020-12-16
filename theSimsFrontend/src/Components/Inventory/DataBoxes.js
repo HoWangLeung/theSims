@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { List, Card, Col, Row } from 'antd';
 import { connect } from 'react-redux';
-
+import intl from 'react-intl-universal';
+import { withRouter } from 'react-router-dom';
 
 class DataBoxes extends Component {
     constructor(props) {
@@ -47,16 +48,16 @@ class DataBoxes extends Component {
                 <Card   >
                     <Row>
                         <Col xs={24} sm={24} xl={6} >
-                            <Card.Grid style={gridStyle}><h1>{this.getCategoryLength()}</h1> <p>Category</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>{this.getCategoryLength()}</h1> <p>{intl.get("inventory.category")}</p></Card.Grid>
                         </Col>
                         <Col xs={24} sm={24} xl={6}   >
-                            <Card.Grid style={gridStyle}><h1>{this.props.inventoryList.length}</h1> <p>Products</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>{this.props.inventoryList.length}</h1> <p>{intl.get("inventory.product")}</p></Card.Grid>
                         </Col>
                         <Col xs={24} sm={24} xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>0</h1> <p>Total Revenue</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>0</h1> <p>{intl.get("inventory.totalRevenue")}</p></Card.Grid>
                         </Col>
                         <Col xs={24} sm={24} xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>0</h1> <p>Total Cost</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>0</h1> <p>{intl.get("inventory.totalCost")}</p></Card.Grid>
                         </Col>
                     </Row>
                 </Card>
@@ -81,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataBoxes)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DataBoxes))

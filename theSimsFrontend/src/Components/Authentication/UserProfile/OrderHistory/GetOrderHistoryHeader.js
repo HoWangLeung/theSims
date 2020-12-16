@@ -68,7 +68,7 @@ const headerTotal = () => {
 const headerCreatedDate = (handleInputChange) => {
     // const{handleInputChange} = callbacks
     return ({
-        title: "Created Date",
+        title: intl.get("createdDate"),
         dataIndex: 'createdDate',
         align: 'center',
         key: 'createdDate',

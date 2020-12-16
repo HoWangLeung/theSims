@@ -17,7 +17,13 @@ function Checkout(props) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchProductsInCart())
+
+
+        let isLoggedIn = sessionStorage.getItem("userId")!==null
+        if(isLoggedIn){
+            console.log('getting cart items');
+            dispatch(fetchProductsInCart())}
+
 
     }, []);
 

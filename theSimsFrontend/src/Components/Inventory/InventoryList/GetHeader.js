@@ -15,7 +15,7 @@ const headerId = () => (
 
 const headerProductCategory = () => (
     {
-        title: intl.get('productCategory'),
+        title: ()=>intl.get('productCategory'),
         dataIndex: 'category',
         key: 'category',
         align: 'center',
@@ -110,7 +110,7 @@ const headerProductStatus = () => (
 
 const createdDate = () => (
     {
-        title: "Created Date",
+        title: ()=>intl.get("createdDate"),
         dataIndex: 'createdDate',
         align: 'center',
         key: 'createdDate',
