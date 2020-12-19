@@ -9,18 +9,17 @@ import { motion } from 'framer-motion'
 function ProductMainpage() {
     const variants = {
         hidden: {
-         
-            x: '-100vw',
+            // opacity:0
+            // // x: '-100vw',
           
          
         },
         visible: {
-           
-            x: 0,
-            transition: {
-                duration: 1,
-                ease: "easeInOut"
-            }
+            // opacity:1,
+            // transition: {
+            //     duration: .5,
+            //     ease: "easeInOut"
+            // }
         },
         exit: {
             x: '-100vw',

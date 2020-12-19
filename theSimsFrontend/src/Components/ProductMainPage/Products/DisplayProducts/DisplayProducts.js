@@ -49,18 +49,17 @@ const Displayproducts = (props) => {
 
 
     const renderProductScreen = () => {
-
-        // if (isLoading)
-        //     return Array.from(Array(20).keys()).map(e => {
-        //         return (
-        //             <Col xs={24} sm={24} sm={12} md={12} xl={8}   >
-
-        //                 <Skeleton key={e} active />
-        //             </Col>
+        console.log(isLoading);
+        if (isLoading)
+            return Array.from(Array(20).keys()).map(e => {
+                return (
+                    <Col xs={24} sm={24} sm={12} md={12} xl={8} className={classes.productNamePriceContainerImgCol}   >
+                        <Skeleton key={e} active />
+                    </Col>
            
-        //         )
-        //     })
-        // else
+                )
+            })
+        else
             return productList && productList.map(item => {
 
                 return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={6} className={classes.productNamePriceContainerImgCol} >
@@ -74,6 +73,7 @@ const Displayproducts = (props) => {
                                         alt="example"
                                         preview={false}
                                         src={item.productUrl}
+                                        placeholder={true}
 
                                     />}
                                 className={classes.productNamePriceContainer}
@@ -97,7 +97,7 @@ const Displayproducts = (props) => {
     return (
         <div className={classes.displayProductOuterContainer}>
 
-            <Row gutter={[8, 8]} >
+            <Row gutter={[8, 8]}   className={classes.displayProductOuterContainerRow}>
 
                 {renderProductScreen()}
 

@@ -213,13 +213,13 @@ class Nav extends React.Component {
             visible: {
                 opacity: 1,
                 transition: {
-                    duration: 1
+                    duration: .5
                 }
             },
             exit: {
                 opacity: 0,
                 transition: {
-                    duration: 1
+                    duration: .5
                 }
             }
 

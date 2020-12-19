@@ -39,32 +39,61 @@ function Specificproduct(props) {
 
     const variants = {
         hidden: {
+
+            x: 1000,
+
+
+        },
+        visible: {
+
+            x: 0,
          
-            x:'100vw',
-            
-  
-          },
-          visible: {
-         
-            x:'0',
+
+
+        },
+        exit: {
+            x: '100vw',
             transition: {
-                duration: 1,
-                ease: "easeInOut"
-            },
-          
-          },
-          exit: {
-            x:'100vw',
-            transition:{
-         
-                ease:"easeInOut",
-                duration:1
-      
+
+                ease: "easeInOut",
+                duration: 1
+
             }
-          }
+        }
 
     }
+    const childVariants = {
+        hidden: {
+            opacity:0
+           
+     
 
+        },
+        visible: {
+       
+            opacity:1,
+            x: '0',
+            
+            transition: {  
+                delay:.5,
+                duration:1,
+               // when:"beforeChildren"
+            },
+
+
+        },
+        exit: {
+            x: '100vw',
+            
+            transition: {
+
+                ease: "easeInOut",
+                duration: .4
+
+            }
+        }
+   
+    }
     return (
         <motion.div
             variants={variants}
@@ -78,7 +107,7 @@ function Specificproduct(props) {
                 <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
 
                     <Image
-                        style={{ cursor: "pointer", borderRadius:"15px" }}
+                        style={{ cursor: "pointer", borderRadius: "15px" }}
                         height="100%"
                         width="100%"
                         src={product.productUrl}
@@ -86,13 +115,19 @@ function Specificproduct(props) {
 
                 </Col>
 
-
+        
                 <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
-
-                    <Productdetail
-                        product={product}
-                    />
-
+                    <motion.div
+                        variants={childVariants}
+                    //  initial="hidden"
+                     // animate="visible"
+                    // exit="exit"
+                    >
+                        <Productdetail
+                            product={product}
+                        />
+                        {/* <h1>Hello</h1> */}
+                    </motion.div>
                 </Col>
 
             </Row>

@@ -11,6 +11,7 @@ import { addToCart } from '../../../actions/productActions';
 import classes from '../SpecificProduct.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion';
 const { Option } = Select;
 function Productdetail(props) {
     const { product } = props
@@ -68,18 +69,44 @@ function Productdetail(props) {
 
     const renderNumberOptions = () => {
 
-        const options = Array.from(Array(101).keys()).filter(f=>f!=0).map(e => <Option value={e}>{e}</Option>)
+        const options = Array.from(Array(101).keys()).filter(f => f != 0).map(e => <Option value={e}>{e}</Option>)
 
         return options
     }
 
-    
+    const variants = {
+        hidden: {
+            opacity: 0
+
+        },
+        visible: {
+            opacity: 1,
+            color:"green",
+           
+            transition: {
+                duration: 1.5,
+                ease:"easeInOut",
+                delay:1,
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: .5
+            }
+        }
+
+
+    }
     return (
         <div className={classes.productdetailContainer_inner} >
             <div>
-                <h1> {product.productName}</h1>
-                
-                <h3>Availability: In Stock</h3>
+              
+                    <h1> {product.productName}</h1>
+             
+                <motion.h3
+                  variants={variants}
+                >Availability: In Stock</motion.h3>
                 <Divider />
                 <h2>$ {product.basePrice}</h2>
             </div>
@@ -93,7 +120,7 @@ function Productdetail(props) {
                 sheets containing Lorem Ipsum passages, and more recently with desktop publishing software l
                    ike Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
-       
+
             <div>
                 <h2>Quantity</h2>
                 <Select defaultValue={1} size="large" className={classes.productDetailSelect} onChange={handleChange}>
