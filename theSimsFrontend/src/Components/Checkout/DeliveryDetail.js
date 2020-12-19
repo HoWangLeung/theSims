@@ -63,7 +63,7 @@ function Deliverydetail(props) {
     }
 
     const onFinish = async (values) => {
-        console.log(values);
+        
         // values.firstname= firstname
         // values.lastname= lastname
         // values.address= address

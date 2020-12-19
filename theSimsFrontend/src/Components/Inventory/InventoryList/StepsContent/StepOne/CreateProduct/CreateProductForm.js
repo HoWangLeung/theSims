@@ -355,7 +355,7 @@ function Createproductform() {
 
                                                                     }
                                                                 >
-                                                                  
+                                                                 
                                                                         <Upload
 
                                                                             onPreview={onPreview}
@@ -379,8 +379,9 @@ function Createproductform() {
                                                                             {...Uprops}>
                                                                             {fileList.length < 5 && '+ Upload'}
                                                                         </Upload>
-                                                                  
+                                                                   
                                                                 </Form.Item>
+
                                                             )
 
 

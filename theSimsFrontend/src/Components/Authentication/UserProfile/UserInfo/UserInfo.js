@@ -25,14 +25,14 @@ export default function Userinfo(props) {
     const [form] = Form.useForm();
     const { userProfile } = props
     const dispatch = useDispatch();
-    console.log(userProfile);
+    
 
     const [editMode, setEditMode] = useState(false)
 
     const [initialValues, setInitialValues] = useState()
     const isFetching = useSelector(state => state.LoadingReducer)
     const [loading, setLoading] = useState(false)
-    console.log(isFetching);
+    
     const toggleEditMode = () => {
 
         setEditMode(prevState => !prevState)
@@ -82,7 +82,7 @@ export default function Userinfo(props) {
     // }, [])
 
     const onFieldsChange = (changedFields, allFields) => {
-        console.log(changedFields, allFields);
+        
     }
 
     const getInitialValues = () => {
@@ -130,7 +130,7 @@ export default function Userinfo(props) {
     //         margin: 0,
 
     //         onOk:  async () => {
-    //             console.log();
+    //             
     //             let payload = {
     //                 lastname: "abcdsd",
     //                 addressBlock: "ZZB",
@@ -139,9 +139,9 @@ export default function Userinfo(props) {
     //         //     let userId = parseInt(sessionStorage.getItem("userId"))
 
     //         //    let res= await axios.put(`${API}/users/editBasicInfo?userId=${userId}`, payload)
-    //         //     console.log(res);
+    //         //     
     //          let res= await dispatch(editBasicInfoRequest(payload))
-    //             console.log(res);
+    //             
 
     //         }
     //     })

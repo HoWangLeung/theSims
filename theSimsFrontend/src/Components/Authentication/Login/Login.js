@@ -19,45 +19,48 @@ class Login extends Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        console.log(prevProps.isLoggedIn);
+        console.log(this.props.isLoggedIn);
+        if(prevProps.isLoggedIn!==this.props.isLoggedIn){
+            console.log('did up date');
+        }
+
+    }
+
+
     onFinish = async (values) => {
         const { getUserProfile } = this.props
         const { username, password, remember } = values
-        
-        AuthenticationService
+
+        let res1 = await AuthenticationService
             .executeJwtAuthenticationService(username, password)
-            .then((res) => {
+        console.log(res1);
+        let token = res1.data.token
+       
+        AuthenticationService.registerSuccessfulLoginForJwt(username, token)
+        let isLoggedIn = AuthenticationService.isUserLoggedIn()
+        console.log('isLoggedIn ' , isLoggedIn);
+      
+        this.props.loginAction(isLoggedIn)
 
-                let token = res.data.token
 
-                AuthenticationService.registerSuccessfulLoginForJwt(username, token)
-                let isLoggedIn = AuthenticationService.isUserLoggedIn()
+        // let payload = { username, password }
+        // let res2 = await getUserProfile(payload)
 
-                this.props.loginAction(isLoggedIn)
-           
-            }).then(() => {
-                console.log('first get uerprofile');
-                let payload={username,password}
-                getUserProfile(payload)
-                    .then(
-                        res => {
-                            sessionStorage.setItem('userId', parseInt(res.data.detail.id))
-                            
-                            if (res.data.detail.role === 'CUSTOMER'){
+        // console.log(res2);
+        // sessionStorage.setItem('userId', parseInt(res2.data.detail.id))
 
-                                this.props.history.push('/')
-                            }
-                              
+        // if (res2.data.detail.role === 'CUSTOMER') {
 
-                            if (res.data.detail.role === 'ADMIN')
-                                this.props.history.push('/inventory')
+        //     this.props.history.push('/')
+        // }
 
-                        }
-                    )
-            })
-            .catch((error) => {
 
-                CommonModal.error({ content: "Invalid username/password" })
-            })
+        // if (res2.data.detail.role === 'ADMIN')
+             this.props.history.push('/')
+
+
 
 
 
@@ -143,7 +146,7 @@ class Login extends Component {
     render() {
 
 
-
+ 
         const loginForm = this.generateLoginForm()
         return (
             <div className={classes.loginFormContainer}>
@@ -159,14 +162,14 @@ const mapStateToProps = (state) => {
 
 
     return {
-
+        isLoggedIn:state.AuthenticationReducer.isLoggedIn
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        loginAction: (isLoggedIn) => { dispatch(loginAction(isLoggedIn)) },
+        loginAction: (isLoggedIn) =>  dispatch(loginAction(isLoggedIn)) ,
         getUserProfile: (payload) => dispatch(getUserProfile(payload))
     }
 }

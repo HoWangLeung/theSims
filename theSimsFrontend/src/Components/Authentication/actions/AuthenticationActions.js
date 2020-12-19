@@ -14,9 +14,13 @@ export const getUserProfile = (payload) => {
 
   return async (dispatch, getState) => {
 
+    let{username} = payload
+    console.log(username);
     try {
-      let res = await axios.post(`${API}/users/userProfile`, payload)
 
+      let res = await axios.get(`${API}/users/userProfile?username=${username}`)
+      console.log(res);
+      sessionStorage.setItem('userId', parseInt(res.data.detail.id))
       dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
       return res
     } catch (err) {

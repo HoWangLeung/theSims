@@ -66,7 +66,7 @@ class AuthenticationService {
 
     componentWillMount() {
         
-        // this.setupAxiosInterceptors()
+        this.setupAxiosInterceptors()
     }
 
 

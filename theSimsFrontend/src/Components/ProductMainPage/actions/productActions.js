@@ -90,6 +90,7 @@ export const fetchAllProducts = () => {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: 'FETCH_PRODUCTS_REQUEST' })
+    
       let res = await axios.get(`${API}/products/`)
       dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data })
       return res
@@ -107,6 +108,9 @@ export const fetchProductsInCart = () => {
     try {
       let userId = sessionStorage.getItem("userId")
       let token = sessionStorage.getItem('USER_TOKEN')
+      console.log(userId);
+     // dispatch({ type: 'FETCH_PRODUCTSINCART_REQUEST', payload: res.data })
+    
       let res = await axios.get(`${API}/orders/user/${userId}`
         // , { headers: { "Authorization": token }} 
       )

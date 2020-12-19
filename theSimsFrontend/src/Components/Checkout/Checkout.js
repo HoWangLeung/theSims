@@ -9,6 +9,7 @@ import classes from './Checkout.less'
 import { Link } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { motion } from 'framer-motion';
 
 const stripePromise = loadStripe('pk_test_oHDsyL0Wxhko6HIFRMrm7QXS00h1og1ziG');
 function Checkout(props) {
@@ -19,10 +20,11 @@ function Checkout(props) {
     useEffect(() => {
 
 
-        let isLoggedIn = sessionStorage.getItem("userId")!==null
-        if(isLoggedIn){
-            console.log('getting cart items');
-            dispatch(fetchProductsInCart())}
+        let isLoggedIn = sessionStorage.getItem("userId") !== null
+        if (isLoggedIn) {
+
+            dispatch(fetchProductsInCart())
+        }
 
 
     }, []);
@@ -30,33 +32,54 @@ function Checkout(props) {
 
 
 
+    const variants = {
+        hidden: {
 
+
+        },
+        visible: {
+
+        },
+        exit: {
+
+        }
+
+    }
 
 
     return (
-        <div className={classes.checkoutOuterContainer}>
-            {/* <Row className={classes.backButtonContainer}>
+        <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className={classes.checkoutOuterContainer}
+        >
+
+          
+                {/* <Row className={classes.backButtonContainer}>
                 <Link to="/" >
                     <Button className={classes.backButton} >Back</Button>
                 </Link>
             </Row> */}
-            <Row className={classes.backButtonContainer}>
-                <h3 className={classes.backButton} >Checkout</h3>
-                <Link to="/" >
-                    <Button className={classes.backButton} >Back</Button>
-                </Link>
-            </Row>
-            <Row className={classes.checkoutContainer}>
-                <Col xs={24} lg={12} span={12}>
-                    <Ordersummary orderInfo={orderInfo} />
-                </Col>
-                <Col xs={24} lg={12} span={12}>
-                    <Elements stripe={stripePromise}>
-                        <Deliverydetail />
-                    </Elements>
-                </Col>
-            </Row>
-        </div>
+                <Row className={classes.backButtonContainer}>
+                    <h3 className={classes.backButton} >Checkout</h3>
+                    <Link to="/" >
+                        <Button className={classes.backButton} >Back</Button>
+                    </Link>
+                </Row>
+                <Row className={classes.checkoutContainer}>
+                    <Col xs={24} lg={12} span={12}>
+                        <Ordersummary orderInfo={orderInfo} />
+                    </Col>
+                    <Col xs={24} lg={12} span={12}>
+                        <Elements stripe={stripePromise}>
+                            <Deliverydetail />
+                        </Elements>
+                    </Col>
+                </Row>
+    
+        </motion.div>
     )
 
 

@@ -6,27 +6,51 @@ import LeftFilters from './LeftFilters/LeftFilters'
 import { Col, Row } from 'antd'
 import classes from '../ProductMainPage.less'
 import Cart from '../Cart/Cart'
+import { motion } from 'framer-motion'
 const Allproducts = (props) => {
+
+
+    const variants = {
+        hidden: {
+            opacity: 0,
+
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: .5
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition:{
+                duration: .5
+            }
+        }
+
+    }
     return (
+      
+            <div className={classes.allProductContainer_outer}>
 
-        <div className={classes.allProductContainer_outer}>
 
+                <Row className={classes.allProductContainer}>
+                    <Col sm={24} xl={8} className={classes.allProductCol1}   >
+                        <LeftFilters />
+                    </Col>
+                    <Col sm={24} xl={16} className={classes.allProductCol2} >
+                        <Row className={classes.cartAndProductSorterContainer} >
+                            <span>All Products</span>
+                            <Productsorter />
+                        </Row>
+                   
+                            <Displayproducts />
+                  
+                    </Col>
+                </Row>
 
-            <Row className={classes.allProductContainer}>
-                <Col sm={24} xl={8} className={classes.allProductCol1}   >
-                    <LeftFilters />
-                </Col>
-                <Col sm={24} xl={16} className={classes.allProductCol2} >
-                    <Row className={classes.cartAndProductSorterContainer} >
-                        <span>All Products</span>
-                        <Productsorter />
-                    </Row>
-                    <Displayproducts />
-                </Col>
-            </Row>
-
-        </div>
-
+            </div>
+  
     )
 }
 

@@ -5,16 +5,19 @@ import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './configureStore'
-
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <Router>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Router>
+  </Provider>
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

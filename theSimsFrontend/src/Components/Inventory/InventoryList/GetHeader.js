@@ -95,7 +95,7 @@ const headerProductStatus = () => (
         key: 'productStatus',
         align: 'center',
         render: (text, row, index) => {
-            console.log(row);
+         
             return (
                 <div className={classes.circleContainer} >
                     <Tooltip title="less then 100 shows RED, else GREEN">

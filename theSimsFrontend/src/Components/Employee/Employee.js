@@ -17,6 +17,9 @@ import SearchCollapse from '../../Common/SearchCollapse/SearchCollapse';
 import QueueAnim from 'rc-queue-anim';
 import CommonDropDown from '../../Common/CommonDropdown/CommonDropdown'
 import { API } from '../../ApiConfig';
+import { motion } from 'framer-motion';
+import Banner from '../../Common/Banner';
+import Navigationmenu from '../../Common/NavigationMenu/NavigationMenu';
 
 const { TabPane } = Tabs;
 
@@ -37,7 +40,7 @@ class Employee extends Component {
         })
     }
     handleSelect = (value) => {
-        
+
         const payload = {}
         if (value) { payload.department = value }
         const { searchByDepartment } = this.props
@@ -121,13 +124,13 @@ class Employee extends Component {
     }
 
     getSelectDropdown = () => {
-        const {currentDept}=this.props
+        const { currentDept } = this.props
         let departmentOptions =
-            ['All', 'Marketing', "Information Technology", "Human Resource", "operation", "Finance"]
+            ['All', intl.get('Marketing'), "Information Technology", "Human Resource", "operation", "Finance"]
         return (
             <CommonDropDown
-                  value={currentDept}
-                placeholder="Select a Department"
+                value={currentDept}
+                placeholder={intl.get("selectDepartment")}
                 className={classes.deptDropdown}
                 options={departmentOptions}
                 onSelect={this.handleSelect} />
@@ -161,19 +164,48 @@ class Employee extends Component {
 
 
         let exportButton = this.getExportButton()
+        const variants = {
+            hidden: {
+
+
+            },
+            visible: {
+
+            },
+            exit: {
+
+            }
+
+        }
         return (
-            <div className={classes.employeeContainer}>
-                <Row className={classes.barAboveTabs} >
-                    {currentTab === 'permanentUsers' && this.getSelectDropdown()}
-                    {currentTab === 'permanentUsers' && exportButton}
-                </Row>
-                {dynamicTabs}
-                {currentTab === 'permanentUsers' &&
-                    <ManagementTabTable
-                        managementList={managementList}
-                        isLoading={isLoading}
-                    />}
-            </div>
+            <motion.div
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className={classes.employeeContainer}
+            >
+
+                <Banner />
+                <Navigationmenu />
+
+                <div className={classes.employeeInnerContainer}>
+                    <Row className={classes.barAboveTabs} >
+
+                        {currentTab === 'permanentUsers' && this.getSelectDropdown()}
+                        {currentTab === 'permanentUsers' && exportButton}
+                    </Row>
+                    {dynamicTabs}
+                    {currentTab === 'permanentUsers' &&
+                        <ManagementTabTable
+                            managementList={managementList}
+                            isLoading={isLoading}
+                        />}
+
+                </div>
+
+            </motion.div>
+
         )
     }
 }
@@ -183,7 +215,7 @@ const mapStateToProps = (state) => {
 
     return {
         employeeList: state.EmployeeReducer.employeeList,
-        currentDept:state.EmployeeReducer.currentDept,
+        currentDept: state.EmployeeReducer.currentDept,
         managementList: state.EmployeeReducer.managementList,
         isLoading: state.EmployeeReducer.loading
     }

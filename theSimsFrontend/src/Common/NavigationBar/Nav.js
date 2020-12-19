@@ -7,12 +7,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AuthenticationService from '../../Components/Authentication/SignUp/AuthenticationService';
 import { withRouter } from 'react-router-dom';
-import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions'
+import { getUserProfile, logoutAction } from '../../Components/Authentication/actions/AuthenticationActions'
 import LoginCard from '../../Components/Authentication/MainPageLogin/LoginCard'
 import intl from 'react-intl-universal';
 import Banner from '../Banner';
 import NavigationMenu from '../NavigationMenu';
 import Cart from '../../Components/ProductMainPage/Cart/Cart';
+import Navigationmenu from '../NavigationMenu/NavigationMenu';
+import { motion } from 'framer-motion';
 
 
 const { Title } = Typography;
@@ -31,10 +33,30 @@ class Nav extends React.Component {
 
 
     }
-   
+
     componentDidMount() {
+        const { getUserProfile } = this.props
+        console.log(this.props);
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
+        if (this.props.isLoggedIn) {
+            console.log('did login, fetch ?');
+
+            let payload = { username: sessionStorage.getItem("authenticatedUser") }
+            console.log(payload);
+            getUserProfile(payload)
+
+        }
+
+    }
+
+    componentDidUpdate(prevProps) {
+        console.log('old props', prevProps.isLoggedIn);
+        console.log('new props', this.props.isLoggedIn);
+
+        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+            console.log('status changed');
+        }
     }
 
     resize = () => {
@@ -88,13 +110,14 @@ class Nav extends React.Component {
     render() {
 
         const { hideNav } = this.state
-        const { currentLocale, handleChangeLocale } = this.props
-        const isLoggedIn = AuthenticationService.isUserLoggedIn()
-        let {userProfile:{username}}= this.props
+        const { currentLocale, handleChangeLocale, location: { pathname },
+            userProfile: { username }, isLoggedIn } = this.props
+
+        console.log(isLoggedIn);
         let homeIcon
         let localeChanger
         let loginOrUserIcon
-        
+
         const menu = (
             <Menu>
                 <Menu.Item key="0">
@@ -117,7 +140,7 @@ class Nav extends React.Component {
                     <Link to="/inventory"> <p>{intl.get('dashboard')}</p></Link>
                 </Menu.Item>
                 <Menu.Item key="1">
-                <Link to={`/userProfile/${username}`}>   <p>{intl.get('userProfile')}</p></Link>
+                    <Link to={`/userProfile/${username}`}>   <p>{intl.get('userProfile')}</p></Link>
                 </Menu.Item>
                 <Menu.Divider />
                 {!isLoggedIn && <Menu.Item key="3"> <Link to="/signup">Sign Up</Link></Menu.Item>}
@@ -173,22 +196,49 @@ class Nav extends React.Component {
             </Dropdown>
 
             <div className={classes.functionGroups}>
-                <Cart/>
+                <Cart />
                 {localeChanger}
                 {homeIcon}
                 {loginOrUserIcon}
             </div>
-     
+
         </div>
-               <Divider style={{margin:"0px", padding:"0px 0px 0px 0px", background:"white", }}/></>)
+            <Divider style={{ margin: "0px", padding: "0px 0px 0px 0px", background: "white", }} /></>)
 
+        const variants = {
+            hidden: {
+                opacity: 0
 
+            },
+            visible: {
+                opacity: 1,
+                transition: {
+                    duration: 1
+                }
+            },
+            exit: {
+                opacity: 0,
+                transition: {
+                    duration: 1
+                }
+            }
+
+        }
         return (
-            <>
-                {hideNav === false && topNavigationMenu}
 
-                {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
-            </>
+            <motion.div
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
+                <div>
+                    {hideNav === false && topNavigationMenu}
+                    {/* <Banner />
+                    <Navigationmenu pathname={pathname} username={username} /> */}
+                    {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
+                </div>
+            </motion.div>
         );
     }
 
@@ -200,13 +250,16 @@ class Nav extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-        userProfile:state.AuthenticationReducer.userProfile
+        userProfile: state.AuthenticationReducer.userProfile,
+        isLoggedIn: state.AuthenticationReducer.isLoggedIn
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        logoutAction: (isLoggedIn) => { dispatch(logoutAction(isLoggedIn)) }
+        logoutAction: (isLoggedIn) => dispatch(logoutAction(isLoggedIn)),
+        getUserProfile: (payload) => dispatch(getUserProfile(payload))
     }
 }
 

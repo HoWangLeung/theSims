@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input } from 'antd';
+import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input, Image } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart, fetchProductsInCart } from '../../actions/productActions';
 import { Link } from 'react-router-dom';
 import classes from '../../ProductMainPage.less'
 import { getUserProfile } from '../../../Authentication/actions/AuthenticationActions';
+import { motion } from 'framer-motion';
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
@@ -19,14 +20,23 @@ const Displayproducts = (props) => {
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
 
     const { categories, productList } = productInfo
-    let isLoggedIn = sessionStorage.getItem("userId") !== null
+    let isLoggedIn = useSelector(state => state.AuthenticationReducer.isLoggedIn);
     const dispatch = useDispatch();
-    useEffect( () => {
+    useEffect(() => {
 
-         dispatch(fetchAllProducts())
-        if (isLoggedIn)
-            dispatch(getUserProfile({ username: sessionStorage.getItem("authenticatedUser") }))
+        dispatch(fetchAllProducts())
+        console.log(isLoggedIn);
+        if (isLoggedIn) {
+            console.log('dispatching fetchProductsInCart displayproduct.js');
+            let payload = { username: sessionStorage.getItem("authenticatedUser") }
+            dispatch(getUserProfile(payload))
+
             dispatch(fetchProductsInCart())
+        }
+
+
+
+
 
         return () => {
 
@@ -35,45 +45,47 @@ const Displayproducts = (props) => {
 
     }, [isLoggedIn]);
 
+    
+
 
     const renderProductScreen = () => {
 
-        if (isLoading)
-            return Array.from(Array(20).keys()).map(e => {
-                return <Col xs={24} sm={24} sm={12} md={12} xl={8} span={6} >
-                   
-                    <Skeleton key={e} active />
-                </Col>
-            })
-        else
+        // if (isLoading)
+        //     return Array.from(Array(20).keys()).map(e => {
+        //         return (
+        //             <Col xs={24} sm={24} sm={12} md={12} xl={8}   >
+
+        //                 <Skeleton key={e} active />
+        //             </Col>
+           
+        //         )
+        //     })
+        // else
             return productList && productList.map(item => {
-                console.log(item);
-                return <Col xs={24} sm={24} sm={12} md={8} xl={6} span={6} >
-                    <Link to={`/product/${item.id}`}>
-                        <Card
-                            hoverable
-                            cover={
-                                <img
-                                    className={classes.productNamePriceContainerImg}
-                                    alt="example"
 
+                return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={6} className={classes.productNamePriceContainerImgCol} >
+                 
+                        <Link to={`/product/${item.id}`}>
+                            <Card
+                                className={classes.productNamePriceContainerImg}
+                                cover={
+                                    <Image
+                                        className={classes.productNamePriceContainerImg}
+                                        alt="example"
+                                        preview={false}
+                                        src={item.productUrl}
 
-                                    src={
+                                    />}
+                                className={classes.productNamePriceContainer}
+                            >
 
-                                        item.productUrl === null ?
-                                            "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
-                                            : item.productUrl
+                                <Meta
+                                    title={item.productName}
+                                    description={`$${item.basePrice}`} />
 
-                                    } />}
-                            className={classes.productNamePriceContainer}
-                        >
-
-                            <Meta
-                                title={item.productName}
-                                description={`$${item.basePrice}`} />
-
-                        </Card>
-                    </Link>
+                            </Card>
+                        </Link>
+               
                 </Col>
             })
 

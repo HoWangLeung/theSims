@@ -55,9 +55,11 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	}
 
 	@Transactional
-	public Users getUserProfile(Map<String,Object> req) {
-		String username = (String) req.get("username");
-		Users user = internalUserAccountRepository.findByUsername(username);
+	public Users getUserProfile(String username) {
+		 
+		System.out.println("IS EQUAL   " + username.replace("\"", "").equals("derek1"));
+		
+		Users user = internalUserAccountRepository.findByUsername(username.replace("\"", ""));
 		System.out.println(user.getId() + "USER id ===========================================================<");
 		return user;
 	}

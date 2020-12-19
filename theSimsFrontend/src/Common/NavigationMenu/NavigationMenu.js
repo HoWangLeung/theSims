@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import classes from './NavigationMenu.less'
+import React from 'react'
 import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, ApartmentOutlined, BarcodeOutlined, CreditCardOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
@@ -7,49 +6,32 @@ import { Link, withRouter } from 'react-router-dom';
 import { getUserProfile } from '../../Components/Authentication/actions/AuthenticationActions';
 import { connect } from 'react-redux';
 const { SubMenu } = Menu;
-class NavigationMenu extends Component {
-    constructor(props) {
-        super(props)
+export default function Navigationmenu(props) {
 
-        this.state = {
-
-        }
-    }
-
-    handleClick = e => {
+    const handleClick = e => {
 
     };
 
-    componentDidMount=()=>{
-        let isLoggedIn = sessionStorage.getItem("userId")!==null
-       if(isLoggedIn){
-        console.log('fired nav');
-        
-        //this.props.getUserProfile({ username: sessionStorage.getItem("authenticatedUser") })
-    }
-
-    }
+    const renderMenu = () => {
 
 
-    renderMenu = () => {
-        const { current } = this.state;
-        const { 
-            location: { pathname },
-            userProfile:{username}
-        
-        
-        } = this.props
-        let id=pathname.substring(pathname.lastIndexOf('/') + 1)
-        if (['/','/signup-customer','/signup','/login','/signup-success',
-        `/product/${id}`,'/checkout',
-         '/checkout-success',
-         `/userProfile/${username}`,
-        ].includes(pathname))  return null
+        const {
+            pathname,
+            username,
 
 
-      
-        return (<Menu onClick={this.handleClick} mode="horizontal" triggerSubMenuAction="click">
-            <Menu.Item key="dashboard" icon={<ApartmentOutlined />}>
+        } = props
+        // let id = pathname.substring(pathname.lastIndexOf('/') + 1)
+        // if (['/', '/signup-customer', '/signup', '/login', '/signup-success',
+        //     `/product/${id}`, '/checkout',
+        //     '/checkout-success',
+        //     `/userProfile/${username}`,
+        // ].includes(pathname)) { return null }
+
+
+
+        return (<Menu onClick={handleClick} mode="horizontal" triggerSubMenuAction="click">
+            <Menu.Item key="statistic" icon={<ApartmentOutlined />}>
                 <Link to="/dashboard">{intl.get('statistic')}</Link>
             </Menu.Item>
             <Menu.Item key="app" icon={<AppstoreOutlined />}>
@@ -74,35 +56,14 @@ class NavigationMenu extends Component {
         </Menu>)
     }
 
-
-    render() {
-
-
-        return (
-            <div className={classes.NavigationMenuContainer}>
-                <div className={classes.menuCotainer}>
-                    {this.renderMenu()}
-                </div>
-
+    return (
+        <div>
+            <div >
+                {renderMenu()}
             </div>
-        )
-    }
+
+        </div>
+    )
+
+
 }
-
-const mapStateToProps = (state) => {
-    
-
-    return {
-        userProfile:state.AuthenticationReducer.userProfile
-
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    
-    return {
-        getUserProfile:(payload)=>dispatch(getUserProfile(payload))
-    }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationMenu))

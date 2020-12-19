@@ -94,12 +94,32 @@ cursor: pointer;
    
 }
 
-.productNamePriceContainerImg{
+.productNamePriceContainerImgCol{
+    :global{
+        .ant-card-bordered {
+            border: none !important;
+        
+        }
+    }
+}
+
+.productNamePriceContainerImgContainer{
     min-width: 280px;
     min-height: 280px;
     max-width: 280px;
     max-height: 280px;
-    border-radius: 5px !important;
+    border-radius: 10px !important;
+}
+
+.productNamePriceContainerImg{
+
+    // min-width: 280px;
+    min-height: 280px;
+    // max-width: 280px;
+    // max-height: 280px;
+    border-radius: 10px !important;
+
+   
 }
 
 

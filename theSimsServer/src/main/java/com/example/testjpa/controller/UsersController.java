@@ -39,10 +39,10 @@ public class UsersController {
 		return internalUserAccountList;
 	}
 
-	@PostMapping("/userProfile")
-	public ResponseEntity<ApiResponse<LinkedHashMap<String, Object>>> getUserProfile(@RequestBody Map<String,Object>req) {
-		System.out.println("I am in get User profile now");
-		Users user = jwtInMemoryUserDetailsService.getUserProfile(req);
+	@GetMapping("/userProfile")
+	public ResponseEntity<ApiResponse<LinkedHashMap<String, Object>>> getUserProfile(@RequestParam(value="username") String username) {
+		System.out.println("I am in get User profile now" + username);
+		Users user = jwtInMemoryUserDetailsService.getUserProfile(username);
 		LinkedHashMap<String, Object> resultMap = new LinkedHashMap<String, Object>();
 	
 		
