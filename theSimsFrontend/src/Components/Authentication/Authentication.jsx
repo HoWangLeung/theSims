@@ -39,13 +39,14 @@ class Authentication extends Component {
 
     componentWillMount(){
         
-        if(this.isUserLoggedIn()){
-            this.setupAxiosInterceptors()
-        }
+        // if(this.isUserLoggedIn()){
+        //     this.setupAxiosInterceptors()
+        // }
       
     }
 
     render() {
+        console.log(this.props);
         if(AuthenticationService.isUserLoggedIn()){
             return <Route {...this.props}/>
         }else{

@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 function Specificproduct(props) {
 
     const [photo, setPhoto] = useState("")
-
+    const [imgLoaded, setImgLoaded] = useState(false);
     const { match: { params: { id } } } = props
 
     const product = useSelector(state => {
@@ -47,7 +47,7 @@ function Specificproduct(props) {
         visible: {
 
             x: 0,
-         
+
 
 
         },
@@ -64,27 +64,26 @@ function Specificproduct(props) {
     }
     const childVariants = {
         hidden: {
-            opacity:0
-           
-     
+            opacity: 0
+
+
 
         },
         visible: {
-       
-            opacity:1,
+
+            opacity: 1,
             x: '0',
-            
-            transition: {  
-                delay:.5,
-                duration:1,
-               // when:"beforeChildren"
+
+            transition: {
+                delay: .5,
+                duration: 1,
+                // when:"beforeChildren"
             },
 
 
         },
         exit: {
             x: '100vw',
-            
             transition: {
 
                 ease: "easeInOut",
@@ -92,8 +91,57 @@ function Specificproduct(props) {
 
             }
         }
-   
+
     }
+
+
+
+
+    const renderContent = () => {
+
+        console.log(imgLoaded);
+
+
+
+        return (<Row >
+
+            <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
+
+                <img
+                    style={{ cursor: "pointer", borderRadius: "15px" }}
+                    height="100%"
+                    width="100%"
+                    src={product.productUrl}
+                    onLoad={() => setImgLoaded(true)}
+
+                />
+
+            </Col>
+
+
+            <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
+                <motion.div
+                    variants={childVariants}
+                //  initial="hidden"
+                // animate="visible"
+                // exit="exit"
+                >
+                    <Productdetail
+                        product={product}
+                    />
+                    {/* <h1>Hello</h1> */}
+                </motion.div>
+            </Col>
+
+        </Row>)
+    }
+
+
+
+
+
+
+
     return (
         <motion.div
             variants={variants}
@@ -102,35 +150,7 @@ function Specificproduct(props) {
             exit="exit"
             className={classes.SpecificProductContainer}
         >
-            <Row >
-
-                <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
-
-                    <Image
-                        style={{ cursor: "pointer", borderRadius: "15px" }}
-                        height="100%"
-                        width="100%"
-                        src={product.productUrl}
-                    />
-
-                </Col>
-
-        
-                <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
-                    <motion.div
-                        variants={childVariants}
-                    //  initial="hidden"
-                     // animate="visible"
-                    // exit="exit"
-                    >
-                        <Productdetail
-                            product={product}
-                        />
-                        {/* <h1>Hello</h1> */}
-                    </motion.div>
-                </Col>
-
-            </Row>
+            {renderContent()}
         </motion.div>
     )
 }

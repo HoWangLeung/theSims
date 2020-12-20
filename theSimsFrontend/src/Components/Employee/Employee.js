@@ -166,16 +166,21 @@ class Employee extends Component {
         let exportButton = this.getExportButton()
         const variants = {
             hidden: {
-
-
+                opacity: 0
+    
             },
             visible: {
-
+                opacity: 1,
+                transition: {
+                    duration: .5
+                }
             },
             exit: {
-
+                opacity: 0,
+                transition: {
+                    duration: .5
+                }
             }
-
         }
         return (
             <motion.div

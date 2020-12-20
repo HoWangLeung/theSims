@@ -1,235 +1,64 @@
 
-// .hover_1{
-//     display: inline-block;
-//     width: 100%;
-//     min-height: 100%;
-//     object-fit: cover;
-//     z-index: -1;
+.homePageContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 89vh;
+
+}
+
+// .heroImgContainer{
+//     // height: 10% !important;
+//     // width: 10% !important;
+  
 // }
 
-
-.backgroundImageContainer_show_0{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     
-     &::before{    
-        box-shadow: 0 0 10px 10px white inset;
-        background-image:url(../assests/Image/hover_1.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;
-        
-     }
-
-}
-
-
-.backgroundImageContainer_show_1{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     &::before{
-        // box-shadow: 0 0 48px 48px white inset;
-        background-image:url(../assests/Image/hover_2.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;   
-     }
-}
-.backgroundImageContainer_show_2{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     &::before{
-        box-shadow: 0 0 10px 10px white inset;
-        background-image:url(../assests/Image/hover_3.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;   
-     }
-}
-.backgroundImageContainer_show_3{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     &::before{
-        // box-shadow: 0 0 48px 48px white inset;
-        background-image:url(../assests/Image/hover_4.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;   
-     }
-}
-.backgroundImageContainer_show_4{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     &::before{
-        box-shadow: 0 0 10px 10px white inset;
-        background-image:url(../assests/Image/hover_5.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;   
-     }
-}
-.backgroundImageContainer_show_5{
-    height: 810px;
-     display: flex;
-     align-items: center;
-     &::before{
-     
-        background-image:url(../assests/Image/hover_6.jpg);
-        content: "";
-        top: 65px;
-        left: 0;
-        bottom: 65px;
-        right: 0;
-        position: absolute;
-        animation: fadein 1.5s;
-        transition-property: all;
-        transition-duration: 1s;   
-     }
-}
-
-
-.backgroundImageContainer_hide{
-    
-     height: 810px;
-    //  box-shadow: 0 0 20px 20px white inset;
-     display: flex;
-     align-items: center;
+.heroImg{
+      object-fit: cover;
+    // width: 100%;
+    // height: 50%;
  
-}
-.sixBoxesContainer{
- 
- width: 100%;
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 200px;
-
-}
-.homePageRow{
-    height: 100%;
-    background-color: rgb(255, 255, 255);
+    // height: 50vh;
+    // width: 100%;
+    // object-fit: cover;
 }
 
-
-.descriptionContainer{
-    padding-left: 20px;
-    padding-top: 190px;
-}
-
-.descriptionTitle{
-    
-    width: 20%;
-    border-bottom:2px solid #000000;
-}
-.imageContainer{
-    display: inline-block;
-position: relative;
-
-}
-.image{
-    height: 200px;
-    width: 100%;
-    font-size: 0;
-    box-shadow: 0 12px 12px 0 rgba(0,0,0,0.5);
-    border-radius: 5px;
-}
-
-.overlay {
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    transition: .5s ease;
-    // background-color: #008CBA;
-  }
-  
-
-  .overlay:hover{
-    width: 100%;
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.3);
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
- .textOverlay{
-     width: 100%;
-    color: white;
-    font-size: 20px;
+.homePageheadline{
+color: rgb(255, 255, 255);
+position: absolute;
+font-weight: 600;
+font-size: 100px;
+width: 100%;
+height: 0%;
+top: 35%;
+left: 20%;
+//z-index: 51;
+margin-bottom: 0px !important;
+padding:0px !important
+;
+Button{
+    padding:0px !important;
+    background-color: rgb(0, 0, 0);
+    color:white;
     font-weight: 600;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
- }
- @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+     height: 65px;
+     width: 180px;
+     &:hover, :visited{
+        background-color: rgb(0, 0, 0);
+        color:white;
+     }
+     border-radius: 50px;
+     top:-180px;
+
+     left: 5%;
+   
+}
 }
 
-@keyframes fadeOut {
-    0% {opacity: 1;}
-    100% {opacity: 0;} 
- } 
-
- .textIcon{
-     width: 100%;
-     padding-top: 40px;
-     padding-left: 10px;
-     display: flex;
-     flex-direction: row;
-     align-items: center;
-     justify-content: center;
-
- 
- }
-
- .arrowIcon{
-     padding-left: 5px;
-     padding-bottom: 18px;
-     font-weight: 700;
- }
-
+.homePageSlider{
+    // width: 1000px;
+    // height: 500px;
+    // z-index: 9999;
+}

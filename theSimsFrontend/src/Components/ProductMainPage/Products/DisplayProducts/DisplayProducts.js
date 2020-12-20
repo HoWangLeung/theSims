@@ -13,6 +13,7 @@ const Displayproducts = (props) => {
 
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [imgLoaded, setImgLoaded] = useState(false);
     const isLoading = useSelector(state => {
         return state.ProductReducer.isLoading
     });
@@ -45,25 +46,39 @@ const Displayproducts = (props) => {
 
     }, [isLoggedIn]);
 
-    
 
+    const variants = {
+        hidden: {
+         
+        },
+        visible: {
+           
+        },
+        exit: {
+            //x: '-100vw',
+         
+        }
+
+    }
 
     const renderProductScreen = () => {
-        console.log(isLoading);
-        if (isLoading)
+        console.log(imgLoaded);
+        if (isLoading && imgLoaded===false)
             return Array.from(Array(20).keys()).map(e => {
                 return (
                     <Col xs={24} sm={24} sm={12} md={12} xl={8} className={classes.productNamePriceContainerImgCol}   >
                         <Skeleton key={e} active />
                     </Col>
-           
+
                 )
             })
-        else
+      
             return productList && productList.map(item => {
 
-                return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={6} className={classes.productNamePriceContainerImgCol} >
-                 
+                return  <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={6} className={classes.productNamePriceContainerImgCol} >
+                    <motion.div
+                        variants={variants}
+                    >
                         <Link to={`/product/${item.id}`}>
                             <Card
                                 className={classes.productNamePriceContainerImg}
@@ -73,8 +88,8 @@ const Displayproducts = (props) => {
                                         alt="example"
                                         preview={false}
                                         src={item.productUrl}
-                                        placeholder={true}
-
+                                       placeholder
+                                        onLoad={() => setImgLoaded(true)}
                                     />}
                                 className={classes.productNamePriceContainer}
                             >
@@ -85,7 +100,7 @@ const Displayproducts = (props) => {
 
                             </Card>
                         </Link>
-               
+                    </motion.div>
                 </Col>
             })
 
@@ -97,7 +112,7 @@ const Displayproducts = (props) => {
     return (
         <div className={classes.displayProductOuterContainer}>
 
-            <Row gutter={[8, 8]}   className={classes.displayProductOuterContainerRow}>
+            <Row gutter={[8, 8]} className={classes.displayProductOuterContainerRow}>
 
                 {renderProductScreen()}
 

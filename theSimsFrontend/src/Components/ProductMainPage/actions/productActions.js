@@ -90,7 +90,7 @@ export const fetchAllProducts = () => {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: 'FETCH_PRODUCTS_REQUEST' })
-   // await sleep(900000)
+    
       let res = await axios.get(`${API}/products/`)
       dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data })
       return res

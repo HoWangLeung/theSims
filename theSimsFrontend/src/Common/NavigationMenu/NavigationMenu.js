@@ -6,9 +6,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { getUserProfile } from '../../Components/Authentication/actions/AuthenticationActions';
 import { connect } from 'react-redux';
 const { SubMenu } = Menu;
-export default function Navigationmenu(props) {
+ function Navigationmenu(props) {
 
-    const handleClick = e => {
+    const handleClick = ({ item, key, keyPath, domEvent })=> {
+        console.log(key);
 
     };
 
@@ -27,23 +28,27 @@ export default function Navigationmenu(props) {
         //     '/checkout-success',
         //     `/userProfile/${username}`,
         // ].includes(pathname)) { return null }
+ 
 
-
-
-        return (<Menu onClick={handleClick} mode="horizontal" triggerSubMenuAction="click">
-            <Menu.Item key="statistic" icon={<ApartmentOutlined />}>
-                <Link to="/dashboard">{intl.get('statistic')}</Link>
+        return (<Menu 
+            // onClick={handleClick} 
+        // defaultSelectedKeys={['statistic']} 
+        mode="horizontal" 
+        triggerSubMenuAction="click">
+            <Menu.Item key="statistic"     icon={<ApartmentOutlined /> } >
+                <Link to="/statistic">{intl.get('statistic')}</Link>
             </Menu.Item>
-            <Menu.Item key="app" icon={<AppstoreOutlined />}>
+            <Menu.Item key="employee" icon={<AppstoreOutlined />}>
                 <Link to="/employee">{intl.get('management')}</Link>
             </Menu.Item>
+
             <SubMenu icon={<CreditCardOutlined />} title={intl.get('payment')}>
                 <Menu.ItemGroup title={intl.get('payment')}>
                     <Menu.Item key="setting:1">{intl.get('outstandingPayment')}</Menu.Item>
                     <Menu.Item key="setting:2">{intl.get('paymentRecord')}</Menu.Item>
                 </Menu.ItemGroup>
             </SubMenu>
-            <Menu.Item key="alipay" icon={<BarcodeOutlined />}>
+            <Menu.Item key="inventory" icon={<BarcodeOutlined />}>
                 <Link to="/inventory">
                     {intl.get('inventory.inventory')}
                 </Link>
@@ -67,3 +72,4 @@ export default function Navigationmenu(props) {
 
 
 }
+export default withRouter(Navigationmenu)

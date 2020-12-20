@@ -12,7 +12,7 @@ import en_US from 'antd/es/locale/en_US';
 import RouterIndex from './RouterIndex'
 import axios from 'axios'
 import NavigationMenu from './Common/NavigationMenu';
-import Dashboard from './Components/Dashboard';
+import Dashboard from './Components/StatisticPage';
 import AuthenticatedRoute from './Components/Authentication/Authentication'
 import WebFooter from './Components/WebFooter/WebFooter'
 import CreateTemplate from './Components/DigitalQrCodeMenu/GettingStrated/GettingStarted';
@@ -46,6 +46,8 @@ import { BrowserRouter as Router, Switch, Route, Link, withRouter, useLocation }
 import Banner from './Common/Banner';
 import { set } from 'lodash';
 import Navigationmenu from './Common/NavigationMenu/NavigationMenu';
+import StatisticPage from './Components/StatisticPage/StatisticPage';
+import Homepage from './Components/HomePage/HomePage';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -142,16 +144,16 @@ function App() {
 
           <AnimatePresence exitBeforeEnter  >
             <Switch location={location} key={location.key}  >
-      
-              <Route exact path='/' component={ProductMainpage} />
+            <Route exact path='/' component={Homepage} />
+              <Route exact path='/products' component={ProductMainpage} />
               <Route path='/product/:id' component={Specificproduct} />
               <Route path='/404' component={Pagenotfound} />
               <Route path='/login' component={Login} />
               <Route path='/signup' component={SignUpMainPage} />
               <Route path='/signup-customer' component={SignUp} />
               <Route path='/signup-success' component={Signupsuccess} />
-              <AuthenticatedRoute path='/dashboard' component={Dashboard} />
-              <AuthenticatedRoute path='/employee' component={Employee} />
+              <AuthenticatedRoute   currentLocale={antdLang} path='/statistic' component={StatisticPage} />
+              <AuthenticatedRoute  currentLocale={antdLang}  path='/employee' component={Employee} />
               <AuthenticatedRoute path='/inventory' component={Inventory} />
               <AuthenticatedRoute path='/checkout' component={Checkout} />
               <AuthenticatedRoute path='/userProfile/:id' component={Userprofile} />

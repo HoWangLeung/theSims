@@ -1,121 +1,119 @@
-import React, { Component } from 'react'
-import LoginCard from '../Authentication/MainPageLogin/LoginCard'
-import Header from '../../Header'
-import Locale from '../../Locale'
+import { Button } from 'antd'
+import { motion, useAnimation } from 'framer-motion'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { homePageVariants, homePageVariantsImg } from './HomPageAnimation'
+import hero from '../../Common/assests/Image/hero.jpg';
 import classes from './HomePage.less'
-import Thesixboxes from './TheSixBoxes'
-import { Row, Col } from 'antd';
-import Initialdescription from './InitialDescription'
-import Animate from 'rc-animate';
-import Hoverslide from './HoverSlide/HoverSlide'
-import styles from './Animation.less'
+export default function Homepage(props) {
 
-class HomePage extends Component {
-    constructor(props) {
-        super(props)
+    const controls = useAnimation()
+    const slider = useAnimation()
 
-        this.state = {
-            initiateHoverAction: false,
-            showAnimation: false,
-            activeNumber: 0,
-            showInitialDescription:true
-        }
-    }
-
-    showBackgroundImage = (initiateHoverAction, activeNumber) => {
-        
-        let number = parseInt(activeNumber)
-        
-
-        this.setState({
-            initiateHoverAction: true,
-            showAnimation: true,
-            activeNumber: number,
-            showAnimation: true,
-            showInitialDescription:false
-        })
-
-
-    }
-
-    hideBackgroundImage = (initiateHoverAction, imageId) => {
-        this.setState({
-            initiateHoverAction: false,
-
-        })
-    }
-
-    hideHoverSlider = () => {
-
-        this.setState({
-            showAnimation: false,
-            showInitialDescription:true
-        })
-
-        // setTimeout(() => {
-
-        //     this.setState({
-        //         showInitialDescription:true
-               
-        //     })
-          
-        // }, 10);
-        
-
-
-    }
-
-
-
-    getSixBoxes = () => {
-        return (<Thesixboxes
-            showBackgroundImage={this.showBackgroundImage}
-            hideBackgroundImage={this.hideBackgroundImage}
-            hideHoverSlider={this.hideHoverSlider}
-            getActiveBox={this.getActiveBox}
-        />)
-    }
-
-
-
-    render() {
-        const { initiateHoverAction, showAnimation, activeNumber,showInitialDescription } = this.state
-        return (
-            <div key="background" className={initiateHoverAction ?
-                classes[`backgroundImageContainer_show_${activeNumber}`] :
-                classes.backgroundImageContainer_hide
-            } >
-                <Row xs={24} sm={24} md={24} lg={12} justify="end" className={classes.homePageRow}>
-
-                    <Col xs={24} sm={24} md={24} lg={24} xl={9} >
-                        {this.getSixBoxes()}
-                    </Col>
-
-                    <Col xs={24} sm={24} md={24} lg={24} xl={12} span={12}>
-                        <Animate
-                            transitionName={{
-                                enter: styles['fade-enter'],
-                                enterActive: styles['fade-enter-active'],
-                                leave: styles['fade-leave'],
-                                leaveActive: styles['fade-leave-active'],
-                                appear: styles['fade-appear'],
-                                appearActive: styles['fade-appear-active']
-                            }}
-                            transitionAppear
-                        >
-                            {showAnimation ? 
-                            
-                            <Hoverslide  key="hoverSlide" activeNumber={activeNumber} /> : null}
-
-                        </Animate>
-                        {showInitialDescription  && <Initialdescription />}
-                    </Col>
-
-                </Row>
-            </div>
+    const  homePageButton = useAnimation()
+    useEffect(() => {
+        sequence()
+    }, [])
+    const sequence = async () => {
+        await controls.start(
+            {
+                 borderRadius: "2px",
+                height: "65vh",
+                width: "100%",
+                objectFit: "cover",
+                transition: {
+                    duration: .6,
+                    ease: "easeInOut"
+                }
+            }
 
         )
-    }
-}
+        slider.start({
 
-export default HomePage
+            backgroundImage: "linear-gradient(to right, #f5f7fa , #c3cfe2 100%, transparent 0%)",
+            transition: " background-position 1s",
+            transition: {
+                duration: 1,
+               
+                
+            }
+
+
+        })
+        await controls.start({
+            height: "65vh",
+            width: "80%",
+            objectFit: "cover",
+             borderRadius: "2px",
+            transition: {
+                duration: .5,
+                ease: "easeInOut"
+            }
+        })
+        homePageButton.start({
+            opacity:1,
+            transition:{duration:1,
+                ease:"easeInOut"
+            }
+        })
+        await controls.start({
+            height: "65vh",
+            width: "80%",
+            objectFit: "cover",
+            borderRadius: "2px",
+            transition: {
+                duration: .5,
+                ease: "easeInOut"
+            }
+        })
+     
+
+
+
+    }
+    return (
+        <>
+            <motion.div
+                animate={slider}
+                exit={{exit:{}}}
+                className={classes.homePageContainer}
+
+            >
+         
+                <motion.img
+                    initial={{
+                        height: "20vh",
+                        width: "100%",
+                   
+                    }}
+                    //  animate="visible"
+                    animate={controls}
+                    src={hero}
+                    alt="hero"
+                    className={classes.heroImg}
+                />
+        
+                <motion.div initial={{opacity:0}}   animate={homePageButton} className={classes.homePageheadline}>
+                    <motion.p>Eat Fresh</motion.p>
+                   <Link to="/products" > <Button  >Explore</Button></Link>
+                </motion.div>
+
+
+            </motion.div>
+            {/* 
+            <motion.div
+                className={classes.homePageSlider}
+                animate={slider}
+                initial={{
+                    x: "-100%",
+                    zIndex: "-1",
+                    background: "red",
+                    width: "100%",
+                }}
+            /> */}
+
+        </>
+
+
+    )
+}
