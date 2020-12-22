@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Dropdown, Typography, Avatar, Popover, Divider } from 'antd';
-import { UserOutlined, DownOutlined, LoginOutlined, HomeOutlined } from '@ant-design/icons';
+import { UserOutlined, DownOutlined, LoginOutlined, HomeOutlined, CaretUpFilled, UpOutlined } from '@ant-design/icons';
 import classes from './Nav.less'
 import AppNav from './AppNav'
 import { Link } from 'react-router-dom';
@@ -15,6 +15,7 @@ import NavigationMenu from '../NavigationMenu';
 import Cart from '../../Components/ProductMainPage/Cart/Cart';
 import Navigationmenu from '../NavigationMenu/NavigationMenu';
 import { motion } from 'framer-motion';
+import Text from 'antd/lib/typography/Text';
 
 
 const { Title } = Typography;
@@ -176,24 +177,18 @@ class Nav extends React.Component {
 
 
         const topNavigationMenu = (<><div className={classes.appHeaderContainer}>
-            <Title style={{ padding: 10 }} level={3}><Link to="/" >{intl.get('webTitle')}</Link></Title>
+            <Title style={{ padding: 10 }} level={3}><Link to="/" >
+                <Text level={1} strong >{intl.get('webTitle')}</Text>
+            </Link></Title>
 
-            <Dropdown overlay={menu} trigger={['hover']}>
-                <h4>{intl.get('news')}</h4>
-            </Dropdown>
+            <motion.div>
+                <Link to="/about">
 
-            <Dropdown overlay={menu} trigger={['hover']}>
-                <h4>{intl.get('forms')}</h4>
-            </Dropdown>
-            <Dropdown overlay={menu} trigger={['hover']}>
-                <h4>{intl.get('entertainment')}<DownOutlined /></h4>
-            </Dropdown>
-            <Dropdown overlay={menu} trigger={['hover']}>
-                <h4>{intl.get('contact')}</h4>
-            </Dropdown>
-            <Dropdown overlay={menu} trigger={['hover']}>
-                <h4>{intl.get('others')}<DownOutlined /></h4>
-            </Dropdown>
+                    <Text level={2} strong >About </Text>
+
+                </Link>
+            </motion.div>
+
 
             <div className={classes.functionGroups}>
                 <Cart />
@@ -203,7 +198,9 @@ class Nav extends React.Component {
             </div>
 
         </div>
-            <Divider style={{ margin: "0px", padding: "0px 0px 0px 0px", background: "white", }} /></>)
+            {/* <Divider style={{ margin: "0px", padding: "0px 0px 0px 0px", background: "white", }} /> */}
+
+        </>)
 
         const variants = {
             hidden: {

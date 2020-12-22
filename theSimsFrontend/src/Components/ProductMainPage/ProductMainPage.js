@@ -22,9 +22,9 @@ function ProductMainpage() {
             // }
         },
         exit: {
-            x: '-100vw',
+            opacity:0,
             transition: {
-                duration: 1,
+                duration: .5,
                 ease: "easeInOut"
             }
         }

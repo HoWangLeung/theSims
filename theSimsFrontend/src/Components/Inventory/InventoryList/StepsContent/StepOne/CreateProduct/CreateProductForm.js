@@ -13,6 +13,7 @@ import Imageuploader from './ImageUploader';
 import { storage } from './UploadIndex'
 import { CheckCircleFilled, UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
+import Text from 'antd/lib/typography/Text';
 const { Panel } = Collapse;
 const { Option } = Select;
 
@@ -22,10 +23,17 @@ function Createproductform() {
         labelCol: { span: 6 },
         wrapperCol: { span: 18 },
     };
+    const formItemLayoutCategory = {
+        labelCol: { span: 7 },
+        wrapperCol: { span: 48 },
+    };
+
+
     const [fileList, setFileList] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
+    const [inputProductName, setInputProductName] = useState("")
 
     //form
 
@@ -107,7 +115,12 @@ function Createproductform() {
                 ]
             })
     }
-    const handleInputChange = () => {
+    const handleInputChange = (e) => {
+        console.log(e.currentTarget);
+        let value = e.currentTarget.value
+        let id = e.currentTarget.id
+        if(id==="productName")
+        setInputProductName(value)
 
     }
 
@@ -214,6 +227,16 @@ function Createproductform() {
         imgWindow.document.write(image.outerHTML);
     };
 
+    const getPanelHeader = () => {
+        return (<>
+            <Text strong>
+                {intl.get(`inventory.newProduct`)}
+            </Text>
+            <span>{` : `}</span>
+            {inputProductName && <Tag color="green">{inputProductName}</Tag>}
+        </>)
+    }
+
     return (
         <Form
             className={classes.createproductForm}
@@ -233,8 +256,9 @@ function Createproductform() {
         >
             <Form.Item
 
+                // {...formItemLayoutCategory}
                 name={"productCategory"}
-                label={intl.get("productCategory")}
+                label={<Text strong>{intl.get("productCategory")}</Text>}
                 rules={[
                     {
                         required: true,
@@ -245,7 +269,7 @@ function Createproductform() {
 
             >
                 <Select
-                    style={{ width: 240 }}
+                    className={classes.categorySelect}
                     placeholder="Select a Category"
                     dropdownRender={menu => (
                         <div>
@@ -307,13 +331,13 @@ function Createproductform() {
                                         key={field.name}
                                         bordered={false}
                                         expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
-                                        defaultActiveKey="0"
+                                        // defaultActiveKey="0"
                                         onChange={handleCollapseKeyChange}
                                     >
                                         <Panel
                                             className={classes.createProductPanel}
                                             key={field.name}
-                                            header={`Product ${field.key}`}
+                                            header={getPanelHeader()}
                                             forceRender={true}
                                             extra={
                                                 <Row>
@@ -332,7 +356,7 @@ function Createproductform() {
                                                                     required={true}
                                                                     {...formItemLayout}
                                                                     key={index}
-                                                                    label={fieldName}
+                                                                    label={intl.get(`inventory.${fieldName}`)}
                                                                     name={[field.name, fieldName]}
                                                                     fieldKey={[field.fieldKey, index]}
                                                                     valuePropName="fileList"
@@ -355,31 +379,31 @@ function Createproductform() {
 
                                                                     }
                                                                 >
-                                                                 
-                                                                        <Upload
 
-                                                                            onPreview={onPreview}
-                                                                            onChange={handleOnChange}
-                                                                            listType="picture-card"
+                                                                    <Upload
 
-                                                                            progress={
-                                                                                {
-                                                                                    format: (percent) => {
+                                                                        onPreview={onPreview}
+                                                                        onChange={handleOnChange}
+                                                                        listType="picture-card"
+
+                                                                        progress={
+                                                                            {
+                                                                                format: (percent) => {
 
 
-                                                                                        return progress < 100 ? progress + "%" : <CheckCircleFilled />
-                                                                                    },
-                                                                                    percent: progress,
-                                                                                    // showInfo:true,
-                                                                                    type: "line",
-                                                                                    success: { percent: progress }
-                                                                                }
+                                                                                    return progress < 100 ? progress + "%" : <CheckCircleFilled />
+                                                                                },
+                                                                                percent: progress,
+                                                                                // showInfo:true,
+                                                                                type: "line",
+                                                                                success: { percent: progress }
                                                                             }
-                                                                            customRequest={handleUpload}
-                                                                            {...Uprops}>
-                                                                            {fileList.length < 5 && '+ Upload'}
-                                                                        </Upload>
-                                                                   
+                                                                        }
+                                                                        customRequest={handleUpload}
+                                                                        {...Uprops}>
+                                                                        {fileList.length < 5 && '+ Upload'}
+                                                                    </Upload>
+
                                                                 </Form.Item>
 
                                                             )
@@ -390,7 +414,7 @@ function Createproductform() {
                                                             return (<Form.Item
                                                                 {...formItemLayout}
                                                                 key={index}
-                                                                label={fieldName}
+                                                                label={intl.get(`inventory.${fieldName}`)}
                                                                 name={[field.name, fieldName]}
                                                                 fieldKey={[field.fieldKey, index]}
                                                                 rules={[
@@ -403,7 +427,7 @@ function Createproductform() {
 
                                                             //   getValueFromEvent={normFile}
                                                             >
-                                                                <Input onChange={handleInputChange} />
+                                                                <Input id={fieldName} onChange={handleInputChange} />
                                                             </Form.Item>)
                                                         }
 

@@ -19,14 +19,14 @@ function ProductsSearch(props) {
 
     return (
         <>
-            <h4>SEARCH</h4>
-            <Divider />
+          
+          
             <Search
                 placeholder="input search text"
                 onSearch={(values) => handleSearch(values)}
                 enterButton
                 // size="large"
-                style={{ width: "90%" }}
+                style={{ width: "30%" }}
             />
         </>
 

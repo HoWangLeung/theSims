@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import classes from '../../ProductMainPage.less'
 import { getUserProfile } from '../../../Authentication/actions/AuthenticationActions';
 import { motion } from 'framer-motion';
+import Text from 'antd/lib/typography/Text';
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
@@ -49,21 +50,21 @@ const Displayproducts = (props) => {
 
     const variants = {
         hidden: {
-         
+
         },
         visible: {
-           
+
         },
         exit: {
-            //x: '-100vw',
-         
+       
+
         }
 
     }
 
     const renderProductScreen = () => {
         console.log(imgLoaded);
-        if (isLoading && imgLoaded===false)
+        if (isLoading && imgLoaded === false)
             return Array.from(Array(20).keys()).map(e => {
                 return (
                     <Col xs={24} sm={24} sm={12} md={12} xl={8} className={classes.productNamePriceContainerImgCol}   >
@@ -72,37 +73,38 @@ const Displayproducts = (props) => {
 
                 )
             })
-      
-            return productList && productList.map(item => {
 
-                return  <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={6} className={classes.productNamePriceContainerImgCol} >
+        return productList && productList.map((item, i) => {
+            while (i < 20)
+                return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={8} className={classes.productNamePriceContainerImgCol} >
                     <motion.div
-                        variants={variants}
+                       variants={variants}
                     >
                         <Link to={`/product/${item.id}`}>
                             <Card
-                                className={classes.productNamePriceContainerImg}
+                             className={classes.productNamePriceContainer}
                                 cover={
                                     <Image
-                                        className={classes.productNamePriceContainerImg}
+                                         className={classes.productNamePriceContainerImg}
                                         alt="example"
                                         preview={false}
                                         src={item.productUrl}
-                                       placeholder
+                                        placeholder
+
                                         onLoad={() => setImgLoaded(true)}
                                     />}
-                                className={classes.productNamePriceContainer}
+                             
                             >
 
                                 <Meta
-                                    title={item.productName}
+                                    title={<Text strong >{item.productName}</Text>}
                                     description={`$${item.basePrice}`} />
 
                             </Card>
                         </Link>
                     </motion.div>
                 </Col>
-            })
+        })
 
     }
 

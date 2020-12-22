@@ -7,9 +7,11 @@ import ProductPicture from './pictureArea/ProductPicture';
 import Productdetail from './purchaseArea/ProductDetail';
 import classes from './SpecificProduct.less'
 import { motion } from 'framer-motion';
+import { withRouter } from 'react-router-dom';
+import CommonBreadcrumb from '../../../BreadCrumb/CommonBreadCrumb';
 
 function Specificproduct(props) {
-
+    const { location: { pathname } } = props
     const [photo, setPhoto] = useState("")
     const [imgLoaded, setImgLoaded] = useState(false);
     const { match: { params: { id } } } = props
@@ -39,26 +41,23 @@ function Specificproduct(props) {
 
     const variants = {
         hidden: {
+            opacity: 0,
 
-            x: 1000,
+
 
 
         },
         visible: {
 
-            x: 0,
+            opacity: 1,
+            transition: { duration: .5, ease: "easeInOut" }
 
 
 
         },
         exit: {
-            x: '100vw',
-            transition: {
-
-                ease: "easeInOut",
-                duration: 1
-
-            }
+            opacity: 1,
+            transition: { duration: .5, ease: "easeInOut" }
         }
 
     }
@@ -72,24 +71,17 @@ function Specificproduct(props) {
         visible: {
 
             opacity: 1,
-            x: '0',
-
             transition: {
-                delay: .5,
-                duration: 1,
+                duration: .5,
                 // when:"beforeChildren"
             },
 
 
         },
         exit: {
-            x: '100vw',
-            transition: {
+            opacity: 0,
 
-                ease: "easeInOut",
-                duration: .4
-
-            }
+            transition: { duration: .5, ease: "easeInOut" }
         }
 
     }
@@ -103,37 +95,48 @@ function Specificproduct(props) {
 
 
 
-        return (<Row >
+        return (
+            <>
+                <Row> <CommonBreadcrumb pathname={pathname} /></Row>
+                <Row >
 
-            <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
+                    <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
+                        <motion.div
+                            variants={childVariants}
+                        //  initial="hidden"
+                        // animate="visible"
+                        // exit="exit"
+                        >
+                            <Image
+                                style={{ cursor: "pointer", borderRadius: "15px" }}
+                                height="100%"
+                                width="100%"
+                                src={product.productUrl}
+                                onLoad={() => setImgLoaded(true)}
+                                preview
 
-                <img
-                    style={{ cursor: "pointer", borderRadius: "15px" }}
-                    height="100%"
-                    width="100%"
-                    src={product.productUrl}
-                    onLoad={() => setImgLoaded(true)}
-
-                />
-
-            </Col>
+                            />
+                        </motion.div>
+                    </Col>
 
 
-            <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
-                <motion.div
-                    variants={childVariants}
-                //  initial="hidden"
-                // animate="visible"
-                // exit="exit"
-                >
-                    <Productdetail
-                        product={product}
-                    />
-                    {/* <h1>Hello</h1> */}
-                </motion.div>
-            </Col>
+                    <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
+                        <motion.div
+                            variants={childVariants}
+                        //  initial="hidden"
+                        // animate="visible"
+                        // exit="exit"
+                        >
+                            <Productdetail
+                                product={product}
+                            />
+                            {/* <h1>Hello</h1> */}
+                        </motion.div>
+                    </Col>
 
-        </Row>)
+                </Row>
+            </>
+        )
     }
 
 
@@ -141,7 +144,7 @@ function Specificproduct(props) {
 
 
 
-
+    console.log(pathname);
     return (
         <motion.div
             variants={variants}
@@ -159,5 +162,5 @@ Specificproduct.propTypes = {
 
 }
 
-export default Specificproduct
+export default withRouter(Specificproduct)
 {/* <Spin spinning={isFetching['FETCH_ONE_PRODUCT']}> */ }

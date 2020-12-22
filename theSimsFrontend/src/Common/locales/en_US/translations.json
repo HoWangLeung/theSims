@@ -73,7 +73,15 @@
                     "add":"Add",
                     "undo":"Undo",
                     "create":"Create",
-                    "editMultiple":"Edit Multiple"
+                    "editMultiple":"Edit Multiple",
+                    "productName":"Product Name",
+                    "countryOrigin":"Country",
+                    "cost":"Cost",
+                    "basePrice":"Price",
+                    "Remaining":"Remaining",
+                    "productUrl":"Image",
+                    "newProduct":"New Product"
+                    
                 },
     "userProfilePage":{
         "username":"Username",

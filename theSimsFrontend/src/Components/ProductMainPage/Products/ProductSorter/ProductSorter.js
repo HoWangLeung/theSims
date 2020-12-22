@@ -26,7 +26,7 @@ const Productsorter = (props) => {
     <div className={classes.productSorter}>
       
 
-      <Select
+      {/* <Select
         size="small"
         style={{ width: 200 }}
         placeholder="Sort By"
@@ -42,7 +42,7 @@ const Productsorter = (props) => {
         <Option value="LH">Price: Lowest To Highest</Option>
         <Option value="Asc">Order: Ascending</Option>
         <Option value="Desc">Order: Descending</Option>
-      </Select>
+      </Select> */}
     </div>
   )
 }

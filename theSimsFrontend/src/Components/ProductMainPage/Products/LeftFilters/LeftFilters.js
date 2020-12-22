@@ -8,6 +8,7 @@ import intl from 'react-intl-universal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts, filterProductByCategory, filterProductByPrice } from '../../actions/productActions';
 import Text from 'antd/lib/typography/Text';
+import { motion } from 'framer-motion';
 
 
 
@@ -55,8 +56,8 @@ const LeftFilters = (props) => {
     }
     const useSlider = () => {
         return (<>
-        <Divider/>
-        <h4>FILTER BY PRICE</h4>
+        
+        <h2>PRICE</h2>
             <Slider
                 className={classes.priceSlider}
                 range
@@ -124,28 +125,48 @@ const LeftFilters = (props) => {
 
 
         return (<>
-            <Divider />
-            <h4>CATEGORIES</h4>
+        
+            <h2>CATEGORIES</h2>
             <ul >
                 {displayList}
             </ul>
 
-            <Divider />
+      
         </>)
 
 
     }
-    
+    const variants = {
+        hidden: {
+         
+        },
+        visible: {
+           
+        },
+        exit:{
+            opacity:0,
+            transition:{
+                duration:.5,
+        
+
+            }                     
+            
+        }
+
+    }
+
     const {categories,productList, numberOfProducts} = productInfo
     return (
-        <div className={classes.LeftFiltersContainer}>
-
-        
+        <motion.div 
+        className={classes.LeftFiltersContainer}
+        // variants={variants}
+        >
             {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
-            <ProductsSearch />
+            {/* <ProductsSearch /> */}
 
-            {useSlider()}
+    
             {getCategories()}
+            {useSlider()}
             <Button 
             type="primary" 
             onClick={handleReset}
@@ -153,7 +174,7 @@ const LeftFilters = (props) => {
                 >
                 <UndoOutlined />  {intl.get('reSet')}
             </Button>
-        </div>
+        </motion.div>
     )
 
 }

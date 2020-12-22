@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions';
 import { withRouter } from 'react-router-dom';
 import Cart from '../../Components/ProductMainPage/Cart/Cart';
+import Text from 'antd/lib/typography/Text';
 
 class AppNav extends Component {
     constructor(props) {
@@ -61,7 +62,7 @@ class AppNav extends Component {
                     />
                 </Row>
                 <Drawer
-                    title={intl.get('webTitle')}
+                    title={<Text level={1} strong >{intl.get('webTitle')}</Text>}
                     placement="right"
                     closable={false}
                     onClose={this.onClose}

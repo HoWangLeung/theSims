@@ -7,6 +7,7 @@ import { Col, Row } from 'antd'
 import classes from '../ProductMainPage.less'
 import Cart from '../Cart/Cart'
 import { motion } from 'framer-motion'
+import ProductsSearch from '../ProductsSearch/ProductsSearch'
 const Allproducts = (props) => {
 
 
@@ -40,8 +41,9 @@ const Allproducts = (props) => {
                     </Col>
                     <Col sm={24} xl={16} className={classes.allProductCol2} >
                         <Row className={classes.cartAndProductSorterContainer} >
-                            <span>All Products</span>
-                            <Productsorter />
+                            <h2>All Products</h2>
+                            {/* <Productsorter /> */}
+                            <ProductsSearch />
                         </Row>
                    
                             <Displayproducts />

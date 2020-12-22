@@ -73,7 +73,14 @@
         "add": "增加",
         "undo": "還原",
         "create":"新增",
-        "editMultiple":"同時變更多項"
+        "editMultiple":"同時變更多項",
+        "productName": "產品名稱",
+        "countryOrigin":"產地",
+        "cost":"成本",
+        "basePrice":"售價",
+        "Remaining":"庫存數量",
+        "productUrl":"圖片",
+        "newProduct":"新產品"
     },
     "userProfilePage": {
         "username":"帳戶名稱",

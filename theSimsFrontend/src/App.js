@@ -48,6 +48,7 @@ import { set } from 'lodash';
 import Navigationmenu from './Common/NavigationMenu/NavigationMenu';
 import StatisticPage from './Components/StatisticPage/StatisticPage';
 import Homepage from './Components/HomePage/HomePage';
+import AboutPage from './Components/HomePage/AboutPage';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -145,6 +146,7 @@ function App() {
           <AnimatePresence exitBeforeEnter  >
             <Switch location={location} key={location.key}  >
             <Route exact path='/' component={Homepage} />
+            <Route exact path='/about' component={AboutPage} />
               <Route exact path='/products' component={ProductMainpage} />
               <Route path='/product/:id' component={Specificproduct} />
               <Route path='/404' component={Pagenotfound} />
