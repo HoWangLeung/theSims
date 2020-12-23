@@ -164,7 +164,7 @@ function App() {
               <Route path='/counter' component={Counter} />
             </Switch>
           </AnimatePresence>
-          <BackTop target={() => document.body} />
+          <BackTop style={{paddingTop:"15px"}} target={() => document.body} />
         </Content>
 
         <Footer>

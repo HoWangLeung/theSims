@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Divider, Row, Slider } from 'antd';
+import { Button, Collapse, Divider, Row, Slider } from 'antd';
 import classes from '../../ProductMainPage.less';
 import ProductsSearch from '../../ProductsSearch/ProductsSearch';
-import { UndoOutlined } from '@ant-design/icons';
+import { MinusSquareOutlined, PlusSquareOutlined, UndoOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts, filterProductByCategory, filterProductByPrice } from '../../actions/productActions';
 import Text from 'antd/lib/typography/Text';
 import { motion } from 'framer-motion';
-
+const { Panel } = Collapse;
 
 
 
@@ -23,9 +23,9 @@ const LeftFilters = (props) => {
 
     const [filterValue, setFilterValue] = useState([1, 50])
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
-    
- 
-   
+
+
+
     const dispatch = useDispatch();
     const handleReset = () => {
 
@@ -56,8 +56,8 @@ const LeftFilters = (props) => {
     }
     const useSlider = () => {
         return (<>
-        
-        <h2>PRICE</h2>
+
+            <h2>Price</h2>
             <Slider
                 className={classes.priceSlider}
                 range
@@ -66,28 +66,28 @@ const LeftFilters = (props) => {
                 max={50}
                 min={0}
                 onChange={onChange}
-                // trackStyle={{
-                //     backgroundColor: 'red',
-                //     height: '5px',
-                //   }}
-                //   railStyle={{
-                //     backgroundColor: 'red',
-                //     height: '5px',
-                //   }}
-                //   handleStyle={{
-                //     borderColor: 'blue',
-                //     height: '14px',
-                //     width: '14px',
-                //     marginLeft: '-7px',
-                //     marginTop: '-4.5px',
-                //     backgroundColor: 'blue',
-                //   }}
+            // trackStyle={{
+            //     backgroundColor: 'red',
+            //     height: '5px',
+            //   }}
+            //   railStyle={{
+            //     backgroundColor: 'red',
+            //     height: '5px',
+            //   }}
+            //   handleStyle={{
+            //     borderColor: 'blue',
+            //     height: '14px',
+            //     width: '14px',
+            //     marginLeft: '-7px',
+            //     marginTop: '-4.5px',
+            //     backgroundColor: 'blue',
+            //   }}
             // onAfterChange={onAfterChange}
             />
-            <Row   className={classes.filterResult}>
+            <Row className={classes.filterResult}>
                 <p>{`Price : $${filterValue[0]} - $${filterValue[1]}`}</p>
-                <h4 onClick={handleFilter}   >    
-                    FILTER  
+                <h4 onClick={handleFilter}   >
+                    FILTER
                 </h4>
 
             </Row>
@@ -105,12 +105,12 @@ const LeftFilters = (props) => {
 
             })
     }
-  
+
     const getCategories = () => {
-        const {categories} = productInfo
+        const { categories } = productInfo
 
         const displayList = categories && categories.map((option, index) => {
-            
+
             return (
 
                 <li
@@ -125,56 +125,67 @@ const LeftFilters = (props) => {
 
 
         return (<>
-        
-            <h2>CATEGORIES</h2>
+
+            <h2>Category</h2>
             <ul >
                 {displayList}
             </ul>
 
-      
+
         </>)
 
 
     }
     const variants = {
         hidden: {
-         
+
         },
         visible: {
-           
-        },
-        exit:{
-            opacity:0,
-            transition:{
-                duration:.5,
-        
 
-            }                     
-            
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: .5,
+
+
+            }
+
         }
 
     }
 
-    const {categories,productList, numberOfProducts} = productInfo
+    const { categories, productList, numberOfProducts } = productInfo
     return (
-        <motion.div 
-        className={classes.LeftFiltersContainer}
-        // variants={variants}
-        >
-            {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
-            {/* <ProductsSearch /> */}
 
-    
-            {getCategories()}
-            {useSlider()}
-            <Button 
-            type="primary" 
-            onClick={handleReset}
-            className={classes.LeftFiltersResetBtn}
+        <Collapse
+            bordered={false}
+            defaultActiveKey="1"
+            expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
+            className={classes.leftFilterCollapse}
+        >
+            <Panel header={<p>Options</p>} key="1"  >
+                <motion.div
+                    className={classes.LeftFiltersContainer}
+                // variants={variants}
                 >
-                <UndoOutlined />  {intl.get('reSet')}
-            </Button>
-        </motion.div>
+                    {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
+                    {/* <ProductsSearch /> */}
+
+
+                    {getCategories()}
+                    {useSlider()}
+                    <Button
+                        type="primary"
+                        onClick={handleReset}
+                        className={classes.LeftFiltersResetBtn}
+                    >
+                        <UndoOutlined />  {intl.get('reSet')}
+                    </Button>
+                </motion.div>
+            </Panel>
+        </Collapse>
+
     )
 
 }

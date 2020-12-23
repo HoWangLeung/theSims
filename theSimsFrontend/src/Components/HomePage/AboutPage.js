@@ -1,7 +1,7 @@
 
-import { Breadcrumb, Col, Row } from 'antd'
-import { motion } from 'framer-motion'
-import React, { Component } from 'react'
+import { Breadcrumb, Col, Image, Row } from 'antd'
+import { motion, useAnimation } from 'framer-motion'
+import React, { Component, useEffect } from 'react'
 import reactLogo from '../../Common/assests/Image/reactLogo.png'
 import springBootLogo from '../../Common/assests/Image/springBootLogo.png'
 import mysqlLogo from '../../Common/assests/Image/mysqlLogo.png'
@@ -12,6 +12,32 @@ import CommonBreadcrumb from '../BreadCrumb/CommonBreadCrumb'
 
 function AboutPage(props) {
     const { location: { pathname } } = props
+    const logo = useAnimation()
+    const header = useAnimation()
+    const text = useAnimation()
+    useEffect(() => {
+        sequence()
+    }, [])
+
+    const sequence = async () => {
+        logo.start({
+            x: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                duration: 1.5
+            }
+        })
+
+
+
+
+
+
+
+
+
+    }
     const data = [
         {
             logo: reactLogo,
@@ -26,8 +52,8 @@ function AboutPage(props) {
                 <p>Requesting API - Axios</p>
                 <p>Charts - Recharts</p>
                 <p>Styling - CSS Modules</p>
-          
-                </>
+
+            </>
         },
         {
             logo: springBootLogo,
@@ -50,6 +76,7 @@ function AboutPage(props) {
                 <p>Backend Deployment - AWS Elastic BeanStalk</p>
                 <p>Database Deployment - AWS RDS</p>
                 <p>Payment Integration - Stripe</p>
+                <p>Image Upload/Storage - Firebase</p>
             </>
         },
     ]
@@ -68,49 +95,64 @@ function AboutPage(props) {
 
     }
 
+
+
+
     console.log(props);
 
     return (
         <motion.div
             initial="hidden"
             animate="visible"
-            exit="exit">
+            exit="exit"
+            
+        >
 
             <Row>
-                <CommonBreadcrumb pathname={pathname}/>
+                <CommonBreadcrumb pathname={pathname} />
             </Row>
 
+    
+         
+                {data.map((item, i) => {
+                    return (
+                        <Row className={classes.aboutPageContainerRow} >
+                            <Col span={12} className={classes.aboutPageContainerCol}  >
+                                <motion.div
+                                    animate={logo}
+                                    initial={{ opacity: 0, x: "-100vw" }}
 
-            {data.map((item, i) => {
-                if (i % 2 === 0)
-                    return (<Row>
-                        <Col>
-                            <img className={classes.logoImg} src={item.logo} />
-                        </Col>
 
-                        <Col>
-                            <motion.div>
-                                <h1> {item.side}</h1>
-                                {item.dependencies}
-                            </motion.div>
-                        </Col>
-                    </Row>)
-                else
-                    return (<Row>
-                        <Col>
-                            <motion.div>
-                                <h1> {item.side}</h1>
-                                {item.dependencies}
-                            </motion.div>
-                        </Col>
-                        <Col>
-                            <img className={classes.logoImg} src={item.logo} />
-                        </Col>
-                    </Row>)
+                                >
+                                    <Image className={classes.logoImg} src={item.logo} />
+                                </motion.div>
+                            </Col>
+
+                            <Col span={12} className={classes.aboutPageContainerCol}>
+                                <motion.div
+                                    animate={logo}
+                                    initial={{ opacity: 0, x: "100vw" }}
+
+
+                                >
+                                    <motion.h1
+                                    >
+                                        {item.side}
+                                    </motion.h1>
+                                    <motion.div  >
+                                        {item.dependencies}
+                                    </motion.div>
+                                </motion.div>
+                            </Col>
+
+
+
+
+                            </Row>)
 
             })}
-
-
+                
+     
 
 
 

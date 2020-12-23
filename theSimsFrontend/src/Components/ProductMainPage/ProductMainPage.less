@@ -11,7 +11,7 @@
 .allProductContainer_outer{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 80% !important;
 }
 
 .ProductssearchContainer{
@@ -38,7 +38,15 @@
 
 .LeftFiltersContainer{
    
-    width: 26%;
+    width: 50%;
+}
+
+
+@media screen and (max-width: 700px) {
+    .LeftFiltersContainer{
+   
+        width: 100%;
+    }
 }
 
 .Allproducts{
@@ -172,6 +180,7 @@ cursor: pointer;
 //   padding-top: 30px;
 display: flex;
 justify-content: center;
+width: 100%;
  
 }
 
@@ -185,4 +194,19 @@ justify-content: center;
 .LeftFiltersResetBtn{
     margin: 0 auto;
     display: block;
+}
+
+.leftFilterCollapse{
+    width: 100%;
+    background-color: white;
+    padding-bottom: 20px;
+
+    :global{
+        .ant-collapse-content-box{
+
+            display: flex;
+            align-items: center;
+           justify-content: center;
+        }
+    }
 }
