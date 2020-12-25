@@ -19,5 +19,5 @@ phases:
 artifacts:
   files:
     - theSimsServer/target/testjpa-1.0.0-RELEASE.jar
-    - appspec.yml
+    - theSimsServer/appspec.yml
 discard-paths: yes
