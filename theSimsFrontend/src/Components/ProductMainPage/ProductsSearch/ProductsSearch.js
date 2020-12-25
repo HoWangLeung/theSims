@@ -25,7 +25,7 @@ function ProductsSearch(props) {
           
           
             <Search
-                placeholder="input search text"
+                placeholder="e.g. Fuji Apple"
                 onSearch={(values) => handleSearch(values)}
                 enterButton
                 // size="large"
