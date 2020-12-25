@@ -14,8 +14,7 @@ phases:
   post_build:
     commands:
       - ls
-      - mv target/deploy ./
 
 artifacts:
   files:
-    - deploy/**/*
+    - target/testjpa-1.0.0-RELEASE.jar
