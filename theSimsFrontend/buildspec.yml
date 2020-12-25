@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      echo trying to list all files
+      echo trying to list all filess
       - ls
       echo a list of files shows up?
       - cd theSimsFrontend && yarn install
