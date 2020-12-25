@@ -6,7 +6,7 @@ phases:
       echo trying to list all filess
       - ls
       echo a list of files shows up?
-      - cd theSimsFrontend && yarn install
+      -yarn install --force
   build:
     commands:
        echo starting the next phrase now ! before yarn build
