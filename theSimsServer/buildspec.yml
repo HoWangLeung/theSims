@@ -19,3 +19,4 @@ phases:
 artifacts:
   files:
     - theSimsServer/target/testjpa-1.0.0-RELEASE.jar
+discard-paths: yes
