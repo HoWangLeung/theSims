@@ -12,11 +12,10 @@ phases:
       - yarn install --force
   build:
     commands:
-      - echo starting the next phrase now ! before yarn build
+      - echo before yarn build
       - ls
-      - value=`package.json`
-      - echo "$value"
       - yarn run build
+      - ls
   post_build:
     commands:
       - ls
