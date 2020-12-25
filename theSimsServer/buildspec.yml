@@ -15,9 +15,9 @@ phases:
     commands:
       - ls
       - echo build complete 
-
+      - mv target/*.jar application.jar 
+      - ls
 artifacts:
   files:
-    - theSimsServer/target/testjpa-1.0.0-RELEASE.jar
-    - theSimsServer/appspec.yml
+    - application.jar
 discard-paths: yes
