@@ -20,4 +20,4 @@ artifacts:
   files:
     - '**/*'
   discard-paths: no
-  base-directory: theSimsFrontend/build
+  base-directory: theSimsServer/build
