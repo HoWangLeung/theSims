@@ -67,16 +67,16 @@ export default function Homepage(props) {
                 ease: "easeInOut"
             }
         })
-        await controls.start({
-            height: "90vh",
-            width: "100%",
-            objectFit: "cover",
-            borderRadius: "2px",
-            transition: {
-                duration: .5,
-                ease: "easeInOut"
-            }
-        })
+        // await controls.start({
+        //     height: "90vh",
+        //     width: "100%",
+        //     objectFit: "cover",
+        //     borderRadius: "2px",
+        //     transition: {
+        //         duration: .5,
+        //         ease: "easeInOut"
+        //     }
+        // })
         props.history.push("/products")
 
 

@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo trying to list all filess
+      - ls
+      - echo now go in one layer?
+      - cd ./theSimsServer
+      - echo gonna list file again after cd
+      - ls
+      - mvn clean package
+      - ls
+  post_build:
+    commands:
+      - ls
+      - echo build complete 
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: theSimsFrontend/build
