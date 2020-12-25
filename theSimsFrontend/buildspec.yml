@@ -5,7 +5,10 @@ phases:
     commands:
       - echo trying to list all filess
       - ls
-      - echo a list of files shows up?
+      - now go in one layer?
+      - cd ./theSimsFrontend
+      - gonna list file again after cd
+      - ls
       - yarn install --force
   build:
     commands:
