@@ -13,7 +13,10 @@ phases:
   build:
     commands:
       - echo starting the next phrase now ! before yarn build
-      - cd ./theSimsFrontend && yarn build
+      - ls
+      - cd ./theSimsFrontend
+      - ls
+      - yarn run build
 
 artifacts:
   files:
