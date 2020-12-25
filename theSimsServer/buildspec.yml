@@ -14,7 +14,8 @@ phases:
   post_build:
     commands:
       - ls
+      - echo build complete 
 
 artifacts:
   files:
-    - target/testjpa-1.0.0-RELEASE.jar
+    - theSimsServer/target/testjpa-1.0.0-RELEASE.jar
