@@ -15,7 +15,7 @@ phases:
     commands:
       - ls
       - echo build complete 
-      - mv target/*.jar application.jar 
+      - mv target/*.jar application.jar
       - ls
 artifacts:
   files:
