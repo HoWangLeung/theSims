@@ -33,7 +33,7 @@ function Createproductform() {
     const [uploading, setUploading] = useState(false);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
-    const [inputProductName, setInputProductName] = useState("")
+    const [inputValues, setInputValues] = useState([])
 
     //form
 
@@ -119,8 +119,13 @@ function Createproductform() {
         console.log(e.currentTarget);
         let value = e.currentTarget.value
         let id = e.currentTarget.id
-        if(id==="productName")
-        setInputProductName(value)
+        console.log(id);
+        console.log(value);
+        console.log(form.getFieldsValue().createProduct);
+        let values = form.getFieldsValue().createProduct
+        setInputValues(values)
+
+
 
     }
 
@@ -227,13 +232,18 @@ function Createproductform() {
         imgWindow.document.write(image.outerHTML);
     };
 
-    const getPanelHeader = () => {
+    const getPanelHeader = (index) => {
+        console.log(inputValues);
+        console.log(index);
+        
         return (<>
             <Text strong>
                 {intl.get(`inventory.newProduct`)}
             </Text>
             <span>{` : `}</span>
-            {inputProductName && <Tag color="green">{inputProductName}</Tag>}
+
+            { inputValues[index] && inputValues[index].productName ? <Tag color="green">{inputValues[index].productName}</Tag>
+            :null}
         </>)
     }
 
@@ -337,7 +347,7 @@ function Createproductform() {
                                         <Panel
                                             className={classes.createProductPanel}
                                             key={field.name}
-                                            header={getPanelHeader()}
+                                            header={getPanelHeader(index)}
                                             forceRender={true}
                                             extra={
                                                 <Row>
@@ -427,7 +437,7 @@ function Createproductform() {
 
                                                             //   getValueFromEvent={normFile}
                                                             >
-                                                                <Input id={fieldName} onChange={handleInputChange} />
+                                                                <Input id={index} onChange={handleInputChange} />
                                                             </Form.Item>)
                                                         }
 

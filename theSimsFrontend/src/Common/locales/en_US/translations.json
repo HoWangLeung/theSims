@@ -69,6 +69,7 @@
                     "category":"Category",
                     "product":"Product",
                     "totalRevenue":"Total Revenue",
+                    "totalConfirmedOrders":"Total Confirmed Orders",
                     "totalCost":"Total Cost",
                     "add":"Add",
                     "undo":"Undo",

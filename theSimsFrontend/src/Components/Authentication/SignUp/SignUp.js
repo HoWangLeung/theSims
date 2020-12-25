@@ -4,6 +4,8 @@ import styles from '../Authentication.less'
 import { connect } from 'react-redux'
 import {signUpRequest} from '../actions/AuthenticationActions'
 import { withRouter } from 'react-router-dom';
+import { motion } from 'framer-motion'
+import { baseVariants } from '../../../Animation'
 class SignUp extends Component {
     constructor(props) {
         super(props)
@@ -35,13 +37,18 @@ class SignUp extends Component {
     render() {
         return (
 
-            <div className={styles.container}>
+            <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={baseVariants}
+            className={styles.container}>
                 <SignUpForm 
                 handleFocus={this.handleFocus}
                 handleSubmit={this.handleSubmit}
                 
                 />
-            </div>
+            </motion.div>
 
         )
     }

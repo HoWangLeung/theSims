@@ -64,7 +64,7 @@ const Displayproducts = (props) => {
 
     const renderProductScreen = () => {
         console.log(imgLoaded);
-        if (isLoading && imgLoaded === false)
+        if (isLoading  )
             return Array.from(Array(20).keys()).map(e => {
                 return (
                     <Col xs={24} sm={24} sm={12} md={12} xl={8} className={classes.productNamePriceContainerImgCol}   >
@@ -73,9 +73,9 @@ const Displayproducts = (props) => {
 
                 )
             })
-
+        else
         return productList && productList.map((item, i) => {
-            while (i < 20)
+            
                 return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={8} className={classes.productNamePriceContainerImgCol} >
                     <motion.div
                        variants={variants}
@@ -84,12 +84,13 @@ const Displayproducts = (props) => {
                             <Card
                              className={classes.productNamePriceContainer}
                                 cover={
-                                    <Image
+                                   <Image
                                          className={classes.productNamePriceContainerImg}
-                                        alt="example"
+                                        alt="product"
                                         preview={false}
                                         src={item.productUrl}
-                                        placeholder
+                                        placeholder 
+                                     
 
                                         onLoad={() => setImgLoaded(true)}
                                     />}
@@ -114,7 +115,7 @@ const Displayproducts = (props) => {
     return (
         <div className={classes.displayProductOuterContainer}>
 
-            <Row gutter={[8, 8]} className={classes.displayProductOuterContainerRow}>
+            <Row   className={classes.displayProductOuterContainerRow}>
 
                 {renderProductScreen()}
 

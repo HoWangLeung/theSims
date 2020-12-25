@@ -13,18 +13,21 @@ import { motion } from 'framer-motion';
 import Banner from '../../Common/Banner';
 import Navigationmenu from '../../Common/NavigationMenu/NavigationMenu';
 import { withRouter } from 'react-router-dom';
+import { getAllConfirmedOrders } from '../Payment/action/PaymentAction';
 
 function Inventory(props) {
 
 
     const inventoryList = useSelector(state => state.InventoryReducer.inventoryList)
-
+    const confirmedOrders = useSelector(state => state.PaymentReducer.confirmedOrders);
+    
     const dispatch = useDispatch()
 
     useEffect(() => {
 
         dispatch(fetchInventory())
         dispatch(fetchProductsInCart())
+        dispatch(getAllConfirmedOrders())
     }, [])
 
 
@@ -61,7 +64,7 @@ function Inventory(props) {
 
             <Banner />
             <Navigationmenu />
-            <DataBoxes />
+            <DataBoxes confirmedOrders={confirmedOrders}/>
 
             <InventoryList
 

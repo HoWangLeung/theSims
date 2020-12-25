@@ -13,15 +13,26 @@ const columns = [
       title: 'Country',
       className: 'Country',
       dataIndex: 'Country',
-      align: 'right',
+      render: (text, row, index) => {
+
+         return <span>{row.countryOrigin}</span>
+    }
     },
     {
       title: 'Cost',
       dataIndex: 'Cost',
+      render: (text, row, index) => {
+
+        return <span>{row.cost}</span>
+   }
     },
     {
         title: 'Price',
         dataIndex: 'Price',
+        render: (text, row, index) => {
+
+          return <span>{row.basePrice}</span>
+     }
       },
       {
         title: 'Remaining',
@@ -36,8 +47,8 @@ function CreateProductPreview(props) {
         columns={columns}
         dataSource={createProductList}
         bordered
-        title={() => 'Header'}
-        footer={() => 'Footer'}
+        title={() => 'Preview Table'}
+        footer={() => `${createProductList.length} product(s) will be created`}
     />)
 }
 

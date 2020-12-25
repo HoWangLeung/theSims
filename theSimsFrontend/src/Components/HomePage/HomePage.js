@@ -77,6 +77,7 @@ export default function Homepage(props) {
                 ease: "easeInOut"
             }
         })
+        props.history.push("/products")
 
 
 
@@ -108,7 +109,7 @@ export default function Homepage(props) {
         
                 <motion.div initial={{opacity:0}}   animate={homePageButton} className={classes.homePageheadline}>
                     <motion.p>Eat Fresh</motion.p>
-                   <Link to="/products" > <Button  >Explore</Button></Link>
+                   {/* <Link to="/products" > <Button  >Explore</Button></Link> */}
                 </motion.div>
 
 

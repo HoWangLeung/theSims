@@ -1,6 +1,8 @@
 import { Card, Row, Col, Button } from 'antd';
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { baseVariants } from '../../../../Animation';
 import Banner from '../../../../Common/Banner';
 import ApplyEmployeeForm from '../../../forms/Application/ApplyEmployee/ApplyEmployeeForm';
 import classes from '../SignUp.less'
@@ -26,7 +28,12 @@ function SignUpMainPage() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={baseVariants}
+    >
  
       <div className={classes.signUpMainPageContainer}>
 
@@ -34,7 +41,7 @@ function SignUpMainPage() {
           {renderCards()}
         </Row>
       </div>
-    </>
+    </motion.div>
   );
 }
 

@@ -69,6 +69,7 @@
         "category":"產品類別",
         "product":"產品數量",
         "totalRevenue":"總收入",
+        "totalConfirmedOrders":"總確認訂單",
         "totalCost":"總成本",
         "add": "增加",
         "undo": "還原",

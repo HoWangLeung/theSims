@@ -9,6 +9,8 @@ import intl from 'react-intl-universal';
 import 'antd/dist/antd.less';
 import CommonModal from '../../../Common/ConfirmModal/CommonModal';
 import jwt_decode from "jwt-decode";
+import { motion } from 'framer-motion';
+import { baseVariants } from '../../../Animation';
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -19,10 +21,10 @@ class Login extends Component {
         }
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps) {
         console.log(prevProps.isLoggedIn);
         console.log(this.props.isLoggedIn);
-        if(prevProps.isLoggedIn!==this.props.isLoggedIn){
+        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
             console.log('did up date');
         }
 
@@ -37,11 +39,11 @@ class Login extends Component {
             .executeJwtAuthenticationService(username, password)
         console.log(res1);
         let token = res1.data.token
-       
+
         AuthenticationService.registerSuccessfulLoginForJwt(username, token)
         let isLoggedIn = AuthenticationService.isUserLoggedIn()
-        console.log('isLoggedIn ' , isLoggedIn);
-      
+        console.log('isLoggedIn ', isLoggedIn);
+
         this.props.loginAction(isLoggedIn)
 
 
@@ -58,7 +60,7 @@ class Login extends Component {
 
 
         // if (res2.data.detail.role === 'ADMIN')
-             this.props.history.push('/')
+        this.props.history.push('/')
 
 
 
@@ -98,7 +100,7 @@ class Login extends Component {
         const { disableLogin } = this.state
         return (
             <>
-                <h1>{intl.get('signin')}</h1>
+                <h1 style={{ color: "white" }}>{intl.get('signin')}</h1>
                 <Form
                     {...layout}
                     name="basic"
@@ -107,7 +109,7 @@ class Login extends Component {
                     onFieldsChange={this.onFieldsChange}
                 >
                     <Form.Item
-                        label={intl.get('username')}
+                        label={"username"}
                         name="username"
                         rules={[
                             {
@@ -120,7 +122,7 @@ class Login extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        label={intl.get('password')}
+                        label={intl.get("password")}
                         name="password"
                         rules={[
                             {
@@ -146,12 +148,17 @@ class Login extends Component {
     render() {
 
 
- 
-        const loginForm = this.generateLoginForm()
+
+
         return (
-            <div className={classes.loginFormContainer}>
-                {loginForm}
-            </div>
+            <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={baseVariants}
+                className={classes.loginFormContainer}>
+                {  this.generateLoginForm()}
+            </motion.div>
         )
     }
 }
@@ -162,14 +169,14 @@ const mapStateToProps = (state) => {
 
 
     return {
-        isLoggedIn:state.AuthenticationReducer.isLoggedIn
+        isLoggedIn: state.AuthenticationReducer.isLoggedIn
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        loginAction: (isLoggedIn) =>  dispatch(loginAction(isLoggedIn)) ,
+        loginAction: (isLoggedIn) => dispatch(loginAction(isLoggedIn)),
         getUserProfile: (payload) => dispatch(getUserProfile(payload))
     }
 }

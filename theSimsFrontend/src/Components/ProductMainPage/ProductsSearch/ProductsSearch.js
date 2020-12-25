@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classes from '../ProductMainPage.less'
 import { Divider, Input } from 'antd';
@@ -8,7 +8,10 @@ const Search = Input.Search;
 
 function ProductsSearch(props) {
 
+    // useEffect(()=>{
 
+    //     window.addEventListener("resize");
+    // },[])
     const dispatch = useDispatch();
     const handleSearch = values => {
 
@@ -26,7 +29,7 @@ function ProductsSearch(props) {
                 onSearch={(values) => handleSearch(values)}
                 enterButton
                 // size="large"
-                style={{ width: "30%" }}
+                 style={{ width: window.innerWidth > 1000? "30%":"100%" }}
             />
         </>
 

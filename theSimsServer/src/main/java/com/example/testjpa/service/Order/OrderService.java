@@ -274,4 +274,24 @@ public class OrderService {
 		return resultMap;
 	}
 
+	public 	List<Orders> getAllConfirmedOrders() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+		Root<Orders> orderRoot = cq.from(Orders.class);
+
+		Predicate likeConfirmed = cb.like(orderRoot.get("status"), "%confirmed");
+		cq.where(likeConfirmed);
+		TypedQuery<Orders> query = 
+				em.createQuery(cq.select(orderRoot));
+		 
+		List<Orders> result = query.getResultList();
+		System.out.println("query => " + result.toString());
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+	 
+		 
+		
+		return result;
+	}
+
 }

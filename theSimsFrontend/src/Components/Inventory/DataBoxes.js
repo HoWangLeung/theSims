@@ -13,6 +13,12 @@ class DataBoxes extends Component {
         }
     }
 
+
+    componentDidMount(){
+
+        
+    }
+
     getCategoryLength = () => {
         return this.props.inventoryList.reduce((acc, curr) => {
             let isElemExist = acc.findIndex((item) => {
@@ -54,10 +60,10 @@ class DataBoxes extends Component {
                             <Card.Grid style={gridStyle}><h1>{this.props.inventoryList.length}</h1> <p>{intl.get("inventory.product")}</p></Card.Grid>
                         </Col>
                         <Col xs={24} sm={24} xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>0</h1> <p>{intl.get("inventory.totalRevenue")}</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>{this.props.confirmedOrders.length}</h1> <p>{intl.get("inventory.totalConfirmedOrders")}</p></Card.Grid>
                         </Col>
                         <Col xs={24} sm={24} xl={6}  >
-                            <Card.Grid style={gridStyle}><h1>0</h1> <p>{intl.get("inventory.totalCost")}</p></Card.Grid>
+                            <Card.Grid style={gridStyle}><h1>0</h1> <p>{intl.get("inventory.totalRevenue")}</p></Card.Grid>
                         </Col>
                     </Row>
                 </Card>

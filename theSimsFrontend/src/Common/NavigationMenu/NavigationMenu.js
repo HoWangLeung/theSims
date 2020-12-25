@@ -42,18 +42,17 @@ const { SubMenu } = Menu;
                 <Link to="/employee">{intl.get('management')}</Link>
             </Menu.Item>
 
-            <SubMenu icon={<CreditCardOutlined />} title={intl.get('payment')}>
-                <Menu.ItemGroup title={intl.get('payment')}>
-                    <Menu.Item key="setting:1">{intl.get('outstandingPayment')}</Menu.Item>
-                    <Menu.Item key="setting:2">{intl.get('paymentRecord')}</Menu.Item>
-                </Menu.ItemGroup>
-            </SubMenu>
+            <Menu.Item key="paymentMangement" icon={<BarcodeOutlined />}>
+                <Link to="/paymentMangement">
+                    {intl.get('payment')}
+                </Link>
+            </Menu.Item>
             <Menu.Item key="inventory" icon={<BarcodeOutlined />}>
                 <Link to="/inventory">
                     {intl.get('inventory.inventory')}
                 </Link>
             </Menu.Item>
-            <Menu.Item key="mail" icon={<MailOutlined />}>
+            <Menu.Item disabled key="mail" icon={<MailOutlined />}>
                 <a href="" target="_blank" rel="noopener noreferrer">
                     {intl.get('email')}
                 </a>

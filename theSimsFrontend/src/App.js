@@ -49,6 +49,7 @@ import Navigationmenu from './Common/NavigationMenu/NavigationMenu';
 import StatisticPage from './Components/StatisticPage/StatisticPage';
 import Homepage from './Components/HomePage/HomePage';
 import AboutPage from './Components/HomePage/AboutPage';
+import PaymentManagement from './Components/Payment/PaymentManagement';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -157,6 +158,7 @@ function App() {
               <AuthenticatedRoute   currentLocale={antdLang} path='/statistic' component={StatisticPage} />
               <AuthenticatedRoute  currentLocale={antdLang}  path='/employee' component={Employee} />
               <AuthenticatedRoute path='/inventory' component={Inventory} />
+              <AuthenticatedRoute path='/paymentMangement' component={PaymentManagement} />
               <AuthenticatedRoute path='/checkout' component={Checkout} />
               <AuthenticatedRoute path='/userProfile/:id' component={Userprofile} />
               <AuthenticatedRoute path='/checkout-success' component={Checkoutsuccess} />

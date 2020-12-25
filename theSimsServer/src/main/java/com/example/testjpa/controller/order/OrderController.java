@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.Order.Orders;
-import com.example.testjpa.model.Order.OrdersProduct;
 import com.example.testjpa.service.Order.OrderService;
 import com.itextpdf.awt.geom.Rectangle;
 import com.itextpdf.text.BaseColor;
@@ -56,6 +55,12 @@ public class OrderController {
 		System.out.println("hi");
 		List<Orders> orderList = orderService.getAll();
 		return orderList;
+	}
+	
+	@GetMapping("/allConfirmedOrders")
+	public  ResponseEntity<ApiResponse<List<Orders>>>  getAllConfirmedOrders() {
+		
+		return ResponseEntity.ok(new ApiResponse<List<Orders>>(orderService.getAllConfirmedOrders()));
 	}
 
 	@GetMapping("/{id}")
