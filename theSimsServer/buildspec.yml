@@ -18,6 +18,4 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
-  discard-paths: no
-  base-directory: theSimsServer/build
+    - theSimsServer/target/testjpa-1.0.0-RELEASE.jar
