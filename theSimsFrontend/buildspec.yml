@@ -14,10 +14,15 @@ phases:
     commands:
       - echo starting the next phrase now ! before yarn build
       - ls
+      - value=`package.json`
+      - echo "$value"
       - yarn run build
+  post_build:
+    commands:
+      - ls
 
 artifacts:
   files:
     - '**/*'
   discard-paths: no
-  base-directory: build
+  base-directory: theSimsFrontend/build
