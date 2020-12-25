@@ -5,7 +5,7 @@ phases:
     commands:
       - echo trying to list all filess
       - ls
-      - echo now go in one layer?
+      - echo now go in one layer
       - cd ./theSimsServer
       - echo gonna list file again after cd
       - ls
