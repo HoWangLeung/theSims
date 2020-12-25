@@ -19,5 +19,5 @@ phases:
       - ls
 artifacts:
   files:
-    - application.jar
+    - theSimsServer/application.jar
 discard-paths: yes
