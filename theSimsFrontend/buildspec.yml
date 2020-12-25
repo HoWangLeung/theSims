@@ -3,14 +3,14 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      echo trying to list all filess
+      - echo trying to list all filess
       - ls
-      echo a list of files shows up?
-      -yarn install --force
+      - echo a list of files shows up?
+      - yarn install --force
   build:
     commands:
-       echo starting the next phrase now ! before yarn build
-      - cd theSimsFrontend &&yarn build
+      - echo starting the next phrase now ! before yarn build
+      - cd theSimsFrontend && yarn build
 
 artifacts:
   files:
