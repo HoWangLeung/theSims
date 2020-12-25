@@ -32,12 +32,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/oracle/oracle-jdbc -->
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>12.1.0.2</version>
-		</dependency>
+
 		<!-- AWS -->
 		<dependency>
 			<groupId>mysql</groupId>
