@@ -6,7 +6,7 @@ phases:
       - yarn install
   build:
     commands:
-      - yarn build
+      - craco build
 
 artifacts:
   files:
