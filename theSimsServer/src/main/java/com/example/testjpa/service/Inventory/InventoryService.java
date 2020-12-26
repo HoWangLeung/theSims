@@ -35,7 +35,7 @@ public class InventoryService {
 
 
 	List<Map<String, Object>> resultMapList = new ArrayList<Map<String,Object>>();
-	System.out.println("productList size ==> " + productList.size());
+	System.out.println("productList sizes ==> " + productList.size());
 	 for(Product product:productList) {	
 		  Map<String, Object> resultMap = new HashMap<String, Object>();
 		  resultMap.put("id", product.getId());
