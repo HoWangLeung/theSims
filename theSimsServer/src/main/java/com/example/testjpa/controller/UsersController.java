@@ -33,7 +33,7 @@ public class UsersController {
 
 	@GetMapping("/")
 	public List<Users> getAllUsers() {
-		LOGGER.info("GETREQUEST!!!!!!!!!!!!!!!!**********************************************************37");
+		LOGGER.info("GETREQUEST!!!!!!!!!!!!!!!!********************************************************37");
 		List<Users> internalUserAccountList = jwtInMemoryUserDetailsService.findAllwithRoles();
 
 		return internalUserAccountList;
