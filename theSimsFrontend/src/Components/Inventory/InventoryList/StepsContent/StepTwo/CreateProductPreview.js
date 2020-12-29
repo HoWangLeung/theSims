@@ -36,7 +36,7 @@ const columns = [
       },
       {
         title: 'Remaining',
-        dataIndex: 'Remaining',
+        dataIndex: 'remaining',
       },
   ];
 

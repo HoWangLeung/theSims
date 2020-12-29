@@ -80,7 +80,7 @@
         "countryOrigin":"產地",
         "cost":"成本",
         "basePrice":"售價",
-        "Remaining":"庫存數量",
+        "remaining":"庫存數量",
         "productUrl":"圖片",
         "newProduct":"新產品"
     },

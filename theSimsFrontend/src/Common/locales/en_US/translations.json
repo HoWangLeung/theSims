@@ -80,7 +80,7 @@
                     "countryOrigin":"Country",
                     "cost":"Cost",
                     "basePrice":"Price",
-                    "Remaining":"Remaining",
+                    "remaining":"Remaining",
                     "productUrl":"Image",
                     "newProduct":"New Product"
                     
