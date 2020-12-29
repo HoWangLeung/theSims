@@ -1,11 +1,12 @@
 import classes from './Payment.less'
-import { Spin, Table, Tag } from 'antd'
+import { Button, Row, Spin, Table, Tag } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { baseVariants } from '../../Animation'
 import { getAllConfirmedOrders } from './action/PaymentAction'
 import { GetPaymentHeaders } from './getPaymentManagmentHeader'
+import { Link } from 'react-router-dom'
 
 export default function PaymentManagement(props) {
 
@@ -45,7 +46,11 @@ export default function PaymentManagement(props) {
             <Spin spinning={isFetching['GET_ALL_CONFIRMED_ORDERS']}>
                 <Table
                   
-                    title={() => <h3 > Confirmed Orders</h3>}
+                    title={() => <Row justify="space-between">
+                        <h3 > Confirmed Orders of All Customers</h3> 
+                        <Link to="/inventory"><Button>Back</Button></Link>
+                    
+                    </Row>}
                     dataSource={confirmedOrders}
                     columns={GetPaymentHeaders()}
                     expandable={

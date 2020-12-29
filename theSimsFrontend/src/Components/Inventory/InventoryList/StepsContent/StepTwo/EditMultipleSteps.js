@@ -145,7 +145,7 @@ class EditMultipleSteps extends Component {
 
         const steps = [
             {
-                title: 'Selected',
+                title: channel === "createProduct"? "Fill In Detail":"Selected",
                 content: <EditStepOne
                     key="EditStepOne"
                     content={this.props.content}
@@ -153,7 +153,7 @@ class EditMultipleSteps extends Component {
                 />,
             },
             {
-                title: 'Edit & Preview',
+                title: channel === "createProduct"? "Preview":"Edit & Preview",
                 content: <EditStepTwo
                     key="EditStepTwo"
                     inventoryList={inventoryList}

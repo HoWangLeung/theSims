@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.Order.Orders;
+import com.example.testjpa.service.Inventory.InventoryService;
 import com.example.testjpa.service.Order.OrderService;
 import com.itextpdf.awt.geom.Rectangle;
 import com.itextpdf.text.BaseColor;
@@ -48,6 +49,9 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 public class OrderController {
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	InventoryService inventoryService;
+	
 	@Autowired
 	EntityManager em;
 	@GetMapping("/")
@@ -103,8 +107,10 @@ public class OrderController {
 	public Map<String, Object> proceedToCheckout(@RequestParam(name = "status") String status, @PathVariable Long id) {
 
 		System.out.println("status => " + status);
+		orderService.changeStatus(id, status);
+		inventoryService.changeQuantityAfterPayment(id);
 
-		return orderService.changeStatus(id, status);
+		return null;
 	}
 
 	@GetMapping("/confirmedOrders/exportPdf/")

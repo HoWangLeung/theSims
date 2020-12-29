@@ -13,11 +13,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.testjpa.model.Order.Orders;
+import com.example.testjpa.model.Order.OrdersProduct;
 import com.example.testjpa.model.inventory.Category;
 import com.example.testjpa.model.inventory.Product;
 import com.example.testjpa.repository.Inventory.CategoryRepository;
 import com.example.testjpa.repository.Inventory.InventoryRepository;
-import com.google.common.base.Optional;
 
 @Service
 @Transactional
@@ -28,6 +29,40 @@ public class InventoryService {
 	CategoryRepository categoryRepository;
 	@Autowired
 	EntityManager em;
+	
+	
+	public void changeQuantityAfterPayment(Long orderId) {
+		System.out.println("CHANGE QUANT");
+		List<Product> products = inventoryRepository.getProductWithCateogry();
+		System.out.println(products.toString());
+		Orders targetOrder = em.find(Orders.class, orderId);
+		System.out.println("targetOrder "+ targetOrder.toString());
+		List<OrdersProduct>	orderProducts = targetOrder.getOrderProductList();
+       
+       for(int i = 0; i<products.size();i++) {
+    	   	Long productId = products.get(i).getId();
+    	 
+    	   	orderProducts.stream().forEach(e->{
+    	   		if(e.getProduct().getId()== productId) {
+    	   			
+    	   			 System.out.println("eee" + e.getProduct().getId() + " : " + e.getProduct().getRemaining() + " quant = " + e.getQuantity());
+    	   			 Product product = 	e.getProduct();
+    	   			 
+    	   			 product.setRemaining(product.getRemaining()-e.getQuantity());
+    	   			em.persist(product);
+    	   		}
+    	   		
+    	   	});
+    	   
+       }
+       products.stream().forEach(e->System.out.println("b4 merge " +e.getId() + "  : "+ e.getRemaining() ));
+				
+
+		
+		
+	}
+	
+	
 	
 	public List<Map<String, Object>> getAll(){
 

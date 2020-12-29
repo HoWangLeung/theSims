@@ -63,6 +63,7 @@
     "productStatus": "狀態",
     "createdDate":"創建日期",
     "selection": "你的選擇",
+    "creation":"創建",
     "next": "下一步",
     "inventory": {
         "inventory": "貨品庫存",

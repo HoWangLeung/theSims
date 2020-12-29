@@ -52,11 +52,11 @@ const { SubMenu } = Menu;
                     {intl.get('inventory.inventory')}
                 </Link>
             </Menu.Item>
-            <Menu.Item disabled key="mail" icon={<MailOutlined />}>
+            {/* <Menu.Item disabled key="mail" icon={<MailOutlined />}>
                 <a href="" target="_blank" rel="noopener noreferrer">
                     {intl.get('email')}
                 </a>
-            </Menu.Item>
+            </Menu.Item> */}
         </Menu>)
     }
 

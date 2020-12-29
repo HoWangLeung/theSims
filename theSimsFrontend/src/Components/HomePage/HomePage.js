@@ -22,7 +22,7 @@ export default function Homepage(props) {
                 width: "100%",
                 objectFit: "cover",
                 transition: {
-                    duration: .6,
+                    duration: .5,
                     ease: "easeInOut"
                 }
             }
@@ -30,7 +30,7 @@ export default function Homepage(props) {
         )
         slider.start({
 
-            backgroundImage: "linear-gradient(to right, rgb(32, 35, 49) 100%, transparent 0%)",
+            backgroundImage: "linear-gradient(to right,#627e75, #576b65, #93a199 100%, transparent 0%)",
             transition: " background-position 1s",
             transition: {
                 duration: 1,
@@ -67,16 +67,7 @@ export default function Homepage(props) {
                 ease: "easeInOut"
             }
         })
-        // await controls.start({
-        //     height: "90vh",
-        //     width: "100%",
-        //     objectFit: "cover",
-        //     borderRadius: "2px",
-        //     transition: {
-        //         duration: .5,
-        //         ease: "easeInOut"
-        //     }
-        // })
+ 
         props.history.push("/products")
 
 
@@ -108,7 +99,7 @@ export default function Homepage(props) {
                 />
         
                 <motion.div initial={{opacity:0}}   animate={homePageButton} className={classes.homePageheadline}>
-                    <motion.p>Eat Fresh</motion.p>
+                    <motion.p className={classes.homePageheadlineText}  >Eat Fresh</motion.p>
                    {/* <Link to="/products" > <Button  >Explore</Button></Link> */}
                 </motion.div>
 

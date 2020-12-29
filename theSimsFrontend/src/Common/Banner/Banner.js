@@ -33,8 +33,11 @@ class Banner extends Component {
 
         return (
 
-            <img className={classes.banner} src={bannerImg} alt="banner" />
-
+            <div>
+                <img className={classes.banner} src={bannerImg} alt="banner" />
+                
+            </div>
+                
         )
     }
 

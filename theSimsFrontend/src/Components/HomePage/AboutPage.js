@@ -1,5 +1,5 @@
 
-import { Breadcrumb, Col, Image, Row } from 'antd'
+import { Breadcrumb, Button, Col, Image, Row } from 'antd'
 import { motion, useAnimation } from 'framer-motion'
 import React, { Component, useEffect } from 'react'
 import reactLogo from '../../Common/assests/Image/reactLogo.png'
@@ -100,59 +100,69 @@ function AboutPage(props) {
 
     console.log(props);
 
+    const itemRender = (route, params, routes, paths) => {
+        console.log('hello104');
+        console.log(paths);
+        const last = routes.indexOf(route) === routes.length - 1;
+        return last ? (
+            <span>{route.breadcrumbName}</span>
+        ) : (
+                <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+            );
+    }
+
     return (
         <motion.div
             initial="hidden"
             animate="visible"
             exit="exit"
-            
+
         >
 
-            <Row>
-                <CommonBreadcrumb pathname={pathname} />
-            </Row>
-
-    
+            <Link to="/products" >
+                <Button className={classes.backButton} >Back</Button>
+            </Link>
          
-                {data.map((item, i) => {
-                    return (
-                        <Row className={classes.aboutPageContainerRow} >
-                            <Col span={12} className={classes.aboutPageContainerCol}  >
-                                <motion.div
-                                    animate={logo}
-                                    initial={{ opacity: 0, x: "-100vw" }}
+
+            {data.map((item, i) => {
+                return (
+                    <Row className={classes.aboutPageContainerRow} >
+                        <Col span={12} className={classes.aboutPageContainerCol}  >
+                            <motion.div
+                                animate={logo}
+                                initial={{ opacity: 0, x: "-100vw" }}
 
 
+                            >
+                                <Image className={classes.logoImg} src={item.logo} />
+                            </motion.div>
+                        </Col>
+
+                        <Col span={12} className={classes.aboutPageContainerCol}>
+                            <motion.div
+                                animate={logo}
+                                initial={{ opacity: 0, x: "100vw" }}
+
+
+                            >
+                                <motion.h1
                                 >
-                                    <Image className={classes.logoImg} src={item.logo} />
+                                    {item.side}
+                                </motion.h1>
+                                <motion.div  >
+                                    {item.dependencies}
                                 </motion.div>
-                            </Col>
-
-                            <Col span={12} className={classes.aboutPageContainerCol}>
-                                <motion.div
-                                    animate={logo}
-                                    initial={{ opacity: 0, x: "100vw" }}
-
-
-                                >
-                                    <motion.h1
-                                    >
-                                        {item.side}
-                                    </motion.h1>
-                                    <motion.div  >
-                                        {item.dependencies}
-                                    </motion.div>
-                                </motion.div>
-                            </Col>
+                            </motion.div>
+                        </Col>
 
 
 
 
-                            </Row>)
+                    </Row>)
 
             })}
-                
-     
+
+
 
 
 

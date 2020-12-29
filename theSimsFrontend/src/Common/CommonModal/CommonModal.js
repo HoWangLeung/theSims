@@ -91,13 +91,14 @@ class CommonModal extends Component {
     }
 
     render() {
-        const { visible, hideModal, footer,isLoading,loadingTip } = this.props
+        const { visible, hideModal, footer,isLoading,loadingTip , channel} = this.props
+        let title = channel  === "createProduct"? intl.get('creation'):intl.get('selection')
         return (
             <div>
 
                 <Modal
 
-                    title={<Texty enter={this.getEnter} >{intl.get('selection')}</Texty>}
+                    title={<Texty enter={this.getEnter} >{title}</Texty>}
                     visible={visible}
                     onCancel={hideModal}
                     {...this.props}

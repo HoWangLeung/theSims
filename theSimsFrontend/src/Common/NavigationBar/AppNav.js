@@ -74,7 +74,6 @@ class AppNav extends Component {
                         <Link to="/login" onClick={this.closeDrawer} >Login</Link>
 
 
-
                     }</p>
                     <p>{isLoggedIn ?
                         null :
@@ -82,8 +81,9 @@ class AppNav extends Component {
 
                     }
                     </p>
-
-
+                    {isLoggedIn && <p><Link to="/products" onClick={this.closeDrawer} >Shop</Link></p> }
+                    {isLoggedIn &&  <p><Link to="/inventory" onClick={this.closeDrawer} >Administration</Link></p> }
+                        
                 </Drawer>
             </>
         )

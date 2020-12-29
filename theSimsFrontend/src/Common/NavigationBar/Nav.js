@@ -97,7 +97,7 @@ class Nav extends React.Component {
         }
     }
     testing = () => {
-
+            this.setState({visible:false})
 
     }
 
@@ -173,7 +173,7 @@ class Nav extends React.Component {
             </Popover>
         }
 
-        homeIcon = <Link to="/"><HomeOutlined className={classes.pointer} /></Link>
+        homeIcon = <Link to="/products"><HomeOutlined className={classes.pointer} /></Link>
 
 
         const topNavigationMenu = (<><div className={classes.appHeaderContainer}>

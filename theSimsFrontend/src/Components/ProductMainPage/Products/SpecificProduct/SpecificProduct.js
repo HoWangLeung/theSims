@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneProduct, fetchPhotoUnsplash } from '../../actions/productActions';
-import { Col, Image, Row, Spin } from 'antd';
+import { Button, Col, Image, Row, Spin } from 'antd';
 import ProductPicture from './pictureArea/ProductPicture';
 import Productdetail from './purchaseArea/ProductDetail';
 import classes from './SpecificProduct.less'
 import { motion } from 'framer-motion';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import CommonBreadcrumb from '../../../BreadCrumb/CommonBreadCrumb';
 
 function Specificproduct(props) {
@@ -96,46 +96,45 @@ function Specificproduct(props) {
 
 
         return (
-            <>
-                <Row> <CommonBreadcrumb pathname={pathname} /></Row>
-                <Row >
-
-                    <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
-                        <motion.div
-                            variants={childVariants}
-                        //  initial="hidden"
-                        // animate="visible"
-                        // exit="exit"
-                        >
-                            <Image
-                                style={{ cursor: "pointer", borderRadius: "15px" }}
-                                height="100%"
-                                width="100%"
-                                src={product.productUrl}
-                                onLoad={() => setImgLoaded(true)}
-                                preview
-
-                            />
-                        </motion.div>
-                    </Col>
 
 
-                    <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
-                        <motion.div
-                            variants={childVariants}
-                        //  initial="hidden"
-                        // animate="visible"
-                        // exit="exit"
-                        >
-                            <Productdetail
-                                product={product}
-                            />
-                            {/* <h1>Hello</h1> */}
-                        </motion.div>
-                    </Col>
+            <Row className={classes.specificProductContainer}>
 
-                </Row>
-            </>
+                <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
+                    <motion.div
+                        variants={childVariants}
+                    //  initial="hidden"
+                    // animate="visible"
+                    // exit="exit"
+                    >
+                        <Image
+
+                            className={classes.specificImage}
+                            src={product.productUrl}
+                            onLoad={() => setImgLoaded(true)}
+                            preview
+
+                        />
+                    </motion.div>
+                </Col>
+
+
+                <Col xs={24} sm={24} md={24} lg={12} className={classes.productdetailContainer}  >
+                    <motion.div
+                        variants={childVariants}
+                    //  initial="hidden"
+                    // animate="visible"
+                    // exit="exit"
+                    >
+                        <Productdetail
+                            product={product}
+                        />
+                        {/* <h1>Hello</h1> */}
+                    </motion.div>
+                </Col>
+
+            </Row>
+
         )
     }
 

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationService from '../../../../Authentication/SignUp/AuthenticationService';
 import intl from 'react-intl-universal';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { addToCart } from '../../../actions/productActions';
 import classes from '../SpecificProduct.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -81,12 +81,12 @@ function Productdetail(props) {
         },
         visible: {
             opacity: 1,
-            color:"green",
-           
+            color: "green",
+
             transition: {
                 duration: 1.5,
-                ease:"easeInOut",
-                delay:1,
+                ease: "easeInOut",
+                delay: 1,
             }
         },
         exit: {
@@ -101,11 +101,15 @@ function Productdetail(props) {
     return (
         <div className={classes.productdetailContainer_inner} >
             <div>
-              
+
+                <Row justify="space-between">
                     <h1> {product.productName}</h1>
-             
+                    <Link to="/products" >
+                        <Button className={classes.backButton} >Back</Button>
+                    </Link>
+                </Row>
                 <motion.h3
-                  variants={variants}
+                    variants={variants}
                 >Availability: In Stock</motion.h3>
                 <Divider />
                 <h2>$ {product.basePrice}</h2>
@@ -141,8 +145,8 @@ function Productdetail(props) {
             </Row>
             <Divider />
             <Row>
-                <FontAwesomeIcon icon={faTruck} />
-                <p>Free HK shipping over $999999999 and easy returns. Learn more.</p>
+                <FontAwesomeIcon icon={faTruck} style={{marginTop:"3px", paddingRight:"3px"}}/>
+                <span> Free HK shipping over $999999999</span>
             </Row>
         </div>
     )

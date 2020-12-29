@@ -240,15 +240,16 @@ public class OrderService {
 
 	}
 
-	public Map<String, Object> changeStatus(Long id, String status) {
+	public String changeStatus(Long id, String status) {
 
 		System.out.println("id ==> " + id);
 		Orders targetOrder = em.find(Orders.class, id);
 		System.out.println("order = > " + targetOrder.toString());
 		targetOrder.setStatus(status);
 		em.merge(targetOrder);
+//		em.flush();
 
-		return null;
+		return "success";
 	}
 
 	public Map<String, Object> getConfirmedrderByUserId(Long id) {

@@ -64,7 +64,7 @@ function Checkout(props) {
             </Row> */}
                 <Row className={classes.backButtonContainer}>
                     <h3 className={classes.backButton} >Checkout</h3>
-                    <Link to="/" >
+                    <Link to="/products" >
                         <Button className={classes.backButton} >Back</Button>
                     </Link>
                 </Row>

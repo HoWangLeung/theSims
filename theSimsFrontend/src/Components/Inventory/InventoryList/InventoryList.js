@@ -95,7 +95,7 @@ class InventoryList extends Component {
                         {intl.get("inventory.editMultiple")}
                     </Button>
                     <CommonModal
-
+                        channel={this.state.channel}
                         visible={showModal}
                         hideModal={this.hideModal}
                         afterClose={this.resetCurrentStep}

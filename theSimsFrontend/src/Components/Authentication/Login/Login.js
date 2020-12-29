@@ -60,7 +60,7 @@ class Login extends Component {
 
 
         // if (res2.data.detail.role === 'ADMIN')
-        this.props.history.push('/')
+        this.props.history.push('/inventory')
 
 
 
@@ -82,7 +82,9 @@ class Login extends Component {
             this.setState({ disableLogin: true })
     }
 
-    generateLoginForm = () => {
+
+    render() {
+
         const layout = {
             labelCol: {
                 span: 8,
@@ -98,8 +100,16 @@ class Login extends Component {
             },
         };
         const { disableLogin } = this.state
+
+
         return (
-            <>
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={baseVariants}
+                className={classes.loginFormContainer}>
+
                 <h1 style={{ color: "white" }}>{intl.get('signin')}</h1>
                 <Form
                     {...layout}
@@ -122,7 +132,7 @@ class Login extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        label={intl.get("password")}
+                        label={"password"}
                         name="password"
                         rules={[
                             {
@@ -141,23 +151,7 @@ class Login extends Component {
                         </Button>
                     </Form.Item>
                 </Form>
-            </>
-        )
-    }
 
-    render() {
-
-
-
-
-        return (
-            <motion.div
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={baseVariants}
-                className={classes.loginFormContainer}>
-                {  this.generateLoginForm()}
             </motion.div>
         )
     }
