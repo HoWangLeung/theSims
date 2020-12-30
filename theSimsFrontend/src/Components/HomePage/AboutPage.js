@@ -61,10 +61,9 @@ function AboutPage(props) {
             dependencies: <>
                 <p>Authentication - JWT Authentication & Spring Security</p>
                 <p>Architecture - Controller-Service-Repository-Model-Database</p>
-                <p>Query - Criteria Query, Entity Manager</p>
+                <p>Query -JPA , Hibernate , Criteria Query, Entity Manager</p>
                 <p>Excel generation - Apache Poi</p>
                 <p>PDF generation - Itext</p>
-
             </>
         },
         {
