@@ -32,11 +32,11 @@ public class InventoryService {
 	
 	
 	public void changeQuantityAfterPayment(Long orderId) {
-		System.out.println("CHANGE QUANT");
+ 
 		List<Product> products = inventoryRepository.getProductWithCateogry();
-		System.out.println(products.toString());
+ 
 		Orders targetOrder = em.find(Orders.class, orderId);
-		System.out.println("targetOrder "+ targetOrder.toString());
+ 
 		List<OrdersProduct>	orderProducts = targetOrder.getOrderProductList();
        
        for(int i = 0; i<products.size();i++) {
@@ -45,7 +45,7 @@ public class InventoryService {
     	   	orderProducts.stream().forEach(e->{
     	   		if(e.getProduct().getId()== productId) {
     	   			
-    	   			 System.out.println("eee" + e.getProduct().getId() + " : " + e.getProduct().getRemaining() + " quant = " + e.getQuantity());
+    	   		 
     	   			 Product product = 	e.getProduct();
     	   			 
     	   			 product.setRemaining(product.getRemaining()-e.getQuantity());
@@ -55,7 +55,7 @@ public class InventoryService {
     	   	});
     	   
        }
-       products.stream().forEach(e->System.out.println("b4 merge " +e.getId() + "  : "+ e.getRemaining() ));
+    
 				
 
 		

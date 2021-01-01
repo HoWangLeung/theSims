@@ -24,15 +24,16 @@ public class OrdersProduct  {
 		private int quantity;
 	
 	 	@ManyToOne
-	 	 @JsonIgnore
+	 	@JsonIgnore
 	    private Orders orders;
 	  
 
-	    @ManyToOne
-	   
+	    @ManyToOne   
 	    private Product product;
 	    
 	    private int subTotal;
+	    
+	    private int finalPrice;
 
 
 		public OrdersProduct() {
@@ -98,6 +99,22 @@ public class OrdersProduct  {
 
 		public void setSubTotal(int subTotal) {
 			this.subTotal = subTotal;
+		}
+
+
+		public int getFinalPrice() {
+			return finalPrice;
+		}
+
+
+		public void setFinalPrice(int finalPrice) {
+			this.finalPrice = finalPrice;
+		}
+
+
+		@Override
+		public String toString() {
+			return "OrdersProduct [id=" + id + ", quantity=" + quantity + "]";
 		}    
 	    
 	 

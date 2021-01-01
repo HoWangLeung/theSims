@@ -1,56 +1,100 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, Cell
 } from 'recharts';
 
 import classes from './Dashboard.less'
-class LineChart1 extends Component {
-    constructor(props) {
-        super(props)
+import { Tabs, Button, Divider, Checkbox, Empty } from 'antd';
+import { getStatSoldByMonth } from './action/StatisticAction';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment'
+import Yearselector from '../../Common/DatePicker/YearSelector';
+const { TabPane } = Tabs;
 
-        this.state = {
 
+
+
+function LineChart1() {
+ 
+    const [activeMonth, setActiveMonth] = useState(moment().format('MMM'))
+    const [activeYear, setActiveYear] = useState(moment().year())
+    const productSoldStat = useSelector(state => state.StatisticReducer.productSoldStat);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        let activeMonthFullName = moment(activeMonth, 'MMM').format('MMMM')
+        let payload = {
+            activeMonth: activeMonthFullName,
+            activeYear
+        }
+        dispatch(getStatSoldByMonth(payload))
+    }, [activeMonth, activeYear])
+
+
+
+    console.log(productSoldStat);
+
+    const data = productSoldStat
+
+
+    const handleTabChange = key => {
+
+        setActiveMonth(key)
+    }
+
+    const handleYearSelect = (year) => {
+        setActiveYear(year);
+    }
+
+    const renderData = () => {
+
+        console.log(productSoldStat === []);
+        if (data.length > 0) {
+            return (<ResponsiveContainer height="99%" width="100%" >
+                <BarChart width={600} height={400} data={data} maxBarSize={20} layout={'vertical'}>
+                    <Tooltip />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type={'number'} orientation={'top'} />
+                    <YAxis type={'category'} orientation={'right'} dataKey={'productName'} />
+
+
+                    <Bar dataKey={'quantity'} radius={0} label={{ position: 'right' }}>
+                        {
+                            data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={colors[index]} />
+                            ))
+                        }
+                    </Bar>
+
+                </BarChart>
+            </ResponsiveContainer>)
+        } else {
+            return <Empty className={classes.empty} image={Empty.PRESENTED_IMAGE_SIMPLE} />
         }
     }
 
 
+    const colors = ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
+    return (
+        <Tabs
+            className={classes.quantityMonthTab}
+            tabBarExtraContent={<Yearselector handleSelect={handleYearSelect} />}
+            onChange={handleTabChange}
+            defaultActiveKey="Feb"
+            activeKey={activeMonth}
+        >
+            {moment.monthsShort().map((month, index) => {
+                console.log(data);
+                return (
+                    <TabPane tab={month} key={month} className={classes.quantityTabPane}   >
+                        {renderData()}
+                    </TabPane>)
 
-    render() {
-        const data = [
-            { name: 'Jan', Apple: 4000, Orange: 2400, Kiwi: 2400 },
-            { name: 'Feb', Apple: 3000, Orange: 1398, Kiwi: 2210 },
-            { name: 'Mar', Apple: 2000, Orange: 9800, Kiwi: 2290 },
-            { name: 'Apr', Apple: 2780, Orange: 3908, Kiwi: 2000 },
-            { name: 'May', Apple: 1890, Orange: 4800, Kiwi: 2181 },
-            { name: 'Jun', Apple: 2390, Orange: 3800, Kiwi: 2500 },
-            { name: 'Jul', Apple: 3490, Orange: 4300, Kiwi: 2100 },
-            { name: 'Aug', Apple: 2390, Orange: 3800, Kiwi: 2500 },
-            { name: 'Sep', Apple: 3490, Orange: 4300, Kiwi: 2100 },
-            { name: 'Oct', Apple: 1500, Orange: 3800, Kiwi: 2500 },
-            { name: 'Nov', Apple: 2421, Orange: 4300, Kiwi: 2100 },
-            { name: 'Dec', Apple: 2390, Orange: 3800, Kiwi: 2500 },
-           
-        ];
-        return (
- 
-            <ResponsiveContainer height="90%" width="100%" >
-                <LineChart 
-            
-                   data={data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Line     animationDuration={10000} type="monotone" dataKey="Orange" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line     animationDuration={10000} type="monotone" dataKey="Apple" stroke="#82ca9d" />
-                    <Line     animationDuration={10000} type="monotone" dataKey="Kiwi" stroke="#fcba03" />
-                </LineChart>
-            </ResponsiveContainer>
+            })}
 
-        )
-    }
+
+        </Tabs>
+    )
+
 }
-
 export default LineChart1

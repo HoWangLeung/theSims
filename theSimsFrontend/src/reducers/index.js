@@ -7,6 +7,7 @@ import CounterReducer from './CounterReducer'
 import ProductReducer from './ProductReducer'
 import PaymentReducer from './PaymentReducer'
 import LoadingReducer from './api/LoadingReducer'
+import StatisticReducer from './StatisticReducer'
 const  rootReducer = combineReducers({
     EmployeeReducer,
     InventoryReducer,
@@ -15,7 +16,8 @@ const  rootReducer = combineReducers({
     CounterReducer,
     ProductReducer,
     LoadingReducer,
-    PaymentReducer
+    PaymentReducer,
+    StatisticReducer
 })
 
 export default (state, action) =>{

@@ -54,6 +54,8 @@ public class OrderController {
 	
 	@Autowired
 	EntityManager em;
+	
+	
 	@GetMapping("/")
 	public List<Orders> getAll() {
 		System.out.println("hi");
@@ -72,7 +74,11 @@ public class OrderController {
 		return orderService.getOrderById(id);
 	}
 	
-	
+	@GetMapping("/confirmedOrders/statistic/quantity")
+	public ResponseEntity<ApiResponse<List<Map<String, Object>>>> getConfirmedrderQuantityByMonth(@RequestParam("year") int year, @RequestParam("month") String month ) {
+	 
+		return ResponseEntity.ok(new ApiResponse<List<Map<String, Object>>>(orderService.getConfirmedrderQuantityByMonth(year, month)));
+	}
 	
 	
 
@@ -108,6 +114,7 @@ public class OrderController {
 
 		System.out.println("status => " + status);
 		orderService.changeStatus(id, status);
+		orderService.setFinalPrice(id);
 		inventoryService.changeQuantityAfterPayment(id);
 
 		return null;

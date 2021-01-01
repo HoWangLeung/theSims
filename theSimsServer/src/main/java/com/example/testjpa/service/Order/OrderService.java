@@ -1,6 +1,9 @@
 package com.example.testjpa.service.Order;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -293,6 +296,75 @@ public class OrderService {
 		 
 		
 		return result;
+	}
+
+	public void setFinalPrice(Long id) {
+		// TODO Auto-generated method stub
+		Orders target = em.find(Orders.class, id);
+		List<OrdersProduct> orderProducts = target.getOrderProductList();	
+		
+		orderProducts.stream().forEach(e->{
+			int finalPrice = e.getProduct().getBasePrice();
+			e.setFinalPrice(finalPrice);
+		});
+		
+		em.merge(target);
+		
+	}
+
+	public List<Map<String, Object>> getConfirmedrderQuantityByMonth(int targetYear, String targetMonth) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+		Root<Orders> orderRoot = cq.from(Orders.class);
+
+
+		
+		Predicate likeConfirmed = cb.like(orderRoot.get("status"), "%confirmed");
+	 
+		cq.where(likeConfirmed);
+		
+		TypedQuery<Orders> query = 
+				em.createQuery(cq.select(orderRoot));
+ 
+		List<Orders> orders = query.getResultList();
+		List<Map<String, Object>> resultMapList = new ArrayList<>();
+		
+		System.out.println("orderss  = "  + orders);
+		orders.forEach(o->{
+			o.getOrderProductList().stream().forEach(e->{
+			    int orderYear = e.getOrders().getCreatedDate().getYear();
+			    String orderMonth = e.getOrders().getCreatedDate().getMonth().toString();
+			    System.out.println(orderMonth);
+			    System.out.println(targetMonth);
+			    System.out.println(orderMonth.equals(targetMonth));
+			    
+		        Map<String, Object> resultMap = new HashMap<String, Object>(); 
+			    if(orderYear == targetYear && orderMonth.equals(targetMonth.toUpperCase())) {
+			
+					resultMap.put("productName",	e.getProduct().getProductName() );
+					resultMap.put("quantity",	e.getQuantity());
+					resultMap.put("createdYear",	e.getOrders().getCreatedDate().getYear());
+					resultMap.put("createdMonth",	e.getOrders().getCreatedDate().getMonth());
+					resultMapList.add(resultMap);
+			    }
+			
+				
+	
+			
+				
+				
+			});
+		});
+													
+	 
+		 
+	
+		
+		System.out.println(resultMapList);
+		
+		
+		return resultMapList;
 	}
 
 }
