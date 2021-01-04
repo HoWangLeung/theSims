@@ -326,6 +326,7 @@ public class OrderService {
 		
 		TypedQuery<Orders> query = 
 				em.createQuery(cq.select(orderRoot));
+				
  
 		List<Orders> orders = query.getResultList();
 		List<Map<String, Object>> resultMapList = new ArrayList<>();
