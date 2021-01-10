@@ -120,41 +120,41 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PR
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Shine Muscat', 'Japan', 45,20,525
 ,'https://images.unsplash.com/photo-1516876319496-d5a849a2e89b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8Z3JhcGVzfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 8);
 
-INSERT INTO orders(id,created_date, status,total,users_id)
-values (10001,SYSDATE(),'confirmed',150,1);
-
-INSERT INTO orders(id,created_date, status,total,users_id)
-values (20001,SYSDATE(),'confirmed',350,1);
-INSERT INTO orders(id,created_date, status,total,users_id)
-values (30001,SYSDATE(),'pending',350,1);
-
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (30001,20,3,150,10001,1);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (40001,20,6,150,10001,2);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (50001,20,9,150,10001,5);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (60001,20,12,150,10001,15);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (70001,20,15,150,10001,21);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (80001,20,18,150,10001,16);
-
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (30002,20,1,150,20001,1);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (40002,20,15,150,20001,2);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (50002,20,25,150,20001,5);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (60002,20,35,150,20001,15);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (70002,20,45,150,20001,21);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (80002,20,55,150,20001,16);
-INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
-values (90002,20,55,150,30001,16);
+--INSERT INTO orders(id,created_date, status,total,users_id)
+--values (10001,SYSDATE(),'confirmed',150,1);
+--
+--INSERT INTO orders(id,created_date, status,total,users_id)
+--values (20001,SYSDATE(),'confirmed',350,1);
+--INSERT INTO orders(id,created_date, status,total,users_id)
+--values (30001,SYSDATE(),'pending',350,1);
+--
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (30001,20,3,150,10001,1);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (40001,20,6,150,10001,2);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (50001,20,9,150,10001,5);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (60001,20,12,150,10001,15);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (70001,20,15,150,10001,21);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (80001,20,18,150,10001,16);
+--
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (30002,20,1,150,20001,1);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (40002,20,15,150,20001,2);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (50002,20,25,150,20001,5);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (60002,20,35,150,20001,15);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (70002,20,45,150,20001,21);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (80002,20,55,150,20001,16);
+--INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
+--values (90002,20,55,150,30001,16);
 
 
 
