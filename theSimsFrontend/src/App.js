@@ -50,6 +50,7 @@ import StatisticPage from './Components/StatisticPage/StatisticPage';
 import Homepage from './Components/HomePage/HomePage';
 import AboutPage from './Components/HomePage/AboutPage';
 import PaymentManagement from './Components/Payment/PaymentManagement';
+import VerifySignUpSuccess from './Components/Authentication/SignUp/Verification/VerifySignUpSuccess';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -164,6 +165,7 @@ function App() {
               <AuthenticatedRoute path='/checkout-success' component={Checkoutsuccess} />
               <Route path='/createMenu' component={CreateTemplate} />
               <Route path='/counter' component={Counter} />
+              <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
             </Switch>
           </AnimatePresence>
           <BackTop style={{top:"93%"}} target={() => document.body} />

@@ -119,6 +119,8 @@ export const signUpRequest = (payload, ownProps) => {
     const headers = {
       'Content-Type': 'application/json'
     }
+
+    dispatch({ type: 'SIGNUP_REQUEST' })
     axios.post(`${API}/users/signup`, payload, {
       headers: headers
     })

@@ -3,6 +3,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import classes from './form.less'
 import ValidationHint from './ValidationHint';
 import Animate from 'rc-animate';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 
@@ -36,6 +38,9 @@ class SignUpForm extends React.Component {
             pwValidateLength,
             pwValidateSpecialChar
         } = this.state
+
+        const{isFetching} = this.props
+        console.log(isFetching);
 
         const layout = {
             labelCol: { span: 8},
@@ -191,13 +196,29 @@ class SignUpForm extends React.Component {
  
 
                 <Form.Item {...tailLayout} >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit"   loading={isFetching["SIGNUP"]}>
                         Submit
-        </Button>
+        </Button  >
                 </Form.Item>
             </Form>
         )
     }
 }
 
-export default SignUpForm
+const mapStateToProps = (state) => {
+    
+
+    return {
+        isFetching: state.LoadingReducer
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    
+    return {
+       
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpForm))

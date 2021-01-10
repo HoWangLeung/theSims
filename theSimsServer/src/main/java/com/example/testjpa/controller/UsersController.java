@@ -2,11 +2,15 @@ package com.example.testjpa.controller;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.testjpa.jwt.JwtInMemoryUserDetailsService;
 import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.Users;
+import com.example.testjpa.model.UsersTest.ConfirmationToken;
+import com.example.testjpa.service.users.ConfirmationTokenService;
+import com.example.testjpa.util.EmailSender;
 
 @RestController
 @RequestMapping("/users")
@@ -30,6 +37,11 @@ public class UsersController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 	@Autowired
 	private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
+	@Autowired
+	ConfirmationTokenService ConfirmationTokenService;
+	@Autowired
+	EmailSender emailSender;
+	
 
 	@GetMapping("/")
 	public List<Users> getAllUsers() {
@@ -63,13 +75,45 @@ public class UsersController {
  
 
 	@PostMapping("/signup")
-	public void signupPost(@RequestBody Users internalUserAccount) {
-		System.out.println("^^^^^^^^^^^^#$$#$#$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + internalUserAccount);
+	public void signupPost(@RequestBody Users user) throws MessagingException {
+		System.out.println("^^^^^^^^^^^^#$$#$#$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + user);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		internalUserAccount.setPassword(encoder.encode(internalUserAccount.getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
+		user.setEnabled(false);
+		
+		
+		
+		jwtInMemoryUserDetailsService.saveUser(user);
+		System.out.println("user name = " + user.getUsername());
+		Users targetUser =jwtInMemoryUserDetailsService.findUser(user.getUsername());
+		System.out.println("user is saved proceed " + targetUser.toString());
+		
+		ConfirmationToken confirmationToken = new ConfirmationToken(targetUser);
+		confirmationToken.setUser(targetUser);
+	
+		ConfirmationTokenService.saveConfirmationToken(confirmationToken);
+		emailSender.sendEmail(targetUser,confirmationToken.getConfirmationToken());
+		
+	}
+	
+	
+	@GetMapping("/confirm")
+	public void signUpConfirm(@RequestParam("token") String token, HttpServletResponse httpServletResponse) {
+		
+		 HttpHeaders headers = new HttpHeaders();
+		    headers.add("Location", "localhost:3000");    
+		   
+		 
+		System.out.println("received the email click");
+		if(ConfirmationTokenService.confirmUser(token)) {
+			System.out.println("redirect now !!!");
+			httpServletResponse.setHeader("Location", "http://localhost:3000/verifySignUPSuccess");
+		    httpServletResponse.setStatus(302);
 
-		jwtInMemoryUserDetailsService.saveUser(internalUserAccount);
-
+		}else {
+			System.out.println("failed");
+		}
+		
 	}
 	
 	@PutMapping("/editBasicInfo")

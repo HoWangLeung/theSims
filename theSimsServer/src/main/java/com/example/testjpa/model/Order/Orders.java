@@ -11,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.metamodel.StaticMetamodel;
 
 import com.example.testjpa.model.Auditable;
 import com.example.testjpa.model.Users;
 
 @Entity
 @Table
+@StaticMetamodel(Orders.class)
 public class Orders extends Auditable<String> {
 
 	@Id

@@ -17,9 +17,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.testjpa.model.Order.Orders;
+import com.example.testjpa.model.UsersTest.ConfirmationToken;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 //implements UserDetails
@@ -62,6 +64,10 @@ public class Users  {
 	            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName ="role_id")
 	            )
 	private Set<Role> roles = new HashSet<>();
+	 
+	 @OneToOne(mappedBy = "user")
+	 private ConfirmationToken confirmationToken;
+	 
 	 
 	
 
@@ -269,6 +275,18 @@ public class Users  {
 
 	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
+	}
+
+
+
+	public ConfirmationToken getConfirmationToken() {
+		return confirmationToken;
+	}
+
+
+
+	public void setConfirmationToken(ConfirmationToken confirmationToken) {
+		this.confirmationToken = confirmationToken;
 	}
 
 
