@@ -35,32 +35,40 @@ class Login extends Component {
         const { getUserProfile } = this.props
         const { username, password, remember } = values
 
-        let res1 = await AuthenticationService
-            .executeJwtAuthenticationService(username, password)
-        console.log(res1);
-        let token = res1.data.token
+        try {
+            console.log('login now !!!!!');
+            let res = await AuthenticationService
+                .executeJwtAuthenticationService(username, password)
+            console.log(res);
+            if (res.data.detail === "USER_DISABLED") {
 
-        AuthenticationService.registerSuccessfulLoginForJwt(username, token)
-        let isLoggedIn = AuthenticationService.isUserLoggedIn()
-        console.log('isLoggedIn ', isLoggedIn);
+                CommonModal.error({
+                    content:"Please activate your account by completing email verification"
+                })
 
-        this.props.loginAction(isLoggedIn)
+            }else if(res.data.detail ==="INVALID_CREDENTIALS"){
+                    console.log('getting "INVALID_CREDENTIALS" ');
+                CommonModal.error({
+                    content:"Invalid username/password"
+                })
+
+            }
+
+            else {
+                let token = res.data.token
+                AuthenticationService.registerSuccessfulLoginForJwt(username, token)
+                let isLoggedIn = AuthenticationService.isUserLoggedIn()
+                console.log('isLoggedIn ', isLoggedIn);
+                this.props.loginAction(isLoggedIn)
+                this.props.history.push('/inventory')
+            }
 
 
-        // let payload = { username, password }
-        // let res2 = await getUserProfile(payload)
 
-        // console.log(res2);
-        // sessionStorage.setItem('userId', parseInt(res2.data.detail.id))
-
-        // if (res2.data.detail.role === 'CUSTOMER') {
-
-        //     this.props.history.push('/')
-        // }
+        } catch (error) {
 
 
-        // if (res2.data.detail.role === 'ADMIN')
-        this.props.history.push('/inventory')
+        }
 
 
 

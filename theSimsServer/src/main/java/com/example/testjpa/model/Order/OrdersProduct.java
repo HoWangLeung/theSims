@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.metamodel.StaticMetamodel;
 
 import com.example.testjpa.model.inventory.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "orders_product")
+@StaticMetamodel(OrdersProduct.class)
 public class OrdersProduct  {
 
 	

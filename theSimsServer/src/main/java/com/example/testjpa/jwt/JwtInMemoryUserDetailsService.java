@@ -85,6 +85,13 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	 
  		  
 	}
+
+
+
+	public Users findUser(String username) {
+		// TODO Auto-generated method stub
+		return internalUserAccountRepository.findByUsername(username);
+	}
 	
 	
 

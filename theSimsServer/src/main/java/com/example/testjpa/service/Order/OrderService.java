@@ -1,18 +1,19 @@
 package com.example.testjpa.service.Order;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
@@ -314,50 +315,43 @@ public class OrderService {
 
 	public List<Map<String, Object>> getConfirmedrderQuantityByMonth(int targetYear, String targetMonth) {
 		
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
-		Root<Orders> orderRoot = cq.from(Orders.class);
-
-
+		Query query = 
+		em.createQuery("SELECT sum(op.quantity) as totalQuantity,op.product.productName, Year(o.createdDate), function('date_format', o.createdDate, '%M') as createdMonth "
+				+ " from  OrdersProduct op  "
+				+ "INNER JOIN op.orders o WHERE o.id=op.orders "
+				+ " and Year(o.createdDate) = :targetYear "
+				+ " and function('date_format', o.createdDate, '%M') = :targetMonth "			
+				+ " and o.status='confirmed' "
+				+ " group by op.product  order by totalQuantity desc ")
+		.setParameter("targetYear", targetYear)
+		.setParameter("targetMonth", targetMonth)
+		.setMaxResults(5);
 		
-		Predicate likeConfirmed = cb.like(orderRoot.get("status"), "%confirmed");
-	 
-		cq.where(likeConfirmed);
-		
-		TypedQuery<Orders> query = 
-				em.createQuery(cq.select(orderRoot));
-				
- 
-		List<Orders> orders = query.getResultList();
 		List<Map<String, Object>> resultMapList = new ArrayList<>();
+		List<Object[]> results = query.getResultList();
+		System.out.println("GET HERE");
+		for (Object[] result : results) {
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+		    Long quantity = (Long) result[0];		    
+		    String productName =(String) result[1];
+		    Integer createdYear = (Integer)result[2];
+		    String createdMonth = (String)result[3];
+		    
+		    
+		    resultMap.put("quantity", quantity);
+		    resultMap.put("productName", productName);
+		   resultMap.put("createdYear", createdYear);
+		   resultMap.put("createdMonth", createdMonth);
+		    System.out.println("RES + " + productName);
+		    resultMapList.add(resultMap);
+		}
+ 
+//		
+	 	
+		;
 		
-		System.out.println("orderss  = "  + orders);
-		orders.forEach(o->{
-			o.getOrderProductList().stream().forEach(e->{
-			    int orderYear = e.getOrders().getCreatedDate().getYear();
-			    String orderMonth = e.getOrders().getCreatedDate().getMonth().toString();
-			    System.out.println(orderMonth);
-			    System.out.println(targetMonth);
-			    System.out.println(orderMonth.equals(targetMonth));
-			    
-		        Map<String, Object> resultMap = new HashMap<String, Object>(); 
-			    if(orderYear == targetYear && orderMonth.equals(targetMonth.toUpperCase())) {
-			
-					resultMap.put("productName",	e.getProduct().getProductName() );
-					resultMap.put("quantity",	e.getQuantity());
-					resultMap.put("createdYear",	e.getOrders().getCreatedDate().getYear());
-					resultMap.put("createdMonth",	e.getOrders().getCreatedDate().getMonth());
-					resultMapList.add(resultMap);
-			    }
-			
-				
-	
-			
-				
-				
-			});
-		});
-													
+		 
+	 										
 	 
 		 
 	

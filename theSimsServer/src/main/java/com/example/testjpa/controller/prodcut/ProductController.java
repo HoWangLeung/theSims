@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.testjpa.model.ApiResponse;
 import com.example.testjpa.model.inventory.Product;
 import com.example.testjpa.service.Product.ProductService;
+import com.example.testjpa.util.EmailSender;
 
 @RestController
 @RequestMapping("/products")
@@ -21,8 +22,12 @@ import com.example.testjpa.service.Product.ProductService;
 public class ProductController {
 	@Autowired
 	ProductService productService;
+
+	
 	@GetMapping("/")
 	public ResponseEntity<ApiResponse<Map<String, Object>>> getAllProducts() {
+		
+	
 	
 		Map<String, Object> resultMap = productService.getAllProducts(); 
 		return ResponseEntity.ok(new ApiResponse<Map<String, Object>>(resultMap));

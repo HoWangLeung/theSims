@@ -20,6 +20,7 @@ export default function Homepage(props) {
                  borderRadius: "2px",
                 height: "65vh",
                 width: "100%",
+                 
                 objectFit: "cover",
                 transition: {
                     duration: .5,
@@ -89,7 +90,7 @@ export default function Homepage(props) {
                     initial={{
                         height: "20vh",
                         width: "100%",
-                   
+                     
                     }}
                     //  animate="visible"
                     animate={controls}

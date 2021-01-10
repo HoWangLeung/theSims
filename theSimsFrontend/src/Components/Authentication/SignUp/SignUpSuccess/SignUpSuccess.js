@@ -13,13 +13,13 @@ function Signupsuccess(props) {
             exit="exit">
             <Result
                 status="success"
-                title="Successfully Registered"
-                subTitle="An email has been sent to your email account (fake)"
+                title="EMAIL VERIFCATION"
+                subTitle="An verification email has been sent to your email address, please check your email to complete the registration."
                 extra={[
                     <Link to="/" ><Button type="primary" key="console">
-                        Go to HomePage
+                        Back to HomePage
   </Button></Link>,
-                    <Link to="/login" > <Button key="buy">Sign in</Button></Link>,
+                
                 ]}
             />
         </motion.div>
