@@ -79,20 +79,20 @@ public class UsersController {
 		System.out.println("^^^^^^^^^^^^#$$#$#$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + user);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
-		user.setEnabled(false);
+		user.setEnabled(true);
 		
 		
 		
 		jwtInMemoryUserDetailsService.saveUser(user);
-		System.out.println("user name = " + user.getUsername());
-		Users targetUser =jwtInMemoryUserDetailsService.findUser(user.getUsername());
-		System.out.println("user is saved proceed " + targetUser.toString());
-		
-		ConfirmationToken confirmationToken = new ConfirmationToken(targetUser);
-		confirmationToken.setUser(targetUser);
-	
-		ConfirmationTokenService.saveConfirmationToken(confirmationToken);
-		emailSender.sendEmail(targetUser,confirmationToken.getConfirmationToken());
+//		System.out.println("user name = " + user.getUsername());
+//		Users targetUser =jwtInMemoryUserDetailsService.findUser(user.getUsername());
+//		System.out.println("user is saved proceed " + targetUser.toString());
+//		
+//		ConfirmationToken confirmationToken = new ConfirmationToken(targetUser);
+//		confirmationToken.setUser(targetUser);
+//	
+//		ConfirmationTokenService.saveConfirmationToken(confirmationToken);
+//		emailSender.sendEmail(targetUser,confirmationToken.getConfirmationToken());
 		
 	}
 	

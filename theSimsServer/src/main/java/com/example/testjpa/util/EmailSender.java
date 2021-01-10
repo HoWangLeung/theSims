@@ -25,7 +25,7 @@ public class EmailSender {
 	    
 	    public void sendEmail(Users user, String token ) throws MessagingException {
 	    	
-	    	  String link =  env.getProperty("url")+ "/users/confirm?token="+ token;
+	    	  String link =  env.getProperty("baseUrl")+ "/users/confirm?token="+ token;
 	    	   Context context = new Context();
 	 	    
 	           context.setVariable("link", link);
