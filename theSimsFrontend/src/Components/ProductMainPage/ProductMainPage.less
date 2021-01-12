@@ -72,24 +72,42 @@
 // }
 .priceSlider{
   width: 80%;
-    // :global{
-    //     .ant-slider-handle{
-    //             border-radius: 0% !important;
-    //             background-color: black;
-    //             border: none;
-    //             width: 5px;
-    //             height: 14px;
-    //             &:focus {
-    //                 background-color: black !important;
+  --antd-wave-shadow-color: red !important;
+    :global{
 
-    //             }
-    //     }
-    //     .ant-slider-step{
-    //         background-color: black !important;
+     
+         
+        // .ant-slider-handle:focus{
+        //     background-color: rgb(107, 43, 43) !important;
+        //     border: rgb(158, 37, 37) !important;
+        // }
 
-    //     }
+     
+        // .ant-slider-handle-click-focused{
+        //     background-color: rgb(43, 107, 46) !important;
+        //     border: rgb(76, 155, 40) !important;
+         
+        // }
+
+        .slider-handle-color-focus-shadow{
+            border-color: brown !important;
+            background-color: rgb(0, 0, 0) !important;
+            color: rgb(0, 0, 0) !important;
+            outline: none;
+         }
+
+        .ant-slider-handle:focus{
+            border-color: rgb(0, 0, 0) !important;
+            background-color: rgb(0, 0, 0) !important;
+            box-shadow: 0 0 0 5px  fade(rgb(122, 122, 122),12%);
+        }
         
-    // }
+ 
+    
+
+       
+        
+    }
 
 
 }

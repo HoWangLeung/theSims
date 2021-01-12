@@ -59,29 +59,36 @@ const LeftFilters = (props) => {
 
             <h2>Price</h2>
             <Slider
-                className={classes.priceSlider}
+                 className={classes.priceSlider}
                 range
                 step={5}
                 defaultValue={filterValue}
                 max={50}
                 min={0}
                 onChange={onChange}
-            // trackStyle={{
-            //     backgroundColor: 'red',
-            //     height: '5px',
-            //   }}
-            //   railStyle={{
-            //     backgroundColor: 'red',
-            //     height: '5px',
-            //   }}
-            //   handleStyle={{
-            //     borderColor: 'blue',
-            //     height: '14px',
-            //     width: '14px',
-            //     marginLeft: '-7px',
-            //     marginTop: '-4.5px',
-            //     backgroundColor: 'blue',
-            //   }}
+
+
+                railStyle={{
+                    backgroundColor: 'grey',
+
+                }}
+                handleStyle={[
+                    {
+                        backgroundColor: 'black',
+                        borderColor: 'black',
+                       
+                    }, 
+                    {
+                        backgroundColor: 'black',
+                        borderColor: 'black'
+                    },
+
+                ]}
+
+                trackStyle={[{ backgroundColor: 'black' }]}
+
+             
+
             // onAfterChange={onAfterChange}
             />
             <Row className={classes.filterResult}>

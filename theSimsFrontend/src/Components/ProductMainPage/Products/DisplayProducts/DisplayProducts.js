@@ -83,6 +83,7 @@ const Displayproducts = (props) => {
                         <Link to={`/product/${item.id}`}>
                             <Card
                              className={classes.productNamePriceContainer}
+                             bordered={false}
                                 cover={
                                    <Image
                                          className={classes.productNamePriceContainerImg}

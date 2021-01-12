@@ -42,7 +42,7 @@ const { SubMenu } = Menu;
                 <Link to="/employee">{intl.get('management')}</Link>
             </Menu.Item>
 
-            <Menu.Item key="paymentMangement" icon={<BarcodeOutlined />}>
+            <Menu.Item key="paymentMangement" icon={<CreditCardOutlined />}>
                 <Link to="/paymentMangement">
                     {intl.get('payment')}
                 </Link>

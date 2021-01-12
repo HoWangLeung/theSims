@@ -20,7 +20,7 @@ export default function Homepage(props) {
                  borderRadius: "2px",
                 height: "65vh",
                 width: "100%",
-                 
+                
                 objectFit: "cover",
                 transition: {
                     duration: .5,
@@ -31,7 +31,7 @@ export default function Homepage(props) {
         )
         slider.start({
 
-            backgroundImage: "linear-gradient(to right,#627e75, #576b65, #93a199 100%, transparent 0%)",
+            backgroundImage: "linear-gradient(to right,#0F2027, #203A43, #2C5364 100%, transparent 0%)",
             transition: " background-position 1s",
             transition: {
                 duration: 1,
@@ -42,14 +42,16 @@ export default function Homepage(props) {
 
         })
         await controls.start({
-          
+             
             height: "65vh",
             width: "80%",
+            
             objectFit: "cover",
              borderRadius: "2px",
             transition: {
                 duration: .5,
-                ease: "easeInOut"
+                ease: "easeInOut",
+               
             }
         })
         homePageButton.start({
@@ -62,6 +64,7 @@ export default function Homepage(props) {
             height: "65vh",
             width: "80%",
             objectFit: "cover",
+       
             borderRadius: "2px",
             transition: {
                 duration: .5,

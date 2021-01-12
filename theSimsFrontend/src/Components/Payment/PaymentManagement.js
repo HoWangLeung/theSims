@@ -7,6 +7,9 @@ import { baseVariants } from '../../Animation'
 import { getAllConfirmedOrders } from './action/PaymentAction'
 import { GetPaymentHeaders } from './getPaymentManagmentHeader'
 import { Link } from 'react-router-dom'
+import Banner from '../../Common/Banner'
+import NavigationMenu from '../../Common/NavigationMenu'
+
 
 export default function PaymentManagement(props) {
 
@@ -28,7 +31,7 @@ export default function PaymentManagement(props) {
                 console.log(e);
                 return (
                     <div key={e.id} className={classes.orderProductDetailContainer} >
-                        <Tag style={{margin:"5px"}}>{`${e.product.productName} x ${e.quantity}`}</Tag>
+                        <Tag style={{ margin: "5px" }}>{`${e.product.productName} x ${e.quantity}`}</Tag>
                     </div>
                 )
             })
@@ -42,26 +45,33 @@ export default function PaymentManagement(props) {
             initial="hidden"
             animate="visible"
             exit="exit"
+            className={classes.paymentContainer}
         >
-            <Spin spinning={isFetching['GET_ALL_CONFIRMED_ORDERS']}>
-                <Table
-                  
-                    title={() => <Row justify="space-between">
-                        <h3 > Confirmed Orders of All Customers</h3> 
-                        <Link to="/inventory"><Button>Back</Button></Link>
-                    
-                    </Row>}
-                    dataSource={confirmedOrders}
-                    columns={GetPaymentHeaders()}
-                    expandable={
-                        {
-                            expandedRowRender: record => getOrderProducts(record)
+            <Banner />
+            <NavigationMenu />
+            <div className={classes.paymentInnerContainer}>
+                <div className={classes.tableContainer} >
+                    <Spin spinning={isFetching['GET_ALL_CONFIRMED_ORDERS']}  >
+                    <Table
+
+                        title={() => <Row justify="space-between">
+                            <h3 > Confirmed Orders of All Customers</h3>
+                            <Link to="/inventory"><Button>Back</Button></Link>
+
+                        </Row>}
+                        dataSource={confirmedOrders}
+                        columns={GetPaymentHeaders()}
+                        expandable={
+                            {
+                                expandedRowRender: record => getOrderProducts(record)
+
+                            }
 
                         }
+                    />
+                </Spin></div>
 
-                    }
-                />
-            </Spin>
+            </div>
         </motion.div>
     )
 }

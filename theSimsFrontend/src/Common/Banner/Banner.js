@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import bannerImg from '../assests/Image/webBanner.png'
+import bannerImg from '../assests/Image/webBanner.jpg'
 
 import classes from './Banner.less'
 class Banner extends Component {
