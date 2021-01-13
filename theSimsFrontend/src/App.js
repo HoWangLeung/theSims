@@ -34,7 +34,7 @@ import Pagenotfound from './Components/ProductMainPage/Products/SpecificProduct/
 import Checkout from './Components/Checkout/Checkout';
 import Checkoutsuccess from './Components/Checkout/CheckoutSuccess';
 import Userprofile from './Components/Authentication/UserProfile/UserProfile';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 
@@ -126,7 +126,29 @@ function App() {
     emit.emit('change_language', val);
 
   }
+  const variants = {
+    hidden: {
+      // opacity:0
+      // // x: '-100vw',
 
+
+    },
+    visible: {
+      // opacity:1,
+      // transition: {
+      //     duration: .5,
+      //     ease: "easeInOut"
+      // }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: .5,
+        ease: "easeInOut"
+      }
+    }
+
+  }
 
 
   console.log(location);
@@ -135,20 +157,30 @@ function App() {
 
     <ConfigProvider locale={antdLang}>
       <Layout hasSider={false} className={classes.layout}>
-        <Nav
-          className={classes.nav}
-          handleChangeLocale={handleChangeLocale}
-          currentLocale={antdLang}
-        />
 
+        <AnimatePresence exitBeforeEnter  >
+          <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
 
+            <Nav
+              className={classes.nav}
+              handleChangeLocale={handleChangeLocale}
+              currentLocale={antdLang}
+            />
 
+          </motion.div>
+        </AnimatePresence>
         <Content className={classes.content}>
 
           <AnimatePresence exitBeforeEnter  >
             <Switch location={location} key={location.key}  >
-            <Route exact path='/' component={Homepage} />
-            <Route exact path='/about' component={AboutPage} />
+
+              <Route exact path='/' component={Homepage} />
+              <Route exact path='/about' component={AboutPage} />
               <Route exact path='/products' component={ProductMainpage} />
               <Route path='/product/:id' component={Specificproduct} />
               <Route path='/404' component={Pagenotfound} />
@@ -156,8 +188,8 @@ function App() {
               <Route path='/signup' component={SignUpMainPage} />
               <Route path='/signup-customer' component={SignUp} />
               <Route path='/signup-success' component={Signupsuccess} />
-              <AuthenticatedRoute   currentLocale={antdLang} path='/statistic' component={StatisticPage} />
-              <AuthenticatedRoute  currentLocale={antdLang}  path='/employee' component={Employee} />
+              <AuthenticatedRoute currentLocale={antdLang} path='/statistic' component={StatisticPage} />
+              <AuthenticatedRoute currentLocale={antdLang} path='/employee' component={Employee} />
               <AuthenticatedRoute path='/inventory' component={Inventory} />
               <AuthenticatedRoute path='/paymentMangement' component={PaymentManagement} />
               <AuthenticatedRoute path='/checkout' component={Checkout} />
@@ -168,7 +200,7 @@ function App() {
               <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
             </Switch>
           </AnimatePresence>
-          <BackTop style={{top:"93%"}} target={() => document.body} />
+          <BackTop style={{ top: "93%" }} target={() => document.body} />
         </Content>
 
         <Footer>

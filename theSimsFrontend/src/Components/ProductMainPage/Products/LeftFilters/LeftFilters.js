@@ -57,9 +57,9 @@ const LeftFilters = (props) => {
     const useSlider = () => {
         return (<>
 
-            <h2>Price</h2>
+         
             <Slider
-                 className={classes.priceSlider}
+                className={classes.priceSlider}
                 range
                 step={5}
                 defaultValue={filterValue}
@@ -76,8 +76,8 @@ const LeftFilters = (props) => {
                     {
                         backgroundColor: 'black',
                         borderColor: 'black',
-                       
-                    }, 
+
+                    },
                     {
                         backgroundColor: 'black',
                         borderColor: 'black'
@@ -87,7 +87,7 @@ const LeftFilters = (props) => {
 
                 trackStyle={[{ backgroundColor: 'black' }]}
 
-             
+
 
             // onAfterChange={onAfterChange}
             />
@@ -133,7 +133,7 @@ const LeftFilters = (props) => {
 
         return (<>
 
-            <h2>Category</h2>
+     
             <ul >
                 {displayList}
             </ul>
@@ -162,36 +162,46 @@ const LeftFilters = (props) => {
 
     }
 
+
     const { categories, productList, numberOfProducts } = productInfo
     return (
 
-        <Collapse
-            bordered={false}
-            defaultActiveKey="1"
-            expandIcon={({ isActive }) => isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />}
-            className={classes.leftFilterCollapse}
+
+        <motion.div
+            className={classes.LeftFiltersContainer}
+        // variants={variants}
         >
-            <Panel header={<p>Options</p>} key="1"  >
-                <motion.div
-                    className={classes.LeftFiltersContainer}
-                // variants={variants}
-                >
-                    {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
-                    {/* <ProductsSearch /> */}
+            {/* <Text strong>{`SHOWING ${productList  && productList.length} OF ${numberOfProducts} RESULTS`}</Text>  */}
+            {/* <ProductsSearch /> */}
 
 
+
+
+            <Collapse defaultActiveKey={['1','2','3']} ghost >
+                <Panel header={<h3>Category</h3>} key="1">
                     {getCategories()}
+                </Panel>
+                <Panel header={<h3>Price</h3>} key="2">
                     {useSlider()}
-                    <Button
-                        type="primary"
-                        onClick={handleReset}
-                        className={classes.LeftFiltersResetBtn}
-                    >
-                        <UndoOutlined />  {intl.get('reSet')}
-                    </Button>
-                </motion.div>
-            </Panel>
-        </Collapse>
+                </Panel>
+                <Panel header={<h3>Country</h3>} key="3">
+                    coming soon...
+                        </Panel>
+            </Collapse>
+
+
+
+
+
+            <Button
+                type="primary"
+                onClick={handleReset}
+                className={classes.LeftFiltersResetBtn}
+            >
+                <UndoOutlined />  {intl.get('reSet')}
+            </Button>
+        </motion.div>
+
 
     )
 

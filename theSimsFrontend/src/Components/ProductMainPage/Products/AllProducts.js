@@ -41,7 +41,7 @@ const Allproducts = (props) => {
                     </Col>
                     <Col sm={24} xl={16} className={classes.allProductCol2} >
                         <Row className={classes.cartAndProductSorterContainer} >
-                            <h2>All Products</h2>
+                            <h3>All Products</h3>
                             {/* <Productsorter /> */}
                             <ProductsSearch />
                         </Row>
