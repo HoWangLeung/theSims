@@ -192,7 +192,7 @@ function App() {
 
 
      
-          <AnimatePresence exitBeforeEnter  >
+          {/* <AnimatePresence exitBeforeEnter  > */}
             <Switch location={location} key={location.key}  >
 
               <Route exact path='/' component={Homepage} />
@@ -215,7 +215,7 @@ function App() {
               <Route path='/counter' component={Counter} />
               <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
             </Switch>
-          </AnimatePresence>
+          {/* </AnimatePresence> */}
      
         <BackTop style={{ top: "93%" }} target={() => document.body} />
 

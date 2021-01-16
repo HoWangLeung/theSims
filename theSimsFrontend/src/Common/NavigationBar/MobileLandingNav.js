@@ -20,7 +20,7 @@ export default function MobileLandNav(props) {
         // initial="hidden"
         // animate="visible"
         // exit="exit"
-        className={classes.landingNav}>
+        className={classes.landingNavMobile}>
             <ul className={classes.landingNavLinksMobile} >
                 <li> <header  className={classes.landingNavHeaderMobile}  >DEREK</header> </li>
 
