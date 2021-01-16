@@ -9,7 +9,7 @@ export default function MobileLandNav(props) {
 
 
     const handleMenuClick=()=>{
-        alert("clicked")
+        alert("clicked 1 ")
     }
 
 
