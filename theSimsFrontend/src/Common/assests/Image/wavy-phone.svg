@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="414.999" height="414.906" viewBox="0 0 414.999 414.906">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b06b44"/>
+      <stop offset="1" stop-color="#612058"/>
+    </linearGradient>
+  </defs>
+  <path id="wavy-phone" d="M486.237-41c-2.668,213.12,168.078,152.419,172.08,276.579s102.27,197.967,120.055,71.048,80.926,17.934,68.476-110.365,53.358-55.872,53.358-55.872V-41Z" transform="translate(-485.707 41.5)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient)"/>
+</svg>

@@ -39,7 +39,7 @@ function ProductMainpage() {
             exit="exit"
             className={classes.productMainpageContainer}
         >
-            <Row>
+            <Row         className={classes.productMainpageContainerRow}>
 
 
                 <Col span={24} className={classes.Allproducts}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import './index.less';
+import  classes from  './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './configureStore'
@@ -13,7 +13,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
     <Router>
-      <App />
+      <App className={classes.app}  />
     </Router>
   </Provider>
   // </React.StrictMode>

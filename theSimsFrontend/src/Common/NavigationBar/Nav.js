@@ -14,8 +14,9 @@ import Banner from '../Banner';
 import NavigationMenu from '../NavigationMenu';
 import Cart from '../../Components/ProductMainPage/Cart/Cart';
 import Navigationmenu from '../NavigationMenu/NavigationMenu';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Text from 'antd/lib/typography/Text';
+import { fadeOutVariants , fadeOutVariantsLandingNav} from '../../Animation';
 
 
 const { Title } = Typography;
@@ -181,13 +182,13 @@ class Nav extends React.Component {
                 <Text level={1} strong >{intl.get('webTitle')}</Text>
             </Link></Title>
 
-            <motion.div>
+            {/* <motion.div>
                 <Link to="/about">
 
                     <Text level={2} strong >About </Text>
 
                 </Link>
-            </motion.div>
+            </motion.div> */}
 
 
             <div className={classes.functionGroups}>
@@ -222,20 +223,25 @@ class Nav extends React.Component {
 
         }
         return (
-
+            <AnimatePresence exitBeforeEnter>
             <motion.div
-                variants={variants}
+                variants={fadeOutVariantsLandingNav}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
             >
-                <div>
+                <motion.div
+                variants={fadeOutVariantsLandingNav}
+                
+                >
                     {hideNav === false && topNavigationMenu}
                     {/* <Banner />
                     <Navigationmenu pathname={pathname} username={username} /> */}
                     {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
-                </div>
+                </motion.div>
             </motion.div>
+
+            </AnimatePresence>
         );
     }
 

@@ -56,7 +56,7 @@ class Home extends Component {
 
                     <Col span={18}>
                         <h1>Jotto</h1>
-
+                        
                         {/* <GuessInput />
                         <RetrieveHint />
                         <Congrats success={false} />

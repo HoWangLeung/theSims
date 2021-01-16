@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts, filterProductByCategory, filterProductByPrice } from '../../actions/productActions';
 import Text from 'antd/lib/typography/Text';
 import { motion } from 'framer-motion';
+import Filtercountry from './FilterCountry';
 const { Panel } = Collapse;
 
 
@@ -57,7 +58,7 @@ const LeftFilters = (props) => {
     const useSlider = () => {
         return (<>
 
-         
+
             <Slider
                 className={classes.priceSlider}
                 range
@@ -133,7 +134,7 @@ const LeftFilters = (props) => {
 
         return (<>
 
-     
+
             <ul >
                 {displayList}
             </ul>
@@ -177,16 +178,16 @@ const LeftFilters = (props) => {
 
 
 
-            <Collapse defaultActiveKey={['1','2','3']} ghost >
-                <Panel header={<h3>Category</h3>} key="1">
+            <Collapse defaultActiveKey={['1', '2', '3']} ghost >
+                <Panel header={<h4>CATEGORY</h4>} key="1">
                     {getCategories()}
                 </Panel>
-                <Panel header={<h3>Price</h3>} key="2">
+                <Panel header={<h4>PRICE</h4>} key="2">
                     {useSlider()}
                 </Panel>
-                <Panel header={<h3>Country</h3>} key="3">
-                    coming soon...
-                        </Panel>
+                <Panel header={<h4>COUNTRY</h4>} key="3">
+                    <Filtercountry productInfo={productInfo} />
+                </Panel>
             </Collapse>
 
 

@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react'
 import 'antd/dist/antd.css';
 import classes from './App.less';
-import { Layout, Menu, Breadcrumb, Dropdown, Typography, BackTop, ConfigProvider } from 'antd';
+import { Layout, Menu, Breadcrumb, Dropdown, Typography, BackTop, ConfigProvider, Divider } from 'antd';
 
 import { emit } from './emit.js'
 import intl from 'react-intl-universal';
@@ -51,6 +51,8 @@ import Homepage from './Components/HomePage/HomePage';
 import AboutPage from './Components/HomePage/AboutPage';
 import PaymentManagement from './Components/Payment/PaymentManagement';
 import VerifySignUpSuccess from './Components/Authentication/SignUp/Verification/VerifySignUpSuccess';
+import LandingNav from './Common/NavigationBar/LandingNav';
+import { fadeOutVariants } from './Animation';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -156,26 +158,40 @@ function App() {
 
 
     <ConfigProvider locale={antdLang}>
-      <Layout hasSider={false} className={classes.layout}>
+      <div className={classes.layout}>
 
-        <AnimatePresence exitBeforeEnter  >
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
 
-            <Nav
-              className={classes.nav}
-              handleChangeLocale={handleChangeLocale}
-              currentLocale={antdLang}
-            />
+        {location.pathname === "/" ?
 
-          </motion.div>
-        </AnimatePresence>
-        <Content className={classes.content}>
 
+          // <LandingNav />
+
+
+    null
+          :
+
+
+
+
+          <Nav
+            // className={classes.nav}
+            handleChangeLocale={handleChangeLocale}
+            currentLocale={antdLang}
+          />
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+     
           <AnimatePresence exitBeforeEnter  >
             <Switch location={location} key={location.key}  >
 
@@ -200,13 +216,10 @@ function App() {
               <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
             </Switch>
           </AnimatePresence>
-          <BackTop style={{ top: "93%" }} target={() => document.body} />
-        </Content>
+     
+        <BackTop style={{ top: "93%" }} target={() => document.body} />
 
-        <Footer>
-          <WebFooter />
-        </Footer>
-      </Layout>
+      </div>
     </ConfigProvider>
 
 
