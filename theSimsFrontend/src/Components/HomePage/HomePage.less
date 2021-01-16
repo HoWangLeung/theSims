@@ -5,7 +5,9 @@
     width: 100% ;
 }
 .homePageContainer{
-  position: fixed;
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+ 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,6 +26,7 @@
 }
 
 .backgroundContainer{
+
       background-image: url("../../Common/assests/Image/wavy.svg") ;
   background-repeat: no-repeat;
  background-position: right;
@@ -295,7 +298,7 @@ width: 85%;
 
 
 
-@media screen and (max-width: 1024px) {
+@media  (max-width: 1024px) {
 
  
       
@@ -399,7 +402,7 @@ width: 85%;
 }
 
 
-@media screen and (max-width: 768px) {
+@media  (max-width: 768px) {
 
  
       
@@ -502,206 +505,34 @@ width: 85%;
     
 }
 
-@media screen and (max-width: 425px) {
-
+@media only screen and (max-width: 425px) {
+  
+   
     .backgroundContainer{
         background-image: url("../../Common/assests/Image/wavy-phone.svg") ;
-    background-repeat: no-repeat;
-    background-position: right;
-    height: 100%;
-    width: 100%;
-      background-size: contain;
-      background-position-y: top;
-      background-position-x: right;
-      z-index: -9999;
-    
-      position: absolute;
-      
-    //   margin-bottom: 5px !important;
-       margin-left: 0%;
-      //margin-right: -10%;
+  
     }
     
     .shopArt{
         
         height: 70%;
         width: 70%;
-        margin-left: 25%;
+        margin-left: 10%;
        margin-top: 8%;
+       padding: 0% !important;
     }
 
 
-    
-.landingPageTextContainer{
-    width: 100%;
-    height: 100%;
-   display: flex;
-   flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding-left: 10%;
-    margin-top: 92%;
-   
-    .landingPageText{
+ 
+ 
 
-        h1:nth-of-type(1){
-             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            color: #B5B4B4;
-            padding: 0px 0px;
-            margin: 0px 0px;
-                
-        }
-
-        h1:nth-of-type(2){
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-           font-weight: bold;
-           font-size: 30px;
-           padding: 0px 0px;
-           margin: 0px 0px;
-       }
-
-    }
-
-    .styledButton {
-        left: 10%;
-         width: 273px;
-         height: 78px;
-         color: black;
-         color:palevioletred ;
-         border-color: palevioletred;
-        font-weight: 600;
-         &:focus {
-            color: palevioletred;
-            border-color: palevioletred;
-            
-          }
-          &:hover {
-            color: palevioletred;
-            border-color: #d87093;
-          }
-          &.ant-btn-clicked:after {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            bottom: -1px;
-            right: -1px;
-            border-radius: inherit;
-            border: 0 solid palevioletred;
-            opacity: 0.4;
-            -webkit-animation: buttonEffect 0.4s;
-            animation: buttonEffect 0.4s;
-            display: block;
-          }
-     
-    }
-   
-
+.styledButton{
+  height: 40px !important;
+  width: 130px !important;
 }
     
 }
 
 
 
-@media screen and (max-width: 320px) {
-
-    .backgroundContainer{
-        background-image: url("../../Common/assests/Image/wavy-phone.svg") ;
-    background-repeat: no-repeat;
-    background-position: right;
-    height: 100%;
-    width: 100%;
-      background-size: contain;
-      background-position-y: top;
-      background-position-x: right;
-      z-index: -9999;
-    
-      position: absolute;
-      
-    //   margin-bottom: 5px !important;
-       margin-left: 0%;
-      //margin-right: -10%;
-    }
-    
-    .shopArt{
-        
-        height: 70%;
-        width: 70%;
-        margin-left: 25%;
-       margin-top: 8%;
-    }
-
-
-    
-.landingPageTextContainer{
-    width: 100%;
-    height: 100%;
-   display: flex;
-   flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding-left: 10%;
-    margin-top: 92%;
-   
-    .landingPageText{
-
-        h1:nth-of-type(1){
-             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            color: #B5B4B4;
-            padding: 0px 0px;
-            margin: 0px 0px;
-                
-        }
-
-        h1:nth-of-type(2){
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-           font-weight: bold;
-           font-size: 30px;
-           padding: 0px 0px;
-           margin: 0px 0px;
-       }
-
-    }
-
-    .styledButton {
-        left: 1%;
-         width: 273px;
-         height: 78px;
-         color: black;
-         color:palevioletred ;
-         border-color: palevioletred;
-        font-weight: 600;
-         &:focus {
-            color: palevioletred;
-            border-color: palevioletred;
-            
-          }
-          &:hover {
-            color: palevioletred;
-            border-color: #d87093;
-          }
-          &.ant-btn-clicked:after {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            bottom: -1px;
-            right: -1px;
-            border-radius: inherit;
-            border: 0 solid palevioletred;
-            opacity: 0.4;
-            -webkit-animation: buttonEffect 0.4s;
-            animation: buttonEffect 0.4s;
-            display: block;
-          }
-     
-    }
-   
-
-}
-    
-}
+ 

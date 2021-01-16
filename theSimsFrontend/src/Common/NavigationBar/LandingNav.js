@@ -1,5 +1,5 @@
 import { MenuOutlined } from '@ant-design/icons'
-import { Drawer } from 'antd'
+import { Col, Drawer, Row } from 'antd'
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,9 +38,9 @@ export default function LandingNav(props) {
 
         <motion.nav
             variants={fadeOutVariants}
-            // initial="hidden"
-            // animate="visible"
-            // exit="exit"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className={classes.landingNav}
             >
 
@@ -59,21 +59,22 @@ export default function LandingNav(props) {
                 <div>{isLoggedIn ?
                     <Link to="/" onClick={logout}>Logout</Link> :
                     <Link to="/login" onClick={closeDrawer} >Login</Link>}</div>
-                <div>Some contents...</div>
+                <div>Some contents2...</div>
                 <div>Some contents...</div>
             </Drawer>
 
-            <ul className={classes.landingNavLinks} >
-                <li> <header className={classes.landingNavHeader}  >DEREK</header> </li>
+            <Row className={classes.landingNavLinks} >
 
-                <div className={classes.landingNavLinksRight}>
-                    <li> <p>HOME</p> </li>
-                    <li> <p>ABOUT</p> </li>
-                    <li><p>SHOP</p></li>
-                    <li> <MenuOutlined onClick={showDrawer} className={classes.MenuOutlined} /> </li>
-                </div>
+                <Col span={19}  className={classes.landingNavHeader} >  <div >DEREK</div> </Col>
 
-            </ul>
+                <Col span={5} className={classes.landingNavLinksRight}>
+                    {props.width> 425 &&  <p>HOME</p>  }
+                    {props.width> 425 &&    <p>ABOUT</p>  }
+                     {props.width> 425 && <p>SHOP</p> }
+                    <div> <MenuOutlined onClick={showDrawer} className={classes.MenuOutlined} /> </div>
+                </Col>
+
+            </Row>
         </motion.nav>
 
 

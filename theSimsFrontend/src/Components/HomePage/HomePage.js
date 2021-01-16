@@ -1,4 +1,4 @@
-import { Button, Row } from 'antd'
+import { Button, Col, Row } from 'antd'
 import { motion, useAnimation } from 'framer-motion'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ import Nav from '../../Common/NavigationBar'
 import { fadeOutVariants } from '../../Animation'
 import fadeOutVariantsLandingNav from '../../Common/NavigationBar/LandingNav'
 import LandingNav from '../../Common/NavigationBar/LandingNav'
-import MobileLandNav from '../../Common/NavigationBar/MobileLandingNav'
+
 
 
 function useWindowSize() {
@@ -104,123 +104,125 @@ export default function Homepage(props) {
     const renderLandingNav = () => {
         console.log(width);
 
-        if (width >= 320 && width < 768) {
-            return (
-                <MobileLandNav />
-            )
-        } else if (width > 768) {
-            return (
-                <LandingNav />
-            )
-        }
+        // if (width >= 320 && width < 768) {
+        //     return (
+        //         <MobileLandNav />
+        //     )
+        // } else if (width > 768) {
+        //     return (
+        //         <LandingNav />
+        //     )
+        // }
+
+        return (<LandingNav width={width} />)
     }
-        return (
-            <motion.div
-                variants={fadeOutVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+    return (
+        // <motion.div
+        //     variants={fadeOutVariants}
+        //     initial="hidden"
+        //     animate="visible"
+        //     exit="exit"
 
-                className={classes.homePageContainerMotion}
+        //     className={classes.homePageContainerMotion}
 
 
-            >
-                <div className={classes.homePageContainer}>
-                    {renderLandingNav()}
+        // >
+            <div className={classes.homePageContainer}>
+                {renderLandingNav()}
 
-                    <Row className={classes.landingPageTextContainer} >
+                <Row className={classes.landingPageTextContainer} >
 
-                        <div className={classes.landingPageText}>
-                            <h1>A Healthy Food</h1>
-                            <h1>For A Wealthy Mood ! </h1>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br />
+                    <Col span={24} className={classes.landingPageText}>
+                        <h1>A Healthy Food</h1>
+                        <h1>For A Wealthy Mood ! </h1>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br />
                           tempor incididunt ut labore et dolore magna aliqua. Ut<br />
                           enim ad minim veniam.
                       </p>
-                            </Row>
 
-                            <Row>
-                                <p>
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia<br />
+
+
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia<br />
                   deserunt mollit anim id est laborum.
                       </p>
-                            </Row>
-                            <Button className={classes.styledButton} shape="round" >
-                                <Link to="/products"> 
-                                 GET STARTED
+
+                        <Button className={classes.styledButton} shape="round" >
+                            <Link to="/products">
+                                GET STARTED
                                  </Link>
 
 
-                            </Button>
-                        </div>
-                    </Row>
-                    <div className={classes.backgroundContainer}>
-                        <motion.img
-                            initial={{
+                        </Button>
+                    </Col>
+                </Row>
+                <div className={classes.backgroundContainer}>
+                    <motion.img
+                        initial={{
 
-                            }}
-                            //  animate="visible"
-                            animate={controls}
-                            src={shopArt}
-                            alt="shopArt"
-                            className={classes.shopArt}
-                        />
-                    </div>
-
+                        }}
+                        //  animate="visible"
+                        animate={controls}
+                        src={shopArt}
+                        alt="shopArt"
+                        className={classes.shopArt}
+                    />
                 </div>
 
-            </motion.div>
+            </div>
+
+        // </motion.div>
 
 
 
-            // <h1>
-            //     <motion.div
-            //         animate={slider}
-            //         initial={{ height: "100vh"
-            //         // ,zIndex:"1" 
+        // <h1>
+        //     <motion.div
+        //         animate={slider}
+        //         initial={{ height: "100vh"
+        //         // ,zIndex:"1" 
 
-            //     }}
-            //         exit={{
-            //             opacity: 0,
-            //             transition: { duration: .5 }
-            //         }}
-            //         className={classes.homePageContainer}
+        //     }}
+        //         exit={{
+        //             opacity: 0,
+        //             transition: { duration: .5 }
+        //         }}
+        //         className={classes.homePageContainer}
 
-            //     >
+        //     >
 
-            //         {/* <Nav
-            //           //  className={classes.nav}
-            //             // handleChangeLocale={handleChangeLocale}
-            //             // currentLocale={antdLang}
-            //         /> */}
+        //         {/* <Nav
+        //           //  className={classes.nav}
+        //             // handleChangeLocale={handleChangeLocale}
+        //             // currentLocale={antdLang}
+        //         /> */}
 
-            //         {/* <motion.img
-            //             initial={{
-            //                 height: "10vh",
-            //                 width: "100%",
+        //         {/* <motion.img
+        //             initial={{
+        //                 height: "10vh",
+        //                 width: "100%",
 
-            //             }}
-            //             //  animate="visible"
-            //             animate={controls}
-            //             src={hero}
-            //             alt="hero"
-            //             className={classes.heroImg}
-            //         /> */}
+        //             }}
+        //             //  animate="visible"
+        //             animate={controls}
+        //             src={hero}
+        //             alt="hero"
+        //             className={classes.heroImg}
+        //         /> */}
 
-            //         <motion.div initial={{ opacity: 0 }} animate={homePageButton} className={classes.homePageheadline}>
-            //             <motion.p className={classes.homePageheadlineText}  >Eat Fresh</motion.p>
-            //             {/* <Link to="/products" > <Button  >Explore</Button></Link> */}
-            //         </motion.div>
-
-
-            //     </motion.div>
+        //         <motion.div initial={{ opacity: 0 }} animate={homePageButton} className={classes.homePageheadline}>
+        //             <motion.p className={classes.homePageheadlineText}  >Eat Fresh</motion.p>
+        //             {/* <Link to="/products" > <Button  >Explore</Button></Link> */}
+        //         </motion.div>
 
 
-            // </h1>
+        //     </motion.div>
 
 
-        )
-    }
+        // </h1>
+
+
+    )
+}
 
