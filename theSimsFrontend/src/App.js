@@ -158,7 +158,7 @@ function App() {
 
 
     <ConfigProvider locale={antdLang}>
-      <div className={classes.layout}>
+    
 
 
         {location.pathname === "/" ?
@@ -219,7 +219,7 @@ function App() {
      
         <BackTop style={{ top: "93%" }} target={() => document.body} />
 
-      </div>
+  
     </ConfigProvider>
 
 

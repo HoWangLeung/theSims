@@ -108,7 +108,7 @@ export default function Homepage(props) {
             return (
                 <MobileLandNav />
             )
-        } else if (width > 425) {
+        } else if (width > 768) {
             return (
                 <LandingNav />
             )
