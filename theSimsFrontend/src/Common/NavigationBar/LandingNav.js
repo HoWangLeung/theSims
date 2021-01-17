@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom'
 import { baseVariants, fadeOutVariants, fadeOutVariantsLandingNav } from '../../Animation'
 import { logoutAction } from '../../Components/Authentication/actions/AuthenticationActions'
 import AuthenticationService from '../../Components/Authentication/SignUp/AuthenticationService'
+import Landingdrawer from './LandingDrawer'
 
 import classes from './Nav.less'
+
 
 export default function LandingNav(props) {
 
@@ -23,14 +25,14 @@ export default function LandingNav(props) {
     };
 
     const dispatch = useDispatch();
-    const  logout = async () => {
-    
+    const logout = async () => {
+
         await AuthenticationService.logout()
 
-        dispatch( logoutAction(isLoggedIn))
-       
-     closeDrawer()
-      // props.history.push('/')
+        dispatch(logoutAction(isLoggedIn))
+
+        closeDrawer()
+        // props.history.push('/')
     }
 
 
@@ -42,36 +44,32 @@ export default function LandingNav(props) {
             animate="visible"
             exit="exit"
             className={classes.landingNav}
-            >
+        >
 
-            <Drawer
-                width="30%"
-                title="Hello !"
-                placement="right"
-                closable={false}
-                onClose={closeDrawer}
-                visible={visible}
-                className={classes.landingNavDrawer}
-
-
-
-            >
-                <div>{isLoggedIn ?
-                    <Link to="/" onClick={logout}>Logout</Link> :
-                    <Link to="/login" onClick={closeDrawer} >Login</Link>}</div>
-                <div>Some contents2...</div>
-                <div>Some contents...</div>
-            </Drawer>
 
             <Row className={classes.landingNavLinks} >
+                <Col>
 
-                <Col span={19}  className={classes.landingNavHeader} >  <div >DEREK</div> </Col>
+                    <Landingdrawer 
+                    visible={visible}
+                    logout={logout}
+                    closeDrawer={closeDrawer}
+                    isLoggedIn={isLoggedIn}
+                    />
+                </Col>
 
-                <Col span={5} className={classes.landingNavLinksRight}>
-                    {props.width> 425 &&  <p>HOME</p>  }
-                    {props.width> 425 &&    <p>ABOUT</p>  }
-                     {props.width> 425 && <p>SHOP</p> }
-                    <div> <MenuOutlined onClick={showDrawer} className={classes.MenuOutlined} /> </div>
+                <Col xs={12} sm={12} lg={12} className={classes.landingNavHeader} >
+                    <div >DEREK</div>
+
+                </Col>
+
+                <Col xs={12} sm={12} lg={12} className={classes.landingNavLinksRight}>
+                    <div className={classes.navLinksRightContainer}>
+                        {props.width > 425 && <Link to="/about" ><p className={classes.navText}>ABOUT</p>  </Link>}
+                        {props.width > 425 && <Link to="/products" ><p className={classes.navText}>SHOP</p></Link>}
+                        {props.width > 425 && <Link to="/conatct" ><p className={classes.navText}>CONTACT</p></Link>}
+                        <div className={classes.menuIcon} > <MenuOutlined onClick={showDrawer} /> </div>
+                    </div>
                 </Col>
 
             </Row>

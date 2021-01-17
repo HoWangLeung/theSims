@@ -98,7 +98,7 @@ function Specificproduct(props) {
         return (
 
 
-            <Row className={classes.specificProductContainer}>
+            <Row className={classes.specificProductContainer} justify="center">
 
                 <Col xs={24} sm={24} md={24} lg={12} className={classes.imageContainer} >
                     <motion.div

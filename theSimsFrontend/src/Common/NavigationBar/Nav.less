@@ -1,57 +1,78 @@
-.avatar{
-    // position: absolute;
-    // right: 70px;
-    // top: 15px;
+.enjoySVG{
+  max-width: 100%;
+  width: 100%;
+}
+.drawer{
+  a{text-decoration: none;}
+    :global{
+      .ant-drawer-body{
+        padding: 0px !important;
+       
+       
+      
+      }
+      .ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+        color: #707070;
+    }
+      .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: transparent;
+        &:hover{
+        background-color: rgba(239, 247, 243, 0.541);;
+        }
+      }
+    }
+  
 }
 
-.loginIcon{
-//     position: absolute;
-//    right: 100px;
-//    top: 25px;
+.drawerImgContainer{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
-
  
 
 
 .appHeaderContainer{
+  width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  position: relative;
+  // position: relative;
   //background-color: white;
 }
 
-.listIcon{
+// .listIcon{
 
-    font-size: 30px;
-       cursor: pointer;
-       padding-top: 15px;
+//     font-size: 30px;
+//        cursor: pointer;
+//        padding-top: 15px;
    
-   }
+//    }
    
-   .listIconContainer{
-    padding-right: 12px;
-   }
+//    .listIconContainer{
+//     padding-right: 12px;
+//    }
 
-   .navCartIconContainer{
-      // margin-top: 12px !important;
-      // padding-right: 12px;
-   }
+//    .navCartIconContainer{
+//       // margin-top: 12px !important;
+//       // padding-right: 12px;
+//    }
 
-.pointer{
-    cursor: pointer;
-    &:link{
-            text-decoration: none;
+// .pointer{
+//     cursor: pointer;
+//     &:link{
+//             text-decoration: none;
 
-          }
-    &:visited{
-            text-decoration: none;
-          }
+//           }
+//     &:visited{
+//             text-decoration: none;
+//           }
 
-            color: #000000;
-            text-decoration: none;
+//             color: #000000;
+//             text-decoration: none;
 
-}
+// }
 .functionGroups{
     display: flex;
     align-items: center;
@@ -60,15 +81,16 @@
     // > div,span{
     //     margin-right: 8px;
     // }
+    
 }
-.userMenuDropDown{
-    min-width: 160px;
-}
-.appNavContainer{
-    // min-height: 50px !important;
-  //   width: 100% !important;
-  // background-color: white;
-}
+// .userMenuDropDown{
+//     min-width: 160px;
+// }
+// .appNavContainer{
+//     // min-height: 50px !important;
+//   //   width: 100% !important;
+//   // background-color: white;
+// }
 
 
 .landingNav{
@@ -79,301 +101,84 @@
   //    }
   //  }
   width: 100%;
-  
-
-  .landingNavLinks{
-    margin:0px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      .landingNavHeader{
-        font-size: 40px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: bold;
-        padding-top: 15px;
-        padding-left: 49px;
-      }
-  
-      .landingNavLinksRight{
-        padding-right: 2%;
-        width: 20%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        
-        
-
-
-            p{
-              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              font-size: 25px;
-              font-weight: 600;
-              color: white;
-              margin-top: 0;
-              padding-top: 30px;
-              cursor: pointer;
-              &::after{
-                content: '';
-                display: block;
-                width: 0;
-                height: 2px;
-                transition: width .3s;
-                background-color: white;
-  
-              }
-              &:hover::after{
-                 width: 100%;
-                 transition: width .3s ;
-  
-              }
-  
-  
-  
-            }      
-  
-            .MenuOutlined{
-              font-size: 25px;
-              color: white;
-              padding-top: 38px;
-            }
-      }
-  }
-}
-
-
-
-
-@media (max-width: 1440px) {
-  .landingNav{
-
-    br.responsive {
-      display: none; // Hide BR tag for wider screens
-    }
-    br.responsive {
-      display: inline; // Show BR tag for narrow screens
-    }
-    
-    width: 100% !important;
-    
-  
-    .landingNavLinks{
-      margin:0px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .landingNavHeader{
-          font-size: 40px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          font-weight: bold;
-          padding-top: 15px;
-          padding-left: 49px;
-        }
-    
-        .landingNavLinksRight{
-          padding-right: 2%;
-          width: 30% !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          
-          
-  
-  
-              p{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 25px;
-                font-weight: 600;
-                color: white;
-                margin-top: 0;
-                padding-top: 30px;
-                cursor: pointer;
-                &::after{
-                  content: '';
-                  display: block;
-                  width: 0;
-                  height: 2px;
-                  transition: width .3s;
-                  background-color: white;
-    
-                }
-                &:hover::after{
-                   width: 100%;
-                   transition: width .3s ;
-    
-                }
-    
-    
-    
-              }      
-    
-              .MenuOutlined{
-                font-size: 25px;
-                color: white;
-                padding-top: 38px;
-              }
-        }
-    }
-  }
-}
-
-
-
-@media (max-width: 1024px) {
-  .landingNav{
-
-   
-    width: 100% !important;
-    
-  
-    .landingNavLinks{
-      margin:0px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .landingNavHeader{
-          font-size: 40px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          font-weight: bold;
-          padding-top: 15px;
-          padding-left: 49px;
-        }
-    
-        .landingNavLinksRight{
-          padding-right: 2%;
-          width: 40% !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          
-          
-  
-  
-              p{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 25px;
-                font-weight: 600;
-                color: white;
-                margin-top: 0;
-                padding-top: 30px;
-                cursor: pointer;
-                &::after{
-                  content: '';
-                  display: block;
-                  width: 0;
-                  height: 2px;
-                  transition: width .3s;
-                  background-color: white;
-    
-                }
-                &:hover::after{
-                   width: 100%;
-                   transition: width .3s ;
-    
-                }
-    
-    
-    
-              }      
-    
-              .MenuOutlined{
-                font-size: 25px;
-                color: white;
-                padding-top: 38px;
-              }
-        }
-    }
-  }
-}
-
-
-
-@media (max-width: 768px) {
-  .landingNav{
-
-   
-    width: 100% !important;
-    
-  
-    .landingNavLinks{
-      margin:0px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .landingNavHeader{
-          font-size: 40px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          font-weight: bold;
-          padding-top:30%;
-          padding-left: 20px;
-        }
-    
-        .landingNavLinksRight{
-          padding-right: 2%;
-          width: 50% !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          
-          padding-top:85px;
-  
-  
-              p{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 25px;
-                font-weight: 600;
-                color: white;
-                margin-top: 0;
-                padding-top: 30px;
-                cursor: pointer;
-                &::after{
-                  content: '';
-                  display: block;
-                  width: 0;
-                  height: 2px;
-                  transition: width .3s;
-                  background-color: white;
-    
-                }
-                &:hover::after{
-                   width: 100%;
-                   transition: width .3s ;
-    
-                }
-    
-    
-    
-              }      
-    
-              .MenuOutlined{
-                font-size: 25px;
-                color: white;
-                padding-top: 38px;
-              }
-        }
-    }
-  }
-}
-
-
-
-@media (max-width: 425px) {
-  .landingNav{
-    margin: 0px !important;
-    padding: 0px !important;
  
+  
+
+  }
+
+
+.landingNavLinks{
+  width: 100%;
+ flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px !important;
+
+  }
+
+
+  .landingNavHeader{
+    font-size: 45px;
+    padding-left: 6%;
+    color: #131313;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+  
+  }
+
+  .landingNavLinksRight{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+  justify-content: flex-end;
+    
+     
+  }
+
+  
+  .navLinksRightContainer{
+
+    width: 500px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 25px;
+    font-weight: 600px ;
    
   }
-
- .landingNavHeader{
+.navText{
   margin: 0px !important;
-  padding: 0px !important;
- }
-  .landingNavLinksRight{
-    margin: 0px !important;
-    padding: 0px !important;
-    left: 0%;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+
+
+
+
+
+  .menuIcon{
+   
+    font-weight: 600;
   }
 
+  @media screen and (max-width: 425px) {
+    .navLinksRightContainer{
+      justify-content: flex-end;
+      padding-right: 10px;
+    }
 
+    .landingNavLinksRight {
+      justify-content: flex-end;
+    }
+    .menuIcon{
+      padding-right: 15px; 
+    }
+  
+  }
 
-}

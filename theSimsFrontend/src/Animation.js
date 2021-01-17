@@ -4,6 +4,22 @@ export const baseVariants={
     exit:{},
 }
 
+export const fadeInVariant={
+  hidden:{
+    background:"red"
+  },
+  visible:{
+   
+    transition: {
+      duration: 5.5,
+      ease: "easeInOut"
+  }
+  },
+  exit:{
+
+  },
+}
+
 export const fadeOutVariants = {
     hidden: {
       // opacity:0

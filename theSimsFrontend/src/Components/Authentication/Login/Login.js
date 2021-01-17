@@ -118,7 +118,7 @@ class Login extends Component {
                 variants={baseVariants}
                 className={classes.loginFormContainer}>
 
-                <h1 style={{ color: "white" }}>{intl.get('signin')}</h1>
+               <h1>Sign IN</h1>
                 <Form
                     {...layout}
                     name="basic"

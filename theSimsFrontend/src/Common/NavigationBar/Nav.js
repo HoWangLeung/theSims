@@ -223,25 +223,23 @@ class Nav extends React.Component {
 
         }
         return (
-            <AnimatePresence exitBeforeEnter>
+             <AnimatePresence exitBeforeEnter>
             <motion.div
                 variants={fadeOutVariantsLandingNav}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                className={classes.appHeaderContainer}
             >
-                <motion.div
-                variants={fadeOutVariantsLandingNav}
-                
-                >
+           
                     {hideNav === false && topNavigationMenu}
                     {/* <Banner />
                     <Navigationmenu pathname={pathname} username={username} /> */}
                     {hideNav === true && <div className={classes.appNavContainer}><AppNav /></div>}
-                </motion.div>
+     
             </motion.div>
 
-            </AnimatePresence>
+             </AnimatePresence>
         );
     }
 
