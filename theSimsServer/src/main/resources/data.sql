@@ -75,9 +75,9 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRO
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Fuji Apple','USA',  12,40, 328,
 'https://images.unsplash.com/photo-1576359717253-70abe0accded?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzN8fGFwcGxlfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 3);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('McIntosh Apple','USA',  9, 50,825,
-'https://firebasestorage.googleapis.com/v0/b/reactspringbootorder.appspot.com/o/images%2Fproducts%2FApple%2Festudio-bloom-oo3kSFZ7uHk-unsplash.jpg?alt=media&token=ef2df92b-38cc-4f5b-9478-8f39af2a01c9', 3);
+'https://images.unsplash.com/photo-1507079304010-f59bbb70a377?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80', 3);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Golden Delicious Apple','USA',  5,10, 290,
-'https://firebasestorage.googleapis.com/v0/b/reactspringbootorder.appspot.com/o/images%2Fproducts%2FApple%2Fsidral-mundet-bWW4ZEWoNqs-unsplash.jpg?alt=media&token=7a79d407-7af2-4d45-bbce-a32db72e053f',3);
+'https://images.unsplash.com/photo-1508431800532-da5486c45537?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTUzfHxhcHBsZXxlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',3);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Golden Bananna','USA',  7,10, 25
 ,'https://firebasestorage.googleapis.com/v0/b/reactspringbootorder.appspot.com/o/images%2Fproducts%2FBanana%2Fanastasia-eremina-qSxKDzhkgvI-unsplash.jpg?alt=media&token=21c577b3-4fc1-423c-9cdb-bb66d2032ad2', 4);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Queen  Pineapple','Mexico',  8,10, 500

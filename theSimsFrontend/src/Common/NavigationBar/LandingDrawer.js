@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import classes from './Nav.less';
-import enjoySVG from '../../Common/assests/Image/enjoySVG.svg'
+import drawerSVG from '../../Common/assests/Image/drawerSVG.svg'
 const { SubMenu } = Menu;
 
 export default function Landingdrawer(props) {
@@ -19,10 +19,10 @@ export default function Landingdrawer(props) {
     return (
         <>
             <Drawer
-                width="30%"
-                title="Welcome !"
+                width={`${props.width > 425?"30%":"50%"}`}
+                title="Choose an option"
                 placement="right"
-                closable={true}
+                closable={false}
                 onClose={closeDrawer}
                 visible={visible}
                 className={classes.drawer}
@@ -43,7 +43,7 @@ export default function Landingdrawer(props) {
                 </Menu>
 
                 <div className={classes.drawerImgContainer}>
-                    <img src={enjoySVG} alt="enjoySVG" className={classes.enjoySVG} />
+                    <img src={drawerSVG} alt="enjoySVG" className={classes.drawerSVG} />
                 </div>
             </Drawer>
         </>

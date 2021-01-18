@@ -84,15 +84,15 @@ public class UsersController {
 		
 		
 		jwtInMemoryUserDetailsService.saveUser(user);
-//		System.out.println("user name = " + user.getUsername());
-//		Users targetUser =jwtInMemoryUserDetailsService.findUser(user.getUsername());
-//		System.out.println("user is saved proceed " + targetUser.toString());
-//		
-//		ConfirmationToken confirmationToken = new ConfirmationToken(targetUser);
-//		confirmationToken.setUser(targetUser);
-//	
-//		ConfirmationTokenService.saveConfirmationToken(confirmationToken);
-//		emailSender.sendEmail(targetUser,confirmationToken.getConfirmationToken());
+		System.out.println("user name = " + user.getUsername());
+		Users targetUser =jwtInMemoryUserDetailsService.findUser(user.getUsername());
+		System.out.println("user is saved proceed " + targetUser.toString());
+		
+		ConfirmationToken confirmationToken = new ConfirmationToken(targetUser);
+		confirmationToken.setUser(targetUser);
+	
+		ConfirmationTokenService.saveConfirmationToken(confirmationToken);
+		emailSender.sendEmail(targetUser,confirmationToken.getConfirmationToken());
 		
 	}
 	

@@ -16,7 +16,7 @@ export default function LandingNav(props) {
 
     const [visible, setVisible] = useState(false);
     const isLoggedIn = useSelector(state => state.AuthenticationReducer.isLoggedIn)
-    console.log(isLoggedIn);
+
     const showDrawer = () => {
         setVisible(true);
     };
@@ -46,18 +46,14 @@ export default function LandingNav(props) {
             className={classes.landingNav}
         >
 
-
+            <Landingdrawer
+                visible={visible}
+                logout={logout}
+                closeDrawer={closeDrawer}
+                isLoggedIn={isLoggedIn}
+                width={props.width}
+            />
             <Row className={classes.landingNavLinks} >
-                <Col>
-
-                    <Landingdrawer 
-                    visible={visible}
-                    logout={logout}
-                    closeDrawer={closeDrawer}
-                    isLoggedIn={isLoggedIn}
-                    />
-                </Col>
-
                 <Col xs={12} sm={12} lg={12} className={classes.landingNavHeader} >
                     <div >DEREK</div>
 
