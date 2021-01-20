@@ -15,7 +15,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.9.4",
     "antd-img-crop": "^3.13.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "check-prop-types": "^1.1.2",
     "craco-antd": "^1.18.1",
     "craco-less": "^1.16.0",
