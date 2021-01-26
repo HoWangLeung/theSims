@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Drawer, Button, Row } from 'antd';
 import {
-    UnorderedListOutlined
+    MenuOutlined
 } from '@ant-design/icons';
 import classes from './Nav.less'
 import intl from 'react-intl-universal';
@@ -56,7 +56,7 @@ class AppNav extends Component {
                     <div className={classes.navCartIconContainer}>
                         <Cart  />
                     </div>
-                    <UnorderedListOutlined
+                    <MenuOutlined
                         onClick={this.showDrawer}
                         className={classes.listIcon}
                     />

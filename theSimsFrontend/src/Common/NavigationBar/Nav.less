@@ -42,18 +42,20 @@
   width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between
   // position: relative;
   //background-color: white;
 }
 
-// .listIcon{
+.listIcon{
 
-//     font-size: 30px;
-//        cursor: pointer;
-//        padding-top: 15px;
+    font-size: 25px;
+       cursor: pointer;
+       padding-top: 5px;
+       padding-left: 10px;
+       padding-right: 10px;
    
-//    }
+   }
    
 //    .listIconContainer{
 //     padding-right: 12px;
@@ -107,7 +109,7 @@
   //  }
   width: 100%;
  
-  z-index: 9999;
+ 
 
   }
 
@@ -119,7 +121,7 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 30px !important;
-
+z-index: 1;
   }
 
 
@@ -138,7 +140,7 @@
     align-items: flex-end;
   justify-content: flex-end;
     
-     
+  z-index: 1;
   }
 
   
@@ -152,7 +154,7 @@
     color: white;
     font-size: 25px;
     font-weight: 600px ;
-   
+    z-index: 1;
   }
 .navText{
   margin: 0px !important;
@@ -160,6 +162,7 @@
   cursor: pointer;
   text-decoration: none;
   color: white;
+  z-index: 1;
 }
 
 
@@ -173,7 +176,21 @@
     z-index: 1;
   }
 
+  @media screen and (max-width: 760px) {
+
+    .appHeaderContainer{
+    
+        justify-content:flex-end;
+     
+    }
+
+
+  
+  }
+
   @media screen and (max-width: 425px) {
+
+    
     .navLinksRightContainer{
       justify-content: flex-end;
       padding-right: 10px;
@@ -185,6 +202,8 @@
     .menuIcon{
       padding-right: 15px; 
     }
+
+
   
   }
 
