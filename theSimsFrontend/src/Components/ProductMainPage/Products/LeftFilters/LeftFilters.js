@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Collapse, Divider, Row, Slider } from 'antd';
 import classes from '../../ProductMainPage.less';
@@ -6,10 +6,12 @@ import ProductsSearch from '../../ProductsSearch/ProductsSearch';
 import { MinusSquareOutlined, PlusSquareOutlined, UndoOutlined } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllProducts, filterProductByCategory, filterProductByPrice } from '../../actions/productActions';
+import { fetchAllProducts, filterProduct, filterProductByPrice, fetchProductsOverView } from '../../actions/productActions';
 import Text from 'antd/lib/typography/Text';
 import { motion } from 'framer-motion';
 import Filtercountry from './FilterCountry';
+
+
 const { Panel } = Collapse;
 
 
@@ -24,10 +26,23 @@ const LeftFilters = (props) => {
 
     const [filterValue, setFilterValue] = useState([1, 50])
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
+    const productOverview = useSelector(state => state.ProductReducer.productOverview);
+    const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
+    console.log(filterPayload);
+
+
 
 
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        //   dispatch(fetchCategoryInfo())
+        dispatch(fetchProductsOverView())
+
+
+    }, [])
+
     const handleReset = () => {
 
         dispatch(fetchAllProducts())
@@ -46,6 +61,7 @@ const LeftFilters = (props) => {
 
         let payload = {
             value: filterValue
+
         }
 
         dispatch(fetchAllProducts())
@@ -106,30 +122,58 @@ const LeftFilters = (props) => {
 
     const handleCategoryClick = e => {
 
-        let payload = { value: e.currentTarget.innerText }
-        dispatch(fetchAllProducts())
-            .then(() => {
-                dispatch(filterProductByCategory(payload))
+        let payload = filterPayload
+         payload.category = e.currentTarget.innerText
+         payload.currentFilter["category"] = true
+         payload.activeFilter.category=e.currentTarget.innerText
+         
 
-            })
+         
+        // dispatch(fetchAllProducts())
+        //     .then(() => {
+        dispatch(filterProduct(payload))
+
+        // })
     }
 
     const getCategories = () => {
-        const { categories } = productInfo
+        const { productList } = productInfo
+        const { categories } = productOverview
+        const { activeFilter } = filterPayload
+        console.log(categories);
+        const displayList = categories && categories.map(category => {
 
-        const displayList = categories && categories.map((option, index) => {
-
+                console.log(activeFilter.category === category);
+                console.log(category);
             return (
-
                 <li
-                    key={option}
+                    key={category}
                     onClick={handleCategoryClick}
                 >
-                    <span key={option}>{option}</span>
+                    <span className={category === activeFilter.category ?
+                        classes.categoryFilterText_ACTIVE :
+                        classes.categoryFilterText_NOT_ACTIVE}
+                        key={category}>
+                        {category}
+                    </span>
                 </li>
-
             )
-        })
+
+        });
+
+        // categoryList && categoryList.map((option, index) => {
+
+        //     return (
+
+        //         <li
+        //             key={option.category.name}
+        //             onClick={handleCategoryClick}
+        //         >
+        //             <span key={option.category.name}>{option.category.name}</span>
+        //         </li>
+
+        //     )
+        // })
 
 
         return (<>
@@ -182,11 +226,11 @@ const LeftFilters = (props) => {
                 <Panel header={<h4>CATEGORY</h4>} key="1">
                     {getCategories()}
                 </Panel>
-                <Panel header={<h4>PRICE</h4>} key="2">
+                {/* <Panel header={<h4>PRICE</h4>} key="2">
                     {useSlider()}
-                </Panel>
+                </Panel> */}
                 <Panel header={<h4>COUNTRY</h4>} key="3">
-                    <Filtercountry productInfo={productInfo} />
+                    <Filtercountry productOverview={productOverview} />
                 </Panel>
             </Collapse>
 

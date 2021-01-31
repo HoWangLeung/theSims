@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input, Image } from 'antd';
+import { Card, Row, Col, Spin, List, Avatar, Button, Skeleton, Input, Image, Result } from 'antd';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllProducts, addToCart, fetchProductsInCart } from '../../actions/productActions';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import classes from '../../ProductMainPage.less'
 import { getUserProfile } from '../../../Authentication/actions/AuthenticationActions';
 import { motion } from 'framer-motion';
 import Text from 'antd/lib/typography/Text';
+import { FileSearchOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 
 const Displayproducts = (props) => {
@@ -15,18 +16,18 @@ const Displayproducts = (props) => {
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
-    const isLoading = useSelector(state => {
-        return state.ProductReducer.isLoading
-    });
+
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
-
+    const isFetching = useSelector(state => state.LoadingReducer);
+    console.log(productInfo);
     const { categories, productList } = productInfo
     let isLoggedIn = useSelector(state => state.AuthenticationReducer.isLoggedIn);
+    console.log(isFetching);
     const dispatch = useDispatch();
     useEffect(() => {
 
-        dispatch(fetchAllProducts())
+
         console.log(isLoggedIn);
         if (isLoggedIn) {
             console.log('dispatching fetchProductsInCart displayproduct.js');
@@ -56,7 +57,7 @@ const Displayproducts = (props) => {
 
         },
         exit: {
-       
+
 
         }
 
@@ -64,7 +65,8 @@ const Displayproducts = (props) => {
 
     const renderProductScreen = () => {
         console.log(imgLoaded);
-        if (isLoading  )
+
+        if (isFetching["FILTER_PRODUCTS"]) {
             return Array.from(Array(20).keys()).map(e => {
                 return (
                     <Col xs={24} sm={24} sm={12} md={12} xl={8} className={classes.productNamePriceContainerImgCol}   >
@@ -73,29 +75,31 @@ const Displayproducts = (props) => {
 
                 )
             })
-        else
-        return productList && productList.map((item, i) => {
-            
+        }
+        if (productList && productList.length > 0) {
+            return productList && productList.map((item, i) => {
+                console.log(item);
+
                 return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={8} className={classes.productNamePriceContainerImgCol} >
                     <motion.div
-                       variants={variants}
+                        variants={variants}
                     >
                         <Link to={`/product/${item.id}`}>
                             <Card
-                             className={classes.productNamePriceContainer}
-                             bordered={false}
+                                className={classes.productNamePriceContainer}
+                                bordered={false}
                                 cover={
-                                   <Image
-                                         className={classes.productNamePriceContainerImg}
+                                    <Image
+                                        className={classes.productNamePriceContainerImg}
                                         alt="product"
                                         preview={false}
                                         src={item.productUrl}
-                                        placeholder 
-                                     
+                                        placeholder
+
 
                                         onLoad={() => setImgLoaded(true)}
                                     />}
-                             
+
                             >
 
                                 <Meta
@@ -106,7 +110,22 @@ const Displayproducts = (props) => {
                         </Link>
                     </motion.div>
                 </Col>
-        })
+            })
+        }
+
+
+        return (
+            <Row justify="center" style={{ width: "100%" }}>
+                <Result
+                    icon={<FileSearchOutlined />}
+                    title="No Such Combination, Please Try Again ! "
+                   
+                />
+            </Row>
+        )
+
+
+
 
     }
 
@@ -116,7 +135,7 @@ const Displayproducts = (props) => {
     return (
         <div className={classes.displayProductOuterContainer}>
 
-            <Row   className={classes.displayProductOuterContainerRow}>
+            <Row className={classes.displayProductOuterContainerRow}>
 
                 {renderProductScreen()}
 

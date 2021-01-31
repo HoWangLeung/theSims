@@ -4,7 +4,30 @@ const initState = {
     isLoading: false,
     productInfo: {},
     cartList: [],
-    specificProduct: {}
+    specificProduct: {},
+    currentFilter:
+    {
+        category: false
+    }
+    ,
+    filterPayload: {
+        category: "All",
+        country: new Set(["All"]),
+        currentFilter:
+        {
+            category: false,
+            country:false,
+        },
+        activeFilter:{
+            category: "All",
+            country:"All",
+
+        }
+
+
+    },
+
+    productOverview:[]
 }
 
 
@@ -113,20 +136,22 @@ const ProductReducer = (state = initState, action) => {
                     productList: listAfterFilter
                 }
             }
-        case ("FETCH_PRODUCTS_CATEOGRY"):
-            let searchCategory = action.payload.value
-            const listAfterFilterByCategory = state.productInfo.productList.filter(e => {
-                return e.category.name === searchCategory
-            })
+        case ("FILTER_PRODUCTS_SUCCESS"):
+        
 
-
-
+            const { currentFilter } = action.payload
+            console.log(currentFilter["category"]);
+            console.log(action.payload);
             return {
                 ...state,
                 productInfo: {
                     ...state.productInfo,
-                    productList: listAfterFilterByCategory
-                }
+                    productList: action.payload.res.data,
+                },
+                currentFilter: {
+                    category: currentFilter["category"]
+                },
+                filterPayload: {...state.filterPayload, ...action.payload}
 
             }
 
@@ -146,6 +171,20 @@ const ProductReducer = (state = initState, action) => {
 
 
             }
+        case ("FETCH_PRODUCT_OVERVIEW_SUCCESS"):
+
+
+      console.log(action.payload.data.detail);
+         return {
+
+                    ...state,
+                    productOverview:action.payload.data.detail
+    
+    
+         }
+
+
+ 
 
 
 

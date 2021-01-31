@@ -108,6 +108,8 @@ export const resetCurrentStep = () => {
 }
 
 
+
+
 export const fetchCategoryInfo = () => {
     return async (dispatch, getState) => {
         dispatch({ type: 'FETCH_ALL_CATEGORY_REQUEST'})
@@ -119,6 +121,9 @@ export const fetchCategoryInfo = () => {
     }
 
 }
+
+
+
 export const addTempItemToCategoryInfo = payload => {
     return  (dispatch, getState) => {
         dispatch({ type: 'ADD_TEMP_TO_CATEOGRY_INFO',payload})

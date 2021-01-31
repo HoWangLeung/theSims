@@ -1,15 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Displayproducts from './DisplayProducts/DisplayProducts'
 import Productsorter from './ProductSorter/ProductSorter'
 import LeftFilters from './LeftFilters/LeftFilters'
-import { Col, Row } from 'antd'
+import { Col, Row, Tag } from 'antd'
 import classes from '../ProductMainPage.less'
 import Cart from '../Cart/Cart'
 import { motion } from 'framer-motion'
 import ProductsSearch from '../ProductsSearch/ProductsSearch'
+import { useDispatch, useSelector } from 'react-redux'
+import { filterProduct } from '../actions/productActions'
 const Allproducts = (props) => {
 
+
+    const currentFilter = useSelector(state => state.ProductReducer.currentFilter);
+    const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
+    console.log(filterPayload);
+    const dispatch = useDispatch();
+    console.log(currentFilter);
+
+  
+    useEffect(() => {
+        let filterPayload={
+            category: "All",
+            country: new Set(["All"]),
+            currentFilter:
+            {
+                category: false,
+                country:false,
+            },
+            activeFilter:{
+                category: "All",
+                country:"All",
+
+            }
+    
+    
+        }
+
+        dispatch(filterProduct(filterPayload))
+    }, [])
 
     const variants = {
         hidden: {
@@ -24,35 +54,77 @@ const Allproducts = (props) => {
         },
         exit: {
             opacity: 0,
-            transition:{
+            transition: {
                 duration: .5
             }
         }
 
     }
-    return (
-      
-            <div className={classes.allProductContainer_outer}>
+
+    const handleTagClose = (e, tagName) => {
+
+        if (tagName === "category") {
+            filterPayload.currentFilter.category = false
+            filterPayload.activeFilter.category="All"
+            dispatch(filterProduct(filterPayload))
+        }
+        if (tagName === "country") {
+
+            filterPayload.country = new Set(["All"])
+            filterPayload.activeFilter.country="All"
+            dispatch(filterProduct(filterPayload))
+        }
 
 
-                <Row className={classes.allProductContainer}>
-                    <Col sm={24} xl={8} className={classes.allProductCol1}   >
-                        <LeftFilters />
-                    </Col>
-                    <Col sm={24} xl={16} className={classes.allProductCol2} >
-                        <Row className={classes.cartAndProductSorterContainer} >
-                            <h3>All Products</h3>
-                            {/* <Productsorter /> */}
-                            <ProductsSearch />
-                        </Row>
-                   
-                            <Displayproducts />
-                  
-                    </Col>
-                </Row>
 
+
+    }
+
+    const productSectionHeader = () => {
+        const {activeFilter} =filterPayload
+
+        return (
+
+            <div className={classes.filterTagContainer}>
+                <h3>Filters</h3>
+                <div className={classes.filterTag} >
+                    {currentFilter.category && 
+                    activeFilter.category!=="All" &&
+                    <Tag value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >Category</Tag>}
+                    {!filterPayload.country.has("All") && <Tag value="country" color="#108ee9" closable onClose={(e) => handleTagClose(e, "country")} >Country</Tag>}
+
+                </div>
             </div>
-  
+        )
+
+
+
+
+        //return <h3>All Products</h3>
+    }
+    return (
+
+        <div className={classes.allProductContainer_outer}>
+
+
+            <Row className={classes.allProductContainer}>
+                <Col sm={24} xl={8} className={classes.allProductCol1}   >
+                    <LeftFilters />
+                </Col>
+                <Col sm={24} xl={16} className={classes.allProductCol2} >
+                    <Row className={classes.cartAndProductSorterContainer} >
+                        <h3>{productSectionHeader()}</h3>
+                        {/* <Productsorter /> */}
+                        <ProductsSearch />
+                    </Row>
+
+                    <Displayproducts />
+
+                </Col>
+            </Row>
+
+        </div>
+
     )
 }
 

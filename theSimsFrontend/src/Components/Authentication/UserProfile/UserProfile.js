@@ -69,7 +69,7 @@ export default function Userprofile(props) {
             exit="exit"
             className={classes.userProfilecontainer}
         >
-            <Row >
+            <Row style={{width:"80%"}} >
                 <Row><h3>Your Profile</h3></Row>
 
                 <Collapse defaultActiveKey={['1']} className={classes.collapseContainer} onChange={handleCollapseChange} >
