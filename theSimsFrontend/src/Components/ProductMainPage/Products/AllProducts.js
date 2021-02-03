@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Displayproducts from './DisplayProducts/DisplayProducts'
 import Productsorter from './ProductSorter/ProductSorter'
@@ -15,31 +15,45 @@ const Allproducts = (props) => {
 
     const currentFilter = useSelector(state => state.ProductReducer.currentFilter);
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
+    const productOverview = useSelector(state => state.ProductReducer.productOverview);
     console.log(filterPayload);
     const dispatch = useDispatch();
     console.log(currentFilter);
 
-  
-    useEffect(() => {
-        let filterPayload={
+    const [filter, setFilter] = useState({
+        category: "All",
+        country: new Set(["All"]),
+        currentFilter:
+        {
+            category: false,
+            country: false,
+        },
+        activeFilter: {
             category: "All",
-            country: new Set(["All"]),
-            currentFilter:
-            {
-                category: false,
-                country:false,
-            },
-            activeFilter:{
-                category: "All",
-                country:"All",
+            country: "All",
 
+        },
+        countryDefaultCheckedList: []
+
+    })
+
+    console.log(filter);
+
+    useEffect(() => {
+
+        dispatch(filterProduct(filter))
+        console.log('changed ', productOverview);
+        setFilter(state => {
+            return {
+                ...state,
+                countryDefaultCheckedList: productOverview
             }
-    
-    
+        })
+        return () => {
+            console.log('previous !!!', productOverview);
         }
-
-        dispatch(filterProduct(filterPayload))
-    }, [])
+        //productOverview.countries
+    }, [productOverview])
 
     const variants = {
         hidden: {
@@ -65,13 +79,13 @@ const Allproducts = (props) => {
 
         if (tagName === "category") {
             filterPayload.currentFilter.category = false
-            filterPayload.activeFilter.category="All"
+            filterPayload.activeFilter.category = "All"
             dispatch(filterProduct(filterPayload))
         }
         if (tagName === "country") {
 
             filterPayload.country = new Set(["All"])
-            filterPayload.activeFilter.country="All"
+            filterPayload.activeFilter.country = "All"
             dispatch(filterProduct(filterPayload))
         }
 
@@ -81,16 +95,16 @@ const Allproducts = (props) => {
     }
 
     const productSectionHeader = () => {
-        const {activeFilter} =filterPayload
+        const { activeFilter } = filterPayload
 
         return (
 
             <div className={classes.filterTagContainer}>
                 <h3>Filters</h3>
                 <div className={classes.filterTag} >
-                    {currentFilter.category && 
-                    activeFilter.category!=="All" &&
-                    <Tag value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >Category</Tag>}
+                    {currentFilter.category &&
+                        activeFilter.category !== "All" &&
+                        <Tag value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >Category</Tag>}
                     {!filterPayload.country.has("All") && <Tag value="country" color="#108ee9" closable onClose={(e) => handleTagClose(e, "country")} >Country</Tag>}
 
                 </div>
@@ -109,7 +123,7 @@ const Allproducts = (props) => {
 
             <Row className={classes.allProductContainer}>
                 <Col sm={24} xl={8} className={classes.allProductCol1}   >
-                    <LeftFilters />
+                    <LeftFilters filter={filter} />
                 </Col>
                 <Col sm={24} xl={16} className={classes.allProductCol2} >
                     <Row className={classes.cartAndProductSorterContainer} >

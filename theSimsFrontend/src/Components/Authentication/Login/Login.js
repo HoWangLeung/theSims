@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Row } from 'antd';
 import AuthenticationService from '../SignUp/AuthenticationService'
 import { connect } from 'react-redux'
 import { getUserProfile, loginAction } from '../actions/AuthenticationActions'
@@ -43,13 +43,13 @@ class Login extends Component {
             if (res.data.detail === "USER_DISABLED") {
 
                 CommonModal.error({
-                    content:"Please activate your account by completing email verification"
+                    content: "Please activate your account by completing email verification"
                 })
 
-            }else if(res.data.detail ==="INVALID_CREDENTIALS"){
-                    console.log('getting "INVALID_CREDENTIALS" ');
+            } else if (res.data.detail === "INVALID_CREDENTIALS") {
+                console.log('getting "INVALID_CREDENTIALS" ');
                 CommonModal.error({
-                    content:"Invalid username/password"
+                    content: "Invalid username/password"
                 })
 
             }
@@ -117,8 +117,9 @@ class Login extends Component {
                 exit="exit"
                 variants={baseVariants}
                 className={classes.loginFormContainer}>
-
-               <h1>Sign IN</h1>
+                <Row justify="flex-start" style={{width:"100%"}} >
+                    <h1>Sign In With Username</h1>
+                </Row>
                 <Form
                     {...layout}
                     name="basic"

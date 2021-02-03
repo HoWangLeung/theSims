@@ -23,7 +23,7 @@ const { Panel } = Collapse;
 const LeftFilters = (props) => {
 
 
-
+    const {filter} = props
     const [filterValue, setFilterValue] = useState([1, 50])
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
@@ -230,7 +230,11 @@ const LeftFilters = (props) => {
                     {useSlider()}
                 </Panel> */}
                 <Panel header={<h4>COUNTRY</h4>} key="3">
-                    <Filtercountry productOverview={productOverview} />
+                    <Filtercountry
+                     productOverview={productOverview} 
+                     
+                     filter={filter}
+                     />
                 </Panel>
             </Collapse>
 

@@ -22,7 +22,8 @@ const initState = {
             category: "All",
             country:"All",
 
-        }
+        },
+        countryDefaultCheckedList:[]
 
 
     },
