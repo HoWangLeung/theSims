@@ -16,7 +16,7 @@ function StatisticPage(props) {
 
     useEffect(()=>{
 
-            console.log('sdf');
+            
           
     },[])
     const variants = {
@@ -39,7 +39,7 @@ function StatisticPage(props) {
 
 
     }
-    console.log(props);
+    
     return (
         <motion.div
             variants={variants}

@@ -38,14 +38,14 @@ class Nav extends React.Component {
 
     componentDidMount() {
         const { getUserProfile } = this.props
-        console.log(this.props);
+        
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
         if (this.props.isLoggedIn) {
-            console.log('did login, fetch ?');
+            
 
             let payload = { username: sessionStorage.getItem("authenticatedUser") }
-            console.log(payload);
+            
             getUserProfile(payload)
 
         }
@@ -53,11 +53,11 @@ class Nav extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('old props', prevProps.isLoggedIn);
-        console.log('new props', this.props.isLoggedIn);
+        
+        
 
         if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-            console.log('status changed');
+            
         }
     }
 
@@ -115,7 +115,7 @@ class Nav extends React.Component {
         const { currentLocale, handleChangeLocale, location: { pathname },
             userProfile: { username }, isLoggedIn } = this.props
 
-        console.log(isLoggedIn);
+        
         let homeIcon
         let localeChanger
         let loginOrUserIcon

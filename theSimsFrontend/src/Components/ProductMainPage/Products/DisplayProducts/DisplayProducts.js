@@ -20,17 +20,17 @@ const Displayproducts = (props) => {
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
     const userProfile = useSelector(state => state.AuthenticationReducer.userProfile);
     const isFetching = useSelector(state => state.LoadingReducer);
-    console.log(productInfo);
+    
     const { categories, productList } = productInfo
     let isLoggedIn = useSelector(state => state.AuthenticationReducer.isLoggedIn);
-    console.log(isFetching);
+    
     const dispatch = useDispatch();
     useEffect(() => {
 
 
-        console.log(isLoggedIn);
+        
         if (isLoggedIn) {
-            console.log('dispatching fetchProductsInCart displayproduct.js');
+            
             let payload = { username: sessionStorage.getItem("authenticatedUser") }
             dispatch(getUserProfile(payload))
 
@@ -64,7 +64,7 @@ const Displayproducts = (props) => {
     }
 
     const renderProductScreen = () => {
-        console.log(imgLoaded);
+        
 
         if (isFetching["FILTER_PRODUCTS"]) {
             return Array.from(Array(20).keys()).map(e => {
@@ -78,7 +78,7 @@ const Displayproducts = (props) => {
         }
         if (productList && productList.length > 0) {
             return productList && productList.map((item, i) => {
-                console.log(item);
+                
 
                 return <Col xs={24} sm={24} sm={12} md={12} lg={8} xl={8} className={classes.productNamePriceContainerImgCol} >
                     <motion.div

@@ -1,6 +1,6 @@
-  
-import React from 'react'
-import { Checkbox } from 'antd';
+
+import React, { useEffect } from 'react'
+import { Button, Checkbox } from 'antd';
 import classes from '../../ProductMainPage.less'
 import { Skeleton, Space, Divider, Switch, Form, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,14 +9,47 @@ import { filterProduct } from '../../actions/productActions';
 export default function Filtercountry(props) {
 
     const { productOverview } = props
-    console.log(productOverview);
+
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
+
+    
+
     const dispatch = useDispatch();
 
+    const [checkedList, setCheckedList] = React.useState([]);
+    useEffect(()=>{
+        console.log(filterPayload.currentFilter);
+        if(filterPayload.currentFilter.country===false){
+            
+            console.log("set empty");
+            setCheckedList([])
+        }
+        return ()=>{
+            
+        }
+    },[filterPayload])
     const onChange = (e) => {
 
-        console.log(`value = ${e.target.value}`);
-        console.log(`checked = ${e.target.checked}`);
+        let target = e.target.value
+        let isChecked = e.target.checked
+        let newCheckListSet = new Set([...checkedList])
+        if (!newCheckListSet.has(target)) {
+            newCheckListSet.add(target)
+        } else if (newCheckListSet.has(target)) {
+            newCheckListSet.delete(target)
+        }
+        // let index = newCheckedLiist.indexOf(target);
+        // 
+        // if (index == -1 && isChecked) {
+        //     
+        //     newCheckedLiist.push(target)
+          
+        // }else{
+        //     newCheckedLiist.splice(index, 1);
+        // }
+     
+        
+
         let country = e.target.value
 
         if (!filterPayload.country.has(country)) {
@@ -31,21 +64,33 @@ export default function Filtercountry(props) {
             filterPayload.country.delete("All")
 
 
-        console.log(filterPayload.country);
 
 
+        console.log("isChecked ",isChecked);
+        if(isChecked)
+        filterPayload.currentFilter.country = true
 
-        filterPayload.currentFilter.country = !filterPayload.currentFilter.country
 
-        console.log(filterPayload);
 
         dispatch(filterProduct(filterPayload))
-
+        let newCheckListArray = [...newCheckListSet]
+        console.log(newCheckListArray);
+        setCheckedList(newCheckListArray)
 
 
     }
 
-     
+
+    const shouldCheck=(country)=>{
+
+       
+       if(checkedList.indexOf(country)!==-1){
+           return true
+       }else{
+           return false
+       }
+
+    }
 
     const renderCheckboxes = () => {
 
@@ -54,43 +99,25 @@ export default function Filtercountry(props) {
         var arrResult = {};
         // if (productList) {
         //     const countryList = productList.map(e => e.countryOrigin)
-        //     console.log(countryList);
+        //     
         //     const uniqueCountries = [...new Set(countryList)];
 
 
 
-        return countries && countries.map(country => (
-
-            <Checkbox
-         
-               
-
-                value={country}
-                key={country}
-                onChange={onChange}>{country}</Checkbox>
-        ))
+        return countries && countries.map((country, i) => {
 
 
-        // } else {
-        //     return (
+            return (
 
-        //         <div className={classes.skeletonCheckbox} > 
-        //             {Array.from(Array(5).keys()).map(e => {
-        //                 return (
-        //                     <div  className={classes.skeletonCheckboxContainer} >
-        //                         <Skeleton.Avatar size="small" active={true} shape="square" />
-        //                         <Skeleton.Input size="small" style={{ width: 100 }} active={true}  className={classes.skeletonInput} />
-        //                     </div>
-        //                 )
-        //             })}
+                <Checkbox
+                    checked={shouldCheck(country)}
+                    value={country}
+                    key={country}
+                    onChange={onChange}>{country}
+                </Checkbox>
+            )
+        })
 
-
-        //         </div>
-
-
-
-        //     )
-        // }
 
     }
 
@@ -99,6 +126,7 @@ export default function Filtercountry(props) {
     return (
         <div className={classes.countryCheckboxes}>
             { renderCheckboxes()}
+    
         </div>
     )
 }

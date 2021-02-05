@@ -12,7 +12,7 @@ const PaymentReducer = (state = initState, action) => {
     switch (action.type) {
 
         case ("GET_ALL_CONFIRMED_ORDERS_SUCCESS"):
-            console.log(action.payload);
+            
 
             return {
                 ...state,

@@ -32,7 +32,7 @@ function LineChart1() {
 
 
 
-    console.log(productSoldStat);
+    
 
     const data = productSoldStat
 
@@ -48,7 +48,7 @@ function LineChart1() {
 
     const renderData = () => {
 
-        console.log(productSoldStat === []);
+        
         if (data.length > 0) {
             return (<ResponsiveContainer height="99%" width="100%" >
                 <BarChart width={600} height={400} data={data} maxBarSize={20} layout={'vertical'}>
@@ -84,7 +84,7 @@ function LineChart1() {
             activeKey={activeMonth}
         >
             {moment.monthsShort().map((month, index) => {
-                console.log(data);
+                
                 return (
                     <TabPane tab={month} key={month} className={classes.quantityTabPane}   >
                         {renderData()}

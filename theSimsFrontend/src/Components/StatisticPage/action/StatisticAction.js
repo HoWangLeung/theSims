@@ -5,7 +5,7 @@ import { API } from "../../../ApiConfig";
 
 export const getStatSoldByMonth =  (payload) => {
     return  async(dispatch, getState) => {
-        console.log(payload);
+        
       const {activeMonth, activeYear} = payload
         dispatch({ type: 'GET_STAT_SOLD_BY_MONTH_REQUEST'})
          let response = await axios.get(`${API}/orders/confirmedOrders/statistic/quantity?year=${activeYear}&month=${activeMonth}`, payload)

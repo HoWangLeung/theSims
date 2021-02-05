@@ -116,12 +116,10 @@ function Createproductform() {
             })
     }
     const handleInputChange = (e) => {
-        console.log(e.currentTarget);
+       
         let value = e.currentTarget.value
         let id = e.currentTarget.id
-        console.log(id);
-        console.log(value);
-        console.log(form.getFieldsValue().createProduct);
+ 
         let values = form.getFieldsValue().createProduct
         setInputValues(values)
 

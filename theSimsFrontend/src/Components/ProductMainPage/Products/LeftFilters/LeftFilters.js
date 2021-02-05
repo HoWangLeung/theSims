@@ -28,7 +28,7 @@ const LeftFilters = (props) => {
     const productInfo = useSelector(state => state.ProductReducer.productInfo);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
-    console.log(filterPayload);
+    
 
 
 
@@ -140,11 +140,11 @@ const LeftFilters = (props) => {
         const { productList } = productInfo
         const { categories } = productOverview
         const { activeFilter } = filterPayload
-        console.log(categories);
+        
         const displayList = categories && categories.map(category => {
 
-                console.log(activeFilter.category === category);
-                console.log(category);
+                
+                
             return (
                 <li
                     key={category}
@@ -242,13 +242,13 @@ const LeftFilters = (props) => {
 
 
 
-            <Button
+            {/* <Button
                 type="primary"
                 onClick={handleReset}
                 className={classes.LeftFiltersResetBtn}
             >
                 <UndoOutlined />  {intl.get('reSet')}
-            </Button>
+            </Button> */}
         </motion.div>
 
 

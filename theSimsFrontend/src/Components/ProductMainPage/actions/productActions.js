@@ -39,7 +39,7 @@ export const changeOrderStatus = (payload) => {
 
 export const filterProduct= (payload) => {
 
-  console.log(payload);
+  
   
   if(payload.currentFilter.category===false){
     payload.category="All"
@@ -48,9 +48,9 @@ export const filterProduct= (payload) => {
 
  let countries = payload.country 
 countries = Array.from(payload.country).join()
-console.log(countries);
+
  
-  console.log(payload);
+  
   let url = `${API}/products/search?category=${payload.category}&country=${countries}`
 
 
@@ -63,7 +63,7 @@ console.log(countries);
     try {
       dispatch({ type: 'FILTER_PRODUCTS_REQUEST' })
       let res = await axios.get(url)
-      console.log(res);
+      
       payload.res=res
       
       dispatch({ type: 'FILTER_PRODUCTS_SUCCESS',  
@@ -135,7 +135,7 @@ export const fetchProductsInCart = () => {
     try {
       let userId = sessionStorage.getItem("userId")
       let token = sessionStorage.getItem('USER_TOKEN')
-      console.log(userId);
+      
      // dispatch({ type: 'FETCH_PRODUCTSINCART_REQUEST', payload: res.data })
     
       let res = await axios.get(`${API}/orders/user/${userId}`
@@ -251,7 +251,7 @@ export const fetchProductsOverView = () => {
   return async (dispatch, getState) => {
       dispatch({ type: 'FETCH_PRODUCT_OVERVIEW_REQUEST'})
       let res = await axios.get(`${API}/products/overview`)
-      console.log(res);
+      
       dispatch({ type: 'FETCH_PRODUCT_OVERVIEW_SUCCESS', 
       payload:res 
     })

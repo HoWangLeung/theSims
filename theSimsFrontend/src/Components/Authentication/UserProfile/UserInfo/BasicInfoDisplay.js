@@ -17,7 +17,7 @@ export default function BasicInfoDisplay(props) {
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        
     }
 
     return (
@@ -33,7 +33,7 @@ export default function BasicInfoDisplay(props) {
                 {Object.keys(userProfile)
                     .filter(field => field !== "id" && field !== "role")
                     .map((field, i) => {
-                        console.log(field);
+                        
                         return (<Col xs={24} lg={12} className={classes.userInfoCol}   >
                             <Form.Item
                                 labelAlign="left"

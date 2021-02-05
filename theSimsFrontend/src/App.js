@@ -71,18 +71,18 @@ function App() {
   const location = useLocation()
   const [antdLang, setAntdLang] = useState(en_US)
   const isUserLoggedIn = AuthenticationService.isUserLoggedIn()
-  console.log(isUserLoggedIn);
+  
 
-  console.log('need to fire again axios interceptor ! ');
+  
   axios.interceptors.request.use(
     (config) => {
-      console.log('line 72 axios ');
-      console.log(config);
+      
+      
       if (isUserLoggedIn) {
-        console.log('user is fucking logged in ');
+        
         config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
       }
-      console.log(config, 'sfd');
+      
       return config
     },
     error => {
@@ -153,7 +153,7 @@ function App() {
   }
 
 
-  console.log(location);
+  
   return (
 
 

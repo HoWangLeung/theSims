@@ -91,7 +91,7 @@ function Specificproduct(props) {
 
     const renderContent = () => {
 
-        console.log(imgLoaded);
+        
 
 
 
@@ -143,7 +143,7 @@ function Specificproduct(props) {
 
 
 
-    console.log(pathname);
+    
     return (
         <motion.div
             variants={variants}

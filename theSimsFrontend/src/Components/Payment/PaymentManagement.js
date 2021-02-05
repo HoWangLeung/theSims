@@ -28,7 +28,7 @@ export default function PaymentManagement(props) {
 
         if (record) {
             return record.orderProductList.map(e => {
-                console.log(e);
+                
                 return (
                     <div key={e.id} className={classes.orderProductDetailContainer} >
                         <Tag style={{ margin: "5px" }}>{`${e.product.productName} x ${e.quantity}`}</Tag>

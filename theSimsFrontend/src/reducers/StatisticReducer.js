@@ -8,7 +8,7 @@ const StatisticReducer = (state = initState, action) => {
 
         case ("GET_STAT_SOLD_BY_MONTH_SUCCESS"):
 
-                console.log(action.payload.detail);
+                
             return {
                 ...state,
                 productSoldStat: action.payload.detail

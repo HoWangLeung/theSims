@@ -16,9 +16,9 @@ const Allproducts = (props) => {
     const currentFilter = useSelector(state => state.ProductReducer.currentFilter);
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
-    console.log(filterPayload);
+    
     const dispatch = useDispatch();
-    console.log(currentFilter);
+    
 
     const [filter, setFilter] = useState({
         category: "All",
@@ -37,12 +37,12 @@ const Allproducts = (props) => {
 
     })
 
-    console.log(filter);
+    
 
     useEffect(() => {
 
         dispatch(filterProduct(filter))
-        console.log('changed ', productOverview);
+        
         setFilter(state => {
             return {
                 ...state,
@@ -50,7 +50,7 @@ const Allproducts = (props) => {
             }
         })
         return () => {
-            console.log('previous !!!', productOverview);
+            
         }
         //productOverview.countries
     }, [productOverview])
@@ -86,6 +86,7 @@ const Allproducts = (props) => {
 
             filterPayload.country = new Set(["All"])
             filterPayload.activeFilter.country = "All"
+            filterPayload.currentFilter.country=false
             dispatch(filterProduct(filterPayload))
         }
 

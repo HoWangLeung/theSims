@@ -141,8 +141,8 @@ const ProductReducer = (state = initState, action) => {
         
 
             const { currentFilter } = action.payload
-            console.log(currentFilter["category"]);
-            console.log(action.payload);
+            
+            
             return {
                 ...state,
                 productInfo: {
@@ -175,7 +175,7 @@ const ProductReducer = (state = initState, action) => {
         case ("FETCH_PRODUCT_OVERVIEW_SUCCESS"):
 
 
-      console.log(action.payload.data.detail);
+      
          return {
 
                     ...state,

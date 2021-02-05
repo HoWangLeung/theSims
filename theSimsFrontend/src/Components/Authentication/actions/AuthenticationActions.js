@@ -15,11 +15,11 @@ export const getUserProfile = (payload) => {
   return async (dispatch, getState) => {
 
     let{username} = payload
-    console.log(username);
+    
     try {
 
       let res = await axios.get(`${API}/users/userProfile?username=${username}`)
-      console.log(res);
+      
       sessionStorage.setItem('userId', parseInt(res.data.detail.id))
       dispatch({ type: 'GET_USER_PROFILE_SUCCESS', payload: res.data })
       return res
@@ -85,8 +85,8 @@ export const editBasicInfoRequest =  (payload) => {
        dispatch({ type: 'EDIT_BASIC_INFO_REQUEST' })
   
        let userId = parseInt(sessionStorage.getItem("userId"))
-      // console.log(typeof userId);
-      // console.log(payload);
+      // 
+      // 
       // const sleep = (m) => new Promise((r) => setTimeout(r, m))
       // sleep(3000)
       let res = await axios.put(`${API}/users/editBasicInfo?userId=${userId}`, payload);

@@ -22,10 +22,10 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log(prevProps.isLoggedIn);
-        console.log(this.props.isLoggedIn);
+        
+        
         if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-            console.log('did up date');
+            
         }
 
     }
@@ -36,10 +36,10 @@ class Login extends Component {
         const { username, password, remember } = values
 
         try {
-            console.log('login now !!!!!');
+            
             let res = await AuthenticationService
                 .executeJwtAuthenticationService(username, password)
-            console.log(res);
+            
             if (res.data.detail === "USER_DISABLED") {
 
                 CommonModal.error({
@@ -47,7 +47,7 @@ class Login extends Component {
                 })
 
             } else if (res.data.detail === "INVALID_CREDENTIALS") {
-                console.log('getting "INVALID_CREDENTIALS" ');
+                
                 CommonModal.error({
                     content: "Invalid username/password"
                 })
@@ -58,7 +58,7 @@ class Login extends Component {
                 let token = res.data.token
                 AuthenticationService.registerSuccessfulLoginForJwt(username, token)
                 let isLoggedIn = AuthenticationService.isUserLoggedIn()
-                console.log('isLoggedIn ', isLoggedIn);
+                
                 this.props.loginAction(isLoggedIn)
                 this.props.history.push('/inventory')
             }

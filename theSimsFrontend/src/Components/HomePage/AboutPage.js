@@ -97,11 +97,11 @@ function AboutPage(props) {
 
 
 
-    console.log(props);
+    
 
     const itemRender = (route, params, routes, paths) => {
-        console.log('hello104');
-        console.log(paths);
+        
+        
         const last = routes.indexOf(route) === routes.length - 1;
         return last ? (
             <span>{route.breadcrumbName}</span>

@@ -75,7 +75,7 @@ export default function Homepage(props) {
 
 
     //=======OLD=====
-    // console.log(width, height);
+    // 
     // const controls = useAnimation()
     // const slider = useAnimation()
 
@@ -148,7 +148,7 @@ export default function Homepage(props) {
 
     // // }
     // const renderLandingNav = () => {
-    //     console.log(width);
+    //     
 
     //     // if (width >= 320 && width < 768) {
     //     //     return (
