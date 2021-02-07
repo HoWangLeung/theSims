@@ -192,12 +192,12 @@ function App() {
 
 
      
-          {/* <AnimatePresence exitBeforeEnter  > */}
+          <AnimatePresence exitBeforeEnter  >
             <Switch location={location} key={location.key}  >
 
               <Route exact path='/' component={Homepage} />
-              <Route exact path='/about' component={AboutPage} />
               <Route exact path='/products' component={ProductMainpage} />
+              <Route exact path='/about' component={AboutPage} />       
               <Route path='/product/:id' component={Specificproduct} />
               <Route path='/404' component={Pagenotfound} />
               <Route path='/login' component={Login} />
@@ -215,7 +215,7 @@ function App() {
               <Route path='/counter' component={Counter} />
               <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
             </Switch>
-          {/* </AnimatePresence> */}
+          </AnimatePresence>
      
         <BackTop style={{ top: "93%" }} target={() => document.body} />
 

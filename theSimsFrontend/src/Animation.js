@@ -6,13 +6,16 @@ export const baseVariants={
 
 export const fadeInVariant={
   hidden:{
-    background:"red"
+   y:1000,
+   opacity:0
   },
   visible:{
-   
+   y:0,
+   opacity:1,
     transition: {
-      duration: 5.5,
-      ease: "easeInOut"
+      duration: 1,
+      ease: "easeInOut",
+      
   }
   },
   exit:{
@@ -24,8 +27,6 @@ export const fadeOutVariants = {
     hidden: {
       // opacity:0
       // // x: '-100vw',
-
-
     },
     visible: {
       opacity:1,
@@ -35,9 +36,10 @@ export const fadeOutVariants = {
       }
     },
     exit: {
+      y:"-3000px",
       opacity: 0,
       transition: {
-        duration: .5,
+        duration: 3,
         ease: "easeInOut"
       }
     }
@@ -60,6 +62,28 @@ export const fadeOutVariants = {
         transition: {
             duration: 5.5
         }
+    }
+
+  }
+
+
+  export const tagVariants = {
+    hidden: {
+        opacity: 0,
+        x:50
+    },
+    visible: {
+        opacity: 1,
+        x:0,
+        transition: {
+            duration: .5
+        }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: .5
+    }
     }
 
   }

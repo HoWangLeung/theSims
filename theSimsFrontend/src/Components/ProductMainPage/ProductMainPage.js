@@ -5,6 +5,7 @@ import { BackTop, Col, Row } from 'antd'
 import Allproducts from './Products/AllProducts'
 import Cart from './Cart/Cart'
 import { motion } from 'framer-motion'
+import { baseVariants, fadeInVariant } from '../../Animation'
 
 function ProductMainpage() {
     const variants = {
@@ -22,18 +23,18 @@ function ProductMainpage() {
             // }
         },
         exit: {
-            opacity:0,
-            transition: {
-                duration: .5,
-                ease: "easeInOut"
-            }
+            // opacity:0,
+            // transition: {
+            //     duration: .5,
+            //     ease: "easeInOut"
+            // }
         }
 
     }
 
     return (
         <motion.div
-            variants={variants}
+            variants={fadeInVariant}
             initial="hidden"
             animate="visible"
             exit="exit"

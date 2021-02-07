@@ -115,7 +115,7 @@ function AboutPage(props) {
             initial="hidden"
             animate="visible"
             exit="exit"
-
+            className={classes.aboutPageContainer}
         >
 
             <Link to="/products" >
@@ -125,19 +125,19 @@ function AboutPage(props) {
 
             {data.map((item, i) => {
                 return (
-                    <Row className={classes.aboutPageContainerRow} >
-                        <Col span={12} className={classes.aboutPageContainerCol}  >
+                    <Row className={classes.aboutPageContainerRow} justify="center" style={{width:"100%"}}  >
+                        <Col xs={24} lg={12} className={classes.aboutPageContainerCol}  >
                             <motion.div
                                 animate={logo}
                                 initial={{ opacity: 0, x: "-100vw" }}
 
-
+                                className={classes.logoImgContainer}
                             >
                                 <Image className={classes.logoImg} src={item.logo} />
                             </motion.div>
                         </Col>
 
-                        <Col span={12} className={classes.aboutPageContainerCol}>
+                        <Col xs={24} lg={12} className={classes.aboutPageContainerCol}>
                             <motion.div
                                 animate={logo}
                                 initial={{ opacity: 0, x: "100vw" }}

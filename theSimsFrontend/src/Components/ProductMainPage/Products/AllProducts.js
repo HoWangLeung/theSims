@@ -6,19 +6,20 @@ import LeftFilters from './LeftFilters/LeftFilters'
 import { Col, Row, Tag } from 'antd'
 import classes from '../ProductMainPage.less'
 import Cart from '../Cart/Cart'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import ProductsSearch from '../ProductsSearch/ProductsSearch'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterProduct } from '../actions/productActions'
+import { fadeInVariant, tagVariants } from '../../../Animation'
 const Allproducts = (props) => {
 
 
     const currentFilter = useSelector(state => state.ProductReducer.currentFilter);
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
-    
+
     const dispatch = useDispatch();
-    
+
 
     const [filter, setFilter] = useState({
         category: "All",
@@ -37,12 +38,12 @@ const Allproducts = (props) => {
 
     })
 
-    
+
 
     useEffect(() => {
 
         dispatch(filterProduct(filter))
-        
+
         setFilter(state => {
             return {
                 ...state,
@@ -50,7 +51,7 @@ const Allproducts = (props) => {
             }
         })
         return () => {
-            
+
         }
         //productOverview.countries
     }, [productOverview])
@@ -86,7 +87,7 @@ const Allproducts = (props) => {
 
             filterPayload.country = new Set(["All"])
             filterPayload.activeFilter.country = "All"
-            filterPayload.currentFilter.country=false
+            filterPayload.currentFilter.country = false
             dispatch(filterProduct(filterPayload))
         }
 
@@ -103,13 +104,38 @@ const Allproducts = (props) => {
             <div className={classes.filterTagContainer}>
                 <h3>Filters</h3>
                 <div className={classes.filterTag} >
+
                     {currentFilter.category &&
                         activeFilter.category !== "All" &&
-                        <Tag value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >Category</Tag>}
-                    {!filterPayload.country.has("All") && <Tag value="country" color="#108ee9" closable onClose={(e) => handleTagClose(e, "country")} >Country</Tag>}
+                        <motion.div
+                            variants={tagVariants}
+                        >
+
+
+                            <Tag
+
+                                value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >
+                                Category
+                            </Tag>
+
+
+                        </motion.div>
+
+                    }
+
+                    {!filterPayload.country.has("All") &&
+
+                        <motion.div    variants={tagVariants}>
+                            <Tag value="country" color="#108ee9" closable onClose={(e) => handleTagClose(e, "country")} >
+                                Country
+                        </Tag>
+
+                        </motion.div>
+                    }
 
                 </div>
             </div>
+
         )
 
 

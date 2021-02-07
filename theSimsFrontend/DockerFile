@@ -1,0 +1,9 @@
+FROM node:alpine
+WORKDIR '/app'
+COPY package.json .
+COPY craco.config.js .
+COPY yarn.lock .
+COPY ./public .
+RUN yarn install
+COPY . ./
+CMD ["yarn","start"]

@@ -6,7 +6,7 @@ import { homePageVariants, homePageVariantsImg } from './HomPageAnimation'
 import shopArt from '../../Common/assests/Image/shopArt.svg';
 import classes from './HomePage.less'
 import Nav from '../../Common/NavigationBar'
-import { fadeOutVariants, fadeInVariant } from '../../Animation'
+import { fadeOutVariants, fadeInVariant, baseVariants } from '../../Animation'
 import fadeOutVariantsLandingNav from '../../Common/NavigationBar/LandingNav'
 import LandingNav from '../../Common/NavigationBar/LandingNav'
 
@@ -39,8 +39,10 @@ export default function Homepage(props) {
 
     return (
         <motion.div
-
-
+            variants={fadeOutVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className={classes.outerMostContainer}
 
         >
