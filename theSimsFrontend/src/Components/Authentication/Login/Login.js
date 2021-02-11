@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Row } from 'antd';
 import AuthenticationService from '../SignUp/AuthenticationService'
 import { connect } from 'react-redux'
 import { getUserProfile, loginAction } from '../actions/AuthenticationActions'
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import classes from '../Authentication.less'
 import intl from 'react-intl-universal';
 import 'antd/dist/antd.less';
@@ -22,10 +22,10 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        
-        
+
+
         if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
-            
+
         }
 
     }
@@ -36,10 +36,10 @@ class Login extends Component {
         const { username, password, remember } = values
 
         try {
-            
+
             let res = await AuthenticationService
                 .executeJwtAuthenticationService(username, password)
-            
+
             if (res.data.detail === "USER_DISABLED") {
 
                 CommonModal.error({
@@ -47,7 +47,7 @@ class Login extends Component {
                 })
 
             } else if (res.data.detail === "INVALID_CREDENTIALS") {
-                
+
                 CommonModal.error({
                     content: "Invalid username/password"
                 })
@@ -58,7 +58,7 @@ class Login extends Component {
                 let token = res.data.token
                 AuthenticationService.registerSuccessfulLoginForJwt(username, token)
                 let isLoggedIn = AuthenticationService.isUserLoggedIn()
-                
+
                 this.props.loginAction(isLoggedIn)
                 this.props.history.push('/inventory')
             }
@@ -108,7 +108,7 @@ class Login extends Component {
             },
         };
         const { disableLogin } = this.state
-
+        const { location } = this.props
 
         return (
             <motion.div
@@ -117,7 +117,7 @@ class Login extends Component {
                 exit="exit"
                 variants={baseVariants}
                 className={classes.loginFormContainer}>
-                <Row justify="flex-start" style={{width:"100%"}} >
+                <Row justify="flex-start" style={{ width: "100%" }} >
                     <h1>Sign In With Username</h1>
                 </Row>
                 <Form
@@ -154,14 +154,23 @@ class Login extends Component {
                     </Form.Item>
 
 
+
                     <Form.Item {...tailLayout}>
+
                         <Button disabled={disableLogin} type="primary" htmlType="submit">
                             {intl.get('login')}
                         </Button>
                     </Form.Item>
+
+
+                    {location.pathname === "/login" && <Form.Item {...tailLayout}>
+                        <Link to="/signup-customer" ><span>Sign up</span></Link>
+
+                    </Form.Item>}
+
                 </Form>
 
-            </motion.div>
+            </motion.div >
         )
     }
 }

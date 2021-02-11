@@ -72,18 +72,23 @@ export const fadeOutVariants = {
         opacity: 0,
         x:50
     },
-    visible: {
+    onFilter: {
         opacity: 1,
         x:0,
         transition: {
             duration: .5
         }
     },
-    exit: {
-      opacity: 0,
+    onClose: {
+      opacity: 1,
+      x:0,
       transition: {
-        duration: .5
-    }
+          duration: .5
+      }
+  },
+
+    exit: {
+   
     }
 
   }

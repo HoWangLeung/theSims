@@ -121,7 +121,7 @@ public class ProductService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> countries = productRepository.findDistinctCountryOrigin();
 		List<Object> categories = categoryRepository.findCategory();
-		countries.add(0,"All");
+		//countries.add(0,"All");
 		categories.add(0,"All");
 	 System.out.println(categories.toString());
 		

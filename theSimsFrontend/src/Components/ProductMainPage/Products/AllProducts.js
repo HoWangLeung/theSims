@@ -18,6 +18,8 @@ const Allproducts = (props) => {
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
 
+     
+
     const dispatch = useDispatch();
 
 
@@ -109,11 +111,11 @@ const Allproducts = (props) => {
                         activeFilter.category !== "All" &&
                         <motion.div
                             variants={tagVariants}
+                            initial="hidden"
+                            animate="onFilter"
+                            exit="exit"
                         >
-
-
                             <Tag
-
                                 value="category" color="#f50" closable onClose={(e) => handleTagClose(e, "category")} >
                                 Category
                             </Tag>

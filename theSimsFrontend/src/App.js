@@ -53,6 +53,7 @@ import PaymentManagement from './Components/Payment/PaymentManagement';
 import VerifySignUpSuccess from './Components/Authentication/SignUp/Verification/VerifySignUpSuccess';
 import LandingNav from './Common/NavigationBar/LandingNav';
 import { fadeOutVariants } from './Animation';
+import Career from './Components/Employee/Career/Career';
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -197,7 +198,8 @@ function App() {
 
               <Route exact path='/' component={Homepage} />
               <Route exact path='/products' component={ProductMainpage} />
-              <Route exact path='/about' component={AboutPage} />       
+              <Route exact path='/about' component={AboutPage} />     
+              <Route exact path='/career' component={Career} />  
               <Route path='/product/:id' component={Specificproduct} />
               <Route path='/404' component={Pagenotfound} />
               <Route path='/login' component={Login} />
@@ -214,6 +216,9 @@ function App() {
               <Route path='/createMenu' component={CreateTemplate} />
               <Route path='/counter' component={Counter} />
               <Route path='/verifySignUPSuccess' component={VerifySignUpSuccess} />
+
+
+
             </Switch>
           </AnimatePresence>
      

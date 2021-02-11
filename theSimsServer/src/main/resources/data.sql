@@ -68,21 +68,21 @@ INSERT INTO category (name,PARENT_CATEGORY_ID) VALUES ('Kiwi',2);
 
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Cameo Apple','USA',  5,35,200
 ,'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60' ,3); 
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Empire Apple','USA',  3,15, 65,
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Empire Apple','Australia',  3,15, 65,
 'https://images.unsplash.com/photo-1605693739596-997481de7c46?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OXx8YXBwbGV8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 3); 
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Gala Apple','Japan',  11,10, 125
 , 'https://images.unsplash.com/photo-1568579029378-d2cc4074f57c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTV8fGFwcGxlfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',3);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Fuji Apple','USA',  12,40, 328,
 'https://images.unsplash.com/photo-1576359717253-70abe0accded?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzN8fGFwcGxlfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 3);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('McIntosh Apple','USA',  9, 50,825,
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('McIntosh Apple','Mexico',  9, 50,825,
 'https://images.unsplash.com/photo-1507079304010-f59bbb70a377?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80', 3);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Golden Delicious Apple','USA',  5,10, 290,
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Golden Delicious Apple','Canada',  5,10, 290,
 'https://images.unsplash.com/photo-1508431800532-da5486c45537?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTUzfHxhcHBsZXxlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',3);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Golden Bananna','USA',  7,10, 25
 ,'https://firebasestorage.googleapis.com/v0/b/reactspringbootorder.appspot.com/o/images%2Fproducts%2FBanana%2Fanastasia-eremina-qSxKDzhkgvI-unsplash.jpg?alt=media&token=21c577b3-4fc1-423c-9cdb-bb66d2032ad2', 4);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Queen  Pineapple','Mexico',  8,10, 500
 ,'https://images.unsplash.com/photo-1439059913849-d6eb99f86db2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80', 7);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Scotland Strawberry','Mexico',  15,10, 200
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Scotland Strawberry','USA',  15,10, 200
 ,'https://images.unsplash.com/photo-1575808142341-e39853744dbd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1442&q=80', 9);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('AllSweet  Watermelon','Mexico',  15,10, 250
 ,'https://images.unsplash.com/photo-1587049352846-4a222e784d38?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80', 10);
@@ -92,9 +92,9 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRO
 ,'https://images.unsplash.com/photo-1542400935-70190c63c242?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Z29sZCUyMGtpd2l8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 11); 
 
 
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Tangerine','Australia',  25,35, 325
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Tangerine','Thailand',  25,35, 325
 ,'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8dGFuZ2VyaW5lfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',5);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Clementine','Australia',  25,20, 325
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Clementine','Japan',  25,20, 325
 ,'https://images.unsplash.com/photo-1590284635836-dc0f237b74d9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTd8fG9yYW5nZXxlbnwwfDJ8MHw%3D&auto=format&fit=crop&w=800&q=60', 5); 
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Bergamot Orange','Australia',  25, 10,325
 ,'https://riviste.newbusinessmedia.it/wp-content/uploads/sites/27/2013/12/Fotolia_11313277_M.jpg', 5);
@@ -106,14 +106,14 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PR
 ,'https://images.unsplash.com/photo-1587324467890-b8a15d78c078?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bGVtb258ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 6);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING,PRODUCT_URL, CATEGORY_ID) VALUES ('Pink Variegated Lemon', 'Thailand', 45,20,525
 ,'https://images.unsplash.com/photo-1527614853535-bc948bbb3e5e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTV8fGxlbW9ufGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 6);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Lisbon Lemon', 'Thailand', 45,10,525
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Lisbon Lemon', 'Australia', 45,10,525
 ,'https://images.unsplash.com/photo-1554884133-995b1e4c1645?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjd8fGxlbW9ufGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 6);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('Verna Lemon', 'Thailand', 45,20,525
 ,'https://images.unsplash.com/photo-1552914953-938eef0ce926?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fGxlbW9ufGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 6);
 
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('CABERNET SAUVIGNON', 'Japan', 45,20,525
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('CABERNET SAUVIGNON', 'Australia', 45,20,525
 ,'https://images.unsplash.com/photo-1561815582-3925313e6add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JhcGVzfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 8);
-INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('PINOT NOIR', 'Japan', 45,20,525
+INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('PINOT NOIR', 'Thailand', 45,20,525
 ,'https://images.unsplash.com/photo-1595938688117-8af7b8da9fca?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhcGVzfGVufDB8MnwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 8);
 INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST,BASE_PRICE, REMAINING, PRODUCT_URL,CATEGORY_ID) VALUES ('MUSCADINE GRAPES', 'Japan', 45,20,525
 ,'https://images.unsplash.com/photo-1598182860315-5112e61ccf91?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fGdyYXBlc3xlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 8);
