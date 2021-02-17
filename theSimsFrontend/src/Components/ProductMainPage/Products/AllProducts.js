@@ -17,8 +17,8 @@ const Allproducts = (props) => {
     const currentFilter = useSelector(state => state.ProductReducer.currentFilter);
     const filterPayload = useSelector(state => state.ProductReducer.filterPayload);
     const productOverview = useSelector(state => state.ProductReducer.productOverview);
+    console.log(filterPayload);
 
-     
 
     const dispatch = useDispatch();
 
@@ -127,7 +127,10 @@ const Allproducts = (props) => {
 
                     {!filterPayload.country.has("All") &&
 
-                        <motion.div    variants={tagVariants}>
+                        <motion.div variants={tagVariants}
+                            initial="hidden"
+                            animate="onFilter"
+                            exit="exit">
                             <Tag value="country" color="#108ee9" closable onClose={(e) => handleTagClose(e, "country")} >
                                 Country
                         </Tag>

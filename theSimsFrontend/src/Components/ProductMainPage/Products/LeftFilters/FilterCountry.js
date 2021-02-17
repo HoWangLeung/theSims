@@ -71,7 +71,7 @@ export default function Filtercountry(props) {
         filterPayload.currentFilter.country = true
 
 
-
+        console.log(filterPayload);
         dispatch(filterProduct(filterPayload))
         let newCheckListArray = [...newCheckListSet]
         console.log(newCheckListArray);
