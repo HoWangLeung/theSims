@@ -142,7 +142,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/users/confirm",
                 "/category/",
                 "/products/overview",
-                "/products/**"
+                "/products/**",
+                "/get/vacancy"
                 
             )
             .and()

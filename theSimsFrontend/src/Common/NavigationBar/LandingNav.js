@@ -63,7 +63,7 @@ export default function LandingNav(props) {
                     <div className={classes.navLinksRightContainer}>
                         {props.width > 425 && <Link to="/about" ><p className={classes.navText}>ABOUT</p>  </Link>}
                         {props.width > 425 && <Link to="/products" ><p className={classes.navText}>SHOP</p></Link>}
-                        {props.width > 425 && <Link to="/career" ><p className={classes.navText}>CONTACT</p></Link>}
+                        {props.width > 425 && <Link to="/career" ><p className={classes.navText}>CAREER</p></Link>}
                         <div className={classes.menuIcon} > <MenuOutlined onClick={showDrawer} /> </div>
                     </div>
                 </Col>

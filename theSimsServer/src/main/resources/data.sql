@@ -156,7 +156,228 @@ INSERT INTO product (PRODUCT_NAME,COUNTRY_ORIGIN, COST, BASE_PRICE,REMAINING, PR
 --INSERT INTO orders_product(id,final_price,quantity,sub_total, orders_id,product_id)
 --values (90002,20,55,150,30001,16);
 
+--'Marketing','Information Technology','Human Resource','Finance'
+
+INSERT INTO JOB_CATEGORY(NAME,PARENT_CATEGORY_ID)VALUES('All Jobs',0);
+INSERT INTO JOB_CATEGORY(NAME,PARENT_CATEGORY_ID)VALUES('Finance',1);
+INSERT INTO JOB_CATEGORY(NAME,PARENT_CATEGORY_ID)VALUES('Marketing',1);
+INSERT INTO JOB_CATEGORY(NAME,PARENT_CATEGORY_ID)VALUES('Information Technology',1);
+INSERT INTO JOB_CATEGORY(NAME,PARENT_CATEGORY_ID)VALUES('Human Resource',1);
 
 
+--Finance
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Accounting',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Middle',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'Minimum 3 years or above relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Accountant',
+'3',
+2
+);
+
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Accounting',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Entry',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'1 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Assistant Accountant',
+'1',
+2
+);
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Responsible for overall day-to-day financial and accounting operations',
+'Manage daily account operations, including but not limit to income tax return, invoice issuing, accounts payable and receivable, etc.',
+'Prepare financial analysis, management reports, and annual budgets',
+'Finance',
+'Management',
+'financial analysis',
+'Senior',
+'Bachelor’s degree holder in Accounting or Finance',
+'5 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Finance Manager',
+'1',
+2
+);
+
+
+--Marketing
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Marketing',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Entry',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'0-1 years or above relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Account Executive',
+'1',
+3
+);
+
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Accounting',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Middle',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'3 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Assistant Marketing Manager',
+'1',
+3
+);
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Responsible for overall day-to-day financial and accounting operations',
+'Manage daily account operations, including but not limit to income tax return, invoice issuing, accounts payable and receivable, etc.',
+'Prepare financial analysis, management reports, and annual budgets',
+'Finance',
+'Management',
+'Marketing Manager',
+'Senior',
+'Bachelor’s degree holder in Accounting or Finance',
+'5 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Marketing Manager',
+'1',
+3
+);
+--Information Technology
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Marketing',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Entry',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'0-1 years or above relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Programmer',
+'1',
+4
+);
+
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Accounting',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Middle',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'3 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Analyst Programmer',
+'1',
+4
+);
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Responsible for overall day-to-day financial and accounting operations',
+'Manage daily account operations, including but not limit to income tax return, invoice issuing, accounts payable and receivable, etc.',
+'Prepare financial analysis, management reports, and annual budgets',
+'Finance',
+'Management',
+'Marketing Manager',
+'Senior',
+'Bachelor’s degree holder in Accounting or Finance',
+'5 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'IT Manager',
+'1',
+4
+);
+--Human Resource
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Marketing',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Entry',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'0-1 years or above relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'HR Officer',
+'1',
+4
+);
+
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Preaparing daily and monthly accounting functions duties, including bookkeeping, AR, AP, internal reimbursements and claims and GL control duties;',
+'Prepare full set of management reports and financial reports to senior staff – P&L by shop and Production cost allocation;',
+'Prepare and review schedule of balance sheet items, PnL and bank accounts monthly;',
+'Accounting',
+'analysis daily sales',
+'bookkeeping, AR, AP',
+'Middle',
+'Diploma / University graduate or above in Accounting, Finance, Business or related discipline;',
+'3 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'Senior HR Manager',
+'1',
+4
+);
+INSERT INTO VACANCY(JOB_DESCRIPTION1, JOB_DESCRIPTION2, JOB_DESCRIPTION3, JOB_HIGHLIGHT1, JOB_HIGHLIGHT2, JOB_HIGHLIGHT3
+, JOB_LEVEL, JOB_REQUIREMENT1, JOB_REQUIREMENT2, JOB_REQUIREMENT3, JOB_TITLE, YEAR_OF_EXPERIENCE, JOB_CATEGORY_ID)
+VALUES(
+'Responsible for overall day-to-day financial and accounting operations',
+'Manage daily account operations, including but not limit to income tax return, invoice issuing, accounts payable and receivable, etc.',
+'Prepare financial analysis, management reports, and annual budgets',
+'Finance',
+'Management',
+'Marketing Manager',
+'Senior',
+'Bachelor’s degree holder in Accounting or Finance',
+'5 year relevant working experience;',
+'Attentive to details, good organizational and prioritization skills;',
+'HR Manager',
+'1',
+4
+);
 
 

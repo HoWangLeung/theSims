@@ -5,7 +5,8 @@ const initState = {
     employeeList: [],
     managementList: [],
     loading: false,
-    currentDept: null
+    currentDept: null,
+    vacancyList: []
 
 }
 
@@ -83,7 +84,7 @@ const EmployeeReducer = (state = initState, action) => {
         case ("SEARCH_EMPLOYEE_SUCCESS"):
 
 
-            
+
             return {
                 ...state,
                 employeeList: action.payload,
@@ -104,12 +105,19 @@ const EmployeeReducer = (state = initState, action) => {
 
         case ("SEARCH_DEPARTMENT_SUCCESS"):
 
-            
+
             return {
                 ...state,
                 employeeList: action.payload,
                 loading: false,
-                currentDept:action.payload[0]?action.payload[0].department.name:null
+                currentDept: action.payload[0] ? action.payload[0].department.name : null
+            }
+
+        case ("FETCH_VACANCY_SUCCESS"):
+            console.log(action.payload.data.detail);
+            return {
+                ...state,
+                vacancyList: action.payload.data.detail
             }
 
         default:
